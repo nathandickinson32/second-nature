@@ -1,0 +1,43 @@
+Second Nature Communications App Kick Off Meeting
+
+Blue: #2a64bd
+Green: #3eaf45
+
+High Level goal
+Communication between and employees and the company
+Time off requests
+Knowing mowing routes
+Removing extra paperwork and removing the friction
+
+Core Values
+Employees being able to shout give kudos.
+
+Highest Priority tasks
+1. Time off request
+2. Kudos
+
+When a user logs in, what do they see first?
+General landing page
+
+Time Off Request Requirements
+Name
+Date Range 
+Why
+
+When do you want to meet next?
+Next time block: Week of 22
+
+We need user types
+Team members - Can request time off
+Managers - Can Request time off can see time off request
+
+Demo
+Tuesday, July 23 @ 6:30pm
+
+Who wants to do what?
+Backend
+Chris
+Natalie
+
+Front End
+Dinda and Kristi
