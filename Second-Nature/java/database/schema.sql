@@ -23,6 +23,7 @@ CREATE TABLE time_off_requests (
     status VARCHAR (8),
     request_reason VARCHAR (200),
     comment VARCHAR (200),
+    review_date DATE,
     FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
