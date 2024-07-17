@@ -7,4 +7,8 @@ import java.util.List;
 
 public interface TimeOffRequestsDao {
     List<TimeOffRequests> getAllTimeOffRequests();
+    List<TimeOffRequests> getAllTimeOffRequestsByUserId(int userId);
+
+
 }
+
