@@ -1,0 +1,31 @@
+7/17/2024 Scrum meeting :)
+
+What are we working on
+
+Chris
+Built the database v0.01
+Updated the Login and Register endpoints to account for first name, last name, and title.
+
+Nathan
+Started work on getting all time off requests.
+
+Dinda
+Login and shows name
+How to arrange buttons on the home page
+
+Kristi
+Making things viewable based on title
+
+
+Next Steps:
+Nathan
+Get Time Off Requests
+Create Time Off Requests
+
+Chris
+Update Time Off Requests
+Delete Time Off Requests
+Outline / Vector Second Nature logo
+Scedule a meeting invite for Friday at 5pm
+
+Kristi and Dinda to meet to splitting the front end into components.
