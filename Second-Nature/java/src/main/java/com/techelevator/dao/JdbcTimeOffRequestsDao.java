@@ -58,11 +58,11 @@ public class JdbcTimeOffRequestsDao implements TimeOffRequestsDao {
 
 
     @Override
-    public List<TimeOffRequests> getAllTimeOffRequestsByUserId(int userId) {
+    public List<TimeOffRequests> getAllTimeOffRequestsByUsername(String username) {
        List <TimeOffRequests> timeOffRequests = new ArrayList<>();
-        String sql = "SELECT request_id, user_id, request_date, start_date, end_date, status, request_reason, comment, review_date FROM time_off_requests WHERE user_id = ?";
+        String sql = "SELECT * FROM time_off_requests JOIN users ON time_off_requests.user_id = users.user_id WHERE users.username = ?";
 
-            SqlRowSet results = template.queryForRowSet(sql, userId);
+            SqlRowSet results = template.queryForRowSet(sql, username);
             while (results.next()) {
                TimeOffRequests timeOffRequests1  = mapRowToTimeOffRequests(results);
                timeOffRequests.add(timeOffRequests1);
