@@ -8,7 +8,8 @@ import java.util.List;
 public interface TimeOffRequestsDao {
     List<TimeOffRequests> getAllTimeOffRequests();
     List<TimeOffRequests> getAllTimeOffRequestsByUsername(String username);
-
+    TimeOffRequests getTimeOffRequestByRequestId(int requestId);
+//    TimeOffRequests createNewTimeOffRequest(TimeOffRequests timeOffRequest);
 
 }
 

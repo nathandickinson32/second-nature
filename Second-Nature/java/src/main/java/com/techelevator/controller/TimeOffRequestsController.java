@@ -27,4 +27,9 @@ public class TimeOffRequestsController {
     public List<TimeOffRequests> getAllTimeOffRequestsByUserId(Principal principal) {
         return timeOffRequestsDao.getAllTimeOffRequestsByUsername(principal.getName());
     }
+
+    @RequestMapping(path="/get-time-off-request-by-request-id/{id}", method = RequestMethod.GET)
+    public TimeOffRequests getIngredientsByRecipeId(@PathVariable int id){
+        return timeOffRequestsDao.getTimeOffRequestByRequestId(id);
+    }
 }
