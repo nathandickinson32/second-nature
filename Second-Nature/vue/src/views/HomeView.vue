@@ -26,5 +26,10 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+h1 {
+  text-align: center;
 }
 </style>
