@@ -25,6 +25,14 @@ export function createStore(currentToken, currentUser) {
         axios.defaults.headers.common = {};
       }
     },
+    //Check if a logged-in user is a manager
+    getters: {
+      isManager(state) {
+        console.log(state);
+        return state.user.title === 'manager'; 
+
+      }
+    }
   });
   return store;
 }
