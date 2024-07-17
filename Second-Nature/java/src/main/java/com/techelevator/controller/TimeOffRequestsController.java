@@ -32,4 +32,10 @@ public class TimeOffRequestsController {
     public TimeOffRequests getIngredientsByRecipeId(@PathVariable int id){
         return timeOffRequestsDao.getTimeOffRequestByRequestId(id);
     }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path="/add-new-time-off-request", method = RequestMethod.POST)
+    public TimeOffRequests addNewTimeOffRequest(@RequestBody TimeOffRequests timeOffRequest) {
+        return timeOffRequestsDao.createNewTimeOffRequest(timeOffRequest);
+    }
 }

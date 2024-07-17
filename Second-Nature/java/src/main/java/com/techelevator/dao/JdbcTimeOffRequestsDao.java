@@ -74,21 +74,36 @@ public class JdbcTimeOffRequestsDao implements TimeOffRequestsDao {
         return timeOffRequests;
     }
 
-//    @Override
-//    public TimeOffRequests createNewTimeOffRequest(TimeOffRequests timeOffRequest){
-//        TimeOffRequests timeOffRequests = null;
-//        String insertTimeOffRequestSql = "INSERT INTO time_off_requests (user_id, request_date, start_date, end_date, status, request_reason, comment, review_date) " +
-//                "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
-//        try {
-//            int newRequestId = template.queryForObject(insertTimeOffRequestSql, int.class);
-//            timeOffRequests = getUserById(newUserId);
-//        } catch (CannotGetJdbcConnectionException e) {
-//            throw new DaoException("Unable to connect to server or database", e);
-//        } catch (DataIntegrityViolationException e) {
-//            throw new DaoException("Data integrity violation", e);
-//        }
-//        return newUser;
-//    }
+    @Override
+    public TimeOffRequests createNewTimeOffRequest(TimeOffRequests timeOffRequest){
+        TimeOffRequests timeOffRequests = null;
+        String sql = "INSERT INTO time_off_requests (user_id, request_date, start_date, end_date, status, request_reason, comment, review_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        int newTimeOffRequestId = -1;
+
+
+        try {
+            newTimeOffRequestId = template.queryForObject(sql, Integer.class,
+                    timeOffRequest.getUserId(),
+                    timeOffRequest.getRequestDate(),
+                    timeOffRequest.getStartDate(),
+                    timeOffRequest.getEndDate(),
+                    timeOffRequest.getStatus(),
+                    timeOffRequest.getRequestReason(),
+                    timeOffRequest.getComment(),
+                    timeOffRequest.getReviewDate()
+
+
+
+            );
+        } catch(CannotGetJdbcConnectionException e) {
+            System.out.println("Problem connecting");
+        } catch (DataIntegrityViolationException e) {
+            System.out.println("Data problems");
+        }
+
+
+        return getTimeOffRequestByRequestId(newTimeOffRequestId);
+    }
 
     public TimeOffRequests getTimeOffRequestByRequestId(int requestId){
         TimeOffRequests timeOffRequests = null;

@@ -9,7 +9,7 @@ public interface TimeOffRequestsDao {
     List<TimeOffRequests> getAllTimeOffRequests();
     List<TimeOffRequests> getAllTimeOffRequestsByUsername(String username);
     TimeOffRequests getTimeOffRequestByRequestId(int requestId);
-//    TimeOffRequests createNewTimeOffRequest(TimeOffRequests timeOffRequest);
+    TimeOffRequests createNewTimeOffRequest(TimeOffRequests timeOffRequest);
 
 }
 
