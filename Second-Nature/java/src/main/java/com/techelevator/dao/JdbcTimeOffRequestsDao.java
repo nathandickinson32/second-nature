@@ -121,4 +121,18 @@ public class JdbcTimeOffRequestsDao implements TimeOffRequestsDao {
         }
         return timeOffRequests;
     }
+
+    @Override
+    public List<TimeOffRequests> getAllTimeOffRequestsByUserId(int id) {
+        List <TimeOffRequests> timeOffRequests = new ArrayList<>();
+        String sql = "SELECT * FROM time_off_requests JOIN users ON time_off_requests.user_id = users.user_id WHERE users.user_id = ?";
+
+        SqlRowSet results = template.queryForRowSet(sql, id);
+        while (results.next()) {
+            TimeOffRequests timeOffRequests1  = mapRowToTimeOffRequests(results);
+            timeOffRequests.add(timeOffRequests1);
+        }
+
+        return timeOffRequests;
+    }
 }
