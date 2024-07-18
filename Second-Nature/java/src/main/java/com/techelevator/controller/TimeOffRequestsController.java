@@ -35,7 +35,7 @@ public class TimeOffRequestsController {
 
 
     @RequestMapping(path="/get-time-off-request-by-request-id/{id}", method = RequestMethod.GET)
-    public TimeOffRequests getIngredientsByRecipeId(@PathVariable int id){
+    public TimeOffRequests getTimeOffRequestByRequestId(@PathVariable int id){
         return timeOffRequestsDao.getTimeOffRequestByRequestId(id);
     }
 
