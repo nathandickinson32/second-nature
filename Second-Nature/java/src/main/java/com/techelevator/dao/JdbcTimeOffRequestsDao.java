@@ -1,12 +1,15 @@
 package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
+import com.techelevator.model.RegisterUserDto;
 import com.techelevator.model.TimeOffRequests;
 import com.techelevator.model.User;
 import org.springframework.boot.autoconfigure.integration.IntegrationProperties;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -67,6 +70,68 @@ public class JdbcTimeOffRequestsDao implements TimeOffRequestsDao {
                TimeOffRequests timeOffRequests1  = mapRowToTimeOffRequests(results);
                timeOffRequests.add(timeOffRequests1);
             }
+
+        return timeOffRequests;
+    }
+
+    @Override
+    public TimeOffRequests createNewTimeOffRequest(TimeOffRequests timeOffRequest){
+        TimeOffRequests timeOffRequests = null;
+        String sql = "INSERT INTO time_off_requests (user_id, request_date, start_date, end_date, status, request_reason, comment, review_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        int newTimeOffRequestId = -1;
+
+
+        try {
+            newTimeOffRequestId = template.queryForObject(sql, Integer.class,
+                    timeOffRequest.getUserId(),
+                    timeOffRequest.getRequestDate(),
+                    timeOffRequest.getStartDate(),
+                    timeOffRequest.getEndDate(),
+                    timeOffRequest.getStatus(),
+                    timeOffRequest.getRequestReason(),
+                    timeOffRequest.getComment(),
+                    timeOffRequest.getReviewDate()
+
+
+
+            );
+        } catch(CannotGetJdbcConnectionException e) {
+            System.out.println("Problem connecting");
+        } catch (DataIntegrityViolationException e) {
+            System.out.println("Data problems");
+        }
+
+
+        return getTimeOffRequestByRequestId(newTimeOffRequestId);
+    }
+
+    public TimeOffRequests getTimeOffRequestByRequestId(int requestId){
+        TimeOffRequests timeOffRequests = null;
+        String  sql = "SELECT * FROM time_off_requests WHERE request_id = ?";
+        try {
+            SqlRowSet results = template.queryForRowSet(sql, requestId);
+
+            if(results.next()) {
+                timeOffRequests = mapRowToTimeOffRequests(results);
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            System.out.println("Problem connecting");
+        } catch (DataIntegrityViolationException e) {
+            System.out.println("Data problems");
+        }
+        return timeOffRequests;
+    }
+
+    @Override
+    public List<TimeOffRequests> getAllTimeOffRequestsByUserId(int id) {
+        List <TimeOffRequests> timeOffRequests = new ArrayList<>();
+        String sql = "SELECT * FROM time_off_requests JOIN users ON time_off_requests.user_id = users.user_id WHERE users.user_id = ?";
+
+        SqlRowSet results = template.queryForRowSet(sql, id);
+        while (results.next()) {
+            TimeOffRequests timeOffRequests1  = mapRowToTimeOffRequests(results);
+            timeOffRequests.add(timeOffRequests1);
+        }
 
         return timeOffRequests;
     }
