@@ -7,7 +7,7 @@
       What if we had the buttons for the manager pages tagged with v-show
     </div> -->
     <div v-show="isManager">Review requests off</div>
-    
+
     <div id="menu-grid">
       <span>testing</span>
       <span>testing</span>
