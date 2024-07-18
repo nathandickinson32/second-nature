@@ -1,22 +1,22 @@
 <template>
   <div class="home">
     <h1>Second Nature</h1>
-    <p>Welcome, {{ this.$store.state.user.firstName }}!</p>
-    <p>App Squares go here</p>
-    <!-- <div >Instead of having two landing pages for employees vs managers, 
+    <p>Welcome, {{ $store.state.user.firstName }}! (header or home?)</p>
+    <p>App Squares go below</p>
+    <!-- Instead of having two landing pages for employees vs managers, 
       What if we had the buttons for the manager pages tagged with v-show
-    </div> -->
+    -->
     <div v-show="isManager">Review requests off</div>
     
     <div id="menu-grid">
-      <span>testing</span>
-      <span>testing</span>
-      <span>testing</span>
-      <span>testing</span>
-      <div>test</div>
-      <div>test</div>
-      <div>test</div>
-      <div>test</div>
+      <span>span square</span>
+      <span>span square</span>
+      <span>span square</span>
+      <span>span square</span>
+      <div>div square</div>
+      <div>div square</div>
+      <div>div square</div>
+      <div>div square</div>
     </div>
   </div>
 </template>
