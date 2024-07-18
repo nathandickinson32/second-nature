@@ -25,7 +25,7 @@ Create Time Off Requests
 Chris
 Update Time Off Requests
 Delete Time Off Requests
-Outline / Vector Second Nature logo
-Scedule a meeting invite for Friday at 5pm
+[complete] Outline / Vector Second Nature logo
+[complete] Schedule a meeting invite for Friday at 5pm
 
 Kristi and Dinda to meet to splitting the front end into components.

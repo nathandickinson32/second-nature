@@ -135,4 +135,35 @@ public class JdbcTimeOffRequestsDao implements TimeOffRequestsDao {
 
         return timeOffRequests;
     }
+
+    @Override
+    public TimeOffRequests updateTimeOffRequestById(int id, TimeOffRequests timeOffRequests){
+        TimeOffRequests updatedTimeOffRequest = null;
+
+        String sql = "UPDATE time_off_requests SET status = ?, comment = ?, review_date = ? WHERE request_id = ?";
+
+        try {
+            template.update(sql, timeOffRequests.getStatus(), timeOffRequests.getComment(), timeOffRequests.getReviewDate(), id);
+            updatedTimeOffRequest = getTimeOffRequestByRequestId(id);
+        } catch (CannotGetJdbcConnectionException e){
+            throw new CannotGetJdbcConnectionException("Unable to connect to the database.");
+        } catch (DataIntegrityViolationException e){
+            throw new DataIntegrityViolationException("Unable to update Time Off Request ID: " + id);
+        }
+
+        return updatedTimeOffRequest;
+    }
+
+    @Override
+    public void deleteTimeOffRequest(int id){
+        String sql = "DELETE FROM time_off_requests WHERE request_id = ?";
+
+        try {
+            template.update(sql, id);
+        } catch (CannotGetJdbcConnectionException e){
+            throw new CannotGetJdbcConnectionException("Cannot connect to the database.");
+        } catch (DataIntegrityViolationException e){
+            throw new DataIntegrityViolationException("Cannot delete Time Off Request ID: " + id);
+        }
+    }
 }

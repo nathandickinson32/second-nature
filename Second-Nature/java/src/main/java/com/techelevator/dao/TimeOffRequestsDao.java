@@ -11,6 +11,7 @@ public interface TimeOffRequestsDao {
     TimeOffRequests getTimeOffRequestByRequestId(int requestId);
     TimeOffRequests createNewTimeOffRequest(TimeOffRequests timeOffRequest);
     public List<TimeOffRequests> getAllTimeOffRequestsByUserId(int id);
-
+    public TimeOffRequests updateTimeOffRequestById(int id, TimeOffRequests timeOffRequests);
+    public void deleteTimeOffRequest(int id);
 }
 

@@ -44,4 +44,17 @@ public class TimeOffRequestsController {
     public TimeOffRequests addNewTimeOffRequest(@RequestBody TimeOffRequests timeOffRequest) {
         return timeOffRequestsDao.createNewTimeOffRequest(timeOffRequest);
     }
+
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @PostMapping(path="/update-time-off-request/{id}")
+    public TimeOffRequests updateTimeOffRequest(@PathVariable int id, @RequestBody TimeOffRequests timeOffRequests){
+        return timeOffRequestsDao.updateTimeOffRequestById(id, timeOffRequests);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping(path="/delete-time-off-request/{id}")
+    public String deleteTimeOffRequest(@PathVariable int id){
+        timeOffRequestsDao.deleteTimeOffRequest(id);
+        return "Time Off Request ID: " + id + " has been deleted.";
+    }
 }
