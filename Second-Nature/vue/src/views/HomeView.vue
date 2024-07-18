@@ -35,7 +35,7 @@ export default {
   display: flex;
   gap: 50px;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
 }
 .menu-icon {
@@ -57,4 +57,24 @@ p {
   text-align: center;
   /* ^^ this p formatting is probably temporary ^^ */
 } 
+
+@media only screen and (min-width: 600px) {
+  .menu-icon {
+    margin-right: 30px;
+    margin-left: 30px;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  #menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+  .menu-icon {
+    margin-right: 50px;
+    margin-left: 50px;
+    justify-self: center;
+  }
+}
 </style>
