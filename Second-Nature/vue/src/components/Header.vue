@@ -1,8 +1,8 @@
 <template>
-    <span id="headder">
+    <div id="header">
        <img src="src\assets\SecondNatureLogo001.png" alt="logo" class="logo"  />
-       <div v-if="$store.state.token !=''"> {{  }}</div>
-    </span>
+       <h1 v-if="$store.state.token !=''" id="display-name"> {{ $store.state.user.firstName }}</h1>
+    </div>
     <div id="nav">
       <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
@@ -17,6 +17,14 @@
 .logo {
   width: 100px;
   height: auto;
+}
+#display-name {
+  align-self: center;
+  padding-top: 20px;
+}
+
+#header {
+  display: flex;
 }
 
 </style>
