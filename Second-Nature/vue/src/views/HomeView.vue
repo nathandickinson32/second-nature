@@ -1,14 +1,14 @@
 <template>
   <div class="home">
     <h1>Second Nature</h1>
-    <p>Welcome, {{ $store.state.user.firstName }}!</p>
+    <h4>Welcome, {{ $store.state.user.firstName }}!</h4>
     <!-- Instead of having two landing pages for employees vs managers, 
       What if we had the buttons for the manager pages tagged with v-show
     -->
     <div v-show="isManager">Review requests off</div>
 
     <div id="menu-grid">
-      <span class="menu-icon">New Leave Request</span>
+      <span class="menu-icon"><router-link v-bind:to="{ name: 'newPTOrequest' }">New Leave Request</router-link></span>
       <div class="menu-icon">My Leave Requests</div>
       <span class="menu-icon" v-if="isManager">Review Leave Requests</span>
       <span class="menu-icon">span square</span>
@@ -53,9 +53,9 @@ export default {
 h1 {
   text-align: center;
 }
-p {
+h4 {
   text-align: center;
-  /* ^^ this p formatting is probably temporary ^^ */
+  /* ^^ this h4 formatting is probably temporary ^^ */
 } 
 
 @media only screen and (min-width: 600px) {
