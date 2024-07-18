@@ -75,15 +75,15 @@ public class JdbcTimeOffRequestsDao implements TimeOffRequestsDao {
     }
 
     @Override
-    public TimeOffRequests createNewTimeOffRequest(TimeOffRequests timeOffRequest){
+    public TimeOffRequests createNewTimeOffRequest(TimeOffRequests timeOffRequest,int userId){
         TimeOffRequests timeOffRequests = null;
-        String sql = "INSERT INTO time_off_requests (user_id, request_date, start_date, end_date, status, request_reason, comment, review_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO time_off_requests (user_id, request_date, start_date, end_date, status, request_reason, comment, review_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING request_id;";
         int newTimeOffRequestId = -1;
 
 
         try {
             newTimeOffRequestId = template.queryForObject(sql, Integer.class,
-                    timeOffRequest.getUserId(),
+                    userId,
                     timeOffRequest.getRequestDate(),
                     timeOffRequest.getStartDate(),
                     timeOffRequest.getEndDate(),

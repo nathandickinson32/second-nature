@@ -41,8 +41,9 @@ public class TimeOffRequestsController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path="/add-new-time-off-request", method = RequestMethod.POST)
-    public TimeOffRequests addNewTimeOffRequest(@RequestBody TimeOffRequests timeOffRequest) {
-        return timeOffRequestsDao.createNewTimeOffRequest(timeOffRequest);
+    public TimeOffRequests addNewTimeOffRequest(@RequestBody TimeOffRequests timeOffRequest, Principal principal) {
+        int userId = userDao.getUserIdByUsername(principal.getName());
+        return timeOffRequestsDao.createNewTimeOffRequest(timeOffRequest, userId);
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
