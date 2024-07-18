@@ -55,5 +55,6 @@ h1 {
 }
 p {
   text-align: center;
-}
+  /* ^^ this p formatting is probably temporary ^^ */
+} 
 </style>
