@@ -46,15 +46,15 @@ public class TimeOffRequestsController {
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
-    @PostMapping(path="/update-time-off-request/{id}")
-    public TimeOffRequests updateTimeOffRequest(@PathVariable int id, @RequestBody TimeOffRequests timeOffRequests){
-        return timeOffRequestsDao.updateTimeOffRequestById(id, timeOffRequests);
+    @PostMapping(path="/update-time-off-request")
+    public TimeOffRequests updateTimeOffRequest(@RequestBody TimeOffRequests timeOffRequests){
+        return timeOffRequestsDao.updateTimeOffRequestById(timeOffRequests.getRequestId(), timeOffRequests);
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping(path="/delete-time-off-request/{id}")
-    public String deleteTimeOffRequest(@PathVariable int id){
-        timeOffRequestsDao.deleteTimeOffRequest(id);
-        return "Time Off Request ID: " + id + " has been deleted.";
+    @DeleteMapping(path="/delete-time-off-request")
+    public String deleteTimeOffRequest(@RequestBody TimeOffRequests timeOffRequests){
+        timeOffRequestsDao.deleteTimeOffRequest(timeOffRequests.getRequestId());
+        return "Time off request has been deleted.";
     }
 }
