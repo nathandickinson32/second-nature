@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="second-nature-app">
     <Header></Header>    
     <router-view />
   </div>
