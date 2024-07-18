@@ -1,22 +1,21 @@
 <template>
   <div class="home">
     <h1>Second Nature</h1>
-    <p>Welcome, {{ $store.state.user.firstName }}! (header or home?)</p>
-    <p>App Squares go below</p>
+    <p>Welcome, {{ $store.state.user.firstName }}!</p>
     <!-- Instead of having two landing pages for employees vs managers, 
       What if we had the buttons for the manager pages tagged with v-show
     -->
     <div v-show="isManager">Review requests off</div>
 
     <div id="menu-grid">
-      <span>span square</span>
-      <span>span square</span>
-      <span>span square</span>
-      <span>span square</span>
-      <div>div square</div>
-      <div>div square</div>
-      <div>div square</div>
-      <div>div square</div>
+      <span class="menu-icon">New Leave Request</span>
+      <div class="menu-icon">My Leave Requests</div>
+      <span class="menu-icon" v-if="isManager">Review Leave Requests</span>
+      <span class="menu-icon">span square</span>
+      <span class="menu-icon">span square</span>
+      <div class="menu-icon">div square</div>
+      <div class="menu-icon">div square</div>
+      <div class="menu-icon">div square</div>
     </div>
   </div>
 </template>
@@ -33,13 +32,28 @@ export default {
 
 <style scoped>
 #menu-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 10px;
-  justify-content: center;
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   align-items: center;
 }
+.menu-icon {
+  display: flex;
+  border: 1px solid black;
+  width: 75px;
+  height: 75px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
 h1 {
+  text-align: center;
+}
+p {
   text-align: center;
 }
 </style>
