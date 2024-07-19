@@ -19,16 +19,14 @@
             <select id="title" v-model="request.requestReason" required>
                 <option value="vacation">Vacation</option>
                 <option value="sick">Sick</option>
-                <option value="">Other</option>
+                <option value="other">Other</option>
             </select>
-            <div class="form-input-group" v-if="request.requestReason === ''">
+            <div class="form-input-group" v-if="request.requestReason === 'other'">
                 <label for="reason">Reason</label>
-                <input type="text" id="reason" v-model="request.requestReason" required autofocus />
+                <input type="text" id="reason" v-model="otherReason" required autofocus />
             </div>
         </div>
         <button type="submit">Submit Request</button>
-        {{ request }}
-        {{ currentDate }}
     </form>
   </div>
 </template>
@@ -48,15 +46,22 @@ export default {
                 comment: '',
                 reviewDate: null
             },
-            currentDate: new Date().toISOString().slice(0, 10)
+            currentDate: new Date().toISOString().slice(0, 10),
+            otherReason: ''
         }
     },
     methods: {
         submitRequest() {
             this.request.requestDate = this.currentDate;
+            if (this.request.requestReason === 'other') {
+                this.request.requestReason = this.otherReason;
+            }
             LeaveRequestService.addNewTImeOffRequest(this.request)
             .then((response) => {
                 console.log(response);
+                if (response.status === 201) {
+                    this.$router.push({ name: 'home' });
+                }
             })
         }
     }
