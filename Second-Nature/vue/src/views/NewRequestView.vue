@@ -60,6 +60,7 @@ export default {
             .then((response) => {
                 console.log(response);
                 if (response.status === 201) {
+                    window.alert('Request submitted successfully!');
                     this.$router.push({ name: 'home' });
                 }
             })
