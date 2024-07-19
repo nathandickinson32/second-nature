@@ -7,6 +7,7 @@ import LoginView from '../views/LoginView.vue';
 import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import NewRequestView from  '../views/NewRequestView.vue';
+import MyLeaveRequestsView from '../views/MyLeaveRequestsView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -29,6 +30,14 @@ const routes = [
     path: '/new-request',
     name: 'newPTOrequest',
     component: NewRequestView,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/my-requests',
+    name: 'myRequests',
+    component: MyLeaveRequestsView,
     meta: {
       requiresAuth: true
     }
