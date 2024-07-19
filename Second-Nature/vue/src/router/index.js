@@ -8,6 +8,7 @@ import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import NewRequestView from  '../views/NewRequestView.vue';
 import MyLeaveRequestsView from '../views/MyLeaveRequestsView.vue';
+import ReviewLeaveRequestsView from '../views/ReviewLeaveRequestsView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -64,6 +65,14 @@ const routes = [
     component: RegisterView,
     meta: {
       requiresAuth: false
+    }
+  },
+  {
+    path: "/reviewLeaveRequests",
+    name: "reviewLeaveRequests",
+    component: ReviewLeaveRequestsView,
+    meta: {
+      requiresAuth: true
     }
   }
 ];

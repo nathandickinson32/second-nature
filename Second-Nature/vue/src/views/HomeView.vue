@@ -10,7 +10,7 @@
     <div id="menu-grid">
       <span class="menu-icon"><router-link v-bind:to="{ name: 'newPTOrequest' }">New Leave Request</router-link></span>
       <div class="menu-icon"><router-link v-bind:to="{ name: 'myRequests' }">My Leave Requests</router-link></div>
-      <span class="menu-icon" v-if="isManager">Review Leave Requests</span>
+      <span class="menu-icon" v-if="isManager"><router-link v-bind:to="{name: 'reviewLeaveRequests'}">Review Leave Requests</router-link></span>
       <span class="menu-icon">span square</span>
       <span class="menu-icon">span square</span>
       <div class="menu-icon">div square</div>

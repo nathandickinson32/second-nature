@@ -1,0 +1,136 @@
+Certainly! I can help you with that. Here's how you can modify the ReviewLeaveRequests.vue file to achieve what you're looking for:
+
+First, let's import and use the LeaveRequestList component:
+<template>
+  <div>
+    <LeaveRequestList :requests="requests">
+      <template v-slot:actions="{ request }">
+        <button @click="approveRequest(request)">Approve</button>
+        <button @click="rejectRequest(request)">Reject</button>
+      </template>
+    </LeaveRequestList>
+  </div>
+</template>
+
+<script>
+import LeaveRequestService from '../services/LeaveRequestService';
+import LeaveRequestList from '../components/LeaveRequestList.vue';
+
+export default {
+  components: {
+    LeaveRequestList
+  },
+  data() {
+    return {
+      requests: []
+    }
+  },
+  created() {
+    this.fetchRequests();
+  },
+  methods: {
+    async fetchRequests() {
+      this.requests = await LeaveRequestService.getRequests();
+    },
+    approveRequest(request) {
+      // Implement approve logic
+    },
+    rejectRequest(request) {
+      // Implement reject logic
+    }
+  }
+}
+</script>
+
+
+
+This modification does the following:
+
+Imports and registers the LeaveRequestList component.
+Uses the LeaveRequestList component in the template.
+Adds a slot for actions, which will contain the approve and reject buttons.
+Implements methods for fetching requests and handling approve/reject actions.
+Make sure your LeaveRequestList component is set up to accept and display the requests prop, and that it has a slot for actions. You may need to modify the LeaveRequestList component to include something like this:
+
+<template>
+  <div>
+    <div v-for="request in requests" :key="request.id">
+      <!-- Display request details -->
+      <slot name="actions" :request="request"></slot>
+    </div>
+  </div>
+</template>
+
+
+
+This setup will display your list of leave requests with approve and reject buttons to the right of each item.
+
+Try again with different context
+Public knowledge only
+Current file only
+Add context...
+Avatar for 129544762-7vanael-ucsij
+I don't want to modify the LeaveRequestList component. Can I add the buttons here instead of in the component?
+
+
+Absolutely! You can add the buttons directly in the ReviewLeaveRequests.vue file without modifying the LeaveRequestList component. Here's how you can do that:
+
+<template>
+  <div>
+    <div v-for="request in requests" :key="request.id" class="request-item">
+      <LeaveRequestList :request="request" />
+      <div class="action-buttons">
+        <button @click="approveRequest(request)">Approve</button>
+        <button @click="rejectRequest(request)">Reject</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import LeaveRequestService from '../services/LeaveRequestService';
+import LeaveRequestList from '../components/LeaveRequestList.vue';
+
+export default {
+  components: {
+    LeaveRequestList
+  },
+  data() {
+    return {
+      requests: []
+    }
+  },
+  created() {
+    this.fetchRequests();
+  },
+  methods: {
+    async fetchRequests() {
+      this.requests = await LeaveRequestService.getRequests();
+    },
+    approveRequest(request) {
+      // Implement approve logic
+    },
+    rejectRequest(request) {
+      // Implement reject logic
+    }
+  }
+}
+</script>
+
+<style scoped>
+.request-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+</style>
+
+
+
+This solution keeps the LeaveRequestList component as is and adds the buttons directly in the ReviewLeaveRequests.vue file. The buttons are placed to the right of each item using flexbox layout. You can adjust the styling as needed to fit your design preferences.

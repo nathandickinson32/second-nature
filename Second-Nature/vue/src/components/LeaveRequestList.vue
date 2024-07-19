@@ -25,7 +25,7 @@ export default {
         }
     },
     created() {
-        LeaveRequestService.getAllTimeOffRequestsByUserId()
+        LeaveRequestService.getAllTimeOffRequests()
         .then((response) => {
             console.log(response);
             this.requests = response.data;
