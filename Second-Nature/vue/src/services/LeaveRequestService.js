@@ -14,7 +14,7 @@ export default {
         return axios.get(`/get-time-off-request-by-request-id/${id}`)
     },
     addNewTImeOffRequest(TimeOffRequest){
-        return axios.post('/add-new-time-off-request', TimeOffRequest);
+        return axios.create('/add-new-time-off-request', TimeOffRequest);
     },
     updateTimePoffRequest(TimeOffRequest){
         return axios.post('/update-time-off-request', TimeOffRequest);
