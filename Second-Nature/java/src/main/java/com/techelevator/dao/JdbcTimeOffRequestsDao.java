@@ -43,7 +43,7 @@ public class JdbcTimeOffRequestsDao implements TimeOffRequestsDao {
 
     public List<TimeOffRequests> getAllTimeOffRequests() {
         List<TimeOffRequests> timeOffRequests = new ArrayList<>();
-        String sql = "SELECT * FROM time_off_requests";
+        String sql = "SELECT * FROM time_off_requests ORDER BY request_date DESC";
 
         SqlRowSet results = template.queryForRowSet(sql);
         while (results.next()) {
@@ -63,7 +63,7 @@ public class JdbcTimeOffRequestsDao implements TimeOffRequestsDao {
     @Override
     public List<TimeOffRequests> getAllTimeOffRequestsByUsername(String username) {
        List <TimeOffRequests> timeOffRequests = new ArrayList<>();
-        String sql = "SELECT * FROM time_off_requests JOIN users ON time_off_requests.user_id = users.user_id WHERE users.username = ?";
+        String sql = "SELECT * FROM time_off_requests JOIN users ON time_off_requests.user_id = users.user_id WHERE users.username = ? ORDER BY request_date DESC";
 
             SqlRowSet results = template.queryForRowSet(sql, username);
             while (results.next()) {
@@ -125,7 +125,7 @@ public class JdbcTimeOffRequestsDao implements TimeOffRequestsDao {
     @Override
     public List<TimeOffRequests> getAllTimeOffRequestsByUserId(int id) {
         List <TimeOffRequests> timeOffRequests = new ArrayList<>();
-        String sql = "SELECT * FROM time_off_requests JOIN users ON time_off_requests.user_id = users.user_id WHERE users.user_id = ?";
+        String sql = "SELECT * FROM time_off_requests JOIN users ON time_off_requests.user_id = users.user_id WHERE users.user_id = ? ORDER BY request_date DESC";
 
         SqlRowSet results = template.queryForRowSet(sql, id);
         while (results.next()) {
