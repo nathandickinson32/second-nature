@@ -1,8 +1,9 @@
 <template>
     <!-- <LeaveRequestList :request="requests"  /> -->
+    <div class="container">
     <div v-for="request in requests" v-bind:key="request.id" class="request-card">
         <!-- <LeaveRequestList :request="request"  /> -->
-         <div class="container">
+         
             <div class="requestCard">
                 <p>Date Requested: {{ request.requestDate }}</p>
                 <p>Start Date: {{ request.startDate }}</p>

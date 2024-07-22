@@ -13,7 +13,7 @@
 
 </script>
 
-<style>
+<style scoped>
 .logo {
   width: 100px;
   height: auto;
@@ -25,6 +25,10 @@
 
 #header {
   display: flex;
+}
+
+#nav {
+  padding-bottom: 15px;
 }
 
 </style>
