@@ -71,13 +71,15 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: start;
-    border: 1px solid black;
+    border: 1px solid #a1af9f;
     border-radius: 5px;
     padding: 10px;
     padding-left: 20px;
     margin-top:10px;
     margin-bottom: 10px;
     width: 300px;
+    background-color: white;
+    box-shadow: -2px 2px 4px #a1af9f;
 }
 
 p {
@@ -93,13 +95,13 @@ p {
 }
 
 .deny-button {
-    background-color: red;
+    background-color: rgba(255, 0, 0, 0.75);
     color: white;
     border-radius: 5px;
 }
 
 .approve-button {
-    background-color: green;
+    background-color: rgba(0, 128, 0, 0.75);
     color: white;
     border-radius: 5px;
 }

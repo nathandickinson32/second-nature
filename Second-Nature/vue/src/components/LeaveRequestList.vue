@@ -53,11 +53,13 @@ h1 {
     gap: 30px;
 }
 .requestCard {
-    border: 1px solid black;
+    border: 1px solid #a1af9f;
     border-radius: 5px;
     padding: 10px;
     padding-left: 20px;
     margin-bottom: 15px;
     width: 300px;
+    background-color: white;
+    box-shadow: -2px 2px 4px #a1af9f;
 }
 </style>

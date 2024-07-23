@@ -10,19 +10,15 @@
             <label for="endDate">End Date </label>
             <input type="date" id="endDate" v-model="request.endDate" required autofocus />
         </div>
-        <!-- <div class="form-input-group">
-            <label for="reason">Reason</label>
-            <input type="text" id="requestReason" v-model="request.requestReason" required autofocus />
-        </div> -->
         <div class="form-input-group">
-            <label for="reason">Reason</label>
+            <label for="reason">Reason </label>
             <select id="title" v-model="request.requestReason" required>
                 <option value="vacation">Vacation</option>
                 <option value="sick">Sick</option>
                 <option value="other">Other</option>
             </select>
             <div class="form-input-group" v-if="request.requestReason === 'other'">
-                <label for="reason">Reason</label>
+                <label for="reason">More Info </label>
                 <input type="text" id="reason" v-model="otherReason" required autofocus />
             </div>
         </div>
@@ -42,7 +38,7 @@ export default {
                 startDate: null,
                 endDate: null,
                 requestReason: '',
-                status: '',
+                status: 'Pending',
                 comment: '',
                 reviewDate: null
             },
@@ -69,6 +65,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+div {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 </style>
