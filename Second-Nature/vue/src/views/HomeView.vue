@@ -5,10 +5,13 @@
     <!-- Instead of having two landing pages for employees vs managers, 
       What if we had the buttons for the manager pages tagged with v-show
     -->
-    <div v-show="isManager">Review requests off</div>
+    <!-- <div v-show="isManager">Review requests off</div> -->
 
     <div id="menu-grid">
-      <span class="menu-icon"><router-link v-bind:to="{ name: 'newPTOrequest' }">New Leave Request</router-link></span>
+      <span class="menu-icon">
+        <img src="/src/images/calendar-plus.png" alt="">
+        <router-link v-bind:to="{ name: 'newPTOrequest' }">New Leave Request</router-link>
+      </span>
       <div class="menu-icon"><router-link v-bind:to="{ name: 'myRequests' }">My Leave Requests</router-link></div>
       <span class="menu-icon" v-if="isManager"><router-link v-bind:to="{name: 'reviewLeaveRequests'}">Review Leave Requests</router-link></span>
       <span class="menu-icon">span square</span>
@@ -40,15 +43,19 @@ export default {
 }
 .menu-icon {
   display: flex;
-  border: 1px solid black;
-  width: 75px;
-  height: 75px;
+  border: 1px solid #a1af9f;
+  width: 150px;
+  height: 150px;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: white;
   text-align: center;
   align-items: center;
   justify-content: center;
+  box-shadow: -2px 2px 4px #a1af9f;
+}
+.menu-icon img {
+  width: 75px;
 }
 h1 {
   text-align: center;

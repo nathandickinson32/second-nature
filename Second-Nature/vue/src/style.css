@@ -1,0 +1,13 @@
+body {
+    background-color: #f4fbf3;
+    color: #3e4a3d;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+a {
+    color: #2a64bd;
+}
+
+a:visited {
+    color: #a1af9f;
+}
