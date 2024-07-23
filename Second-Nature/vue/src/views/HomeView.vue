@@ -20,11 +20,6 @@
         <img src="/src/images/to-do.png" alt="">
         <router-link v-bind:to="{name: 'reviewLeaveRequests'}">Review Leave Requests</router-link>
       </span>
-      <span class="menu-icon">span square</span>
-      <span class="menu-icon">span square</span>
-      <div class="menu-icon">div square</div>
-      <div class="menu-icon">div square</div>
-      <div class="menu-icon">div square</div>
     </div>
   </div>
 </template>
