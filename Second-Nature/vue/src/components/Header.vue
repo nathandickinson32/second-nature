@@ -1,7 +1,7 @@
 <template>
     <div id="header">
        <img src="src\assets\SecondNatureLogo001.png" alt="logo" class="logo"  />
-       <h1 v-if="$store.state.token !=''" id="display-name"> {{ $store.state.user.firstName }}</h1>
+       <!-- <h1 v-if="$store.state.token !=''" id="display-name"> {{ $store.state.user.firstName }}</h1> -->
     </div>
     <div id="nav">
       <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
@@ -15,7 +15,7 @@
 
 <style scoped>
 .logo {
-  width: 100px;
+  width: 175px;
   height: auto;
 }
 #display-name {
@@ -25,10 +25,15 @@
 
 #header {
   display: flex;
+  background-color: white;
 }
 
 #nav {
-  padding-bottom: 15px;
+  border-top: 10px solid #f4fbf3;
+  padding: 5px;
+  margin-bottom: 15px;
+  background-color: white;
+  width: fit-content;
 }
 
 </style>

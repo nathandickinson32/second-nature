@@ -12,8 +12,14 @@
         <img src="/src/images/calendar-plus.png" alt="">
         <router-link v-bind:to="{ name: 'newPTOrequest' }">New Leave Request</router-link>
       </span>
-      <div class="menu-icon"><router-link v-bind:to="{ name: 'myRequests' }">My Leave Requests</router-link></div>
-      <span class="menu-icon" v-if="isManager"><router-link v-bind:to="{name: 'reviewLeaveRequests'}">Review Leave Requests</router-link></span>
+      <div class="menu-icon">
+        <img src="/src/images/handshake.png" alt="">
+        <router-link v-bind:to="{ name: 'myRequests' }">My Leave Requests</router-link>
+      </div>
+      <span class="menu-icon" v-if="isManager">
+        <img src="/src/images/to-do.png" alt="">
+        <router-link v-bind:to="{name: 'reviewLeaveRequests'}">Review Leave Requests</router-link>
+      </span>
       <span class="menu-icon">span square</span>
       <span class="menu-icon">span square</span>
       <div class="menu-icon">div square</div>
@@ -43,6 +49,7 @@ export default {
 }
 .menu-icon {
   display: flex;
+  flex-direction: column;
   border: 1px solid #a1af9f;
   width: 150px;
   height: 150px;
@@ -56,6 +63,7 @@ export default {
 }
 .menu-icon img {
   width: 75px;
+  margin-bottom: 15px;
 }
 h1 {
   text-align: center;
