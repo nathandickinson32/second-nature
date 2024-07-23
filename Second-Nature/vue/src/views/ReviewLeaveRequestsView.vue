@@ -33,7 +33,8 @@ export default {
     },
     data() {
         return {
-            requests: []
+            requests: [],
+            currentDate: new Date().toISOString().slice(0, 10),
         }
     },
     created() {
@@ -47,10 +48,26 @@ export default {
         })
         },
         approveRequest(request){
-            // send the post with the leave request status === approve
+            request.reviewDate = this.currentDate;
+            request.status = 'Approved'
+            LeaveRequestService.updateTimeOffRequest(request)
+            .then((response) => {
+                console.log(response);
+                if (response.status === 202) {
+                    window.alert('Request has been approved');
+                }
+            })
         },
         denyRequest(request){
-            // send the post with the leave request status === denied
+            request.reviewDate = this.currentDate;
+            request.status = 'Denied'
+            LeaveRequestService.updateTimeOffRequest(request)
+            .then((response) => {
+                console.log(response);
+                if (response.status === 202) {
+                    window.alert('Request has been denied');
+                }
+            })
         }
     }
 }

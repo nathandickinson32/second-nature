@@ -13,10 +13,10 @@ export default {
     getTimeOffRequestByRequestId (id) {
         return axios.get(`/get-time-off-request-by-request-id/${id}`)
     },
-    addNewTImeOffRequest(TimeOffRequest){
+    addNewTimeOffRequest(TimeOffRequest){
         return axios.post('/add-new-time-off-request', TimeOffRequest);
     },
-    updateTimePoffRequest(TimeOffRequest){
+    updateTimeOffRequest(TimeOffRequest){
         return axios.post('/update-time-off-request', TimeOffRequest);
     },
     deleteTimeOffRequest(TimeOffRequest){

@@ -52,7 +52,7 @@ export default {
             if (this.request.requestReason === 'other') {
                 this.request.requestReason = this.otherReason;
             }
-            LeaveRequestService.addNewTImeOffRequest(this.request)
+            LeaveRequestService.addNewTimeOffRequest(this.request)
             .then((response) => {
                 console.log(response);
                 if (response.status === 201) {
