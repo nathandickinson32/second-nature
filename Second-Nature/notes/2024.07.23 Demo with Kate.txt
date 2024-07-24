@@ -1,0 +1,23 @@
+Types of Feedback
+- Personal Check-In
+Performance rating / Employee Satisfaction  / Goals /
+
+- Professional Development 
+
+
+
+Kate Feedback
+Works as expected
+Colors are good.
+
+Next Steps
+Add a get user by ID
+Add comment from manager
+Color the request a shade of green or red depending on approval status
+
+Next Features to work on
+Performance and Feedback (Kudos)
+
+Chris to get the user information over to the front end.
+Chris and Nathan to plan out the backend.
+Dinda and Kristi to get together when they decide.
