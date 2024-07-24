@@ -1,0 +1,14 @@
+2024.07.24 Backend Meeting
+
+The PLAN
+Chris
+- Export database diagram
+- to update database
+- maintenance CRUD
+- maintenance_performed CRUD
+
+Nathan
+- professional_review CRUD
+- equipment CRUD
+
+Reconvince on Monday 7/29/2027
