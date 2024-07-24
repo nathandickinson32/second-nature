@@ -20,6 +20,10 @@
         <img src="/src/images/to-do.png" alt="">
         <router-link v-bind:to="{name: 'reviewLeaveRequests'}">Review Leave Requests</router-link>
       </span>
+      <div class="menu-icon">
+        <img src="" alt="">
+        <router-link v-bind:to="{ name: 'kudos' }">Kudos Board</router-link>
+      </div>
     </div>
   </div>
 </template>
