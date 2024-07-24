@@ -4,7 +4,8 @@
        <!-- <h1 v-if="$store.state.token !=''" id="display-name"> {{ $store.state.user.firstName }}</h1> -->
     </div>
     <div id="nav">
-      <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'home' }">Home</router-link>
+      <span v-if="$store.state.token != ''"> | </span>
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
     </div>
 </template>

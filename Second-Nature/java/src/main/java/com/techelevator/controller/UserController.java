@@ -22,7 +22,7 @@ public class UserController {
 
     @GetMapping(path = "/get-user")
     public User getUser(Principal principal){
-        System.out.println(LocalDateTime.now() + " [User Controller] Accessing user " + principal.getName());
+        System.out.println(LocalDateTime.now() + " git [User Controller] Accessing user " + principal.getName());
         return userDao.getUserByUsername(principal.getName());
     }
 

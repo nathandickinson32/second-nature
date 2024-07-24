@@ -9,6 +9,7 @@ import RegisterView from '../views/RegisterView.vue';
 import NewRequestView from  '../views/NewRequestView.vue';
 import MyLeaveRequestsView from '../views/MyLeaveRequestsView.vue';
 import ReviewLeaveRequestsView from '../views/ReviewLeaveRequestsView.vue';
+import KudosView from '../views/KudosView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -39,6 +40,14 @@ const routes = [
     path: '/my-requests',
     name: 'myRequests',
     component: MyLeaveRequestsView,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/kudos',
+    name: 'kudos',
+    component: KudosView,
     meta: {
       requiresAuth: true
     }
