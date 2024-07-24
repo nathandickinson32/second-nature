@@ -91,6 +91,11 @@ export default {
 </script>
 
 <style scoped>
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .form-input-group {
   margin-bottom: 1rem;
 }
