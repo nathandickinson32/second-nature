@@ -1,0 +1,48 @@
+Endpoints and JSON Objects - Kudos
+
+Endpoints:
+/give-kudos
+Inserts a Kudos object into the database and returns a kudos object.
+Expects: A Kudos JSON object.
+Returns: The new Kudos JSON object.
+
+/update-kudos
+Updates a Kudos object in the database.
+Expects: A Kudos JSON object.
+Returns: The updated Kudos JSON object.
+
+/get-all-kudos
+Returns ALL Kudos object in descending order by date.
+Expects: Nothing.
+Returns: An array of all Kudos JSON objects.
+
+/get-my-received-kudos
+Gets all Kudos received by the logged in user.
+Expects: The Principal
+Returns: An array of all Kudos JSON objects received by me.
+
+/get-my-given-kudos
+Gets all Kudos given by the logged in user.
+Expects: The Principal.
+Returns: An array of all Kudos JSON objects that I have given.
+
+/get-kudos-by-id
+Gets a Kudos object by a kudos id
+Expects: A Kudos JSON object.
+Returns: The retrieved Kudos JSON object.
+
+/delete-kudos
+Deletes a Kudos object from the database.
+Expects: A Kudos JSON object.
+Returns: Nothing.
+
+Objects:
+Default Kudos JSON Object:
+{
+	"kudosId": 1, // Not needed when giving kudos
+	"giverUserId": 3,
+	"receiverUserId": 1,
+	"date": "2024-07-25",
+	"title": "Updated Title",
+	"notes": "Default Note"
+}
