@@ -1,0 +1,3 @@
+2024-07-26 Backend to do
+
+- Need a list of all users first name and last name EXCEPT for the principal
