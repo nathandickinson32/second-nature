@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        <div v-for="request in requests" v-bind:key="request.id" class="request-card">
+        <div v-for="request in requests" v-bind:key="request.id" class="request-card" >
             <form @submit.prevent="submitRequest">
-                <div class="requestCard">
+                <div class="requestCard" :class="{ 'approved': request.status == 'Approved', 'denied': request.status == 'Denied' }">
                     <p>Requested by: {{ request.userName }}</p>
                     <p>Date Requested: {{ request.requestDate }}</p>
                     <p>Start Date: {{ request.startDate }}</p>
@@ -144,7 +144,16 @@ p {
     border-radius: 5px;
 }
 
+.approved {
+    background-color: rgba(163, 196, 163, 0.463);
+}
+
+.denied {
+    background-color: darksalmon;
+}
+
 .inactive_button {
     background-color: rgba(109, 97, 97, 0.25);
 }
+
 </style>

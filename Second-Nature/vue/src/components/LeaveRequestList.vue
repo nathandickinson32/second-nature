@@ -2,7 +2,7 @@
   <div>
     <h1>Leave Requests</h1>
     <div class="container">
-        <div class="requestCard" v-for="request in requests" v-bind:key="request.id">
+        <div class="requestCard" v-for="request in requests" v-bind:key="request.id" :class="{ 'approved': request.status == 'Approved', 'denied': request.status == 'Denied' }">
             <p>Date Requested: {{ request.requestDate }}</p>
             <p>Start Date: {{ request.startDate }}</p>
             <p>End Date: {{ request.endDate }}</p>
@@ -61,4 +61,12 @@ h1 {
     background-color: white;
     box-shadow: -2px 2px 4px #a1af9f;
 }
+.approved {
+    background-color: rgba(163, 196, 163, 0.463);
+}
+
+.denied {
+    background-color: darksalmon;
+}
+
 </style>
