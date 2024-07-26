@@ -10,7 +10,7 @@ INSERT INTO users (username,password_hash,role,first_name,last_name,title)
 VALUES ('boss','$2a$10$HEWndqvi9gOWgcw2b.bUNu0AS31AzXBc7YAfAiklkaHXkTAE1HabW','ROLE_USER', 'Boss First Name', 'Boss Last Name', 'manager');
 
 INSERT INTO time_off_requests (user_id, request_date, start_date, end_date, status, request_reason, comment, review_date)
-VALUES (1, '2024-07-15', '2024-07-22', '2024-07-26', 'approved', 'Need time off.', 'Take all the time you need.', '2024-07-16');
+VALUES (1, '2024-07-15', '2024-07-22', '2024-07-26', 'Approved', 'Need time off.', 'Take all the time you need.', '2024-07-16');
 
 INSERT INTO professional_check_in (manager_id, employee_id, notes, date)
 VALUES (3, 1, 'Default note', '2024-07-26');

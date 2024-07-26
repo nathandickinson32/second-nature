@@ -1,9 +1,12 @@
 package com.techelevator.model;
 
+import java.util.Date;
+
 public class Kudos {
     private int kudosId;
     private int giverUserId;
     private int receiverUserId;
+    private Date date;
     private String title;
     private String notes;
 
@@ -29,6 +32,14 @@ public class Kudos {
 
     public void setReceiverUserId(int receiverUserId) {
         this.receiverUserId = receiverUserId;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getTitle() {
