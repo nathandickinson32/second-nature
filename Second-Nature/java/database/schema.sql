@@ -1,5 +1,9 @@
 BEGIN TRANSACTION;
 
+DROP TABLE IF EXISTS maintenance_performed;
+DROP TABLE IF EXISTS maintenance;
+DROP TABLE IF EXISTS equipment;
+DROP TABLE IF EXISTS professional_check_in;
 DROP TABLE IF EXISTS time_off_requests;
 DROP TABLE IF EXISTS users;
 
@@ -25,6 +29,52 @@ CREATE TABLE time_off_requests (
     comment VARCHAR (200),
     review_date DATE,
     FOREIGN KEY (user_id) REFERENCES users (user_id)
+);
+
+CREATE TABLE professional_check_in (
+    check_in_id SERIAL PRIMARY KEY,
+    manager_id INT NOT NULL,
+    employee_id INT NOT NULL,
+    notes VARCHAR,
+    date DATE NOT NULL,
+    FOREIGN KEY (manager_id) REFERENCES users (user_id),
+    FOREIGN KEY (employee_id) REFERENCES users (user_id)
+);
+
+CREATE TABLE equipment (
+    equipment_id SERIAL PRIMARY KEY,
+    serial_number VARCHAR NOT NULL,
+    model VARCHAR NOT NULL,
+    name VARCHAR,
+    starting_hours INT NOT NULL,
+    entered_by_user_id INT NOT NULL,
+    entered_on_date DATE NOT NULL,
+    notes VARCHAR,
+    active BOOLEAN NOT NULL,
+    active_note VARCHAR,
+    FOREIGN KEY (entered_by_user_id) REFERENCES users (user_id)
+);
+
+CREATE TABLE maintenance (
+    ticket_id SERIAL PRIMARY KEY,
+    equipment_id INT NOT NULL,
+    hours INT NOT NULL,
+    entered_by_user_id INT NOT NULL,
+    date DATE NOT NULL,
+    notes VARCHAR,
+    complete BOOLEAN NOT NULL,
+    FOREIGN KEY (entered_by_user_id) REFERENCES users (user_id)
+);
+
+CREATE TABLE maintenance_performed (
+    maintenance_performed_id SERIAL PRIMARY KEY,
+    equipment_id INT NOT NULL,
+    ticket_id INT NOT NULL,
+    description VARCHAR NOT NULL,
+    performed_by VARCHAR NOT NULL,
+    notes VARCHAR,
+    FOREIGN KEY (equipment_id) REFERENCES equipment (equipment_id),
+    FOREIGN KEY (ticket_id) REFERENCES maintenance (ticket_id)
 );
 
 COMMIT TRANSACTION;

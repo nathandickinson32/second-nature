@@ -12,4 +12,16 @@ VALUES ('boss','$2a$10$HEWndqvi9gOWgcw2b.bUNu0AS31AzXBc7YAfAiklkaHXkTAE1HabW','R
 INSERT INTO time_off_requests (user_id, request_date, start_date, end_date, status, request_reason, comment, review_date)
 VALUES (1, '2024-07-15', '2024-07-22', '2024-07-26', 'approved', 'Need time off.', 'Take all the time you need.', '2024-07-16');
 
+INSERT INTO professional_check_in (manager_id, employee_id, notes, date)
+VALUES (3, 1, 'Default note', '2024-07-26');
+
+INSERT INTO equipment (serial_number, model, name, starting_hours, entered_by_user_id, entered_on_date, notes, active, active_note)
+VALUES ('Default Serial Number', 'Default Model', 'Default Name', 0, 3, '2024-07-26', 'Default Note', true, 'Default Active Note');
+
+INSERT INTO maintenance (equipment_id, hours, entered_by_user_id, date, notes, complete)
+VALUES (1, 0, 3, '2024-07-26', 'Default Note', false);
+
+INSERT INTO maintenance_performed (equipment_id, ticket_id, description, performed_by, notes)
+VALUES (1, 1, 'Default Description', 'Default Performed By', 'Default Notes');
+
 COMMIT TRANSACTION;
