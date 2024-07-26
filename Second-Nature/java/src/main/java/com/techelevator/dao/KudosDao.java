@@ -12,4 +12,5 @@ public interface KudosDao {
     public List<Kudos> getKudosByGiverId(int giverUserId);
     public Kudos getKudosById(int id);
     public void deleteKudos(Kudos kudos);
+    public Kudos archiveKudos(Kudos kudos);
 }

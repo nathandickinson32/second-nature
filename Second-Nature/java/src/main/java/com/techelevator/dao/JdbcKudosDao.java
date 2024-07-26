@@ -22,7 +22,7 @@ public class JdbcKudosDao implements KudosDao{
 
     @Override
     public Kudos insertKudos(Kudos kudos) {
-        String sql = "INSERT INTO kudos (giver_user_id, receiver_user_id, date, title, notes) VALUES (?, ?, ?, ?, ?) RETURNING kudos_id;";
+        String sql = "INSERT INTO kudos (giver_user_id, receiver_user_id, date, title, notes, archive) VALUES (?, ?, ?, ?, ?, ?) RETURNING kudos_id;";
         int newKudosId = -1;
 
         try {
@@ -33,7 +33,8 @@ public class JdbcKudosDao implements KudosDao{
                     kudos.getReceiverUserId(),
                     kudos.getDate(),
                     kudos.getTitle(),
-                    kudos.getNotes()
+                    kudos.getNotes(),
+                    kudos.isArchive()
             );
         } catch (CannotGetJdbcConnectionException e){
             throw new CannotGetJdbcConnectionException("[JDBC Kudos DAO] Unable to connect to the database.");
@@ -46,7 +47,7 @@ public class JdbcKudosDao implements KudosDao{
 
     @Override
     public Kudos updateKudos(Kudos kudos) {
-        String sql = "UPDATE kudos SET giver_user_id = ?, receiver_user_id = ?, date = ?, title = ?, notes = ? WHERE kudos_id = ?;";
+        String sql = "UPDATE kudos SET giver_user_id = ?, receiver_user_id = ?, date = ?, title = ?, notes = ?, archive = ? WHERE kudos_id = ?;";
 
         try {
             template.update(
@@ -56,6 +57,7 @@ public class JdbcKudosDao implements KudosDao{
                     kudos.getDate(),
                     kudos.getTitle(),
                     kudos.getNotes(),
+                    kudos.isArchive(),
                     kudos.getKudosId()
             );
         } catch (CannotGetJdbcConnectionException e){
@@ -158,6 +160,26 @@ public class JdbcKudosDao implements KudosDao{
         }
     }
 
+    @Override
+    public Kudos archiveKudos(Kudos kudos) {
+        String sql = "UPDATE kudos SET archive = ? WHERE kudos_id = ?;";
+
+        try {
+            template.update(
+                    sql,
+                    true,
+                    kudos.getKudosId()
+            );
+        } catch (CannotGetJdbcConnectionException e){
+            throw new CannotGetJdbcConnectionException("[JDBC Kudos DAO] Unable to connect to the database.");
+        } catch (DataIntegrityViolationException e){
+            throw new DataIntegrityViolationException("[JDBC Kudos DAO] Unable to archive kudos by ID: " + kudos.getKudosId());
+        }
+
+        return getKudosById(kudos.getKudosId());
+    }
+
+
     private Kudos mapRowToKudos(SqlRowSet results){
         Kudos kudos = new Kudos();
         kudos.setKudosId(results.getInt("kudos_id"));
@@ -166,6 +188,7 @@ public class JdbcKudosDao implements KudosDao{
         kudos.setDate(results.getDate("date"));
         kudos.setTitle(results.getString("title"));
         kudos.setNotes(results.getString("notes"));
+        kudos.setArchive(results.getBoolean("archive"));
         return kudos;
     }
 }

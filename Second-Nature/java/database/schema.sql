@@ -49,6 +49,7 @@ CREATE TABLE kudos (
     date DATE NOT NULL,
     title VARCHAR NOT NULL,
     notes VARCHAR,
+    archive BOOLEAN NOT NULL,
     FOREIGN KEY (giver_user_id) REFERENCES users (user_id),
     FOREIGN KEY (receiver_user_id) REFERENCES users (user_id)
 );

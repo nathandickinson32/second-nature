@@ -19,7 +19,9 @@ public class KudosController {
     private UserDao userDao;
 
     @PostMapping(path = "/give-kudos")
-    public Kudos giveKudos(@RequestBody Kudos kudos){
+    public Kudos giveKudos(@RequestBody Kudos kudos, Principal principal){
+        int giverUserId = userDao.getUserIdByUsername(principal.getName());
+        kudos.setGiverUserId(giverUserId);
         return kudosDao.insertKudos(kudos);
     }
 
@@ -45,7 +47,7 @@ public class KudosController {
         return kudosDao.getKudosByGiverId(myUserId);
     }
 
-    @GetMapping(path = "/get-kudos-by-id")
+    @GetMapping(path = "/get-kudos")
     public Kudos getKudosByKudosId(@RequestBody Kudos kudos){
         return kudosDao.getKudosById(kudos.getKudosId());
     }
@@ -53,5 +55,10 @@ public class KudosController {
     @DeleteMapping(path = "/delete-kudos")
     public void deleteKudos(@RequestBody Kudos kudos){
         kudosDao.deleteKudos(kudos);
+    }
+
+    @PostMapping(path = "/archive-kudos")
+    public Kudos archiveKudos(@RequestBody Kudos kudos){
+        return kudosDao.archiveKudos(kudos);
     }
 }

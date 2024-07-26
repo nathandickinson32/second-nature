@@ -9,6 +9,7 @@ public class Kudos {
     private Date date;
     private String title;
     private String notes;
+    private boolean archive;
 
     public int getKudosId() {
         return kudosId;
@@ -56,5 +57,13 @@ public class Kudos {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public boolean isArchive() {
+        return archive;
+    }
+
+    public void setArchive(boolean archive) {
+        this.archive = archive;
     }
 }

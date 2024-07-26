@@ -3,7 +3,7 @@ Endpoints and JSON Objects - Kudos
 Endpoints:
 /give-kudos
 Inserts a Kudos object into the database and returns a kudos object.
-Expects: A Kudos JSON object.
+Expects: A Kudos JSON object and the Principal.
 Returns: The new Kudos JSON object.
 
 /update-kudos
@@ -26,8 +26,8 @@ Gets all Kudos given by the logged in user.
 Expects: The Principal.
 Returns: An array of all Kudos JSON objects that I have given.
 
-/get-kudos-by-id
-Gets a Kudos object by a kudos id
+/get-kudos
+Gets a Kudos object by a Kudos object. Looks into the database by kudos_id.
 Expects: A Kudos JSON object.
 Returns: The retrieved Kudos JSON object.
 
@@ -35,6 +35,11 @@ Returns: The retrieved Kudos JSON object.
 Deletes a Kudos object from the database.
 Expects: A Kudos JSON object.
 Returns: Nothing.
+
+/archive-kudos
+Instead of removing the record like delete, archive changes the archive Boolean to true.
+Expects: A Kudos JSON object.
+Returns: The updated Kudos JSON object.
 
 Objects:
 Default Kudos JSON Object:
@@ -44,5 +49,6 @@ Default Kudos JSON Object:
 	"receiverUserId": 1,
 	"date": "2024-07-25",
 	"title": "Updated Title",
-	"notes": "Default Note"
+	"notes": "Default Note",
+	"archive": false
 }

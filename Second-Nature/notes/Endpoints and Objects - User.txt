@@ -1,0 +1,24 @@
+Endpoints and Objects - User
+
+Endpoints
+/register
+
+/login
+
+Objects
+Register
+{
+	"username" : "user",
+	"password" : "password",
+	"confirmPassword" : "password",
+	"role" : "user",
+	"firstName" : "User First Name",
+	"lastName" : "User Last Name",
+	"title" : "User Title"
+}
+
+Login
+{
+	"username": "user",
+	"password" : "password"
+}
