@@ -15,5 +15,22 @@ export default {
 
     giveKudos(kudos) {
         return axios.post('/give-kudos', kudos);
+    },
+
+    updateKudos(kudos) {
+        return axios.post('/update-kudos', kudos);
+    },
+
+    // Requested modified end point to accept a kudosId instead of kudos
+    getKudo(kudos) {
+        return axios.post('/get-kudos', kudos);
+    },
+
+    deleteKudos(kudos) {
+        return axios.post('/delete-kudos', kudos);
+    },
+
+    archiveKudos(kudos) {
+        return axios.post('/archive-kudos', kudos);
     }
 }

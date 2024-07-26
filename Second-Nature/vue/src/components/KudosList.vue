@@ -1,6 +1,6 @@
 <template>
   <div class="kudos-list">
-    <h1>Culture Kudos</h1>
+    <!-- <h1>Culture Kudos</h1> -->
     <div v-if="kudos.length === 0">No kudos have been entered yet.</div>
     <div v-else>
         <Kudo v-for="kudo in kudos" :key="kudo.kudosId" :kudo="kudo"></Kudo>

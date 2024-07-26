@@ -1,17 +1,17 @@
 <template>
   <div class="kudo">
-    <h1>{{ kudo.title }}</h1>
-    <p>Given by: {{ kudo.giverUserName }}</p>
-    <p>Sent to: {{ kudo.receiverUserName }}</p>
-    <p>Sent on: {{ kudo.date }}</p>
-    <p>Note:</p>
-    <p class="kudo-note">{{ kudo.notes }}</p>
+    <h1>{{ kudo.title }} for {{ kudo.receiverUserName }}</h1>
+    <span>
+      <p>Given by: {{ kudo.giverUserName }}</p>
+      <!-- <button @click.prevent="viewKudo(kudo)">View</button> -->
+    </span>
   </div>
 </template>
 
 <script>
+import router from '../router/index.js';
 import LeaveRequestService from '../services/LeaveRequestService.js'
-import KudosService from '../services/KudosService.js';
+import KudoDetail from './KudoDetail.vue';
 
 export default {
     props: {
@@ -46,12 +46,17 @@ export default {
                  kudo.receiverUserName = response.data.firstName + ' ' + response.data.lastName;
                }
             );
+        },
+        viewKudo(kudo){
+          router.push({ 
+            name: 'kudosDetail',
+            params: {
+              kudosId: kudo.kudosId
+            }
+          });
         }
     },
     computed: {
-        // getUserName(kudo.giverUserId){
-        //     this.Sender=LeaveRequestService.getUserName(kudo.giverUserId);
-        // }
     }
 }
 
