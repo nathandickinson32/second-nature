@@ -3,10 +3,11 @@
     <h1>Culture Kudos</h1>
     <button id="give-kudos-btn" @click="giveKudos">Give Kudos</button>
     <div class="container">
-      <div class="kudos-card" v-for="kudo in kudos" v-bind:key="kudo.id">
+      <!-- <div class="kudos-card" v-for="kudo in kudos" v-bind:key="kudo.id">
         <h4>{{ kudo.title }} for {{ kudo.receiverUserName }}</h4>
         <p>by {{ kudo.giverUserName }} <button>View</button></p> 
-      </div>
+      </div> -->
+      <KudosList />
     </div>
   </div>
 </template>
@@ -14,8 +15,12 @@
 <script>
 import KudosService from '../services/KudosService';
 import LeaveRequestService from '../services/LeaveRequestService';
+import KudosList from '../components/KudosList.vue';
 
 export default {
+  components: {
+    KudosList
+    },
   data() {
     return {
       kudos: []
@@ -31,22 +36,22 @@ export default {
         (response) => {
           console.log(response.data);
           this.kudos = response.data;
-          this.kudos.forEach((kudo) => {
-            LeaveRequestService.getUserById(kudo.giverUserId)
-           .then(
-              (response) => {
-                console.log(response.data);
-                kudo.giverUserName = response.data.firstName + ' ' + response.data.lastName;
-              }
-            );
-            LeaveRequestService.getUserById(kudo.receiverUserId)
-            .then(
-              (response) => {
-                 console.log(response.data);
-                 kudo.receiverUserName = response.data.firstName + ' ' + response.data.lastName;
-               }
-            );
-          });
+          // this.kudos.forEach((kudo) => {
+          //   LeaveRequestService.getUserById(kudo.giverUserId)
+          //  .then(
+          //     (response) => {
+          //       console.log(response.data);
+          //       kudo.giverUserName = response.data.firstName + ' ' + response.data.lastName;
+          //     }
+          //   );
+          //   LeaveRequestService.getUserById(kudo.receiverUserId)
+          //   .then(
+          //     (response) => {
+          //        console.log(response.data);
+          //        kudo.receiverUserName = response.data.firstName + ' ' + response.data.lastName;
+          //      }
+          //   );
+          // });
         }
       );
     }
