@@ -5,6 +5,12 @@ Endpoints
 
 /login
 
+/get-all-user-information
+Gets a list of all users in the system, excluding the logged int user.
+Expects: The Principal
+Returns: An array of User Information JSON objects.
+
+
 Objects
 Register
 {
@@ -21,4 +27,11 @@ Login
 {
 	"username": "user",
 	"password" : "password"
+}
+
+User Infomration
+{
+	"userId" : 0,
+	"firstName" : "Users First Name",
+	"lastName" : "Users Last Name"
 }
