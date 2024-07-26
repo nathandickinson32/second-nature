@@ -4,11 +4,11 @@ The PLAN
 Chris
 [Complete] - Export database diagram
 [Complete] - to update database
+[Complete] - Create and share front end UI flow diagrams for Equipment, maintenance, and professional check in
+[Complete] - Update Database for a Team Member to Team Member kudos board
+[Complete] - Create Diagrams for Kudos Flow
 - maintenance CRUD (Delay?)
 - maintenance_performed CRUD (Delay?)
-- Create and share front end UI flow diagrams for Equipment, maintenance, and professional check in
-[Complete] - Update Database for a Team Member to Team Member kudos board
-- Create Diagrams for Kudos Flow
 
 Nathan
 - professional_review CRUD
