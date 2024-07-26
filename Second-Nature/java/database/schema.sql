@@ -3,6 +3,7 @@ BEGIN TRANSACTION;
 DROP TABLE IF EXISTS maintenance_performed;
 DROP TABLE IF EXISTS maintenance;
 DROP TABLE IF EXISTS equipment;
+DROP TABLE IF EXISTS kudos;
 DROP TABLE IF EXISTS professional_check_in;
 DROP TABLE IF EXISTS time_off_requests;
 DROP TABLE IF EXISTS users;
@@ -39,6 +40,17 @@ CREATE TABLE professional_check_in (
     date DATE NOT NULL,
     FOREIGN KEY (manager_id) REFERENCES users (user_id),
     FOREIGN KEY (employee_id) REFERENCES users (user_id)
+);
+
+CREATE TABLE kudos (
+    kudos_id SERIAL PRIMARY KEY,
+    giver_user_id INT NOT NULL,
+    receiver_user_id INT NOT NULL,
+    date DATE NOT NULL,
+    title VARCHAR NOT NULL,
+    notes VARCHAR,
+    FOREIGN KEY (giver_user_id) REFERENCES users (user_id),
+    FOREIGN KEY (receiver_user_id) REFERENCES users (user_id)
 );
 
 CREATE TABLE equipment (
