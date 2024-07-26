@@ -1,50 +1,60 @@
 <template>
-    <!-- <LeaveRequestList :request="requests"  /> -->
     <div class="container">
-    <div v-for="request in requests" v-bind:key="request.id" class="request-card">
-        <!-- <LeaveRequestList :request="request"  /> -->
-         
-            <div class="requestCard">
-                <p>Date Requested: {{ request.requestDate }}</p>
-                <p>Start Date: {{ request.startDate }}</p>
-                <p>End Date: {{ request.endDate }}</p>
-                <p>Reason: {{ request.requestReason }}</p>
-                <p>Status: {{ request.status }}</p>
-                <p v-if="request.status != 'Pending'">Manager comment: {{ request.comment }}</p>
-                <p>Reviewed by manager: {{ request.reviewDate }}</p>
-                <span class="action-buttons">
-                    <button class="approve-button" @click="approveRequest(request)">Approve</button>
-                    <button class="deny-button" @click="denyRequest(request)">Deny</button>
-                </span>
-            </div>    
+        <div v-for="request in requests" v-bind:key="request.id" class="request-card">
+            <form @submit.prevent="submitRequest">
+                <div class="requestCard">
+                    <p>Requested by: {{ request.userName }}</p>
+                    <p>Date Requested: {{ request.requestDate }}</p>
+                    <p>Start Date: {{ request.startDate }}</p>
+                    <p>End Date: {{ request.endDate }}</p>
+                    <p>Reason: {{ request.requestReason }}</p>
+                    <p>Status: {{ request.status }}</p>
+                    <p v-if="request.status != 'Pending'">Manager comment: {{ request.comment }}</p>
+                    <p v-if="request.status == 'Pending'" class="manager-comment">
+                        <label for="comment">Manager Comment</label>
+                        <input type="comment" id="comment" v-model="request.comment" autofocus/>
+                    </p>
+                    <p v-if="request.status != 'Pending'">Reviewed by manager: {{ request.reviewDate }}</p>
+                    <span v-if="request.status == 'Pending'" class="action-buttons">
+                        <button class="approve-button" @click="approveRequest(request)">Approve</button>
+                        <button class="deny-button" :class="{'inactive_button' : !request.comment}" :disabled="!request.comment" @click="denyRequest(request)">Deny</button>
+                    </span>
+                </div>  
+            </form>
         </div>
-        
     </div>
 </template>
 
 <script>
 
 import LeaveRequestService from '../services/LeaveRequestService';
-// import LeaveRequestList from '../components/LeaveRequestList.vue';
 
 export default {
     components: {
-        // LeaveRequestList
     },
     data() {
         return {
             requests: [],
-            currentDate: new Date().toISOString().slice(0, 10),
+            currentDate: new Date().toISOString().slice(0, 10)
         }
     },
     created() {
         this.fetchRequests();
     },
+    computed(){
+    },
     methods: {
         fetchRequests() {
             LeaveRequestService.getAllTimeOffRequests()
             .then((response) => {
+                console.log(response.data);
                 this.requests = response.data;
+            this.requests.forEach(request => {
+                console.log(request.userId);
+                if(request.userId){
+                    this.getUserName(request);
+                }
+            })
         })
         },
         approveRequest(request){
@@ -56,6 +66,7 @@ export default {
                 if (response.status === 202) {
                     window.alert('Request has been approved');
                 }
+                this.fetchRequests();
             })
         },
         denyRequest(request){
@@ -67,11 +78,21 @@ export default {
                 if (response.status === 202) {
                     window.alert('Request has been denied');
                 }
+                this.fetchRequests();
+            })
+            
+        },
+        getUserName(request) {
+            LeaveRequestService.getUserById(request.userId)
+            .then((response) => {
+                console.log(response.data);
+                if(response.status == 200){
+                    request.userName = response.data.firstName + ' ' + response.data.lastName;
+                }
             })
         }
     }
 }
-
 
 </script>
 
@@ -121,5 +142,9 @@ p {
     background-color: rgba(0, 128, 0, 0.75);
     color: white;
     border-radius: 5px;
+}
+
+.inactive_button {
+    background-color: rgba(109, 97, 97, 0.25);
 }
 </style>

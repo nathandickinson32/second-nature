@@ -21,5 +21,8 @@ export default {
     },
     deleteTimeOffRequest(TimeOffRequest){
         return axios.delete('/delete-time-off-request', TimeOffRequest);
+    }, 
+    getUserById(id) {
+        return axios.get(`/get-user/${id}`)
     }
 }
