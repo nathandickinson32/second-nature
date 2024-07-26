@@ -11,8 +11,8 @@ Colors are good.
 
 Next Steps
 [Complete] Add a get user by ID
-Add comment from manager
-Color the request a shade of green or red depending on approval status
+[Complete] Add comment from manager
+[Complete] Color the request a shade of green or red depending on approval status
 
 Next Features to work on
 Performance and Feedback (Kudos)

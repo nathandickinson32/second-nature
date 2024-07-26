@@ -89,7 +89,7 @@ export default {
                 if(response.status == 200){
                     request.userName = response.data.firstName + ' ' + response.data.lastName;
                 }
-            })
+            });
         }
     }
 }
