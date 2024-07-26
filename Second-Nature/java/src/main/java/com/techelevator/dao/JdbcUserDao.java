@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.RegisterUserDto;
+import com.techelevator.model.UserInformation;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -40,6 +41,31 @@ public class JdbcUserDao implements UserDao {
         }
 
         return result;
+    }
+
+    @Override
+    public List<UserInformation> getAllUsersInformation(int userId) {
+        List<UserInformation> allUsersInformation = new ArrayList<>();
+        String sql = "SELECT user_id, first_name, last_name FROM users;";
+
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+            while (results.next()){
+                UserInformation userInformation = new UserInformation();
+                if (results.getInt("user_id") != userId){
+                    userInformation.setUserId(results.getInt("user_id"));
+                    userInformation.setFirstName(results.getString("first_name"));
+                    userInformation.setLastName(results.getString("last_name"));
+                    allUsersInformation.add(userInformation);
+                }
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("[JDBC User DAO] Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("[JDBC User DAO] Data integrity violation", e);
+        }
+
+        return allUsersInformation;
     }
 
     @Override
@@ -113,6 +139,8 @@ public class JdbcUserDao implements UserDao {
         }
         return newUser;
     }
+
+
 
     private User mapRowToUser(SqlRowSet rs) {
         User user = new User();

@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.User;
+import com.techelevator.model.UserInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -30,5 +32,11 @@ public class UserController {
     public User getUserById(@PathVariable int id, Principal principal){
         System.out.println(LocalDateTime.now() + " [User Controller] Accessing user id: " + id + " by user: " + principal.getName());
         return userDao.getUserById(id);
+    }
+
+    @GetMapping(path = "/get-all-user-information")
+    public List<UserInformation> getAllUserInformation(Principal principal){
+        int userId = userDao.getUserIdByUsername(principal.getName());
+        return userDao.getAllUsersInformation(userId);
     }
 }
