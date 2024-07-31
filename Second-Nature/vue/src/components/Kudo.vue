@@ -1,10 +1,9 @@
 <template>
-  <router-link :to="{ name: 'kudosDetail', params: { kudosId: kudo.kudosId } }">
+  <router-link :to="{ name: 'kudosDetail', params: { kudosId: kudo.kudosId } }" class="link-object">
   <div class="kudo">
     <h1>{{ kudo.title }} for {{ kudo.receiverUserName }}</h1>
     <span>
       <p>Given by: {{ kudo.giverUserName }}</p>
-      <!-- <button @click.prevent="viewKudo(kudo)">View</button>       -->
     </span>
   </div>
 </router-link>
@@ -13,7 +12,6 @@
 <script>
 import router from '../router/index.js';
 import LeaveRequestService from '../services/LeaveRequestService.js'
-import KudoDetail from './KudoDetail.vue';
 
 export default {
     props: {
@@ -80,6 +78,12 @@ export default {
     width: 300px;
     background-color: white;
     box-shadow: -2px 2px 4px #a1af9f;
+    text-decoration: none;
+}
+
+a {  
+    text-decoration: none;
+    color: #3e4a3d;
 }
 
 </style>
