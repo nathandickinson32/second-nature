@@ -36,5 +36,9 @@ export default {
 
     archiveKudos(kudos) {
         return axios.post('/archive-kudos', kudos);
+    },
+
+    getAllOtherUsers() {
+        return axios.get('/get-all-user-information');
     }
 }

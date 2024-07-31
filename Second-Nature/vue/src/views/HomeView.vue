@@ -2,11 +2,6 @@
   <div class="home">
     <h1>Second Nature</h1>
     <h4>Welcome, {{ $store.state.user.firstName }}!</h4>
-    <!-- Instead of having two landing pages for employees vs managers, 
-      What if we had the buttons for the manager pages tagged with v-show
-    -->
-    <!-- <div v-show="isManager">Review requests off</div> -->
-
     <div id="menu-grid">
       <span class="menu-icon">
         <img src="/src/images/calendar-plus.png" alt="">

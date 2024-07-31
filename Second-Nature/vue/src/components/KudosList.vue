@@ -1,11 +1,11 @@
 <template>
   <div class="kudos-list">
-    <span class="filter-section">
-        
-        {{ currentUserId }}
-      <button @click="showAllKudos">Show All Kudos</button>
-      <button @click="showMyKudos">Show My Kudos</button>
-      <button @click="showSentKudos">Show Kudos I sent</button>
+    <span class="filter-section">        
+      <label @click="showAllKudos" class="clickable-label">Show All</label>
+      <span class="separator"> | </span>
+      <label @click="showMyKudos" class="clickable-label">My Kudos</label>
+      <span class="separator"> | </span>
+      <label @click="showSentKudos" class="clickable-label">Sent Kudos</label>
     </span>
     <div v-if="filteredKudos.length === 0">No kudos have been entered yet.</div>
     <div v-else>
@@ -72,5 +72,21 @@ export default {
 </script>
 
 <style>
+.filter-section {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.clickable-label:hover {
+    cursor: pointer;
+    text-decoration: solid underline;
+}
+.clickable-label {
+    margin: 0px 10px;
+}
+.sepparator {
+    color:cornflowerblue;
+}
 
 </style>

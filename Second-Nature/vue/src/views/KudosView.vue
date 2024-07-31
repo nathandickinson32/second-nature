@@ -1,12 +1,8 @@
 <template>
   <div>
     <h1>Culture Kudos</h1>
-    <button id="give-kudos-btn" @click="giveKudos">Give Kudos</button>
+    <router-link v-bind:to="{ name: 'newKudo'}" id="give-kudos-btn" >Give Kudos</router-link>
     <div class="container">
-      <!-- <div class="kudos-card" v-for="kudo in kudos" v-bind:key="kudo.id">
-        <h4>{{ kudo.title }} for {{ kudo.receiverUserName }}</h4>
-        <p>by {{ kudo.giverUserName }} <button>View</button></p> 
-      </div> -->
       <KudosList />
     </div>
   </div>
@@ -23,38 +19,12 @@ export default {
     },
   data() {
     return {
-      kudos: []
     }
   },
   created() {
-    this.getKudos();
   },
   methods: {
-    getKudos() {
-      KudosService.getAllKudos()
-      .then(
-        (response) => {
-          console.log(response.data);
-          this.kudos = response.data;
-          // this.kudos.forEach((kudo) => {
-          //   LeaveRequestService.getUserById(kudo.giverUserId)
-          //  .then(
-          //     (response) => {
-          //       console.log(response.data);
-          //       kudo.giverUserName = response.data.firstName + ' ' + response.data.lastName;
-          //     }
-          //   );
-          //   LeaveRequestService.getUserById(kudo.receiverUserId)
-          //   .then(
-          //     (response) => {
-          //        console.log(response.data);
-          //        kudo.receiverUserName = response.data.firstName + ' ' + response.data.lastName;
-          //      }
-          //   );
-          // });
-        }
-      );
-    }
+    
   }
 }
 </script>
