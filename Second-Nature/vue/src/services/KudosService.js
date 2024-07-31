@@ -23,7 +23,11 @@ export default {
 
     // Requested modified end point to accept a kudosId instead of kudos
     getKudo(kudos) {
-        return axios.post('/get-kudos', kudos);
+        return axios.get('/get-kudos', kudos);
+    },
+    
+    getKudos(id) {
+        return axios.get(`/get-kudos-by-kudos-id/${id}`);
     },
 
     deleteKudos(kudos) {

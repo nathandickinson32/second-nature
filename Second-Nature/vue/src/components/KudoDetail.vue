@@ -1,8 +1,8 @@
 <template>
   <div class="kudo">
     <h1>{{ kudo.title }}</h1>
-    <p>Given by: {{ kudo.giverUserName }}</p>
-    <p>Sent to: {{ kudo.receiverUserName }}</p>
+    <p>Given by: {{ giverUserName }}</p>
+    <p>Sent to: {{ receiverUserName }}</p>
     <p>Sent on: {{ kudo.date }}</p>
     <p>Note:</p>
     <p class="kudo-note">{{ kudo.notes }}</p>
@@ -22,10 +22,11 @@ export default {
   },
   data() {
       return {
-  
+        giverUserName: '',
+        receiverUserName: ''
       }
   },
-  created(){
+  created(){    
       this.getUsers(this.kudo);
   },
   methods: {
@@ -35,7 +36,7 @@ export default {
             (response) => {
               console.log('The giving user:')
               console.log(response.data);
-              kudo.giverUserName = response.data.firstName + ' ' + response.data.lastName;
+              this.giverUserName = response.data.firstName + ' ' + response.data.lastName;
             }
           );
           LeaveRequestService.getUserById(kudo.receiverUserId)
@@ -43,7 +44,7 @@ export default {
             (response) => {
               console.log('The receiving user:')
                 console.log(response.data);
-                kudo.receiverUserName = response.data.firstName + ' ' + response.data.lastName;
+                this.receiverUserName = response.data.firstName + ' ' + response.data.lastName;
               }
           );
       }

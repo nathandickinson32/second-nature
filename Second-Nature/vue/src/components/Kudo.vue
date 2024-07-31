@@ -3,7 +3,7 @@
     <h1>{{ kudo.title }} for {{ kudo.receiverUserName }}</h1>
     <span>
       <p>Given by: {{ kudo.giverUserName }}</p>
-      <!-- <button @click.prevent="viewKudo(kudo)">View</button> -->
+      <button @click.prevent="viewKudo(kudo)">View</button>
     </span>
   </div>
 </template>
@@ -47,11 +47,15 @@ export default {
                }
             );
         },
-        viewKudo(kudo){
+        // viewKudo(kudo){
+        viewKudo(){
           router.push({ 
             name: 'kudosDetail',
+            // props: {
+            //   kudo: this.kudo
+            // },
             params: {
-              kudosId: kudo.kudosId
+              kudosId: this.kudo.kudosId
             }
           });
         }

@@ -1,6 +1,7 @@
 <template>
   <div class="kudo-detail">
-    <KudoDetail />
+    <KudoDetail :kudo="kudo" />
+    <!-- {{ this.kudo }} -->
   </div>
 </template>
 
@@ -10,34 +11,35 @@ import KudosService from '../services/KudosService';
 import { useRoute } from 'vue-router';
 
 export default {
-    setup(){
-    const route = useRoute()
-    console.log( route.params );
-    },
+    
      components: {
        KudoDetail
      },
      data() {
         return {
             kudo: {
-                kudosId: 0,
+                kudosId: '',
                 title: '',
                 notes: '',
-                giverUserId: 0,
-                receiverUserId: 0,
-                date: ''
+                giverUserId: '',
+                receiverUserId: '',
+                date: '',
+                archive: ''
             }
         }
      },
      created() {
+        // this.kudo.kudosId = this.$route.params.kudosId;
         this.getKudo();
+        
      },
      methods: {
         getKudo() {
-            KudosService.getKudo(this.kudo)
+            KudosService.getKudos(this.$route.params.kudosId)
                 .then((response) => {
                         console.log(response.data);
                         this.kudo = response.data;
+                        console.log(this.kudo);
                     }
                 );
         }
@@ -46,8 +48,10 @@ export default {
 </script>
 
 <style scoped>
+
+/*
 .kudo-detail {
-    display: flex;
+ display: flex;
     flex-direction: column;
     justify-content: start;
     border: 1px solid #a1af9f;
@@ -60,4 +64,7 @@ export default {
     background-color: white;
     box-shadow: -2px 2px 4px #a1af9f;
 }
+*/
+
+   
 </style>

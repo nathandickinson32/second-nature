@@ -11,7 +11,6 @@ import MyLeaveRequestsView from '../views/MyLeaveRequestsView.vue';
 import ReviewLeaveRequestsView from '../views/ReviewLeaveRequestsView.vue';
 import KudosView from '../views/KudosView.vue';
 import KudoDetailView from '../views/KudoDetailView.vue';
-
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
@@ -89,6 +88,7 @@ const routes = [
     path: "/kudos/:kudosId",
     name: "kudosDetail",
     component: KudoDetailView,
+    props: true,
     meta: {
       requiresAuth: true
     }
