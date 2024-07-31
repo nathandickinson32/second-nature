@@ -37,12 +37,15 @@ export default {
         getKudo() {
             KudosService.getKudos(this.$route.params.kudosId)
                 .then((response) => {
-                        console.log(response.data);
                         this.kudo = response.data;
-                        console.log(this.kudo);
+                        console.log("[Kudos Detail View] Kudos object: " + response.data);
+
+                        // Get Receiver Function
                     }
                 );
-        }
+        },
+        // Get Receiver function { on response Get giver funciton }
+        // Get Giver funtion
     }
 }
 </script>
