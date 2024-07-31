@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Kudos;
+import com.techelevator.model.TimeOffRequests;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -191,4 +192,24 @@ public class JdbcKudosDao implements KudosDao{
         kudos.setArchive(results.getBoolean("archive"));
         return kudos;
     }
+
+
+
+    public Kudos getKudosByKudosId(int kudosId){
+        Kudos kudos = null;
+        String  sql = "SELECT * FROM kudos WHERE kudos_id = ?";
+        try {
+            SqlRowSet results = template.queryForRowSet(sql, kudosId);
+
+            if(results.next()) {
+                kudos = mapRowToKudos(results);
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            System.out.println("Problem connecting");
+        } catch (DataIntegrityViolationException e) {
+            System.out.println("Data problems");
+        }
+        return kudos;
+    }
+
 }

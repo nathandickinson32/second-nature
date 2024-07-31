@@ -3,6 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.KudosDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.Kudos;
+import com.techelevator.model.TimeOffRequests;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -60,5 +61,10 @@ public class KudosController {
     @PostMapping(path = "/archive-kudos")
     public Kudos archiveKudos(@RequestBody Kudos kudos){
         return kudosDao.archiveKudos(kudos);
+    }
+
+    @RequestMapping(path="/get-kudos-by-kudos-id/{kudosId}", method = RequestMethod.GET)
+    public Kudos getKudosByKudosId(@PathVariable int kudosId){
+        return kudosDao.getKudosByKudosId(kudosId);
     }
 }
