@@ -18,36 +18,24 @@ export default {
         kudo: {
             type: Object,
             required: true
+        },
+        giverUserName: {
+            type: String,
+            required: true
+        },
+        receiverUserName: {
+            type: String,
+            required: true
         }
   },
   data() {
       return {
-        giverUserName: '',
-        receiverUserName: ''
       }
   },
   created(){    
-      this.getUsers(this.kudo);
   },
   methods: {
-      getUsers(kudo) {
-          LeaveRequestService.getUserById(kudo.giverUserId)
-          .then(
-            (response) => {
-              console.log('The giving user:')
-              console.log(response.data);
-              this.giverUserName = response.data.firstName + ' ' + response.data.lastName;
-            }
-          );
-          LeaveRequestService.getUserById(kudo.receiverUserId)
-          .then(
-            (response) => {
-              console.log('The receiving user:')
-                console.log(response.data);
-                this.receiverUserName = response.data.firstName + ' ' + response.data.lastName;
-              }
-          );
-      }
+      
   }
 }
 
