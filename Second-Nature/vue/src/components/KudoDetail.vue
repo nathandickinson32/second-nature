@@ -15,48 +15,28 @@ import KudosService from '../services/KudosService.js';
 
 export default {
   props: {
-    kudo: {
-      type: Object,
-      required: true
-    }
+
+        kudo: {
+            type: Object,
+            required: true
+        },
+        giverUserName: {
+            type: String,
+            required: true
+        },
+        receiverUserName: {
+            type: String,
+            required: true
+        }
   },
   data() {
-    return {
-      giverUserName: '',
-      receiverUserName: '',
-      kudos: {}
-    }
+      return {
+      }
   },
-  created() {
-    this.getKudo();
+  created(){    
   },
   methods: {
-    getKudo() {
-      KudosService.getKudos(this.kudo.kudosId)
-        .then((response) => {
-          this.kudos = response.data;
-          console.log("[Kudos Detail View] Kudos ID: " + response.data.kudosId);
 
-          this.getUsers();
-        }
-        );
-    },
-    getUsers() {
-      console.log("[Kudos Detail] Kudos ID: " + this.kudos.kudosId);
-      LeaveRequestService.getUserById(this.kudos.giverUserId)
-        .then(
-          (response) => {
-            this.giverUserName = response.data.firstName + ' ' + response.data.lastName;
-          }
-        );
-      LeaveRequestService.getUserById(this.kudos.receiverUserId)
-        .then(
-          (response1) => {
-            console.log(response1.data);
-            this.receiverUserName = response1.data.firstName + ' ' + response1.data.lastName;
-          }
-        );
-    },
   }
 }
 

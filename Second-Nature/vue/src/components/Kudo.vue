@@ -4,6 +4,7 @@
     <span>
       <p>Given by: {{ kudo.giverUserName }}</p>
       <button @click.prevent="viewKudo(kudo)">View</button>
+      <!-- <router-link :to="{ name: 'kudoDetail', params: { kudosId: kudo.kudosId } }">View</router-link> -->
     </span>
   </div>
 </template>
@@ -47,13 +48,9 @@ export default {
                }
             );
         },
-        // viewKudo(kudo){
         viewKudo(){
           router.push({ 
             name: 'kudosDetail',
-            // props: {
-            //   kudo: this.kudo
-            // },
             params: {
               kudosId: this.kudo.kudosId
             }
