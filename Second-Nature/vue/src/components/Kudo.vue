@@ -1,12 +1,13 @@
 <template>
+  <router-link :to="{ name: 'kudosDetail', params: { kudosId: kudo.kudosId } }">
   <div class="kudo">
     <h1>{{ kudo.title }} for {{ kudo.receiverUserName }}</h1>
     <span>
       <p>Given by: {{ kudo.giverUserName }}</p>
-      <button @click.prevent="viewKudo(kudo)">View</button>
-      <!-- <router-link :to="{ name: 'kudoDetail', params: { kudosId: kudo.kudosId } }">View</router-link> -->
+      <!-- <button @click.prevent="viewKudo(kudo)">View</button>       -->
     </span>
   </div>
+</router-link>
 </template>
 
 <script>
