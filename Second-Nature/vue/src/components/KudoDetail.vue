@@ -1,6 +1,6 @@
 <template>
   <div class="kudo">
-    <h1>{{ kudos.title }}</h1>
+    <h1>{{ kudo.title }}</h1>
     <p>Given by: {{ giverUserName }}</p>
     <p>Sent to: {{ receiverUserName }}</p>
     <p>Sent on: {{ kudo.date }}</p>
@@ -10,39 +10,25 @@
 </template>
 
 <script>
-import LeaveRequestService from '../services/LeaveRequestService.js'
-import KudosService from '../services/KudosService.js';
 
 export default {
   props: {
-
-        kudo: {
-            type: Object,
-            required: true
-        },
-        giverUserName: {
-            type: String,
-            required: true
-        },
-        receiverUserName: {
-            type: String,
-            required: true
-        }
-  },
-  data() {
-      return {
-      }
-  },
-  created(){    
-  },
-  methods: {
-
+    kudo: {
+      type: Object,
+      required: true
+    },
+    giverUserName: {
+      type: String,
+      required: true
+    },
+    receiverUserName: {
+      type: String,
+      required: true
+    }
   }
 }
 
 </script>
-
-
 
 <style scoped>
 .kudo {
