@@ -28,9 +28,11 @@ export function createStore(currentToken, currentUser) {
     //Check if a logged-in user is a manager
     getters: {
       isManager(state) {
-        console.log(state);
         return state.user.title === 'manager'; 
 
+      },
+      loggedInUserId(state) {
+        return state.user.id;
       }
     }
   });
