@@ -1,12 +1,12 @@
 <template>
   <div class="kudos-list">
-    <span class="filter-section">        
+    <div class="filter-section">        
       <label @click="showAllKudos" class="clickable-label">Show All</label>
       <span class="separator"> | </span>
       <label @click="showMyKudos" class="clickable-label">My Kudos</label>
       <span class="separator"> | </span>
       <label @click="showSentKudos" class="clickable-label">Sent Kudos</label>
-    </span>
+    </div>
     <div v-if="filteredKudos.length === 0">No kudos have been entered yet.</div>
     <div v-else>
         <Kudo v-for="kudo in filteredKudos" :key="kudo.kudosId" :kudo="kudo"></Kudo>
@@ -72,19 +72,30 @@ export default {
 </script>
 
 <style>
-.filter-section {
-    display: inline-flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+.clickable-label {
+    color: #2a64bd;
+    text-decoration: none;
 }
+
 .clickable-label:hover {
     cursor: pointer;
-    text-decoration: solid underline;
+    text-decoration: underline;
 }
-.clickable-label {
-    margin: 0px 10px;
+
+.clickable-label:visited {
+color: #a1af9f;
 }
+
+.filter-section {
+    width: 100%;
+    text-align: center;
+}
+
+.kudo-list {
+    display: flex;
+    width: auto;
+}
+
 .sepparator {
     color:cornflowerblue;
 }

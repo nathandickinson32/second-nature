@@ -1,10 +1,8 @@
 <template>
-  <div>
+  <div class="container">
     <h1>Culture Kudos</h1>
-    <router-link v-bind:to="{ name: 'newKudo'}" id="give-kudos-btn" >Give Kudos</router-link>
-    <div class="container">
-      <KudosList />
-    </div>
+    <router-link v-bind:to="{ name: 'newKudo'}" id="give-kudos-btn">Give Kudos</router-link>
+    <KudosList />
   </div>
 </template>
 
@@ -32,26 +30,28 @@ export default {
 <style scoped>
 h1 {
     text-align: center;
+    margin-top: 0;
 }
+
 #give-kudos-btn {
-  position: absolute;
-  right: 20px;
-}
-.container {
-  margin-top: 50px;
   display: flex;
   justify-content: center;
-}
-.kudos-card {
+  align-items: center;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
   background-color: white;
-  border-radius: 5px;
-  padding: 10px;
+  width: 100%;
+  max-width: 400px;
+  height: 50px;
+  text-align: center;
+  margin-bottom: 20px;
 }
-button {
-  background-color: #f4fbf3;
-  border: 1px solid #a1af9f;
-  border-radius: 5px;
-  padding: 5px;
-  margin-left: 10px;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 5%;
+  align-items: center;
 }
 </style>
