@@ -114,14 +114,13 @@ export default {
 
 .container {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
     gap: 20px;
+    align-items: center;
     margin: 20px 5%;
 }
 
-.requestCard {
+.request-card {
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -129,6 +128,7 @@ export default {
     border-radius: 10px;
     padding: 20px;
     width: 90%;
+    max-width: 400px;
     background-color: white;
     box-shadow: -2px 2px 4px #a1af9f;
 }

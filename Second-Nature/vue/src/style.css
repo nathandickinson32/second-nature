@@ -40,7 +40,7 @@ h4 {
 }
 
 h5 {
-    font-size: 12pt;
+    font-size: 10pt;
     margin: 0.5em 0;
     font-weight: normal;
 }
@@ -78,4 +78,8 @@ p {
     border-width: 1px;
     margin-top:20px;
     padding: 10px 20px;
+}
+
+.small-font {
+    font-size: 10pt;
 }

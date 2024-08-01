@@ -1,17 +1,17 @@
 <template>
-  <div class="kudos-list">
-    <div class="filter-section">        
-      <label @click="showAllKudos" class="clickable-label">Show All</label>
-      <span class="separator"> | </span>
-      <label @click="showMyKudos" class="clickable-label">My Kudos</label>
-      <span class="separator"> | </span>
-      <label @click="showSentKudos" class="clickable-label">Sent Kudos</label>
+    <div class="container">
+        <div class="filter-section">
+            <label @click="showAllKudos" class="clickable-label">Show All</label>
+            <span class="separator"> | </span>
+            <label @click="showMyKudos" class="clickable-label">My Kudos</label>
+            <span class="separator"> | </span>
+            <label @click="showSentKudos" class="clickable-label">Sent Kudos</label>
+        </div>
+        <div class="kudos-list" v-if="filteredKudos.length === 0">No kudos have been entered yet.</div>
+        <div class="kudos-list" v-else>
+            <Kudo v-for="kudo in filteredKudos" :key="kudo.kudosId" :kudo="kudo"></Kudo>
+        </div>
     </div>
-    <div v-if="filteredKudos.length === 0">No kudos have been entered yet.</div>
-    <div v-else>
-        <Kudo v-for="kudo in filteredKudos" :key="kudo.kudosId" :kudo="kudo"></Kudo>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -51,12 +51,12 @@ export default {
     methods: {
         getKudos() {
             KudosService.getAllKudos()
-           .then(
-                (response) => {
-                    console.log(response.data);
-                    this.kudos = response.data;
-                }
-            );
+                .then(
+                    (response) => {
+                        console.log(response.data);
+                        this.kudos = response.data;
+                    }
+                );
         },
         showAllKudos() {
             this.filterType = 'all';
@@ -71,7 +71,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .clickable-label {
     color: #2a64bd;
     text-decoration: none;
@@ -83,7 +83,7 @@ export default {
 }
 
 .clickable-label:visited {
-color: #a1af9f;
+    color: #a1af9f;
 }
 
 .filter-section {
@@ -91,13 +91,17 @@ color: #a1af9f;
     text-align: center;
 }
 
-.kudo-list {
+.container {
+    width: 100%;
+    margin: 0;
+}
+
+.kudos-list {
     display: flex;
-    width: auto;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    width: 100%;
 }
-
-.sepparator {
-    color:cornflowerblue;
-}
-
 </style>
