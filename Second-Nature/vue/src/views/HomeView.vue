@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <h1>Second Nature</h1>
     <h4>Welcome, {{ $store.state.user.firstName }}!</h4>
     <div id="menu-grid">
       <span class="menu-icon">
@@ -55,7 +54,7 @@ h4 {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 20px;
+  margin: 20px 5%;
 }
 
 .menu-icon {
@@ -76,25 +75,5 @@ h4 {
 .menu-icon img {
   width: 75px;
   margin-bottom: 15px;
-}
-
-@media only screen and (min-width: 600px) {
-  .menu-icon {
-    margin-right: 30px;
-    margin-left: 30px;
-  }
-}
-
-@media only screen and (min-width: 800px) {
-  #menu-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-  }
-  .menu-icon {
-    margin-right: 50px;
-    margin-left: 50px;
-    justify-self: center;
-  }
 }
 </style>

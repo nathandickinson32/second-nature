@@ -67,6 +67,7 @@ export default {
 button {
   width: 200px;
   height: 50px;
+  margin: 20px;
 }
 
 form {
@@ -93,6 +94,7 @@ label {
   border-radius: 10px;
   border-style: solid;
   border-width: 1px;
+  border-color: #3e4a3d;
   width: auto;
   max-width: 400px;
   padding: 20px;
