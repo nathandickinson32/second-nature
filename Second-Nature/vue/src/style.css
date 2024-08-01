@@ -47,7 +47,7 @@ h5 {
 
 input {
     height: 2em;
-    padding: 0 1em;
+    padding: 0 0.5em;
     border-radius: 5px;
     border-width: 1px;
     border-color: #3e4a3d;
