@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="content">
     <form @submit.prevent="submitRequest">
-        <h1>New Request Form</h1>
+        <h2>New Request Form</h2>
         <div class="form-input-group">
             <label for="startDate">Start Date </label>
             <input type="date" id="startDate" v-model="request.startDate" required autofocus />
@@ -17,11 +17,11 @@
                 <option value="sick">Sick</option>
                 <option value="other">Other</option>
             </select>
-            <div class="form-input-group" v-if="request.requestReason === 'other'">
+        </div>
+        <div class="form-input-group" v-if="request.requestReason === 'other'">
                 <label for="reason">More Info </label>
                 <input type="text" id="reason" v-model="otherReason" required autofocus />
             </div>
-        </div>
         <button type="submit">Submit Request</button>
     </form>
   </div>
@@ -66,8 +66,43 @@ export default {
 </script>
 
 <style scoped>
-div {
-    margin-top: 10px;
-    margin-bottom: 10px;
+button {
+    width: 200px;
+    height: 50px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 20px;
+    align-items: center;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: -2px 2px 4px #a1af9f;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 0;
+}
+
+input {
+    width: 150px;
+}
+
+select {
+    width: 180px;
+    height: 50px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 5%;
 }
 </style>

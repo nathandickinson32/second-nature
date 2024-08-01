@@ -1,4 +1,5 @@
 <template>
+  <div class="content">
     <div id="register" class="text-center">
       <h1>Create Account</h1>
       <form v-on:submit.prevent="register">
@@ -36,6 +37,7 @@
         <p><router-link v-bind:to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
       </form>
     </div>
+  </div>
 </template>
 
 <script>
@@ -102,11 +104,10 @@ form {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: auto;
+  width: 100%;
 }
 
 h1 {
-  width: auto;
   text-align: center;
   margin-top: 0;
 }
@@ -118,9 +119,10 @@ select {
 
 #register {
   display: flex;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: auto;
+  width: 100%;
   background-color: white;
   border-radius: 10px;
   border-style: solid;
@@ -129,12 +131,11 @@ select {
   margin: 20px 5%;
   max-width: 400px;
   padding: 20px;
+  box-shadow: -2px 2px 4px #a1af9f;
 }
 
-.form-input-group {
-  margin-bottom: 1rem;
-  width: 100%;
+.content {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 </style>

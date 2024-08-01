@@ -75,11 +75,10 @@ form {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: auto;
+  width: 100%;
 }
 
 h1 {
-  width: auto;
   text-align: center;
   margin-top: 0;
 }
@@ -98,17 +97,11 @@ label {
   width: auto;
   max-width: 400px;
   padding: 20px;
+  box-shadow: -2px 2px 4px #a1af9f;
 }
 
 .content {
   display: flex;
   justify-content: center;
-}
-
-.form-input-group {
-  margin: 0.5em 0;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
 }
 </style>
