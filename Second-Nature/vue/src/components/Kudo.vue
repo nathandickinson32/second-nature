@@ -84,7 +84,7 @@ h5 {
   flex-direction: column;
   justify-content: start;
   border: 1px solid #a1af9f;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 20px;
   width: 90%;
   max-width: 400px;

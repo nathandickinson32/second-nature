@@ -33,6 +33,10 @@ export default {
 </script>
 
 <style scoped>
+h3 {
+  margin-top: 0;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -45,7 +49,7 @@ export default {
   flex-direction: column;
   justify-content: start;
   border: 1px solid #a1af9f;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 20px;
   width: 90%;
   max-width: 800px;

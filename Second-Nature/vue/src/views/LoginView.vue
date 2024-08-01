@@ -90,11 +90,9 @@ label {
 #login {
   margin: 20px;
   background-color: white;
+  border: 1px solid #a1af9f;
   border-radius: 10px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #3e4a3d;
-  width: auto;
+  width: 90%;
   max-width: 400px;
   padding: 20px;
   box-shadow: -2px 2px 4px #a1af9f;

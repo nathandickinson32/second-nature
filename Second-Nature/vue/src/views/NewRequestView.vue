@@ -75,9 +75,8 @@ form {
     display: flex;
     flex-direction: column;
     background-color: white;
-    border-radius: 20px;
-    border-style: solid;
-    border-width: 1px;
+    border-radius: 10px;
+    border: 1px solid #a1af9f;
     padding: 20px;
     align-items: center;
     width: 90%;

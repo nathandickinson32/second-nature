@@ -99,6 +99,7 @@ form {
     border-radius: 10px;
     padding: 20px;
     width: 90%;
+    max-width: 800px;
     align-content: space-between;
     justify-content: space-between;
 }
@@ -107,11 +108,20 @@ h2 {
     text-align: center;
 }
 
+input {
+    width: 100%;
+}
+
+label {
+    margin-right: 10px;
+}
+
 #note {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     width: 100%;
     height: 20em;
     resize: none;
+    border-radius: 5px;
 }
 
 .container {

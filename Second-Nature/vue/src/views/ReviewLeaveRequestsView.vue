@@ -109,7 +109,7 @@ export default {
 
 <style scoped>
 #comment {
-    width: auto;
+    width: 95%;
 }
 
 .container {
@@ -136,7 +136,8 @@ export default {
 .action-buttons {
     display: flex;
     gap: 10px;
-    align-self: center;
+    width: auto;
+    justify-content: center;
 }
 
 .deny-button {
@@ -146,7 +147,7 @@ export default {
     border-color: black;
     border-width: 1px;
     border-style: solid;
-    width: 100px;
+    width: 150px;
     height: 50px;
 }
 
@@ -157,7 +158,7 @@ export default {
     border-color: black;
     border-width: 1px;
     border-style: solid;
-    width: 100px;
+    width: 150px;
     height: 50px;
 }
 
@@ -175,5 +176,6 @@ export default {
 
 .manager-comment {
     margin-bottom: 10px;
+    width: auto;
 }
 </style>

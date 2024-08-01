@@ -124,10 +124,8 @@ select {
   flex-direction: column;
   width: 100%;
   background-color: white;
+  border: 1px solid #a1af9f;
   border-radius: 10px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #3e4a3d;
   margin: 20px 5%;
   max-width: 400px;
   padding: 20px;

@@ -72,9 +72,8 @@ p {
 
 .review {
     background-color: white;
-    border-style: solid;
+    border: 1px solid #a1af9f;
     border-radius: 10px;
-    border-width: 1px;
     margin-top:20px;
     padding: 10px 20px;
 }
