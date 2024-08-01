@@ -41,7 +41,7 @@ h4 {
 
 h5 {
     font-size: 12pt;
-    display: inline;
+    margin: 0.5em 0;
     font-weight: normal;
 }
 
@@ -69,4 +69,13 @@ p {
     display: flex;
     justify-content: space-between;
     width: 100%;
-  }
+}
+
+.review {
+    background-color: white;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 1px;
+    margin-top:20px;
+    padding: 10px 20px;
+}

@@ -79,13 +79,4 @@ h5 {
 .denied {
     background-color: #fdd4be;
 }
-
-.review {
-    background-color: white;
-    border-style: solid;
-    border-radius: 10px;
-    border-width: 1px;
-    margin: 20px 0;
-    padding: 10px 20px;
-}
 </style>

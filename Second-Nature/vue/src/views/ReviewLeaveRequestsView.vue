@@ -1,25 +1,36 @@
 <template>
     <div class="container">
-        <div v-for="request in requests" v-bind:key="request.id" class="request-card" >
+        <div v-for="request in requests" v-bind:key="request.id" class="request-card">
             <form @submit.prevent="submitRequest">
-                <div class="requestCard" :class="{ 'approved': request.status == 'Approved', 'denied': request.status == 'Denied' }">
-                    <p>Requested by: {{ request.userName }}</p>
-                    <p>Date Requested: {{ request.requestDate }}</p>
-                    <p>Start Date: {{ request.startDate }}</p>
-                    <p>End Date: {{ request.endDate }}</p>
-                    <p>Reason: {{ request.requestReason }}</p>
-                    <p>Status: {{ request.status }}</p>
-                    <p v-if="request.status != 'Pending'">Manager comment: {{ request.comment }}</p>
-                    <p v-if="request.status == 'Pending'" class="manager-comment">
-                        <label for="comment">Manager Comment</label>
-                        <input type="comment" id="comment" v-model="request.comment" autofocus/>
-                    </p>
-                    <p v-if="request.status != 'Pending'">Reviewed by manager: {{ request.reviewDate }}</p>
-                    <span v-if="request.status == 'Pending'" class="action-buttons">
-                        <button class="approve-button" @click="approveRequest(request)">Approve</button>
-                        <button class="deny-button" :class="{'inactive_button' : !request.comment}" :disabled="!request.comment" @click="denyRequest(request)">Deny</button>
-                    </span>
-                </div>  
+                <div class="requestCard"
+                    :class="{ 'approved': request.status == 'Approved', 'denied': request.status == 'Denied' }">
+                    <h5>Request</h5>
+                    <p>{{ request.requestReason }}</p>
+                    <h5>Requested by</h5>
+                    <p>{{ request.userName }}</p>
+                    <h5>Date Range</h5>
+                    <p>From {{ request.startDate }} to {{ request.endDate }}</p>
+                    <h5>Requested on</h5>
+                    <p>{{ request.requestDate }}</p>
+                    <div class="review">
+                        <h5>Approval Status</h5>
+                        <p>{{ request.status }}</p>
+                        <p v-if="request.status != 'Pending'">{{ request.comment }}</p>
+                        <div v-if="request.status == 'Pending'" class="manager-comment">
+                            <h5>Comment</h5>
+                            <input type="comment" id="comment" v-model="request.comment" autofocus />
+                        </div>
+                        <div v-if="request.status != 'Pending'">
+                            <h5>Reviewed on</h5>
+                            <p>{{ request.reviewDate }}</p>
+                        </div>
+                        <span v-if="request.status == 'Pending'" class="action-buttons">
+                            <button class="approve-button" @click="approveRequest(request)">Approve</button>
+                            <button class="deny-button" :class="{ 'inactive_button': !request.comment }"
+                                :disabled="!request.comment" @click="denyRequest(request)">Deny</button>
+                        </span>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
@@ -41,55 +52,55 @@ export default {
     created() {
         this.fetchRequests();
     },
-    computed(){
+    computed() {
     },
     methods: {
         fetchRequests() {
             LeaveRequestService.getAllTimeOffRequests()
-            .then((response) => {
-                console.log(response.data);
-                this.requests = response.data;
-            this.requests.forEach(request => {
-                console.log(request.userId);
-                if(request.userId){
-                    this.getUserName(request);
-                }
-            })
-        })
+                .then((response) => {
+                    console.log(response.data);
+                    this.requests = response.data;
+                    this.requests.forEach(request => {
+                        console.log(request.userId);
+                        if (request.userId) {
+                            this.getUserName(request);
+                        }
+                    })
+                })
         },
-        approveRequest(request){
+        approveRequest(request) {
             request.reviewDate = this.currentDate;
             request.status = 'Approved'
             LeaveRequestService.updateTimeOffRequest(request)
-            .then((response) => {
-                console.log(response);
-                if (response.status === 202) {
-                    window.alert('Request has been approved');
-                }
-                this.fetchRequests();
-            })
+                .then((response) => {
+                    console.log(response);
+                    if (response.status === 202) {
+                        window.alert('Request has been approved');
+                    }
+                    this.fetchRequests();
+                })
         },
-        denyRequest(request){
+        denyRequest(request) {
             request.reviewDate = this.currentDate;
             request.status = 'Denied'
             LeaveRequestService.updateTimeOffRequest(request)
-            .then((response) => {
-                console.log(response);
-                if (response.status === 202) {
-                    window.alert('Request has been denied');
-                }
-                this.fetchRequests();
-            })
-            
+                .then((response) => {
+                    console.log(response);
+                    if (response.status === 202) {
+                        window.alert('Request has been denied');
+                    }
+                    this.fetchRequests();
+                })
+
         },
         getUserName(request) {
             LeaveRequestService.getUserById(request.userId)
-            .then((response) => {
-                console.log(response.data);
-                if(response.status == 200){
-                    request.userName = response.data.firstName + ' ' + response.data.lastName;
-                }
-            });
+                .then((response) => {
+                    console.log(response.data);
+                    if (response.status == 200) {
+                        request.userName = response.data.firstName + ' ' + response.data.lastName;
+                    }
+                });
         }
     }
 }
@@ -97,63 +108,72 @@ export default {
 </script>
 
 <style scoped>
+#comment {
+    width: auto;
+}
 
 .container {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-around;
-    gap: 30px;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 5%;
 }
+
 .requestCard {
     display: flex;
     flex-direction: column;
     justify-content: start;
     border: 1px solid #a1af9f;
-    border-radius: 5px;
-    padding: 10px;
-    padding-left: 20px;
-    margin-top:10px;
-    margin-bottom: 10px;
-    width: 300px;
+    border-radius: 10px;
+    padding: 20px;
+    width: 90%;
     background-color: white;
     box-shadow: -2px 2px 4px #a1af9f;
 }
 
-p {
-    margin: 2px;
-    padding: 2px;
-}
-
 .action-buttons {
-  display: flex;
-  gap: 10px;
-  padding-top: 3px;
-  align-self: center;
+    display: flex;
+    gap: 10px;
+    align-self: center;
 }
 
 .deny-button {
-    background-color: rgba(255, 0, 0, 0.75);
+    background-color: #ff4848;
     color: white;
     border-radius: 5px;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    width: 100px;
+    height: 50px;
 }
 
 .approve-button {
-    background-color: rgba(0, 128, 0, 0.75);
+    background-color: rgba(30, 155, 30, 0.75);
     color: white;
     border-radius: 5px;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    width: 100px;
+    height: 50px;
 }
 
 .approved {
-    background-color: rgba(163, 196, 163, 0.463);
+    background-color: #f4fbf3;
 }
 
 .denied {
-    background-color: darksalmon;
+    background-color: #fdd4be;
 }
 
 .inactive_button {
     background-color: rgba(109, 97, 97, 0.25);
 }
 
+.manager-comment {
+    margin-bottom: 10px;
+}
 </style>

@@ -43,7 +43,7 @@ h4 {
 
 #menu-grid {
   display: flex;
-  gap: 30px;
+  gap: 20px;
   flex-wrap: wrap;
   justify-content: baseline;
   width: auto;
@@ -61,8 +61,8 @@ h4 {
   display: flex;
   flex-direction: column;
   border: 1px solid #a1af9f;
-  width: 150px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
   padding: 10px;
   border-radius: 10px;
   background-color: white;
@@ -73,7 +73,6 @@ h4 {
 }
 
 .menu-icon img {
-  width: 75px;
-  margin-bottom: 15px;
+  width: 70px;
 }
 </style>
