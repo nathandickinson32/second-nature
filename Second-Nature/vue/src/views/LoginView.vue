@@ -104,7 +104,7 @@ label {
 }
 
 .form-input-group {
-  margin: 1em 0;
+  margin: 0.5em 0;
   display: flex;
   justify-content: space-between;
   width: 100%;

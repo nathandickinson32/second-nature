@@ -27,11 +27,9 @@
 }
 
 #nav {
-  border-top: 10px solid #f4fbf3;
-  padding: 5px;
-  margin-bottom: 15px;
-  background-color: white;
-  width: fit-content;
+  margin: 10px;
+  width: auto;
+  text-align: center;
 }
 
 </style>

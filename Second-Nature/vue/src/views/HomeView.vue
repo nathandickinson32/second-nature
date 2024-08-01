@@ -34,13 +34,30 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  text-align: center;
+}
+
+h4 {
+  text-align: center;
+} 
+
 #menu-grid {
   display: flex;
-  gap: 50px;
+  gap: 30px;
   flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: baseline;
+  width: auto;
+  margin: 20px 0;
 }
+
+.home {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 20px;
+}
+
 .menu-icon {
   display: flex;
   flex-direction: column;
@@ -52,20 +69,14 @@ export default {
   background-color: white;
   text-align: center;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   box-shadow: -2px 2px 4px #a1af9f;
 }
+
 .menu-icon img {
   width: 75px;
   margin-bottom: 15px;
 }
-h1 {
-  text-align: center;
-}
-h4 {
-  text-align: center;
-  /* ^^ this h4 formatting is probably temporary ^^ */
-} 
 
 @media only screen and (min-width: 600px) {
   .menu-icon {
