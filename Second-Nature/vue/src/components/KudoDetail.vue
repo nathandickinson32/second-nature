@@ -48,6 +48,7 @@ export default {
   border-radius: 5px;
   padding: 20px;
   width: 90%;
+  max-width: 800px;
   background-color: white;
   box-shadow: -2px 2px 4px #a1af9f;
 }

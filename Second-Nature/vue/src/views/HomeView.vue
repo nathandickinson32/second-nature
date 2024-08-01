@@ -45,7 +45,7 @@ h4 {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
-  justify-content: baseline;
+  justify-content: center;
   width: auto;
   margin: 20px 0;
 }
