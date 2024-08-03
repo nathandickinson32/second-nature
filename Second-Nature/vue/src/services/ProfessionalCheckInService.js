@@ -24,5 +24,8 @@ export default {
     }, 
     getUserById(id) {
         return axios.get(`/get-user/${id}`)
+    },
+    getUserInformation(id){
+        return axios.get('/get-all-user-information');
     }
 }
