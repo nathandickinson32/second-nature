@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div id="login">
+    <div id="login" class="small-container">
       <h1>Please Sign In</h1>
       <form v-on:submit.prevent="login">
         <div role="alert" v-if="invalidCredentials">
@@ -70,36 +70,8 @@ button {
   margin: 20px;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
 h1 {
   text-align: center;
   margin-top: 0;
-}
-
-label {
-  margin-right: 0.5rem;
-}
-
-#login {
-  margin: 20px;
-  background-color: white;
-  border: 1px solid #a1af9f;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 400px;
-  padding: 20px;
-  box-shadow: -2px 2px 4px #a1af9f;
-}
-
-.content {
-  display: flex;
-  justify-content: center;
 }
 </style>

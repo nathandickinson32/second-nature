@@ -1,7 +1,7 @@
 <template>
-  <div class="home">
+  <div class="content">
     <h4>Welcome, {{ $store.state.user.firstName }}!</h4>
-    <div id="menu-grid">
+    <div class="menu-grid">
       <span class="menu-icon">
         <img src="/src/images/calendar-plus.png" alt="">
         <router-link v-bind:to="{ name: 'newPTOrequest' }">New Leave Request</router-link>
@@ -33,46 +33,12 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  text-align: center;
-}
-
 h4 {
   text-align: center;
+  margin: 0;
 } 
 
-#menu-grid {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: auto;
-  margin: 20px 0;
-}
-
-.home {
-  display: flex;
-  justify-content: center;
+.content {
   flex-direction: column;
-  margin: 20px 5%;
-}
-
-.menu-icon {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #a1af9f;
-  width: 130px;
-  height: 130px;
-  padding: 10px;
-  border-radius: 10px;
-  background-color: white;
-  text-align: center;
-  align-items: center;
-  justify-content: space-around;
-  box-shadow: -2px 2px 4px #a1af9f;
-}
-
-.menu-icon img {
-  width: 70px;
 }
 </style>

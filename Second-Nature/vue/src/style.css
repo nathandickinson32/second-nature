@@ -1,3 +1,28 @@
+/*
+Color reference:
+
+#2a64bd (Second Nature blue)
+Used to links and logos.
+
+#3e4a3d (Dark Green)
+Used for text.
+
+#a1af9f (Desaturated Dark Green)
+Used for visited links, borders, and drop shadows.
+
+#f4fbf3 (Very Light Green)
+Used for background color and approved time off requests.
+
+#ff4848 (Saturated coral)
+Used for deny button.
+
+rgba(30, 155, 30, 0.75) (Saturated green)
+Used for approval button.
+
+#fdd4be (Desaturated coral)
+Used for denied time off requests.
+*/
+
 body {
     background-color: #f4fbf3;
     color: #3e4a3d;
@@ -17,6 +42,14 @@ a:hover {
 
 a:visited {
     color: #a1af9f;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
 h1 {
@@ -63,6 +96,12 @@ p {
     margin: 0.5em 0;
 }
 
+.content {
+    display: flex;
+    justify-content: center;
+    margin: 20px 5%;
+}
+
 .form-input-group {
     margin: 0.5em 0;
     display: flex;
@@ -70,12 +109,68 @@ p {
     width: 100%;
 }
 
-.review {
+.large-container {
+    display: flex;
+    flex-direction: column;
     background-color: white;
     border: 1px solid #a1af9f;
     border-radius: 10px;
-    margin-top:20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    align-content: space-between;
+    justify-content: space-between;
+    box-shadow: -2px 2px 4px #a1af9f;
+    box-sizing: border-box;
+}
+
+.menu-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: auto;
+    margin: 20px 0;
+}
+
+.menu-icon {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #a1af9f;
+    width: 130px;
+    height: 130px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: -2px 2px 4px #a1af9f;
+}
+
+.menu-icon img {
+    width: 70px;
+}
+
+.review-container {
+    background-color: white;
+    border: 1px solid #a1af9f;
+    border-radius: 10px;
+    margin-top: 20px;
     padding: 10px 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.small-container {
+    background-color: white;
+    border: 1px solid #a1af9f;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    box-shadow: -2px 2px 4px #a1af9f;
+    box-sizing: border-box;
 }
 
 .small-font {

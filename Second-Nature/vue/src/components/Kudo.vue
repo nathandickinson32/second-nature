@@ -1,12 +1,12 @@
 <template>
-  <router-link class="kudo" :to="{ name: 'kudosDetail', params: { kudosId: kudo.kudosId } }">
+  <router-link class="small-container" :to="{ name: 'kudosDetail', params: { kudosId: kudo.kudosId } }">
     <h3>{{ kudo.title }}</h3>
-    <h5>To </h5>
+    <!-- <h5>To </h5>
     <p>{{ kudo.receiverUserName }}</p>
     <span>
       <h5>From </h5>
       <p>{{ kudo.giverUserName }}</p>
-    </span>
+    </span> -->
   </router-link>
 </template>
 
@@ -77,19 +77,5 @@ h3 {
 
 h5 {
   margin-bottom: 0;
-}
-
-.kudo {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  border: 1px solid #a1af9f;
-  border-radius: 10px;
-  padding: 20px;
-  width: 90%;
-  max-width: 400px;
-  background-color: white;
-  box-shadow: -2px 2px 4px #a1af9f;
-  text-decoration: none;
 }
 </style>

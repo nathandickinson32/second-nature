@@ -1,32 +1,35 @@
 <template>
-    <div class="container">
+    <div class="content">
         <h2>Give Kudos</h2>
-        <form id="give-kudos-form" @submit.prevent="onSubmit">
-            <!-- Dropdown list of users -->
-            <div class="form-input-group">
-                <label for="userSelect">To: </label>
-                <select v-model="kudo.receiverUserId" id="userSelect" required>
-                    <option value="" disabled>Select a Team Member</option>
-                    <option v-for="user in users" :key="user.userId" :value="user.userId">
-                        {{ user.firstName }} {{ user.lastName }}
-                    </option>
-                </select>
-            </div>
+        <div class="large-container">
+            <form id="give-kudos-form" @submit.prevent="onSubmit">
+                <!-- Dropdown list of users -->
+                <div class="form-input-group">
+                    <label for="userSelect">To: </label>
+                    <select v-model="kudo.receiverUserId" id="userSelect" required>
+                        <option value="" disabled>Select a Team Member</option>
+                        <option v-for="user in users" :key="user.userId" :value="user.userId">
+                            {{ user.firstName }} {{ user.lastName }}
+                        </option>
+                    </select>
+                </div>
 
-            <!-- Title text field -->
-            <div class="form-input-group">
-                <label for="title">Title: </label>
-                <input type="text" v-model="kudo.title" id="title" required />
-            </div>
+                <!-- Title text field -->
+                <div class="form-input-group">
+                    <label for="title">Title: </label>
+                    <input type="text" v-model="kudo.title" id="title" required />
+                </div>
 
-            <!-- Note text field -->
-            <div class="form-input-group">
-                <textarea v-model="kudo.notes" id="note" rows="4" required></textarea>
-            </div>
+                <!-- Note text field -->
+                <div class="form-input-group">
+                    <textarea v-model="kudo.notes" id="note" rows="4" required></textarea>
+                </div>
 
-            <!-- Submit button -->
-            <button type="submit">Send this Kudo!</button>
-        </form>
+                <!-- Submit button -->
+                <button type="submit">Send this Kudo!</button>
+            </form>
+        </div>
+
     </div>
 </template>
 
@@ -71,7 +74,7 @@ export default {
                     this.note = '';
                     this.selectedUserId = '';
                     alert('Kudo sent!');
-                    this.$router.push( {    name: 'kudos' } );
+                    this.$router.push({ name: 'kudos' });
                 })
                 .catch(error => {
                     console.log(error);
@@ -89,19 +92,7 @@ export default {
 <style scoped>
 button {
     height: 50px;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    border: 1px solid #a1af9f;
-    border-radius: 10px;
-    padding: 20px;
-    width: 90%;
-    max-width: 800px;
-    align-content: space-between;
-    justify-content: space-between;
+    width: 200px;
 }
 
 h2 {
@@ -119,15 +110,13 @@ label {
 #note {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     width: 100%;
-    height: 20em;
+    height: 10em;
     resize: none;
     border-radius: 5px;
 }
 
-.container {
-    display: flex;
+.content {
     flex-direction: column;
     align-items: center;
-    margin: 20px 5%;
 }
 </style>

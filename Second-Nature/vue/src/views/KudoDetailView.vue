@@ -1,5 +1,5 @@
 <template>
-  <div class="kudo-detail">
+  <div class="content">
     <KudoDetail :kudo="kudo" :giverUserName="giverUserName" :receiverUserName="receiverUserName"></KudoDetail>
   </div>
 </template>

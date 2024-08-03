@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div id="register" class="text-center">
+    <div id="register" class="small-container">
       <h1>Create Account</h1>
       <form v-on:submit.prevent="register">
         <div role="alert" v-if="registrationErrors">
@@ -99,14 +99,6 @@ button {
   margin: 20px;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
 h1 {
   text-align: center;
   margin-top: 0;
@@ -115,25 +107,5 @@ h1 {
 select {
   width: 180px;
   height: 50px;
-}
-
-#register {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  background-color: white;
-  border: 1px solid #a1af9f;
-  border-radius: 10px;
-  margin: 20px 5%;
-  max-width: 400px;
-  padding: 20px;
-  box-shadow: -2px 2px 4px #a1af9f;
-}
-
-.content {
-  display: flex;
-  justify-content: center;
 }
 </style>

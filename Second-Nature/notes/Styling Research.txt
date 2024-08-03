@@ -1,0 +1,17 @@
+Styling Research
+Instagram
+
+Notifications Title
+font-size: 24
+
+My Username
+font-size: 20
+
+Usernames in Dms / Notifications Day Title
+Font-size: 16
+
+Default 
+font-size: 14
+
+Status / activity / Footer
+font-size: 12

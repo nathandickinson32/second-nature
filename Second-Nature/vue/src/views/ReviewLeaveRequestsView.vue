@@ -1,35 +1,34 @@
 <template>
-    <div class="container">
-        <div v-for="request in requests" v-bind:key="request.id" class="request-card">
+    <div class="content">
+        <div v-for="request in requests" v-bind:key="request.id" class="small-container"
+            :class="{ 'approved': request.status == 'Approved', 'denied': request.status == 'Denied' }">
             <form @submit.prevent="submitRequest">
-                <div class="requestCard"
-                    :class="{ 'approved': request.status == 'Approved', 'denied': request.status == 'Denied' }">
-                    <h5>Request</h5>
-                    <p>{{ request.requestReason }}</p>
-                    <h5>Requested by</h5>
-                    <p>{{ request.userName }}</p>
-                    <h5>Date Range</h5>
-                    <p>From {{ request.startDate }} to {{ request.endDate }}</p>
-                    <h5>Requested on</h5>
-                    <p>{{ request.requestDate }}</p>
-                    <div class="review">
-                        <h5>Approval Status</h5>
-                        <p>{{ request.status }}</p>
-                        <p v-if="request.status != 'Pending'">{{ request.comment }}</p>
-                        <div v-if="request.status == 'Pending'" class="manager-comment">
-                            <h5>Comment</h5>
-                            <input type="comment" id="comment" v-model="request.comment" autofocus />
-                        </div>
-                        <div v-if="request.status != 'Pending'">
-                            <h5>Reviewed on</h5>
-                            <p>{{ request.reviewDate }}</p>
-                        </div>
-                        <span v-if="request.status == 'Pending'" class="action-buttons">
-                            <button class="approve-button" @click="approveRequest(request)">Approve</button>
-                            <button class="deny-button" :class="{ 'inactive_button': !request.comment }"
-                                :disabled="!request.comment" @click="denyRequest(request)">Deny</button>
-                        </span>
+                <h5>Request</h5>
+                <p>{{ request.requestReason }}</p>
+                <h5>Requested by</h5>
+                <p>{{ request.userName }}</p>
+                <h5>Date Range</h5>
+                <p>From {{ request.startDate }} to {{ request.endDate }}</p>
+                <h5>Requested on</h5>
+                <p>{{ request.requestDate }}</p>
+                <div class="review-container">
+                    <h5>Approval Status</h5>
+                    <p>{{ request.status }}</p>
+                    <h5 v-if="request.comment != ''">Comment</h5>
+                    <p v-if="request.status != 'Pending'">{{ request.comment }}</p>
+                    <div v-if="request.status == 'Pending'" class="manager-comment">
+                        <h5>Comment</h5>
+                        <input type="comment" id="comment" v-model="request.comment" autofocus />
                     </div>
+                    <div v-if="request.status != 'Pending'">
+                        <h5>Reviewed on</h5>
+                        <p>{{ request.reviewDate }}</p>
+                    </div>
+                    <span v-if="request.status == 'Pending'" class="approval-button-container">
+                        <button class="approval-button approve-button" @click="approveRequest(request)">Approve</button>
+                        <button class="approval-button deny-button" :class="{ 'inactive_button': !request.comment }"
+                            :disabled="!request.comment" @click="denyRequest(request)">Deny</button>
+                    </span>
                 </div>
             </form>
         </div>
@@ -109,39 +108,24 @@ export default {
 
 <style scoped>
 #comment {
-    width: 95%;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.container {
-    display: flex;
+.content {
     flex-direction: column;
-    gap: 20px;
     align-items: center;
-    margin: 20px 5%;
+    gap: 20px;
 }
 
-.request-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    border: 1px solid #a1af9f;
-    border-radius: 10px;
-    padding: 20px;
-    width: 90%;
-    max-width: 400px;
-    background-color: white;
-    box-shadow: -2px 2px 4px #a1af9f;
-}
-
-.action-buttons {
+.approval-button-container {
     display: flex;
     gap: 10px;
     width: auto;
     justify-content: center;
 }
 
-.deny-button {
-    background-color: #ff4848;
+.approval-button {
     color: white;
     border-radius: 5px;
     border-color: black;
@@ -153,13 +137,10 @@ export default {
 
 .approve-button {
     background-color: rgba(30, 155, 30, 0.75);
-    color: white;
-    border-radius: 5px;
-    border-color: black;
-    border-width: 1px;
-    border-style: solid;
-    width: 150px;
-    height: 50px;
+}
+
+.deny-button {
+    background-color: #ff4848;
 }
 
 .approved {
