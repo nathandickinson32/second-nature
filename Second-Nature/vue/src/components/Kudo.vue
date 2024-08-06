@@ -34,16 +34,12 @@ export default {
       LeaveRequestService.getUserById(kudo.giverUserId)
         .then(
           (response) => {
-            console.log('The giving user:')
-            console.log(response.data);
             kudo.giverUserName = response.data.firstName + ' ' + response.data.lastName;
           }
         );
       LeaveRequestService.getUserById(kudo.receiverUserId)
         .then(
           (response) => {
-            console.log('The receiving user:')
-            console.log(response.data);
             kudo.receiverUserName = response.data.firstName + ' ' + response.data.lastName;
           }
         );
