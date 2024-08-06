@@ -1,9 +1,9 @@
 <template>
   <router-link class="small-container" :to="{ name: 'kudosDetail', params: { kudosId: kudo.kudosId } }">
     <h3>{{ kudo.title }}</h3>
-    <!-- <h5>To </h5>
+    <h5>To </h5>
     <p>{{ kudo.receiverUserName }}</p>
-    <span>
+    <!-- <span>
       <h5>From </h5>
       <p>{{ kudo.giverUserName }}</p>
     </span> -->
