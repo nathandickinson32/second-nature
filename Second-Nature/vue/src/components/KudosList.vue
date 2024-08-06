@@ -40,7 +40,7 @@ export default {
                 return this.kudos.filter(kudo => kudo.giverUserId === this.currentUserId);
             }
             else if (this.filterType === 'toMe') {
-                return this.kudos.filter(kudo => kudo.receivingUserId === this.currentUserId);
+                return this.kudos.filter(kudo => kudo.receiverUserId === this.currentUserId);
             }
             return []; // Default return for unexpected filterType
         },
