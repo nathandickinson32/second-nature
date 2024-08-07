@@ -14,6 +14,7 @@ import KudoDetailView from '../views/KudoDetailView.vue';
 import NewKudoView from '../views/NewKudoView.vue';
 import ProfessionalCheckInView from '../views/MyProfessionalCheckInView.vue';
 import ProfessionalCheckInDetails from '../views/ProfessionalCheckInDetailView.vue';
+import ManagerAllCheckInsView from '../views/ManagerAllCheckInsView.vue';
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
@@ -118,6 +119,14 @@ const routes = [
     name: 'check-in-details',
     component: ProfessionalCheckInDetails,
     props: true,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/all-check-ins',
+    name: 'allCheckIns',
+    component: ManagerAllCheckInsView,
     meta: {
       requiresAuth: true
     }

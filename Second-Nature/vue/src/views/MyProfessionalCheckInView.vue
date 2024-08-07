@@ -1,8 +1,14 @@
 <template>
   <div class="container">
 
-    <div class="user">Professional Check Ins for {{ $store.state.user.firstName }}   {{ $store.state.user.lastName }}</div>
-  <div class="check-in-list">
+    <div class="user"> 
+     
+      <p v-if="!isManager">Professional Check Ins for {{ $store.state.user.firstName }}   {{ $store.state.user.lastName }}</p> <p v-if="isManager">Professional Check Ins Done By: {{ $store.state.user.firstName }}   {{ $store.state.user.lastName }}</p>
+   
+      
+    </div>
+ 
+    <div class="check-in-list">
 <professional-check-in-list></professional-check-in-list>
   </div>
 
@@ -22,6 +28,11 @@ export default {
 components: {
     ProfessionalCheckInList
 },
+computed: {
+    isManager() {
+      return this.$store.getters.isManager;
+    }
+  }
 
 }
 </script>

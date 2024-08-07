@@ -1,10 +1,24 @@
 <template>
 
-  <div>
+  <div v-if="!isManager">
     <div class="large-container">
      <professional-check-in
         class="checkInCard"
         v-for="professionalCheckIn in professionalCheckIns"
+        v-bind:key="professionalCheckIn.id"
+        :professionalCheckIn="professionalCheckIn"
+      >
+   
+       
+    </professional-check-in>
+    </div>
+  </div>
+
+  <div v-if="isManager">
+    <div class="large-container">
+     <professional-check-in
+        class="checkInCard"
+        v-for="professionalCheckIn in allProfessionalCheckIns"
         v-bind:key="professionalCheckIn.id"
         :professionalCheckIn="professionalCheckIn"
       >
@@ -27,7 +41,8 @@ export default {
   data() {
     return {
       professionalCheckIns: [],
-      managerId: ''
+      managerId: '',
+      allProfessionalCheckIns: [],
 
     };
   },
@@ -39,10 +54,21 @@ export default {
         this.managerId = response.data.managerId
       }
     );
+    ProfessionalCheckInService.getAllProfessionalCheckInByManagerUserId().then(
+      (response) => {
+        console.log(response);
+        this.allProfessionalCheckIns = response.data;
+      }
+    );
   },
   methods: {
     showCheckInDetails(id, managerId){
       this.$router.push({path: `/check-in-details/${id}`, query: { managerId }});
+    }
+  },
+  computed: {
+    isManager() {
+      return this.$store.getters.isManager;
     }
   }
   

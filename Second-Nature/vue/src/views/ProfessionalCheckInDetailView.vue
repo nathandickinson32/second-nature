@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ProfessionalCheckInDetails :professionalCheckIn="professionalCheckIn" :managerName="managerName"></ProfessionalCheckInDetails>
+        <ProfessionalCheckInDetails :professionalCheckIn="professionalCheckIn" :managerName="managerName" :employeeName="employeeName"></ProfessionalCheckInDetails>
 
     </div>
 </template>
@@ -23,6 +23,7 @@ export default {
         date: "",
       },
       managerName: "",
+      employeeName: "",
     };
   },
   created() {
@@ -41,7 +42,14 @@ export default {
             ).catch((error) => {
               console.log(error.response);
             });
-         
+            ProfessionalCheckInService.getUserById(this.professionalCheckIn.employeeId)
+            .then(
+              (response2) => {
+                this.employeeName = response2.data.firstName + ' ' + response2.data.lastName;
+              }
+            ).catch((error) => {
+              console.log(error.response);
+            });
         }
         ).catch((error) => {
           console.log(error.response);

@@ -18,6 +18,7 @@
         <img src="/src/images/handshake.png" alt="">
         <router-link v-bind:to="{ name: 'myCheckIns' }">My Check-ins</router-link>
       </div>
+     
       <div class="menu-icon">
         <img src="/src/images/megaphone.png" alt="">
         <router-link v-bind:to="{ name: 'kudos' }">Kudos Board</router-link>

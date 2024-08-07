@@ -8,8 +8,12 @@
       </span>
     </p>
     <p class="label">
-      Performed By
-      {{ managerName }}
+     <div v-if="!isManager">Performed By</div> 
+     <div v-if="!isManager"> {{ managerName }}</div> 
+      </p>
+      <p class="label">
+     <div v-if="isManager">Check In With </div> 
+     <div v-if="isManager">{{ employeeName }} </div> 
       </p>
       <label>
         Check In Notes <br/>
@@ -34,9 +38,17 @@ managerName: {
   type: String,
   required: true
 },
+employeeName: {
+  type: String,
+  required: true
+},
 
 },
-  
+   computed: {
+    isManager() {
+      return this.$store.getters.isManager;
+    }
+  }
 };
 </script>
 
