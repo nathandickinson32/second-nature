@@ -1,46 +1,42 @@
 <template>
   <div class="container">
     <p class="label">
-      Professional Check In
+      Professional Check In 
       <span class="date">
-        {{ this.professionalCheckIn.date }}
+        {{ professionalCheckIn.date }}
+    
       </span>
     </p>
     <p class="label">
       Performed By
+      {{ managerName }}
+      </p>
+      <label>
+        Check In Notes <br/>
+        <div class="notes">
+          {{ professionalCheckIn.notes }}
+        </div>
+      </label>
       
-        
-      
-    </p>
   </div>
 </template>
 
 <script>
 import ProfessionalCheckInService from "../services/ProfessionalCheckInService";
 export default {
-  data() {
-    return {
-      professionalCheckIn: {
-        checkInId: "",
-        managerId: "",
-        employeeId: "",
-        notes: "",
-        date: "",
-      },
-      managerName: "",
-     
-    };
-  },
-  created() {
-    ProfessionalCheckInService.getProfessionalCheckInByCheckInId(
-      this.$route.params.checkInId
-    ).then((response) => {
-      console.log(response);
-      this.professionalCheckIn = response.data;
-      
-    });
-   
-  },
+
+props: {
+professionalCheckIn: {
+  type: Object,
+  required: true
+},
+managerName: {
+  type: String,
+  required: true
+},
+
+},
+  
 };
 </script>
 
@@ -52,5 +48,9 @@ export default {
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+.notes{
+  border-style: solid;
+  border-color: black;
 }
 </style>

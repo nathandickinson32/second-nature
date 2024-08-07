@@ -1,6 +1,6 @@
-<!-- <template>
+<template>
     <div>
-        <ProfesionalCheckInDetail :professionalCheckIn="profesionalCheckIn" :managerName="managerName"></ProfesionalCheckInDetail>
+        <ProfessionalCheckInDetails :professionalCheckIn="professionalCheckIn" :managerName="managerName"></ProfessionalCheckInDetails>
 
     </div>
 </template>
@@ -8,13 +8,14 @@
 <script>
 import ProfessionalCheckInService from "../services/ProfessionalCheckInService";
 import LeaveRequestService from "../services/LeaveRequestService";
+import ProfessionalCheckInDetails from "../components/ProfessionalCheckInDetails.vue";
 export default {
   components: {
-    ProfesionalCheckInDetail,
+   ProfessionalCheckInDetails
   },
   data() {
     return {
-      profesionalCheckIn: {
+      professionalCheckIn: {
         checkInId: "",
         managerId: "",
         employeeId: "",
@@ -29,23 +30,26 @@ export default {
   },
   methods: {
     getProfessionalCheckIn() {
-      ProfessionalCheckInService.getProfessionalCheckInByCheckInId(
-        this.$route.checkInId
-      ).then((response) => {
-        this.profesionalCheckIn = response.data;
-        LeaveRequestService.getUserById(this.profesionalCheckIn.managerId)
-          .then((response1) => {
-            this.managerName =
-              response1.data.firstName + " " + response1.data.lastName;
-          })
-          .catch((error) => {
-            console.log(error.response);
-          });
-      });
-    },
-  },
+      ProfessionalCheckInService.getProfessionalCheckInByCheckInId(this.$route.params.checkInId)
+        .then((response) => {
+          this.professionalCheckIn = response.data
+          ProfessionalCheckInService.getUserById(this.professionalCheckIn.managerId)
+            .then(
+              (response1) => {
+                this.managerName = response1.data.firstName + ' ' + response1.data.lastName;
+              }
+            ).catch((error) => {
+              console.log(error.response);
+            });
+         
+        }
+        ).catch((error) => {
+          console.log(error.response);
+        });
+    }
+  }
 };
 </script>
 
 <style scoped>
-</style> -->
+</style>

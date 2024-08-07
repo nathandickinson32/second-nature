@@ -1,27 +1,29 @@
 <template>
 
   <div>
-    <div class="container">
-      <div
+    <div class="large-container">
+     <professional-check-in
         class="checkInCard"
         v-for="professionalCheckIn in professionalCheckIns"
         v-bind:key="professionalCheckIn.id"
+        :professionalCheckIn="professionalCheckIn"
       >
-      <div class="check-in-details">
-        <p class="performed">Performed On: <span>{{ professionalCheckIn.date }}</span> </p>
-        <button @click="showCheckInDetails(professionalCheckIn.checkInId,  professionalCheckIn.managerId)" class="view-details-btn">View Details</button>
-      </div>
+   
        
-    </div>
+    </professional-check-in>
     </div>
   </div>
   
 </template>
   
   <script>
+  import ProfessionalCheckIn from "./ProfessionalCheckIn.vue";
 import ProfessionalCheckInService from "../services/ProfessionalCheckInService";
 
 export default {
+  components: {
+    ProfessionalCheckIn
+  },
   data() {
     return {
       professionalCheckIns: [],
