@@ -65,7 +65,11 @@ CREATE TABLE equipment (
     notes VARCHAR,
     is_active BOOLEAN NOT NULL,
     active_note VARCHAR,
-    FOREIGN KEY (entered_by_user_id) REFERENCES users (user_id)
+    updated_by_user_id INT,
+    updated_on_date DATE,
+    is_archived BOOLEAN,
+    FOREIGN KEY (entered_by_user_id) REFERENCES users (user_id),
+    FOREIGN KEY (updated_by_user_id) REFERENCES users (user_id)
 );
 
 CREATE TABLE maintenance_ticket (

@@ -1,20 +1,14 @@
 package com.techelevator.model;
 
-import java.util.Date;
-
-public class Equipment {
+public class UpdateEquipmentDto {
     private int equipmentId;
     private String serialNumber;
     private String model;
     private String name;
-    private int startingHours;
-    private int enteredByUserId;
-    private Date enteredOnDate;
     private String notes;
     private boolean isActive;
     private String activeNotes;
     private int updatedByUserId;
-    private Date updatedOnDate;
     private boolean isArchived;
 
     public int getEquipmentId() {
@@ -49,30 +43,6 @@ public class Equipment {
         this.name = name;
     }
 
-    public int getStartingHours() {
-        return startingHours;
-    }
-
-    public void setStartingHours(int startingHours) {
-        this.startingHours = startingHours;
-    }
-
-    public int getEnteredByUserId() {
-        return enteredByUserId;
-    }
-
-    public void setEnteredByUserId(int enteredByUserId) {
-        this.enteredByUserId = enteredByUserId;
-    }
-
-    public Date getEnteredOnDate() {
-        return enteredOnDate;
-    }
-
-    public void setEnteredOnDate(Date enteredOnDate) {
-        this.enteredOnDate = enteredOnDate;
-    }
-
     public String getNotes() {
         return notes;
     }
@@ -103,14 +73,6 @@ public class Equipment {
 
     public void setUpdatedByUserId(int updatedByUserId) {
         this.updatedByUserId = updatedByUserId;
-    }
-
-    public Date getUpdatedOnDate() {
-        return updatedOnDate;
-    }
-
-    public void setUpdatedOnDate(Date updatedOnDate) {
-        this.updatedOnDate = updatedOnDate;
     }
 
     public boolean isArchived() {
