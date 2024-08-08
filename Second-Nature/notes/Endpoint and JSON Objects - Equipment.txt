@@ -1,0 +1,62 @@
+Endpoint and JSON Objects - Equipment
+
+Endpoints:
+
+
+JSON Objects:
+Equipment
+{
+	"equipmentId" : 0,
+	"serialNumber" : "Equipment Serial Number",
+	"model" : "Equipment Model",
+	"name" : "Equipment Name",
+	"startingHours" : 0,
+	"enteredByUserId" : 0,
+	"enteredOnDate" : "2024-08-08",
+	"notes" : "Equipment Notes",
+	"isActive" : true,
+	"activeNotes" : "Equipment active notes",
+	"updatedByUserId" : 0,
+	"updatedOnDate" : "2024-08-08",
+	"isArchived" : false
+}
+
+Archive Equipment DTO
+{
+	"equipmentId" : 0,
+	"updatedByUserId" : 0,
+	"isArchived" : true
+}
+
+Create Equipment DTO
+{
+	"serialNumber" : "Equipment Serial Number",
+	"model" : "Equipment Model",
+	"name" : "Equipment Name",
+	"startingHours" : 0,
+	"enteredByUserId" : 0,
+	"notes" : "Equipment Notes",
+	"isActive" : true,
+	"activeNotes" : "Equipment active notes"
+}
+
+Update Equipment Activity DTO
+{
+	"equipmentId" : 0,
+	"isActive" : true,
+	"activeNotes" : "Equipment active notes",
+	"updatedByUserId" : 0
+}
+
+Update Equipment DTO
+{
+	"equipmentId" : 0,
+	"serialNumber" : "Equipment Serial Number",
+	"model" : "Equipment Model",
+	"name" : "Equipment Name",
+	"notes" : "Equipment Notes",
+	"isActive" : true,
+	"activeNotes" : "Equipment active notes",
+	"updatedByUserId" : 0,
+	"isArchived" : false
+}

@@ -8,7 +8,6 @@ public class CreateEquipmentDto {
     private String name;
     private int startingHours;
     private int enteredByUserId;
-    private Date date;
     private String notes;
     private boolean isActive;
     private String activeNotes;
@@ -51,14 +50,6 @@ public class CreateEquipmentDto {
 
     public void setEnteredByUserId(int enteredByUserId) {
         this.enteredByUserId = enteredByUserId;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public String getNotes() {
