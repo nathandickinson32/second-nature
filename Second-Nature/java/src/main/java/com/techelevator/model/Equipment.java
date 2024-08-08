@@ -2,7 +2,7 @@ package com.techelevator.model;
 
 import java.util.Date;
 
-public class equipment {
+public class Equipment {
     private int equipmentId;
     private String serialNumber;
     private String model;
