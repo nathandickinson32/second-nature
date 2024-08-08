@@ -21,7 +21,7 @@ VALUES (3, 1, '2024-07-26', 'Default Title', 'Default Note', false);
 INSERT INTO equipment (serial_number, model, name, starting_hours, entered_by_user_id, entered_on_date, notes, is_active, active_note)
 VALUES ('Default Serial Number', 'Default Model', 'Default Name', 0, 3, '2024-07-26', 'Default Note', true, 'Default Active Note');
 
-INSERT INTO maintenance_tickets (equipment_id, hours, entered_by_user_id, date, notes, complete)
+INSERT INTO maintenance_ticket (equipment_id, hours, entered_by_user_id, date, notes, is_complete)
 VALUES (1, 0, 3, '2024-07-26', 'Default Note', false);
 
 INSERT INTO maintenance_performed (equipment_id, ticket_id, description, performed_by, notes)

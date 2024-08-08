@@ -1,7 +1,7 @@
 BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS maintenance_performed;
-DROP TABLE IF EXISTS maintenance_tickets;
+DROP TABLE IF EXISTS maintenance_ticket;
 DROP TABLE IF EXISTS equipment;
 DROP TABLE IF EXISTS kudos;
 DROP TABLE IF EXISTS professional_check_in;
@@ -68,14 +68,14 @@ CREATE TABLE equipment (
     FOREIGN KEY (entered_by_user_id) REFERENCES users (user_id)
 );
 
-CREATE TABLE maintenance_tickets (
+CREATE TABLE maintenance_ticket (
     ticket_id SERIAL PRIMARY KEY,
     equipment_id INT NOT NULL,
     hours INT NOT NULL,
     entered_by_user_id INT NOT NULL,
     date DATE NOT NULL,
     notes VARCHAR,
-    complete BOOLEAN NOT NULL,
+    is_complete BOOLEAN NOT NULL,
     FOREIGN KEY (entered_by_user_id) REFERENCES users (user_id)
 );
 
@@ -87,7 +87,7 @@ CREATE TABLE maintenance_performed (
     performed_by VARCHAR NOT NULL,
     notes VARCHAR,
     FOREIGN KEY (equipment_id) REFERENCES equipment (equipment_id),
-    FOREIGN KEY (ticket_id) REFERENCES maintenance_tickets (ticket_id)
+    FOREIGN KEY (ticket_id) REFERENCES maintenance_ticket (ticket_id)
 );
 
 COMMIT TRANSACTION;
