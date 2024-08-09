@@ -1,11 +1,15 @@
 package com.techelevator.model;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 public class CreateEquipmentDto {
+    @NotEmpty(message = "Please enter a serial number.")
     private String serialNumber;
+    @NotEmpty(message = "Please enter a model.")
     private String model;
     private String name;
+    @NotEmpty(message = "Please enter the machines starting hours.")
     private int startingHours;
     private int enteredByUserId;
     private String notes;
