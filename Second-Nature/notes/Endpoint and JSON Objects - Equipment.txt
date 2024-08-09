@@ -58,13 +58,13 @@ Equipment
 	"model" : "Equipment Model",
 	"name" : "Equipment Name",
 	"startingHours" : 0,
-	"enteredByUserId" : 0, // Can be left blank, updated on the server
-	"enteredOnDate" : "2024-08-08", // Can be left blank, updated on the server
+	"enteredByUserId" : 0,
+	"enteredOnDate" : "2024-08-08",
 	"notes" : "Equipment Notes",
 	"isActive" : true,
 	"activeNotes" : "Equipment active notes",
-	"updatedByUserId" : 0, // Can be left blank, updated on the server
-	"updatedOnDate" : "2024-08-08", // Can be left blank, updated on the server
+	"updatedByUserId" : 0,
+	"updatedOnDate" : "2024-08-08",
 	"archived" : false
 }
 
