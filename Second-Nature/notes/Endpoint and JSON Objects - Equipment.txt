@@ -31,7 +31,7 @@ HTTP Status: 202 ACCEPTED
 Expects: An Update Equipment DTO JSON Object
 Returns: An Equipment JSON Object
 
-/equipment/update-activitiy
+/equipment/update-activity
 Updates an existing equipment record's activity status and returns the updated equipment object.
 HTTP Status: 202 ACCEPTED
 Expects: An Update Equipment Activity DTO JSON Object.
@@ -79,7 +79,6 @@ Equipment Identity
 Archive Equipment DTO
 {
 	"equipmentId" : 0,
-	"updatedByUserId" : 0, // Can be left blank, updated on the server
 	"archived" : true
 }
 
@@ -89,7 +88,6 @@ Create Equipment DTO
 	"model" : "Equipment Model",
 	"name" : "Equipment Name",
 	"startingHours" : 0,
-	"enteredByUserId" : 0, // Can be left blank, updated on the server
 	"notes" : "Equipment Notes",
 	"active" : true,
 	"activeNotes" : "Equipment active notes",
@@ -100,8 +98,7 @@ Update Equipment Activity DTO
 {
 	"equipmentId" : 0,
 	"active" : true,
-	"activeNotes" : "Equipment active notes",
-	"updatedByUserId" : 0 // Can be left blank, updated on the server
+	"activeNotes" : "Equipment active notes"
 }
 
 Update Equipment DTO
@@ -113,6 +110,5 @@ Update Equipment DTO
 	"notes" : "Equipment Notes",
 	"active" : true,
 	"activeNotes" : "Equipment active notes",
-	"updatedByUserId" : 0, // Can be left blank, updated on the server
 	"archived" : false
 }

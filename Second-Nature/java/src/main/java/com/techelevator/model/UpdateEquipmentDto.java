@@ -14,8 +14,6 @@ public class UpdateEquipmentDto {
     @NotEmpty
     private boolean isActive;
     private String activeNotes;
-    @NotEmpty
-    private int updatedByUserId;
     private boolean isArchived;
 
     public int getEquipmentId() {
@@ -72,14 +70,6 @@ public class UpdateEquipmentDto {
 
     public void setActiveNotes(String activeNotes) {
         this.activeNotes = activeNotes;
-    }
-
-    public int getUpdatedByUserId() {
-        return updatedByUserId;
-    }
-
-    public void setUpdatedByUserId(int updatedByUserId) {
-        this.updatedByUserId = updatedByUserId;
     }
 
     public boolean isArchived() {

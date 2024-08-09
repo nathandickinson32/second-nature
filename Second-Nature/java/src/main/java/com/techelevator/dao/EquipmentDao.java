@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface EquipmentDao {
     // Create
-    public Equipment createEquipment(CreateEquipmentDto createEquipmentDto);
+    public Equipment createEquipment(CreateEquipmentDto createEquipmentDto, int userId);
 
     // Read
     public List<Equipment> getListOfAllEquipment();
@@ -14,10 +14,10 @@ public interface EquipmentDao {
     public List<EquipmentIdentityDto> getEquipmentIdentityList();
 
     // Update
-    public Equipment updateEquipment(UpdateEquipmentDto updateEquipmentDto);
-    public Equipment updateEquipmentActivity(UpdateEquipmentActivityDto updateEquipmentActivityDto);
+    public Equipment updateEquipment(UpdateEquipmentDto updateEquipmentDto, int userId);
+    public Equipment updateEquipmentActivity(UpdateEquipmentActivityDto updateEquipmentActivityDto, int userId);
 
     // Delete
     public void deleteEquipment(int equipmentId);
-    public Equipment archiveEquipment(ArchiveEquipmentDto archiveEquipmentDto);
+    public Equipment archiveEquipment(ArchiveEquipmentDto archiveEquipmentDto, int userId);
 }

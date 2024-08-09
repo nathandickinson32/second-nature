@@ -11,8 +11,6 @@ public class CreateEquipmentDto {
     private String name;
     @NotEmpty(message = "Please enter the machines starting hours.")
     private int startingHours;
-    @NotEmpty
-    private int enteredByUserId;
     private String notes;
     @NotEmpty
     private boolean isActive = true;
@@ -50,14 +48,6 @@ public class CreateEquipmentDto {
 
     public void setStartingHours(int startingHours) {
         this.startingHours = startingHours;
-    }
-
-    public int getEnteredByUserId() {
-        return enteredByUserId;
-    }
-
-    public void setEnteredByUserId(int enteredByUserId) {
-        this.enteredByUserId = enteredByUserId;
     }
 
     public String getNotes() {

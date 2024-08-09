@@ -8,8 +8,6 @@ public class UpdateEquipmentActivityDto {
     @NotEmpty
     private boolean isActive;
     private String activeNotes;
-    @NotEmpty
-    private int updatedByUserId;
 
     public int getEquipmentId() {
         return equipmentId;
@@ -33,13 +31,5 @@ public class UpdateEquipmentActivityDto {
 
     public void setActiveNotes(String activeNotes) {
         this.activeNotes = activeNotes;
-    }
-
-    public int getUpdatedByUserId() {
-        return updatedByUserId;
-    }
-
-    public void setUpdatedByUserId(int updatedByUserId) {
-        this.updatedByUserId = updatedByUserId;
     }
 }

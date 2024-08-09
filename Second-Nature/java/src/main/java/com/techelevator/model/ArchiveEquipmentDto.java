@@ -6,8 +6,6 @@ public class ArchiveEquipmentDto {
     @NotEmpty
     private int equipmentId;
     @NotEmpty
-    private int updatedByUserId;
-    @NotEmpty
     private boolean isArchived;
 
     public int getEquipmentId() {
@@ -16,14 +14,6 @@ public class ArchiveEquipmentDto {
 
     public void setEquipmentId(int equipmentId) {
         this.equipmentId = equipmentId;
-    }
-
-    public int getUpdatedByUserId() {
-        return updatedByUserId;
-    }
-
-    public void setUpdatedByUserId(int updatedByUserId) {
-        this.updatedByUserId = updatedByUserId;
     }
 
     public boolean isArchived() {

@@ -22,7 +22,7 @@ public class JdbcEquipmentDao implements EquipmentDao {
     }
 
     @Override
-    public Equipment createEquipment(CreateEquipmentDto createEquipmentDto) {
+    public Equipment createEquipment(CreateEquipmentDto createEquipmentDto, int userId) {
         int equipmentId = -1;
         String sql = "INSERT INTO equipment (serial_number, model, name, starting_hours, entered_by_user_id, entered_on_date, notes, is_active, active_notes, is_archived) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING equipment_id;";
 
@@ -34,7 +34,7 @@ public class JdbcEquipmentDao implements EquipmentDao {
                     createEquipmentDto.getModel(),
                     createEquipmentDto.getName(),
                     createEquipmentDto.getStartingHours(),
-                    createEquipmentDto.getEnteredByUserId(),
+                    userId,
                     new Date(),
                     createEquipmentDto.getNotes(),
                     createEquipmentDto.isActive(),
@@ -114,7 +114,7 @@ public class JdbcEquipmentDao implements EquipmentDao {
 
 
     @Override
-    public Equipment updateEquipment(UpdateEquipmentDto updateEquipmentDto) {
+    public Equipment updateEquipment(UpdateEquipmentDto updateEquipmentDto, int userId) {
         String sql = "UPDATE equipment SET serial_number = ?, model = ?, name = ?, notes = ?, is_active = ?, active_notes = ?, updated_by_user_id = ?, updated_on_date = ?, is_archived = ? WHERE equipment_id = ?;";
 
         try {
@@ -126,7 +126,7 @@ public class JdbcEquipmentDao implements EquipmentDao {
                     updateEquipmentDto.getNotes(),
                     updateEquipmentDto.isActive(),
                     updateEquipmentDto.getActiveNotes(),
-                    updateEquipmentDto.getUpdatedByUserId(),
+                    userId,
                     new Date(),
                     updateEquipmentDto.isArchived(),
                     updateEquipmentDto.getEquipmentId()
@@ -141,7 +141,7 @@ public class JdbcEquipmentDao implements EquipmentDao {
     }
 
     @Override
-    public Equipment updateEquipmentActivity(UpdateEquipmentActivityDto updateEquipmentActivityDto) {
+    public Equipment updateEquipmentActivity(UpdateEquipmentActivityDto updateEquipmentActivityDto, int userId) {
         String sql = "UPDATE equipment SET is_active = ?, active_notes = ?, updated_by_user_id = ?, updated_on_date = ? WHERE equipment_id = ?;";
 
         try {
@@ -149,7 +149,7 @@ public class JdbcEquipmentDao implements EquipmentDao {
                     sql,
                     updateEquipmentActivityDto.isActive(),
                     updateEquipmentActivityDto.getActiveNotes(),
-                    updateEquipmentActivityDto.getUpdatedByUserId(),
+                    userId,
                     new Date(),
                     updateEquipmentActivityDto.getEquipmentId()
             );
@@ -176,13 +176,13 @@ public class JdbcEquipmentDao implements EquipmentDao {
     }
 
     @Override
-    public Equipment archiveEquipment(ArchiveEquipmentDto archiveEquipmentDto) {
+    public Equipment archiveEquipment(ArchiveEquipmentDto archiveEquipmentDto, int userId) {
         String sql = "UPDATE equipment SET updated_by_user_id = ?, updated_on_date = ?, is_archived = ? WHERE equipment_id = ?;";
 
         try {
             template.update(
                     sql,
-                    archiveEquipmentDto.getUpdatedByUserId(),
+                    userId,
                     new Date(),
                     archiveEquipmentDto.isArchived(),
                     archiveEquipmentDto.getEquipmentId()
