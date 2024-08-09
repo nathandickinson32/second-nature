@@ -1,8 +1,13 @@
 package com.techelevator.model;
 
+import javax.validation.constraints.NotEmpty;
+
 public class ArchiveEquipmentDto {
+    @NotEmpty
     private int equipmentId;
+    @NotEmpty
     private int updatedByUserId;
+    @NotEmpty
     private boolean isArchived;
 
     public int getEquipmentId() {

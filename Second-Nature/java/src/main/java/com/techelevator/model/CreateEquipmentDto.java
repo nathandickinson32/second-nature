@@ -11,10 +11,14 @@ public class CreateEquipmentDto {
     private String name;
     @NotEmpty(message = "Please enter the machines starting hours.")
     private int startingHours;
+    @NotEmpty
     private int enteredByUserId;
     private String notes;
-    private boolean isActive;
+    @NotEmpty
+    private boolean isActive = true;
     private String activeNotes;
+    @NotEmpty
+    private boolean isArchived = false;
 
     public String getSerialNumber() {
         return serialNumber;
@@ -78,5 +82,14 @@ public class CreateEquipmentDto {
 
     public void setActiveNotes(String activeNotes) {
         this.activeNotes = activeNotes;
+    }
+
+    @NotEmpty
+    public boolean isArchived() {
+        return isArchived;
+    }
+
+    public void setArchived(@NotEmpty boolean archived) {
+        isArchived = archived;
     }
 }

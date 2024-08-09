@@ -1,13 +1,20 @@
 package com.techelevator.model;
 
+import javax.validation.constraints.NotEmpty;
+
 public class UpdateEquipmentDto {
+    @NotEmpty
     private int equipmentId;
+    @NotEmpty
     private String serialNumber;
+    @NotEmpty
     private String model;
     private String name;
     private String notes;
+    @NotEmpty
     private boolean isActive;
     private String activeNotes;
+    @NotEmpty
     private int updatedByUserId;
     private boolean isArchived;
 

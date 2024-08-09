@@ -24,7 +24,7 @@ public class JdbcEquipmentDao implements EquipmentDao {
     @Override
     public Equipment createEquipment(CreateEquipmentDto createEquipmentDto) {
         int equipmentId = -1;
-        String sql = "INSERT INTO equipment (serial_number, model, name, starting_hours, entered_by_user_id, entered_on_date, notes, is_active, active_notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING equipment_id;";
+        String sql = "INSERT INTO equipment (serial_number, model, name, starting_hours, entered_by_user_id, entered_on_date, notes, is_active, active_notes, is_archived) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING equipment_id;";
 
         try {
             equipmentId = template.queryForObject(
@@ -38,7 +38,8 @@ public class JdbcEquipmentDao implements EquipmentDao {
                     new Date(),
                     createEquipmentDto.getNotes(),
                     createEquipmentDto.isActive(),
-                    createEquipmentDto.getActiveNotes()
+                    createEquipmentDto.getActiveNotes(),
+                    createEquipmentDto.isArchived()
             );
         } catch(CannotGetJdbcConnectionException e) {
             throw new CannotGetJdbcConnectionException("[JDBC Equipment DAO] Problem connecting to the database.");

@@ -1,9 +1,14 @@
 package com.techelevator.model;
 
+import javax.validation.constraints.NotEmpty;
+
 public class UpdateEquipmentActivityDto {
+    @NotEmpty
     private int equipmentId;
+    @NotEmpty
     private boolean isActive;
     private String activeNotes;
+    @NotEmpty
     private int updatedByUserId;
 
     public int getEquipmentId() {
