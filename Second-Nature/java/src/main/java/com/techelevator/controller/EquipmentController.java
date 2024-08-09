@@ -35,6 +35,12 @@ public class EquipmentController {
         return equipmentDao.getEquipmentById(id);
     }
 
+    @GetMapping(path = "/identity-list")
+    public List<EquipmentIdentityDto> getEquipmentIdentityList(Principal principal){
+        System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " accessed all equipment identities.");
+        return equipmentDao.getEquipmentIdentityList();
+    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/create")
     public Equipment createEquipment(@RequestBody CreateEquipmentDto createEquipmentDto, Principal principal){

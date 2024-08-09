@@ -89,6 +89,30 @@ public class JdbcEquipmentDao implements EquipmentDao {
     }
 
     @Override
+    public List<EquipmentIdentityDto> getEquipmentIdentityList() {
+        List<EquipmentIdentityDto> equipmentIdentityDtoList = new ArrayList<>();
+        String sql = "SELECT serial_number, model, name FROM equipment;";
+
+        try {
+            SqlRowSet results = template.queryForRowSet(sql);
+            while (results.next()){
+                EquipmentIdentityDto equipmentIdentityDto = new EquipmentIdentityDto();
+                equipmentIdentityDto.setSerialNumber(results.getString("serial_number"));
+                equipmentIdentityDto.setModel(results.getString("model"));
+                equipmentIdentityDto.setName(results.getString("name"));
+                equipmentIdentityDtoList.add(equipmentIdentityDto);
+            }
+        } catch(CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Equipment DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Equipment DAO] Cannot get a list of equipment identities.");
+        }
+
+        return equipmentIdentityDtoList;
+    }
+
+
+    @Override
     public Equipment updateEquipment(UpdateEquipmentDto updateEquipmentDto) {
         String sql = "UPDATE equipment SET serial_number = ?, model = ?, name = ?, notes = ?, is_active = ?, active_notes = ?, updated_by_user_id = ?, updated_on_date = ?, is_archived = ? WHERE equipment_id = ?;";
 

@@ -11,6 +11,7 @@ public interface EquipmentDao {
     // Read
     public List<Equipment> getListOfAllEquipment();
     public Equipment getEquipmentById(int equipmentId);
+    public List<EquipmentIdentityDto> getEquipmentIdentityList();
 
     // Update
     public Equipment updateEquipment(UpdateEquipmentDto updateEquipmentDto);
