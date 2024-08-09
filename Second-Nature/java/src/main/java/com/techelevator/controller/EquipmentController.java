@@ -44,6 +44,8 @@ public class EquipmentController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/create")
     public Equipment createEquipment(@RequestBody CreateEquipmentDto createEquipmentDto, Principal principal){
+        int userId = userDao.getUserIdByUsername(principal.getName());
+        createEquipmentDto.setEnteredByUserId(userId);
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is creating a new equipment.");
         return equipmentDao.createEquipment(createEquipmentDto);
     }
@@ -51,6 +53,8 @@ public class EquipmentController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping(path = "/update")
     public Equipment updateEquipment(@RequestBody UpdateEquipmentDto updateEquipmentDto, Principal principal){
+        int userId = userDao.getUserIdByUsername(principal.getName());
+        updateEquipmentDto.setUpdatedByUserId(userId);
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is updating equipment ID: " + updateEquipmentDto.getEquipmentId());
         return equipmentDao.updateEquipment(updateEquipmentDto);
     }
@@ -58,13 +62,17 @@ public class EquipmentController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping(path = "/update-activity")
     public Equipment updateEquipmentActivity(@RequestBody UpdateEquipmentActivityDto updateEquipmentActivityDto, Principal principal){
+        int userId = userDao.getUserIdByUsername(principal.getName());
+        updateEquipmentActivityDto.setUpdatedByUserId(userId);
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is updating active status for equipment ID: " + updateEquipmentActivityDto.getEquipmentId());
         return equipmentDao.updateEquipmentActivity(updateEquipmentActivityDto);
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping(path = "/archive")
-    public Equipment archiveEquipment(ArchiveEquipmentDto archiveEquipmentDto, Principal principal){
+    public Equipment archiveEquipment(@RequestBody ArchiveEquipmentDto archiveEquipmentDto, Principal principal){
+        int userId = userDao.getUserIdByUsername(principal.getName());
+        archiveEquipmentDto.setUpdatedByUserId(userId);
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is archiving equipment ID: " + archiveEquipmentDto.getEquipmentId());
         return equipmentDao.archiveEquipment(archiveEquipmentDto);
     }

@@ -1,9 +1,18 @@
 package com.techelevator.model;
 
 public class EquipmentIdentityDto {
+    private int equipmentId;
     private String serialNumber;
     private String model;
     private String name;
+
+    public int getEquipmentId() {
+        return equipmentId;
+    }
+
+    public void setEquipmentId(int equipmentId) {
+        this.equipmentId = equipmentId;
+    }
 
     public String getSerialNumber() {
         return serialNumber;

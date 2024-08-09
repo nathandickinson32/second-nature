@@ -64,7 +64,7 @@ CREATE TABLE equipment (
     entered_on_date DATE NOT NULL,
     notes VARCHAR,
     is_active BOOLEAN NOT NULL,
-    active_note VARCHAR,
+    active_notes VARCHAR,
     updated_by_user_id INT,
     updated_on_date DATE,
     is_archived BOOLEAN NOT NULL,

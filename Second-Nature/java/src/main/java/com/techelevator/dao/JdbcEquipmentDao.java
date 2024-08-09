@@ -91,12 +91,13 @@ public class JdbcEquipmentDao implements EquipmentDao {
     @Override
     public List<EquipmentIdentityDto> getEquipmentIdentityList() {
         List<EquipmentIdentityDto> equipmentIdentityDtoList = new ArrayList<>();
-        String sql = "SELECT serial_number, model, name FROM equipment;";
+        String sql = "SELECT equipment_id, serial_number, model, name FROM equipment;";
 
         try {
             SqlRowSet results = template.queryForRowSet(sql);
             while (results.next()){
                 EquipmentIdentityDto equipmentIdentityDto = new EquipmentIdentityDto();
+                equipmentIdentityDto.setEquipmentId(results.getInt("equipment_id"));
                 equipmentIdentityDto.setSerialNumber(results.getString("serial_number"));
                 equipmentIdentityDto.setModel(results.getString("model"));
                 equipmentIdentityDto.setName(results.getString("name"));

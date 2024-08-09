@@ -1,6 +1,53 @@
 Endpoint and JSON Objects - Equipment
 
 Endpoints:
+/equipment/get-all
+Returns a list of equipment and their details.
+HTTP Status: 200 OK
+Expected: Nothing:
+Returns: List of Equipment JSON Objects.
+
+/equipment/{id}
+Returns all the details of a piece of equipment
+HTTP Status: 200 OK
+Expected: Nothing
+Returns: An Equipment JSON object
+
+/equipment/identity-list
+Returns a list of equipment serial numbers, models, and names.
+HTTP Status: 200 OK
+Expects: Nothing
+Returns: A list of Equipment Identity DTO JSON objects
+
+/equipment/create
+Inserts a new equipment record into the database. Returns the new equipment object
+HTTP Status: 201 CREATED
+Expects: A Create Equipment DTO JSON Object
+Returns: An Equipment JSON Object
+
+/equipment/update
+Updates an existing equipment record and returns the updated equipment object.
+HTTP Status: 202 ACCEPTED
+Expects: An Update Equipment DTO JSON Object
+Returns: An Equipment JSON Object
+
+/equipment/update-activitiy
+Updates an existing equipment record's activity status and returns the updated equipment object.
+HTTP Status: 202 ACCEPTED
+Expects: An Update Equipment Activity DTO JSON Object.
+Returns: An Equipment JSON Object.
+
+/equipment/archive
+Updates and existing equipment records archive status and returns the updated equipment object.
+HTTP Status: 202 ACCEPTED
+Expects: An Archive Equipment DTO JSON Object.
+Returns: An Equipment JSON Object.
+
+/equipment/delete/{id}
+Deletes an existing equipment record.
+HTTP Status: None
+Expects: Path variable
+Returns: Nothing
 
 
 JSON Objects:
@@ -18,14 +65,22 @@ Equipment
 	"activeNotes" : "Equipment active notes",
 	"updatedByUserId" : 0,
 	"updatedOnDate" : "2024-08-08",
-	"isArchived" : false
+	"archived" : false
+}
+
+Equipment Identity
+{
+	"equipmentId" : 0,
+	"serialNumber" : "Equipment Serial Number",
+	"model" : "Equipment Model",
+	"name" : "Equipment Name",
 }
 
 Archive Equipment DTO
 {
 	"equipmentId" : 0,
 	"updatedByUserId" : 0,
-	"isArchived" : true
+	"archived" : true
 }
 
 Create Equipment DTO
@@ -36,14 +91,15 @@ Create Equipment DTO
 	"startingHours" : 0,
 	"enteredByUserId" : 0,
 	"notes" : "Equipment Notes",
-	"isActive" : true,
-	"activeNotes" : "Equipment active notes"
+	"active" : true,
+	"activeNotes" : "Equipment active notes",
+	"archived" : false
 }
 
 Update Equipment Activity DTO
 {
 	"equipmentId" : 0,
-	"isActive" : true,
+	"active" : true,
 	"activeNotes" : "Equipment active notes",
 	"updatedByUserId" : 0
 }
@@ -55,8 +111,8 @@ Update Equipment DTO
 	"model" : "Equipment Model",
 	"name" : "Equipment Name",
 	"notes" : "Equipment Notes",
-	"isActive" : true,
+	"active" : true,
 	"activeNotes" : "Equipment active notes",
 	"updatedByUserId" : 0,
-	"isArchived" : false
+	"archived" : false
 }
