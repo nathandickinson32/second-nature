@@ -58,13 +58,13 @@ Equipment
 	"model" : "Equipment Model",
 	"name" : "Equipment Name",
 	"startingHours" : 0,
-	"enteredByUserId" : 0,
-	"enteredOnDate" : "2024-08-08",
+	"enteredByUserId" : 0, // Can be left blank, updated on the server
+	"enteredOnDate" : "2024-08-08", // Can be left blank, updated on the server
 	"notes" : "Equipment Notes",
 	"isActive" : true,
 	"activeNotes" : "Equipment active notes",
-	"updatedByUserId" : 0,
-	"updatedOnDate" : "2024-08-08",
+	"updatedByUserId" : 0, // Can be left blank, updated on the server
+	"updatedOnDate" : "2024-08-08", // Can be left blank, updated on the server
 	"archived" : false
 }
 
@@ -79,7 +79,7 @@ Equipment Identity
 Archive Equipment DTO
 {
 	"equipmentId" : 0,
-	"updatedByUserId" : 0,
+	"updatedByUserId" : 0, // Can be left blank, updated on the server
 	"archived" : true
 }
 
@@ -89,7 +89,7 @@ Create Equipment DTO
 	"model" : "Equipment Model",
 	"name" : "Equipment Name",
 	"startingHours" : 0,
-	"enteredByUserId" : 0,
+	"enteredByUserId" : 0, // Can be left blank, updated on the server
 	"notes" : "Equipment Notes",
 	"active" : true,
 	"activeNotes" : "Equipment active notes",
@@ -101,7 +101,7 @@ Update Equipment Activity DTO
 	"equipmentId" : 0,
 	"active" : true,
 	"activeNotes" : "Equipment active notes",
-	"updatedByUserId" : 0
+	"updatedByUserId" : 0 // Can be left blank, updated on the server
 }
 
 Update Equipment DTO
@@ -113,6 +113,6 @@ Update Equipment DTO
 	"notes" : "Equipment Notes",
 	"active" : true,
 	"activeNotes" : "Equipment active notes",
-	"updatedByUserId" : 0,
+	"updatedByUserId" : 0, // Can be left blank, updated on the server
 	"archived" : false
 }
