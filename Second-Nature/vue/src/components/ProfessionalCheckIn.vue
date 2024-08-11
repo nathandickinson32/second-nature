@@ -2,7 +2,9 @@
   <router-link class="small-container" :to="{name: 'check-in-details', params: { checkInId: professionalCheckIn.checkInId, managerId: professionalCheckIn.managerId, employeeId: professionalCheckIn.employeeId} }">
 <!-- <h3>{{ ProfessionalCheckIn.date }}</h3> -->
 <div class="check-in-details">
-        <p class="performed">Performed On: <span>{{ professionalCheckIn.date }}</span> </p>
+       <span></span> <p class="performed">Performed On: <span>{{ professionalCheckIn.date }}</span> </p>
+        
+        <p class="employeeName" v-if="isManager">{{ employeeName }}</p>
         <!-- <button @click="showCheckInDetails(professionalCheckIn.checkInId,  professionalCheckIn.managerId)" class="view-details-btn">View Details</button> -->
       </div>
 <div></div>
@@ -44,7 +46,7 @@ export default {
           (response) => {
             console.log('The Employee:')
             console.log(response.data);
-            profesionalCheckIn.employeeName = response.data.firstName + ' ' + response.data.lastName;
+            this.employeeName = response.data.firstName + ' ' + response.data.lastName;
           }
         );
      
@@ -59,6 +61,11 @@ export default {
     },
     showCheckInDetails(id, managerId, employeeId){
       this.$router.push({path: `/check-in-details/${id}`, query: { managerId, employeeId }});
+    }
+  },
+  computed: {
+    isManager() {
+      return this.$store.getters.isManager;
     }
   },
 }
