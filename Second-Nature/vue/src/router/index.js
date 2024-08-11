@@ -15,7 +15,7 @@ import NewKudoView from '../views/NewKudoView.vue';
 import ProfessionalCheckInView from '../views/MyProfessionalCheckInView.vue';
 import ProfessionalCheckInDetails from '../views/ProfessionalCheckInDetailView.vue';
 import EquipmentListView from '../views/EquipmentListView.vue';
-import NewProfessionalCheckIn from '../views/NewProfessionalCheckIn.vue';
+import NewProfessionalCheckIn from '../views/NewProfessionalCheckInView.vue';
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
