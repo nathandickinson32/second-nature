@@ -1,13 +1,9 @@
 <template>
-  <router-link class="small-container" :to="{name: 'check-in-details', params: { checkInId: professionalCheckIn.checkInId, managerId: professionalCheckIn.managerId, employeeId: professionalCheckIn.employeeId} }">
-<!-- <h3>{{ ProfessionalCheckIn.date }}</h3> -->
-<div class="check-in-details">
-       <span></span> <p class="performed">Performed On: <span>{{ professionalCheckIn.date }}</span> </p>
-        
-        <p class="employeeName" v-if="isManager">{{ employeeName }}</p>
-        <!-- <button @click="showCheckInDetails(professionalCheckIn.checkInId,  professionalCheckIn.managerId)" class="view-details-btn">View Details</button> -->
-      </div>
-<div></div>
+  <router-link class="small-container" :to="{name: 'check-in-details', params: { checkInId: professionalCheckIn.checkInId } }">
+    <!-- <h3>{{ ProfessionalCheckIn.date }}</h3> -->
+    <p>Performed On: {{ professionalCheckIn.date }}</p>
+    <p class="employeeName" v-if="isManager">{{ employeeName }}</p>
+            <!-- <button @click="showCheckInDetails(professionalCheckIn.checkInId,  professionalCheckIn.managerId)" class="view-details-btn">View Details</button> -->
   </router-link>
 </template>
 
@@ -32,19 +28,19 @@ export default {
     this.getUsers(this.professionalCheckIn);
   },
   methods: {
-    getUsers(profesionalCheckIn) {
+    getUsers(professionalCheckIn) {
       ProfessionalCheckInService.getUserById(this.professionalCheckIn.managerId)
         .then(
           (response) => {
-            console.log('The Manager:')
+            console.log('The Manager:');
             console.log(response.data);
-            profesionalCheckIn.managerName = response.data.firstName + ' ' + response.data.lastName;
+            professionalCheckIn.managerName = response.data.firstName + ' ' + response.data.lastName;
           }
         );
         ProfessionalCheckInService.getUserById(this.professionalCheckIn.employeeId)
         .then(
           (response) => {
-            console.log('The Employee:')
+            console.log('The Employee:');
             console.log(response.data);
             this.employeeName = response.data.firstName + ' ' + response.data.lastName;
           }
@@ -55,7 +51,7 @@ export default {
       router.push({
         name: 'professionalCheckInDetails',
         params: {
-          professionalCheckInId: this.professionalCheckIn.profesionalCheckInId
+          professionalCheckInId: this.professionalCheckIn.professionalCheckInId
         }
       });
     },
@@ -72,5 +68,8 @@ export default {
 </script>
 
 <style scoped>
-
+a {
+  text-decoration: none;
+  color: #3e4a3d;
+}
 </style>

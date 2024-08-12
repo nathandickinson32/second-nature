@@ -1,33 +1,33 @@
 <template>
-
-  <div v-if="!isManager">
-    <div class="large-container">
+<div class="container">
+  <!-- <div v-if="!isManager">
+    <div class="checkInContainer">
      <professional-check-in
         class="checkInCard"
         v-for="professionalCheckIn in professionalCheckIns"
         v-bind:key="professionalCheckIn.id"
         :professionalCheckIn="professionalCheckIn"
-      >
-   
-       
-    </professional-check-in>
+      />
     </div>
   </div>
 
   <div v-if="isManager">
-    <div class="large-container">
+    <div class="checkInContainer">
      <professional-check-in
         class="checkInCard"
         v-for="professionalCheckIn in allProfessionalCheckIns"
         v-bind:key="professionalCheckIn.id"
         :professionalCheckIn="professionalCheckIn"
-      >
-   
-       
-    </professional-check-in>
+      />
     </div>
+  </div> -->
+  <div class="checkInList" v-if="isManager">
+    <professional-check-in v-for="professionalCheckIn in allProfessionalCheckIns" :key="professionalCheckIn.checkInId" :professionalCheckIn="professionalCheckIn" />
   </div>
-  
+  <div class="checkInList" v-else>
+    <professional-check-in v-for="professionalCheckIn in professionalCheckIns" :key="professionalCheckIn.checkInId" :professionalCheckIn="professionalCheckIn" />
+  </div>
+</div>
 </template>
   
   <script>
@@ -74,30 +74,19 @@ export default {
   
 };
 </script>
-  
-  <style scoped>
 
-
-.checkInCard {
-  border: 1px solid #a1af9f;
-  border-radius: 5px;
-  padding: 10px;
-  padding-left: 20px;
-  margin-bottom: 15px;
-  width: 350px;
-  background-color: white;
-  box-shadow: -2px 2px 4px #a1af9f;
+<style scoped>
+.checkInList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    width: 100%;
 }
-.check-in-details{
-  display: flex;
-justify-content: space-between;
-
-}
-.view-details-btn{
-  padding: 5px 5px 5px 5px;
-  margin-top: 50px;
-  
-  
+.container {
+    width: 100%;
+    margin: 0;
 }
 
 </style>

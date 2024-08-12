@@ -1,23 +1,19 @@
 <template>
-  <div class="container">
+  <div class="content">
+   
     <div class="user">
       <p v-if="!isManager">
         Professional Check Ins for {{ $store.state.user.firstName }}
         {{ $store.state.user.lastName }}
       </p>
       <p v-if="isManager">
-        Professional Check Ins Done By: {{ $store.state.user.firstName }}
+        Professional Check Ins by: {{ $store.state.user.firstName }}
         {{ $store.state.user.lastName }}
       </p>
     </div>
-    <div class="newCheckIn">
-      <router-link  v-if="isManager" v-bind:to="{ name: 'newProfessionalCheckIn'}" id="add-check-in-btn">New Check In</router-link>
 
-    </div>
-
-    <div class="check-in-list">
-      <professional-check-in-list></professional-check-in-list>
-    </div>
+    <router-link  v-if="isManager" v-bind:to="{ name: 'newProfessionalCheckIn'}" id="add-check-in-btn">New Check In</router-link>
+    <professional-check-in-list />
   </div>
 </template>
 
@@ -42,12 +38,29 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.content {
+  flex-direction: column;
+  align-items: center;
+}
+/* .check-in-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+  width: 100%;
+} */
+/* .container {
   display: grid;
   padding: 20px;
-}
+  justify-content: center;
+} */
 .user {
   padding-bottom: 20px;
+}
+.newCheckIn {
+  text-align: center;
+  padding-bottom: 40px;
 }
 
 </style>
