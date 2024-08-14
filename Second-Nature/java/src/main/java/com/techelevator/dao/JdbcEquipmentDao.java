@@ -208,6 +208,8 @@ public class JdbcEquipmentDao implements EquipmentDao {
         equipment.setNotes(results.getString("notes"));
         equipment.setActive(results.getBoolean("is_active"));
         equipment.setActiveNotes(results.getString("active_notes"));
+//        These subsequent rows are not returned from the equipment table
+//        The /equipment/get-all endpoint is erroring out
         equipment.setUpdatedByUserId(results.getInt("updated_by_user_id"));
         equipment.setUpdatedOnDate(results.getDate("updated_on_date"));
         equipment.setArchived(results.getBoolean("is_archived"));

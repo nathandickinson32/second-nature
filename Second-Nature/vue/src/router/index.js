@@ -16,6 +16,10 @@ import ProfessionalCheckInView from '../views/MyProfessionalCheckInView.vue';
 import ProfessionalCheckInDetails from '../views/ProfessionalCheckInDetailView.vue';
 import EquipmentListView from '../views/EquipmentListView.vue';
 import NewProfessionalCheckIn from '../views/NewProfessionalCheckInView.vue';
+import EquipmentDetailView from '../views/EquipmentDetailView.vue'; 
+import MaintenanceTicketListView from '../views/MaintenanceTicketListView.vue';
+// import MaintenanceTicketDetailView from '../views/MaintenanceTicketDetailView.vue'; 
+import NewMaintenenceTicketView from '../views/NewMaintenenceTicketView.vue';
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
@@ -138,6 +142,30 @@ const routes = [
     path: '/equipment',
     name: 'equipmentList',
     component: EquipmentListView,
+    meta: {
+      requiresAuth  : true
+    }
+  },
+  {
+    path: '/maintenance-ticket-list/:equipment.id',
+    name: 'maintenance-ticket-List',
+    component: MaintenanceTicketListView,
+    meta: {
+      requiresAuth  : true
+    }
+  },
+  {
+    path: '/new-maintenance-ticket/:equipment.id',
+    name: 'new-maintenance-ticket',
+    component: NewMaintenenceTicketView,
+    meta: {
+      requiresAuth  : true
+    }
+  },
+  {
+    path: '/equipment/:equipment.id',
+    name: 'equipmnet-detail',
+    component: EquipmentDetailView,
     meta: {
       requiresAuth  : true
     }
