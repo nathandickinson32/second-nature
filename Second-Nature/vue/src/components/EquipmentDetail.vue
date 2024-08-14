@@ -43,15 +43,15 @@ import EquipmentService from '../services/EquipmentService';
 
 export default {
     props: {
-        equipment: {
-            type: Object,
+        equipmentId: {
+            type: Number,
             required: true
         }
     },
     data() {
         return {
             equipmentDetail: {
-                equipmentId: 0,
+                equipmentId: -1,
                 serialNumber: '',
                 model: '',
                 name: '',
@@ -80,8 +80,8 @@ export default {
             }
         }
     },
-    created(){
-        this.equipmentDetail = this.equipment;
+    mounted(){
+        console.log(this.$route.params.equipmentId);
     },
     methods: {
         onSubmit() {
@@ -126,7 +126,7 @@ export default {
                         this.updateEquipment.notes = '',
                         this.updateEquipment.active = true,
                         this.updateEquipment.activeNotes = '',
-                        this.updateEquipment.updatedByUserI= '',
+                        this.updateEquipment.updatedByUserId= '',
                         this.updateEquipment.archived = false
                         this.$router.push({ name: 'equipment-list' });
                     })

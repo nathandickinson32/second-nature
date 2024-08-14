@@ -1,7 +1,7 @@
 <template>
   <div class="content">
       <h1>Equipment Detail View</h1>
-      <EquipmentDetail :equipment="equipment" />
+      <EquipmentDetail v-bind:equipmentId="equipmentId" />
   </div>
 </template>
 

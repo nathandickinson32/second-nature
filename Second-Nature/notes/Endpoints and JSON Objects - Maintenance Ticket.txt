@@ -1,0 +1,54 @@
+Endpoints and JSON Objects - Maintenance Tickets
+
+Create
+/maintenance-ticket/create
+Request Type: PUT
+Inserts a new maintenance ticket into the database. 
+HTTP Status: 201 CREATED
+Expects: Create Maintenance Ticket DTO JSON Object.
+Returns: Maintenance Ticket JSON Object.
+
+Read
+/maintenance-tickets
+Request Type: GET
+Returns all maintenance tickets from the database.
+HTTP Status: 200 OK
+Expects: Nothing
+Returns: An array or maintenance ticket JSON objects.
+
+/maintenance-ticket/{id}
+Request Type: GET
+Returns a specific maintenance ticket from the database.
+HTTP Status: 200 OK
+Expects: Equipment ID as a path variable.
+Returns: An Maintenance Ticket JSON Object.
+
+Update
+/maintenance-ticket/update
+Request Type: POST
+Updates the maintenance ticket in the database
+HTTP Status: 202 Accepted
+Expects: An Update Maintenance Ticket DTO JSON Object.
+Returns: The updated Maintenance Ticket JSON Object.
+
+/maintenance-ticket/complete
+Request Type: POST
+Updates the maintenance ticket "is_complete" field to true, "date_completed" to the current date, and "completed_by" to the currently logged in user ID.
+HTTP Status: 202 Accepted
+Expects: A Complete Maintenance Ticket DTO JSON Object.
+Returns: The updated maintenance ticket JSON object.
+
+Delete
+/maintenance-ticket/delete/{id}
+Request Type: DELETE
+Deletes the maintenance ticket from the database.
+HTTP Status: 200 OK
+Expects: The Maintenance Ticket ID as a path variable.
+Returns: Nothing
+
+/maintenance-ticket/archive/{id}
+Request Type: POST
+Updates the Maintenance Ticket "is_archived" field to true.
+HTTP Status: 202 Accepted
+Expects: The maintenance ticket id as a path variable.
+Returns: Nothing.
