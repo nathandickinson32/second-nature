@@ -4,7 +4,7 @@ Endpoints:
 /equipment/get-all
 Returns a list of equipment and their details.
 HTTP Status: 200 OK
-Expected: Nothing:
+Expected: Nothing.
 Returns: List of Equipment JSON Objects.
 
 /equipment/{id}
