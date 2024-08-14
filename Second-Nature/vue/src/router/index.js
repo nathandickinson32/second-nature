@@ -147,8 +147,8 @@ const routes = [
     }
   },
   {
-    path: '/equipment/:equipment.id?',
-    name: 'equipmnet-detail',
+    path: '/equipment/:equipmentId',
+    name: 'equipment-detail',
     component: EquipmentDetailView,
     meta: {
       requiresAuth  : true

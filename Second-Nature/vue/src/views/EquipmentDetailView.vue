@@ -34,8 +34,8 @@ export default {
   },
   methods: {
     getEquipment(){
-      if(this.$route.params.equipmentId){
-        EquipmentService.getEquipment(this.$route.params.equipmentId)
+      if(this.$route.params.equipmentId > 0){
+        EquipmentService.getEquipmentById(this.$route.params.equipmentId)
           .then((response) => {
             this.equipment = response.data;
           })
