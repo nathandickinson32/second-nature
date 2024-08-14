@@ -1,5 +1,5 @@
 <template>
-  <div class="large-container">
+  <div>
     <Equipment class="equipmentCard" v-for="equipment in equipmentList" v-bind:key="equipment.id" :equipment="equipment"></Equipment>
 
   </div>

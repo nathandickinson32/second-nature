@@ -147,6 +147,14 @@ const routes = [
     }
   },
   {
+    path: '/equipment/:equipment.id?',
+    name: 'equipmnet-detail',
+    component: EquipmentDetailView,
+    meta: {
+      requiresAuth  : true
+    }
+  },
+  {
     path: '/maintenance-ticket-list/:equipment.id',
     name: 'maintenance-ticket-List',
     component: MaintenanceTicketListView,
@@ -161,14 +169,7 @@ const routes = [
     meta: {
       requiresAuth  : true
     }
-  },
-  {
-    path: '/equipment/:equipment.id',
-    name: 'equipmnet-detail',
-    component: EquipmentDetailView,
-    meta: {
-      requiresAuth  : true
-    }
+  
   }
 ];
 
