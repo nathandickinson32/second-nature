@@ -3,35 +3,35 @@
     <form id="equipment-form" @submit.prevent="onSubmit">
         <div class="form-input-group">
             <label for="title">Serial Number: </label>
-            <input type="text" v-model="equipmentDetail.serialNumber" id="serialNumber" required />
+            <input type="text" v-model="equipment.serialNumber" id="serialNumber" required />
         </div>
         <div class="form-input-group">
             <label for="title">Model: </label>
-            <input type="text" v-model="equipmentDetail.model" id="model" required />
+            <input type="text" v-model="equipment.model" id="model" required />
         </div>
         <div class="form-input-group">
             <label for="title">Name: </label>
-            <input type="text" v-model="equipmentDetail.name" id="name" required />
+            <input type="text" v-model="equipment.name" id="name" required />
 
         </div>
         <div class="form-input-group">
             <label for="title">Current Hours: </label>
-            <input type="text" v-model="equipmentDetail.startingHours" id="startingHours" required />
+            <input type="text" v-model="equipment.startingHours" id="startingHours" required />
 
         </div>
         <div class="form-input-group">
             <label for="title">Currently Active: </label>
-            <input type="text" v-model="equipmentDetail.active" id="active" required />
+            <input type="text" v-model="equipment.active" id="active" required />
 
         </div>
         <div class="form-input-group">
             <label for="title">Notes about Active Status: </label>
-            <input type="text" v-model="equipmentDetail.activeNotes" id="activeNotes" required />
+            <input type="text" v-model="equipment.activeNotes" id="activeNotes" required />
 
         </div>
         <div class="form-input-group">
             <label for="title">Notes: </label>
-            <input type="text" v-model="equipmentDetail.notes" id="notes" />
+            <input type="text" v-model="equipment.notes" id="notes" />
 
         </div>
     </form>
@@ -50,7 +50,7 @@ export default {
     },
     data() {
         return {
-            equipmentDetail: {
+            equipment: {
                 equipmentId: -1,
                 serialNumber: '',
                 model: '',
@@ -81,7 +81,13 @@ export default {
         }
     },
     mounted(){
-        console.log(this.$route.params.equipmentId);
+        EquipmentService.getEquipmentById(this.$route.params.equipmentId).then((response) => {
+            if (response.status == 200) {
+                this.equipment = response.data;
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
     },
     methods: {
         onSubmit() {
