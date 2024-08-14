@@ -1,5 +1,6 @@
 <template>
-  <div class="container">
+  <div class="check-in">
+    <div class="large-container">
     <p class="label">
       Professional Check In 
       <span class="date">
@@ -8,11 +9,12 @@
       </span>
     </p>
     <p class="label">
-     <div v-if="!isManager">Performed By</div> 
+     <div v-if="!isManager">Performed By:</div> 
      <div v-if="!isManager"> {{ managerName }}</div> 
       </p>
       <p class="label">
      <div v-if="isManager">Check In With </div> 
+     
      <div v-if="isManager">{{ employeeName }} </div> 
       </p>
       <label>
@@ -23,6 +25,10 @@
       </label>
       
   </div>
+
+
+  </div>
+
 </template>
 
 <script>
@@ -53,16 +59,24 @@ employeeName: {
 </script>
 
 <style scoped>
-.container {
-  padding: 10px;
-}
+
 .label {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 .notes{
+  border: 1px;
   border-style: solid;
   border-color: black;
+  padding: 50px 50px 50px 50px;
+  text-align: center;
+}
+.check-in{
+  margin-left: 10px;
+  margin-right: 10px;
+
+
+  
 }
 </style>
