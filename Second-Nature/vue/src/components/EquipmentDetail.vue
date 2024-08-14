@@ -85,7 +85,7 @@ export default {
     },
     methods: {
         onSubmit() {
-            if(this.equipmentDetail.archive){
+            if(this.equipmentDetail.archived){
                 this.archivedEquipment.equipmentId = this.equipmentDetail.equipmentId;
                 EquipmentService.archiveEquipment(this.archivedEquipment)
                     .then(response => {
@@ -126,7 +126,7 @@ export default {
                         this.updateEquipment.notes = '',
                         this.updateEquipment.active = true,
                         this.updateEquipment.activeNotes = '',
-                        this.updateEquipment.updatedByUserI= '',
+                        this.updateEquipment.updatedByUserId= '',
                         this.updateEquipment.archived = false
                         this.$router.push({ name: 'equipment-list' });
                     })
