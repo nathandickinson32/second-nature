@@ -107,9 +107,27 @@ export default {
                         console.log(error);
                     });
             } else {
-                EquipmentService.updateEquipment(this.equipmentDetail)
+                this.updateEquipment.equipmentId = this.equipmentDetail.equipmentId;
+                this.updateEquipment.serialNumber = this.equipmentDetail.serialNumber;  
+                this.updateEquipment.model = this.equipmentDetail.model;
+                this.updateEquipment.name = this.equipmentDetail.name;
+                this.updateEquipment.notes = this.equipmentDetail.notes;
+                this.updateEquipment.active = this.equipmentDetail.active;  
+                this.updateEquipment.activeNotes = this.equipmentDetail.activeNotes;
+                this.updateEquipment.updatedByUserId = this.equipmentDetail.enteredByUserId;
+                this.updateEquipment.archived = this.equipmentDetail.archived;
+                EquipmentService.updateEquipment(this.updateEquipment)
                     .then(response => {
                         console.log(response.data);
+                        this.updateEquipment.equipmentId = 0;
+                        this.updateEquipment.serialNumber = '';
+                        this.updateEquipment.model = '';
+                        this.updateEquipment.name = '';
+                        this.updateEquipment.notes = '',
+                        this.updateEquipment.active = true,
+                        this.updateEquipment.activeNotes = '',
+                        this.updateEquipment.updatedByUserI= '',
+                        this.updateEquipment.archived = false
                         this.$router.push({ name: 'equipment-list' });
                     })
                     .catch(error => {
