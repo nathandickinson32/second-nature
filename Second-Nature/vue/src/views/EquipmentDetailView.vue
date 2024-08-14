@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       equipment: {
-        equipmentId: 0,
+        equipmentId: '',
         serialNumber: '',
         model: '',
         name: '',
