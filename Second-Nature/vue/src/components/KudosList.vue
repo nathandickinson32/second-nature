@@ -45,7 +45,7 @@ export default {
             return []; // Default return for unexpected filterType
         },
         currentUserId() {
-            return this.$store.state.user.userId;
+            return this.$store.state.user.id;
         }
     },
     methods: {
@@ -62,10 +62,10 @@ export default {
             this.filterType = 'all';
         },
         showMyKudos() {
-            this.filterType = 'fromMe';
+            this.filterType = 'toMe';
         },
         showSentKudos() {
-            this.filterType = 'toMe';
+            this.filterType = 'fromMe';
         }
     }
 }
