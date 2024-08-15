@@ -52,3 +52,58 @@ Updates the Maintenance Ticket "is_archived" field to true.
 HTTP Status: 202 Accepted
 Expects: The maintenance ticket id as a path variable.
 Returns: Nothing.
+
+JSON Objects
+Maintenance Ticket
+{
+	"ticketId" : -1,
+	"hours" : -1,
+	"enteredByUserId" : -1,
+	"date" : "2024-08-14",
+	"notes" : "Notes about the ticket", // Not required.
+	"complete" : false,
+	[
+		{ Maintenance Performed JSON Object array }
+	]
+}
+
+Maintenance Performed
+{
+	"maintenancePerformedId" : -1,
+	"equipmentId" : -1,
+	"ticketId" : -1,
+	"description" : "What was done",
+	"performedBy" : "Person or Vendor",
+	"notes" : "Note about the maintenance" // Not Required
+}
+
+Create Maintenance Ticket
+{
+	"hours" : -1,
+	"notes" : "Notes about the ticket.",
+	"complete" : false,
+	[
+		{ Maintenance Performed JSON Object array }
+	]
+}
+// Entered by user id and date is added on the server side.
+
+Update Maintenance Ticket
+{
+	"notes" : "Updated notes",
+	"complete" : false,
+	[
+		{ Maintenance Performed JSON Object array }
+	]
+}
+// Updated by user id and updated on date is added on the server side.
+
+Complete Maintenance Ticket
+{
+	"ticketId" : -1,
+	"complete" : true
+}
+// Updated by user id and updated on date is added on the server side.
+
+Archive Maintenance Ticket
+// Updated by user id and updated on date is added on the server side.
