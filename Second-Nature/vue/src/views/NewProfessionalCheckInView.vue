@@ -1,63 +1,65 @@
 <template>
   <div class="content">
-    <div class="small-container">
-      <form @submit.prevent="submitCheckIn">
-      
-
-        <div class="form-input-group">
-          <label for="checkInDate" class="title">
-            <span class="title-text">Professional Check In </span>
-            <span class="currentDate">{{ currentDate }}</span>
-          </label>
-        </div>
-
-        <div class="form-input-group">
-          <label for="manager"
-          class="title"
-            >
-            <span>
-                Performed By:
-
-            </span>
-            <span class="managerName">
-
-                {{ $store.state.user.firstName }}
-                {{ $store.state.user.lastName }}
-
-            </span>
-           
-
-          </label>
-        </div>
-        <div class="form-input-group">
-          <label for="userSelect">Employee: </label>
-          <select v-model="CheckIn.employeeId" id="userSelect" required>
-            <option value="" disabled>Select Employee</option>
-            <option
-              v-for="user in users"
-              :key="user.userId"
-              :value="user.userId"
-            >
-              {{ user.firstName }} {{ user.lastName }}
-            </option>
-          </select>
-        </div>
+    <div class="form">
+      <div class="small-container">
+        <form @submit.prevent="submitCheckIn">
         
-        <div class="form-input-group">
-          <label for="notes">Check In Notes </label>
-        
-            <textarea
-           
-            id="notes"
-            v-model="CheckIn.notes"
-            required
-            autofocus
-          ></textarea>
 
-         
-        </div>
-        <button type="submit" class="submit">Submit Check In</button>
-      </form>
+          <div class="form-input-group">
+            <label for="checkInDate" class="title">
+              <span class="title-text">Professional Check In </span>
+              <span class="currentDate">{{ currentDate }}</span>
+            </label>
+          </div>
+
+          <div class="form-input-group">
+            <label for="manager"
+            class="title"
+              >
+              <span>
+                  Performed By:
+
+              </span>
+              <span class="managerName">
+
+                  {{ $store.state.user.firstName }}
+                  {{ $store.state.user.lastName }}
+
+              </span>
+            
+
+            </label>
+          </div>
+          <div class="form-input-group">
+            <label for="userSelect">Employee: </label>
+            <select v-model="CheckIn.employeeId" id="userSelect" required>
+              <option value="" disabled>Select Employee</option>
+              <option
+                v-for="user in users"
+                :key="user.userId"
+                :value="user.userId"
+              >
+                {{ user.firstName }} {{ user.lastName }}
+              </option>
+            </select>
+          </div>
+          
+          <div class="form-input-group">
+            <label for="notes">Check In Notes </label>
+          
+              <textarea
+            
+              id="notes"
+              v-model="CheckIn.notes"
+              required
+              autofocus
+            ></textarea>
+
+          
+          </div>
+          <button type="submit" class="submit">Submit Check In</button>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -136,6 +138,11 @@ export default {
     text-align: right;
 }
 #notes{
+    border-radius: 5px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: 100%;
+    height: 10em;
+    resize: none;
     border-radius: 5px;
 }
 #userSelect{
