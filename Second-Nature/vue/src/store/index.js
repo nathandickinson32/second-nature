@@ -5,7 +5,8 @@ export function createStore(currentToken, currentUser) {
   let store = _createStore({
     state: {
       token: currentToken || '',
-      user: currentUser || {}
+      user: currentUser || {},
+      equipmentDetailView : 'detail'
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -23,6 +24,9 @@ export function createStore(currentToken, currentUser) {
         state.token = '';
         state.user = {};
         axios.defaults.headers.common = {};
+      },
+      SET_EQUIPMENT_DETAIL_VIEW(state, view) {
+        state.equipmentDetailView = view;
       }
     },
     //Check if a logged-in user is a manager
@@ -33,6 +37,9 @@ export function createStore(currentToken, currentUser) {
       },
       loggedInUserId(state) {
         return state.user.id;
+      },
+      getEquipmentDetailView(state) {
+        return state.equipmentDetailView;
       }
     }
   });

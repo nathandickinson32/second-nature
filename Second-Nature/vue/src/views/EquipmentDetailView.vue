@@ -1,13 +1,26 @@
 <template>
   <div class="content">
-      <h1>Equipment Detail View</h1>
-      <EquipmentDetail v-bind:equipmentId="equipmentId" />
+      <h1>Equipment Detail</h1>
+      <div v-if="view == 'detail'">
+        <EquipmentDetail v-bind:equipmentId="equipmentId" />
+      </div>
+      <div v-else-if="view == 'modify'">
+        <EquipmentModify v-bind:equipmentId="equipmentId" />
+      </div>
+      <div v-else-if="view == 'activeStatus'">
+        <EquipmentActiveStatusChange v-bind:equipmentId="equipmentId" />
+      </div>
+      <div v-else-if="view == 'archive'">
+        <EquipmentModify v-bind:equipmentId="equipmentId" />
+      </div>
   </div>
 </template>
 
 <script>
 import EquipmentDetail from '../components/EquipmentDetail.vue';
+import EquipmentModify from '../components/EquipmentModify.vue';
 import EquipmentService from '../services/EquipmentService';
+import EquipmentActiveStatusChange from '../components/EquipmentActiveStatusChange.vue';
 
 export default {
   components: {
@@ -26,7 +39,13 @@ export default {
         active: true,
         activeNotes: '',
         archived: false
-      }
+      },
+      view: 'detail'
+    }
+  },
+  computed: {
+    getEquipmentDetailView() {
+      return this.$store.getters.getEquipmentDetailView;
     }
   },
   created() {
@@ -45,6 +64,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.content {
+  flex-direction: column;
+}
+h1 {
+  text-align: center;
+}
 
 </style>

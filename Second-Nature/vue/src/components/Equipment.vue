@@ -3,7 +3,7 @@
     <div>
       <span class="line-display"> 
         <p id="model" >{{ equipment.model }}</p>
-        <p id="status" :class="equipment.isActive ? 'active' : 'inactive' "> {{ equipment.isActive ?  'Active' : 'Inactive' }}</p>
+        <p id="status" :class="equipment.active ? 'active' : 'inactive' "> {{ equipment.active ?  'Active' : 'Inactive' }}</p>
       </span>
       <span class="line-display">
         <button @click="maintenenceHistory(equipment)" class="maintenenceHistoryBtn">Maintenence</button>

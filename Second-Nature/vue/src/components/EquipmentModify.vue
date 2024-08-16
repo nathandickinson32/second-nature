@@ -1,43 +1,41 @@
 <template>
-    <div class="content">
-        <div class="large-container">
-                <div class="detail-display">
-                    <label for="label">Serial Number: </label>
-                    <span> {{ equipment.serialNumber }}</span> 
-                </div>
-                <div class="detail-display">
-                    <label for="label">Model: </label>
-                    <span> {{ equipment.model }}</span>
-                </div>
-                <div class="detail-display">
-                    <label for="label">Name: </label>
-                    <span> {{ equipment.name }}</span>
-                </div>
-                <div class="detail-display">
-                    <label for="label">Current Hours: </label>
-                    <span> {{ equipment.startingHours }}</span>
-                </div>
-                <div class="detail-display">
-                    <label for="label">Currently Active: </label>
-                    <span> {{ equipment.active }}</span>
-                </div>
-                <div class="detail-display">
-                    <label for="label">Notes about Active Status: </label>
-                    <span> {{ equipment.activeNotes }}</span>
-                </div>
-                <div class="detail-display">
-                    <label for="label">Notes: </label>
-                    <span id="notes"> {{ equipment.notes }}</span>
-                </div>
+  <div class="large-container">
+    <form id="equipment-form" @submit.prevent="onSubmit">
+        <div class="form-input-group">
+            <label for="title">Serial Number: </label>
+            <input type="text" v-model="equipment.serialNumber" id="serialNumber" required />
         </div>
-        <div class="button-section">
-                <label @click="modify" class="clickable-label">Modify Equipment</label>
-                <span class="separator"> | </span>
-                <label @click="toggleActivity" class="clickable-label">Change Active Status</label>
-                <span class="separator"> | </span>
-                <label @click="archive" class="clickable-label">Archive</label>
+        <div class="form-input-group">
+            <label for="title">Model: </label>
+            <input type="text" v-model="equipment.model" id="model" required />
         </div>
-    </div>
+        <div class="form-input-group">
+            <label for="title">Name: </label>
+            <input type="text" v-model="equipment.name" id="name" required />
+
+        </div>
+        <div class="form-input-group">
+            <label for="title">Current Hours: </label>
+            <input type="text" v-model="equipment.startingHours" id="startingHours" required />
+
+        </div>
+        <div class="form-input-group">
+            <label for="title">Currently Active: </label>
+            <input type="text" v-model="equipment.active" id="active" required />
+
+        </div>
+        <div class="form-input-group">
+            <label for="title">Notes about Active Status: </label>
+            <input type="text" v-model="equipment.activeNotes" id="activeNotes" required />
+
+        </div>
+        <div class="form-input-group">
+            <label for="title">Notes: </label>
+            <input type="text" v-model="equipment.notes" id="notes" />
+
+        </div>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -60,7 +58,7 @@ export default {
                 startingHours: '',
                 enteredByUserId: '',
                 notes: '',
-                active: '',
+                active: true,
                 activeNotes: '',
                 archived: false
             },
@@ -92,17 +90,6 @@ export default {
         })
     },
     methods: {
-        modify() {
-            this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'modify');
-        },
-        toggleActivity() {
-            this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'activeStatus');
-
-        },
-        archive() {
-            this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'archive');
-
-        },
         onSubmit() {
             if(this.equipmentDetail.archive){
                 this.archivedEquipment.equipmentId = this.equipmentDetail.equipmentId;
@@ -158,15 +145,6 @@ export default {
 }
 </script>
 
-<style scoped>
-
-.content {
-    flex-direction: column;
-}
-
-.button-section {
-    padding-top: 15px;
-}
-
+<style>
 
 </style>
