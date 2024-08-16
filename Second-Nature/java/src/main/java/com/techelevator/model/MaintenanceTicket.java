@@ -10,6 +10,9 @@ public class MaintenanceTicket {
     private Date date;
     private String notes;
     private boolean isComplete;
+    private int updatedByUserId;
+    private Date updatedOnDate;
+    private boolean isArchived;
 
     public int getTicketId() {
         return ticketId;
@@ -65,5 +68,29 @@ public class MaintenanceTicket {
 
     public void setComplete(boolean complete) {
         isComplete = complete;
+    }
+
+    public int getUpdatedByUserId() {
+        return updatedByUserId;
+    }
+
+    public void setUpdatedByUserId(int updatedByUserId) {
+        this.updatedByUserId = updatedByUserId;
+    }
+
+    public Date getUpdatedOnDate() {
+        return updatedOnDate;
+    }
+
+    public void setUpdatedOnDate(Date updatedOnDate) {
+        this.updatedOnDate = updatedOnDate;
+    }
+
+    public boolean isArchived() {
+        return isArchived;
+    }
+
+    public void setArchived(boolean archived) {
+        isArchived = archived;
     }
 }
