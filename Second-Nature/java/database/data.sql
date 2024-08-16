@@ -9,6 +9,9 @@ VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','
 INSERT INTO users (username,password_hash,role,first_name,last_name,title)
 VALUES ('boss','$2a$10$HEWndqvi9gOWgcw2b.bUNu0AS31AzXBc7YAfAiklkaHXkTAE1HabW','ROLE_USER', 'Boss First Name', 'Boss Last Name', 'manager');
 
+INSERT INTO users (username,password_hash,role,first_name,last_name,title)
+VALUES ('bob','$2a$10$5MDhl03/4h0Mn14.pi/HiOSkYZfQUtfyiRAcMfPgDECHF4EqAjiVq','ROLE_USER', 'Bob', 'Boberson', 'Default Title');
+
 INSERT INTO time_off_requests (user_id, request_date, start_date, end_date, status, request_reason, comment, review_date)
 VALUES (1, '2024-07-15', '2024-07-22', '2024-07-26', 'Approved', 'Need time off.', 'Take all the time you need.', '2024-07-16');
 
@@ -21,8 +24,8 @@ VALUES (3, 1, '2024-07-26', 'Default Title', 'Default Note', false);
 INSERT INTO equipment (serial_number, model, name, starting_hours, entered_by_user_id, entered_on_date, notes, is_active, active_notes, is_archived)
 VALUES ('Default Serial Number', 'Default Model', 'Default Name', 0, 3, '2024-07-26', 'Default Note', true, 'Default Active Note', false);
 
-INSERT INTO maintenance_ticket (equipment_id, hours, entered_by_user_id, date, notes, is_complete)
-VALUES (1, 0, 3, '2024-07-26', 'Default Note', false);
+INSERT INTO maintenance_ticket (equipment_id, hours, entered_by_user_id, date, notes, is_complete, is_archived)
+VALUES (1, 0, 3, '2024-07-26', 'Default Note', false, false);
 
 INSERT INTO maintenance_performed (equipment_id, ticket_id, description, performed_by, notes)
 VALUES (1, 1, 'Default Description', 'Default Performed By', 'Default Notes');

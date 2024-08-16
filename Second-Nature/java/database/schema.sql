@@ -80,7 +80,11 @@ CREATE TABLE maintenance_ticket (
     date DATE NOT NULL,
     notes VARCHAR,
     is_complete BOOLEAN NOT NULL,
-    FOREIGN KEY (entered_by_user_id) REFERENCES users (user_id)
+    updated_by_user_id INT,
+    updated_on_date DATE,
+    is_archived BOOLEAN NOT NULL,
+    FOREIGN KEY (entered_by_user_id) REFERENCES users (user_id),
+    FOREIGN KEY (updated_by_user_id) REFERENCES users (user_id)
 );
 
 CREATE TABLE maintenance_performed (

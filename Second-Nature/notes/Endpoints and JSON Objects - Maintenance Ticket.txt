@@ -77,7 +77,7 @@ Maintenance Performed
 	"notes" : "Note about the maintenance" // Not Required
 }
 
-Create Maintenance Ticket
+Create Maintenance Ticket DTO
 {
 	"equipmentId" : -1.
 	"hours" : -1,
@@ -89,7 +89,7 @@ Create Maintenance Ticket
 }
 // Entered by user id and date is added on the server side.
 
-Update Maintenance Ticket
+Update Maintenance Ticket DTO
 {
 	"notes" : "Updated notes",
 	"complete" : false,
@@ -99,7 +99,7 @@ Update Maintenance Ticket
 }
 // Updated by user id and updated on date is added on the server side.
 
-Complete Maintenance Ticket
+Complete Maintenance Ticket DTO
 {
 	"ticketId" : -1,
 	"complete" : true
