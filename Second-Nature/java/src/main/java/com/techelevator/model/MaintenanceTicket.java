@@ -6,7 +6,7 @@ public class MaintenanceTicket {
     private int ticketId;
     private int equipmentId;
     private int hours;
-    private String enteredByUserId;
+    private int enteredByUserId;
     private Date date;
     private String notes;
     private boolean isComplete;
@@ -38,11 +38,11 @@ public class MaintenanceTicket {
         this.hours = hours;
     }
 
-    public String getEnteredByUserId() {
+    public int getEnteredByUserId() {
         return enteredByUserId;
     }
 
-    public void setEnteredByUserId(String enteredByUserId) {
+    public void setEnteredByUserId(int enteredByUserId) {
         this.enteredByUserId = enteredByUserId;
     }
 
