@@ -36,6 +36,8 @@
                 <label @click="toggleActivity" class="clickable-label">Change Active Status</label>
                 <span class="separator"> | </span>
                 <label @click="archive" class="clickable-label">Archive</label>
+                <span class="separator"> | </span>
+                <router-link v-bind:to="{ name: 'equipmentList' }">Back to Equipment List</router-link>
         </div>
     </div>
 </template>

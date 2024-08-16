@@ -1,17 +1,17 @@
 <template>
   <div class="content">
       <h1>Equipment Detail</h1>
-      <div v-if="view == 'detail'">
-        <EquipmentDetail v-bind:equipmentId="equipmentId" />
+      <div v-show="getEquipmentDetailView == 'detail'">
+        <EquipmentDetail v-bind:equipmentId="this.$route.params.equipmentId" />
       </div>
-      <div v-else-if="view == 'modify'">
-        <EquipmentModify v-bind:equipmentId="equipmentId" />
+      <div v-show="getEquipmentDetailView == 'modify'">
+        <EquipmentModify v-bind:equipmentId="this.$route.params.equipmentId" />
       </div>
-      <div v-else-if="view == 'activeStatus'">
-        <EquipmentActiveStatusChange v-bind:equipmentId="equipmentId" />
+      <div v-show="getEquipmentDetailView == 'activeStatus'">
+        <EquipmentActiveStatusChange v-bind:equipmentId="this.$route.params.equipmentId" />
       </div>
-      <div v-else-if="view == 'archive'">
-        <EquipmentModify v-bind:equipmentId="equipmentId" />
+      <div v-show="getEquipmentDetailView == 'archive'">
+        <EquipmentModify v-bind:equipmentId="this.$route.params.equipmentId" />
       </div>
   </div>
 </template>
@@ -24,12 +24,14 @@ import EquipmentActiveStatusChange from '../components/EquipmentActiveStatusChan
 
 export default {
   components: {
-    EquipmentDetail
+    EquipmentDetail,
+    EquipmentModify,
+    EquipmentActiveStatusChange
   },
   data() {
     return {
       equipment: {
-        equipmentId: '',
+        equipmentId: -1,
         serialNumber: '',
         model: '',
         name: '',
@@ -48,7 +50,7 @@ export default {
       return this.$store.getters.getEquipmentDetailView;
     }
   },
-  created() {
+  mounted() {
     this.getEquipment();
   },
   methods: {
