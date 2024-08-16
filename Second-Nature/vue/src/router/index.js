@@ -155,7 +155,7 @@ const routes = [
     }
   },
   {
-    path: '/maintenance-ticket-list/:equipment.id',
+    path: '/maintenance-ticket-list/',
     name: 'maintenance-ticket-List',
     component: MaintenanceTicketListView,
     meta: {
