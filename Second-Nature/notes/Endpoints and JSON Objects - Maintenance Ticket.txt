@@ -79,6 +79,7 @@ Maintenance Performed
 
 Create Maintenance Ticket
 {
+	"equipmentId" : -1.
 	"hours" : -1,
 	"notes" : "Notes about the ticket.",
 	"complete" : false,
