@@ -19,7 +19,7 @@
             <input type="text" v-model="equipment.startingHours" id="startingHours" required />
 
         </div>
-        <div class="form-input-group">
+        <!-- <div class="form-input-group">
             <label for="title">Currently Active: </label>
             <input type="text" v-model="equipment.active" id="active" required />
 
@@ -28,11 +28,16 @@
             <label for="title">Notes about Active Status: </label>
             <input type="text" v-model="equipment.activeNotes" id="activeNotes" required />
 
-        </div>
+        </div> -->
         <div class="form-input-group">
             <label for="title">Notes: </label>
             <input type="text" v-model="equipment.notes" id="notes" />
 
+        </div>
+        <div class="button-section">
+                <label @click="goBack" class="clickable-label">Back to Equipment Details</label>
+                <span class="separator"> | </span>
+                <label @click="saveEquipment" class="clickable-label">Save Equipment Changes</label>
         </div>
     </form>
   </div>
@@ -90,56 +95,20 @@ export default {
         })
     },
     methods: {
-        onSubmit() {
-            if(this.equipmentDetail.archive){
-                this.archivedEquipment.equipmentId = this.equipmentDetail.equipmentId;
-                EquipmentService.archiveEquipment(this.archivedEquipment)
-                    .then(response => {
-                        console.log(response.data);
-                        alert('Equipment archived!');
-                        this.$router.push({ name: 'equipment' });
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-            }
-            if (this.equipment.equipmentId < 1) {
-                EquipmentService.addEquipment(this.equipmentDetail)
-                    .then(response => {
-                        console.log(response.data);
-                        this.$router.push({ name: 'equipment-list' });
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-            } else {
-                this.updateEquipment.equipmentId = this.equipmentDetail.equipmentId;
-                this.updateEquipment.serialNumber = this.equipmentDetail.serialNumber;  
-                this.updateEquipment.model = this.equipmentDetail.model;
-                this.updateEquipment.name = this.equipmentDetail.name;
-                this.updateEquipment.notes = this.equipmentDetail.notes;
-                this.updateEquipment.active = this.equipmentDetail.active;  
-                this.updateEquipment.activeNotes = this.equipmentDetail.activeNotes;
-                this.updateEquipment.updatedByUserId = this.equipmentDetail.enteredByUserId;
-                this.updateEquipment.archived = this.equipmentDetail.archived;
-                EquipmentService.updateEquipment(this.updateEquipment)
-                    .then(response => {
-                        console.log(response.data);
-                        this.updateEquipment.equipmentId = 0;
-                        this.updateEquipment.serialNumber = '';
-                        this.updateEquipment.model = '';
-                        this.updateEquipment.name = '';
-                        this.updateEquipment.notes = '',
-                        this.updateEquipment.active = true,
-                        this.updateEquipment.activeNotes = '',
-                        this.updateEquipment.updatedByUserId= '',
-                        this.updateEquipment.archived = false
-                        this.$router.push({ name: 'equipment-list' });
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-            }
+        goBack() {
+            this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'detail');
+        },
+        saveEquipment() {
+            EquipmentService.updateEquipment(this.equipmentActivity)
+            .then(response => {
+                console.log(response.data);
+                alert('Equipment Modifications updated!');
+                this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'detail');
+                this.$router.push({ name: 'equipmentList' });
+            })
+            .catch(error => {
+                console.log(error);
+            });
         }
     }
 }

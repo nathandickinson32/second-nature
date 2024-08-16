@@ -48,7 +48,7 @@ export default {
      * status: 202 ACCEPTED
      */
     updateEquipment(updatedEquipment){
-        return axios.put('/equipment/update',updatedEquipment);
+        return axios.post('/equipment/update',updatedEquipment);
     },
 
     /**
@@ -59,7 +59,7 @@ export default {
      * status: 202 ACCEPTED
      */
     updateEquipmentActivity(updateEquipmentActivity){
-        return axios.put('/equipment/update-activity', updateEquipmentActivity);
+        return axios.post('/equipment/update-activity', updateEquipmentActivity);
     },
 
     /**
@@ -70,7 +70,7 @@ export default {
      * status: 202 ACCEPTED
      */
     archiveEquipment(archiveEquipment) {
-        return axios.put('/equipment/archive', archiveEquipment);
+        return axios.post('/equipment/archive', archiveEquipment);
     },
 
     /**
