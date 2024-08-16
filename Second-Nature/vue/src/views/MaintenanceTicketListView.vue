@@ -1,12 +1,17 @@
 <template>
   <div>
     <h1>Maintenence Ticket List</h1>
+    <maintenance-ticket-list/>
   </div>
 </template>
 
 <script>
-export default {
+import MaintenanceTicketList from '../components/MaintenanceTicketList.vue';
 
+export default {
+components: {
+  MaintenanceTicketList
+}
 }
 </script>
 
