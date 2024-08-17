@@ -18,7 +18,7 @@ import EquipmentListView from '../views/EquipmentListView.vue';
 import NewProfessionalCheckIn from '../views/NewProfessionalCheckInView.vue';
 import EquipmentDetailView from '../views/EquipmentDetailView.vue'; 
 import MaintenanceTicketListView from '../views/MaintenanceTicketListView.vue';
-// import MaintenanceTicketDetailView from '../views/MaintenanceTicketDetailView.vue'; 
+import MaintenanceTicketDetailView from '../views/MaintenanceTicketDetailView.vue'; 
 import NewMaintenenceTicketView from '../views/NewMaintenenceTicketView.vue';
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -158,6 +158,14 @@ const routes = [
     path: '/maintenance-ticket-list/',
     name: 'maintenance-ticket-List',
     component: MaintenanceTicketListView,
+    meta: {
+      requiresAuth  : true
+    }
+  },
+  {
+    path: '/maintenance-ticket-list/:ticketId',
+    name: 'maintenance-ticket-detail',
+    component: MaintenanceTicketDetailView,
     meta: {
       requiresAuth  : true
     }

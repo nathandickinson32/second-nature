@@ -1,11 +1,15 @@
 <template>
  <div class="small-container">
-    <p>Maintenance Ticket for </p>
+    <span>Maintenance Ticket for <span>{{ modelNumber }}</span></span>
+    <span>{{ modelName }} | {{serialNumber }} </span><br/>
+    <span>Complete {{ this.MaintenanceTicket.complete }}</span> <br/> 
+    <button @click="viewMaintenanceTicket">View Ticket</button>
  </div>
   </template>
   
   <script>
   import router from '../router/index.js';
+import EquipmentService from '../services/EquipmentService.js';
 import MaintenanceService from '../services/MaintenanceService.js';  
   export default {
     props: {
@@ -16,23 +20,39 @@ import MaintenanceService from '../services/MaintenanceService.js';
     },
     data() {
       return {
-  
+          modelName: '',
+          serialNumber: '',
+          modelNumber: '',
+
       }
     },
+
   
     
     methods: {
+      getModels(MaintenanceTicket){
+          EquipmentService.getEquipmentById(this.MaintenanceTicket.equipmentId)
+          .then(
+            (response) => {
+              console.log(response.data)
+              this.modelName = response.data.name;
+              this.serialNumber= response.data.serialNumber;
+              this.modelNumber = response.data.model;
+            }
+          )
+      },
      
       viewMaintenanceTicket() {
         router.push({
-          name: 'maintenanceTicketDetail',
+          name: 'maintenanceTicketDetails',
           params: {
             ticketId: this.MaintenanceTicket.ticketId
           }
         });
       }
     },
-    computed: {
+    created() {
+      this.getModels(this.MaintenanceTicket);
     }
   }
   
@@ -41,16 +61,5 @@ import MaintenanceService from '../services/MaintenanceService.js';
   
   
   <style scoped>
-  a {
-    text-decoration: none;
-    color: #3e4a3d;
-  }
-  
-  h3 {
-    margin: 0;
-  }
-  
-  h5 {
-    margin-bottom: 0;
-  }
+
   </style>
