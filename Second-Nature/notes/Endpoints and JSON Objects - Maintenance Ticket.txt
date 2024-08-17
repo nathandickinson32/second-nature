@@ -9,12 +9,12 @@ Expects: Create Maintenance Ticket DTO JSON Object.
 Returns: Maintenance Ticket JSON Object.
 
 Read
-/maintenance-tickets
+/maintenance-tickets/all
 Request Type: GET
 Returns all maintenance tickets from the database.
 HTTP Status: 200 OK
 Expects: Nothing
-Returns: An array or maintenance ticket JSON objects.
+Returns: An array of maintenance ticket JSON objects.
 
 /maintenance-ticket/{id}
 Request Type: GET
