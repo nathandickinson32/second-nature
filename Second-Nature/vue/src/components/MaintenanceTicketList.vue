@@ -30,12 +30,12 @@ export default {
         filteredMaintenanceTickets() {
             if (this.filterType === 'all') {
                 return this.MaintenanceTickets;
+            }else if (this.filterType === 'single') {
+                return this.MaintenanceTickets.filter(MaintenanceTicket => MaintenanceTicket.equipmentId === this.currentUserId);
             }
             return []; // Default return for unexpected filterType
         },
-        currentUserId() {
-            return this.$store.state.user.id;
-        }
+      
     },
     methods: {
         getMaintenanceTickets() {
@@ -55,36 +55,5 @@ export default {
 </script>
 
 <style scoped>
-.clickable-label {
-    color: #2a64bd;
-    text-decoration: none;
-}
 
-.clickable-label:hover {
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.clickable-label:visited {
-    color: #a1af9f;
-}
-
-.filter-section {
-    width: 100%;
-    text-align: center;
-}
-
-.container {
-    width: 100%;
-    margin: 0;
-}
-
-.kudos-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    margin-top: 20px;
-    width: 100%;
-}
 </style>
