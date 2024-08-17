@@ -65,7 +65,8 @@ Equipment
 	"activeNotes" : "Equipment active notes",
 	"updatedByUserId" : 0,
 	"updatedOnDate" : "2024-08-08",
-	"archived" : false
+	"archived" : false,
+	"type" : "Equipment Type"
 }
 
 Equipment Identity

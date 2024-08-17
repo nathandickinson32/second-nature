@@ -1,0 +1,19 @@
+Kristi's vacation pass off
+
+What is "done":
+Equipment List
+Equipment Detail View
+Update Equipment Activity Status
+
+Where she is:
+Update Equipment Archive Status
+Update / Modify Equipment
+
+What needs work:
+Equipment Detail View
+- Add type once in the database
+
+Update / Modify Equipment
+- Has an error
+
+Equipment Detail View Styling
