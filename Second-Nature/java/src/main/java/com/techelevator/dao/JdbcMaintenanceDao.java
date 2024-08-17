@@ -1,8 +1,9 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.CreateMaintenanceTicketDTO;
+import com.techelevator.model.MaintenancePerformed;
 import com.techelevator.model.MaintenanceTicket;
-import com.techelevator.model.MaintenanceTicketDto;
+import com.techelevator.model.CompleteMaintenanceTicketDto;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -56,6 +57,7 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
             if (results.next()) {
                 ticket = mapRowToMaintenanceTicket(results);
             }
+            ticket.setMaintenancePerformedList(getMaintenancePerformedByTicket(id));
         } catch (CannotGetJdbcConnectionException e){
             throw new CannotGetJdbcConnectionException("[JDBC MaintenanceTicket DAO] Unable to connect to the database.");
         } catch (DataIntegrityViolationException e){
@@ -66,18 +68,37 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
     }
 
     @Override
-    public MaintenanceTicket completeMaintenanceTicket(MaintenanceTicketDto maintenanceTicketDto) {
+    public List<MaintenancePerformed> getMaintenancePerformedByTicket(int id) {
+        List<MaintenancePerformed> performed = new ArrayList<>();
+        String sql = "SELECT * FROM maintenance_performed WHERE ticket_id = ?;";
+
+        try {
+            SqlRowSet results = template.queryForRowSet(sql, id);
+            while (results.next()) {
+                performed.add(mapRowToMaintenancePerformed(results));
+            }
+        } catch(CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Maintenance DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Maintenance DAO] Error getting maintenance performed for ticket " + id);
+        }
+
+        return performed;
+    }
+
+    @Override
+    public MaintenanceTicket completeMaintenanceTicket(CompleteMaintenanceTicketDto completeMaintenanceTicketDto) {
         String sql = "UPDATE maintenance_tickets SET is_complete = ? WHERE ticket_id = ?;";
 
         try {
-            template.update(sql, maintenanceTicketDto.isComplete(), maintenanceTicketDto.getTicketId());
+            template.update(sql, completeMaintenanceTicketDto.isComplete(), completeMaintenanceTicketDto.getTicketId());
         } catch (CannotGetJdbcConnectionException e){
             throw new CannotGetJdbcConnectionException("[JDBC MaintenanceTicket DAO] Unable to connect to the database.");
         } catch (DataIntegrityViolationException e){
-            throw new DataIntegrityViolationException("[JDBC MaintenanceTicket DAO] Unable to update ticket: " + maintenanceTicketDto.getTicketId());
+            throw new DataIntegrityViolationException("[JDBC MaintenanceTicket DAO] Unable to update ticket: " + completeMaintenanceTicketDto.getTicketId());
         }
 
-        return getMaintenanceTicketById(maintenanceTicketDto.getTicketId());
+        return getMaintenanceTicketById(completeMaintenanceTicketDto.getTicketId());
     }
 
     private MaintenanceTicket mapRowToMaintenanceTicket(SqlRowSet results){
@@ -93,5 +114,16 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
         maintenanceTicket.setUpdatedOnDate(results.getDate("updated_on_date"));
         maintenanceTicket.setArchived(results.getBoolean("is_archived"));
         return maintenanceTicket;
+    }
+
+    private MaintenancePerformed mapRowToMaintenancePerformed(SqlRowSet results) {
+        MaintenancePerformed performed = new MaintenancePerformed();
+        performed.setMaintenancePerformedId(results.getInt("maintenance_performed_id"));
+        performed.setEquipmentId(results.getInt("equipment_id"));
+        performed.setTicketId(results.getInt("ticket_id"));
+        performed.setDescription(results.getString("description"));
+        performed.setPerformedBy(results.getString("performed_by"));
+        performed.setNotes(results.getString("notes"));
+        return performed;
     }
 }

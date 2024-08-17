@@ -1,6 +1,6 @@
 package com.techelevator.model;
 
-public class MaintenanceTicketDto {
+public class CompleteMaintenanceTicketDto {
     private int ticketId;
     private boolean isComplete;
 

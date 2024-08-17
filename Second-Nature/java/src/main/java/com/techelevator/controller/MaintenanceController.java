@@ -3,7 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.MaintenanceDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.MaintenanceTicket;
-import com.techelevator.model.MaintenanceTicketDto;
+import com.techelevator.model.CompleteMaintenanceTicketDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -42,9 +42,9 @@ public class MaintenanceController {
     // Update
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping(path = "/complete")
-    public MaintenanceTicket completeMaintenanceTicket(@RequestBody MaintenanceTicketDto maintenanceTicketDto, Principal principal) {
-        System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " completed maintenance ticket " + maintenanceTicketDto.getTicketId());
-        return maintenanceDao.completeMaintenanceTicket(maintenanceTicketDto);
+    public MaintenanceTicket completeMaintenanceTicket(@RequestBody CompleteMaintenanceTicketDto completeMaintenanceTicketDto, Principal principal) {
+        System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " completed maintenance ticket " + completeMaintenanceTicketDto.getTicketId());
+        return maintenanceDao.completeMaintenanceTicket(completeMaintenanceTicketDto);
     }
 
     // Delete

@@ -1,6 +1,7 @@
 package com.techelevator.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class MaintenanceTicket {
     private int ticketId;
@@ -13,6 +14,7 @@ public class MaintenanceTicket {
     private int updatedByUserId;
     private Date updatedOnDate;
     private boolean isArchived;
+    private List<MaintenancePerformed> maintenancePerformedList;
 
     public int getTicketId() {
         return ticketId;
@@ -92,5 +94,11 @@ public class MaintenanceTicket {
 
     public void setArchived(boolean archived) {
         isArchived = archived;
+    }
+
+    public List<MaintenancePerformed> getMaintenancePerformedList() { return maintenancePerformedList; }
+
+    public void setMaintenancePerformedList(List<MaintenancePerformed> maintenancePerformedList) {
+        this.maintenancePerformedList = maintenancePerformedList;
     }
 }
