@@ -42,7 +42,7 @@ export default {
                 .then(
                     (response) => {
                         console.log(response.data);
-                        this.MaintenanceTicket = response.data;
+                        this.MaintenanceTickets = response.data;
                     }
                 );
         },

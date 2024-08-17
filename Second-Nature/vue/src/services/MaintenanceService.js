@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default {
     getAllMaintenanceTickets() {
-        return axios.get('/get-all-maintenance-tickets');
+        return axios.get('/maintenance-tickets/all');
     },
 
     getMaintenanceTicketsByEquipmentId() {
