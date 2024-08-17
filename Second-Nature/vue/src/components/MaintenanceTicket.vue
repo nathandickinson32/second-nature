@@ -1,8 +1,8 @@
 <template>
  <div class="small-container">
-    <span>Maintenance Ticket for <span>{{ modelNumber }}</span></span>
+    <span>Maintenance Ticket for <span>{{ modelNumber }}</span></span><br/>
     <span>{{ modelName }} | {{serialNumber }} </span><br/>
-    <span>Complete {{ this.MaintenanceTicket.complete }}</span> <br/> 
+    <span>Complete {{ MaintenanceTicket.complete }}</span> <br/> 
     <button @click="viewMaintenanceTicket">View Ticket</button>
  </div>
   </template>
@@ -30,7 +30,7 @@ import MaintenanceService from '../services/MaintenanceService.js';
   
     
     methods: {
-      getModels(MaintenanceTicket){
+      getModels(){
           EquipmentService.getEquipmentById(this.MaintenanceTicket.equipmentId)
           .then(
             (response) => {
@@ -44,7 +44,7 @@ import MaintenanceService from '../services/MaintenanceService.js';
      
       viewMaintenanceTicket() {
         router.push({
-          name: 'maintenanceTicketDetails',
+          name: 'maintenance-ticket-detail',
           params: {
             ticketId: this.MaintenanceTicket.ticketId
           }

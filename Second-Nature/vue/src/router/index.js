@@ -20,6 +20,7 @@ import EquipmentDetailView from '../views/EquipmentDetailView.vue';
 import MaintenanceTicketListView from '../views/MaintenanceTicketListView.vue';
 import MaintenanceTicketDetailView from '../views/MaintenanceTicketDetailView.vue'; 
 import NewMaintenenceTicketView from '../views/NewMaintenenceTicketView.vue';
+import MaintenanceTicketDetails from '../components/MaintenanceTicketDetails.vue';
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.

@@ -19,7 +19,8 @@ export default {
     data() {
         return {
             MaintenanceTickets: [],
-            filterType: 'all'
+            filterType: 'all',
+           
         }
     },
     created() {
