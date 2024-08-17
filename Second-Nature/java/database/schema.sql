@@ -1,5 +1,7 @@
 BEGIN TRANSACTION;
 
+DROP TABLE IF EXISTS equipment_type;
+DROP TABLE IF EXISTS type;
 DROP TABLE IF EXISTS maintenance_performed;
 DROP TABLE IF EXISTS maintenance_ticket;
 DROP TABLE IF EXISTS maintenance_tickets;
@@ -97,6 +99,18 @@ CREATE TABLE maintenance_performed (
     notes VARCHAR,
     FOREIGN KEY (equipment_id) REFERENCES equipment (equipment_id),
     FOREIGN KEY (ticket_id) REFERENCES maintenance_tickets (ticket_id)
+);
+
+CREATE TABLE type (
+    type_id SERIAL PRIMARY KEY,
+    name VARCHAR NOT NULL
+);
+
+CREATE TABLE equipment_type (
+    type_id INT NOT NULL,
+    equipment_id INT NOT NULL,
+    FOREIGN KEY (type_id) REFERENCES type (type_id),
+    FOREIGN KEY (equipment_id) REFERENCES equipment (equipment_id)
 );
 
 COMMIT TRANSACTION;

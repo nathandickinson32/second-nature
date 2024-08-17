@@ -30,4 +30,8 @@ VALUES (1, 0, 3, '2024-07-26', 'Default Note', false, false);
 INSERT INTO maintenance_performed (equipment_id, ticket_id, description, performed_by, notes)
 VALUES (1, 1, 'Default Description', 'Default Performed By', 'Default Notes');
 
+INSERT INTO type (name) VALUES ('Mower');
+
+INSERT INTO equipment_type (equipment_id, type_id) VALUES (1, 1);
+
 COMMIT TRANSACTION;
