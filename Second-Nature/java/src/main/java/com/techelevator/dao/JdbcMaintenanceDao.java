@@ -1,9 +1,6 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.CreateMaintenanceTicketDTO;
-import com.techelevator.model.MaintenancePerformed;
-import com.techelevator.model.MaintenanceTicket;
-import com.techelevator.model.CompleteMaintenanceTicketDto;
+import com.techelevator.model.*;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -26,6 +23,32 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
     @Override
     public MaintenanceTicket createMaintenanceTicket(CreateMaintenanceTicketDTO createMaintenanceTicketDTO) {
         return null;
+    }
+
+    @Override
+    public MaintenanceTicket addMaintenancePerformed(CreateMaintenancePerformedDto mxpDto) {
+        String sql = "INSERT INTO maintenance_performed (equipment_id, ticket_id, description, performed_by, notes) " +
+                "VALUES (?, ?, ?, ?, ?) " +
+                "RETURNING maintenance_performed_id;";
+        int newMPId = -1;
+
+        try {
+            newMPId = template.queryForObject(
+                    sql,
+                    int.class,
+                    mxpDto.getEquipmentId(),
+                    mxpDto.getTicketId(),
+                    mxpDto.getDescription(),
+                    mxpDto.getPerformedBy(),
+                    mxpDto.getNotes()
+            );
+        } catch (CannotGetJdbcConnectionException e){
+            throw new CannotGetJdbcConnectionException("[JDBC Maintenance DAO] Unable to connect to the database.");
+        } catch (DataIntegrityViolationException e){
+            throw new DataIntegrityViolationException("[JDBC Maintenance DAO] Unable to add maintenance performed.");
+        }
+
+        return getMaintenanceTicketById(mxpDto.getTicketId());
     }
 
     @Override

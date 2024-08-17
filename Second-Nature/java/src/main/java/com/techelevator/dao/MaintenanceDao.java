@@ -1,15 +1,13 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.CreateMaintenanceTicketDTO;
-import com.techelevator.model.MaintenancePerformed;
-import com.techelevator.model.MaintenanceTicket;
-import com.techelevator.model.CompleteMaintenanceTicketDto;
+import com.techelevator.model.*;
 
 import java.util.List;
 
 public interface MaintenanceDao {
     // Create
     public MaintenanceTicket createMaintenanceTicket(CreateMaintenanceTicketDTO createMaintenanceTicketDTO);
+    public MaintenanceTicket addMaintenancePerformed(CreateMaintenancePerformedDto createMaintenancePerformedDTO);
     // Read
     public List<MaintenanceTicket> getAllMaintenanceTickets();
     public MaintenanceTicket getMaintenanceTicketById(int id);
