@@ -11,7 +11,7 @@
         <EquipmentActiveStatusChange v-bind:equipmentId="this.$route.params.equipmentId" />
       </div>
       <div v-show="getEquipmentDetailView == 'archive'">
-        <EquipmentModify v-bind:equipmentId="this.$route.params.equipmentId" />
+        <EquipmentDetailArchive v-bind:equipmentId="this.$route.params.equipmentId" />
       </div>
   </div>
 </template>
@@ -21,12 +21,14 @@ import EquipmentDetail from '../components/EquipmentDetail.vue';
 import EquipmentModify from '../components/EquipmentModify.vue';
 import EquipmentService from '../services/EquipmentService';
 import EquipmentActiveStatusChange from '../components/EquipmentActiveStatusChange.vue';
+import EquipmentDetailArchive from './EquipmentDetailArchive.vue';
 
 export default {
   components: {
     EquipmentDetail,
     EquipmentModify,
-    EquipmentActiveStatusChange
+    EquipmentActiveStatusChange,
+    EquipmentDetailArchive
   },
   data() {
     return {

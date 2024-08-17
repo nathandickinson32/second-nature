@@ -2,12 +2,11 @@
   <div class="content">
     <form id="equipment-activity-form" @submit.prevent="onSubmit">
       <div>
-        <h2>Modify the Active Status for: {{ equipment.name }} ; {{ equipment.model }}</h2>
+        <h3>Modify the Active Status for: {{ equipment.name }} ; {{ equipment.model }}</h3>
       </div>
         <div class="form-input-group">
-          <label for="userSelect">To: </label>
+          <label for="userSelect">Equipment is Active: </label>
           <select v-model="equipment.active" id="activeStatus" required>
-              <!-- <option value="" disabled>Currently Active: </option> -->
               <option v-for="option in options" :key="option.Id" :value="option">
                   {{ option }}
               </option>
