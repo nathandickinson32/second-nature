@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.model.CreateMaintenanceTicketDTO;
 import com.techelevator.model.MaintenanceTicket;
+import com.techelevator.model.MaintenanceTicketDto;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -43,6 +44,40 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
         }
 
         return maintenanceTickets;
+    }
+
+    @Override
+    public MaintenanceTicket getMaintenanceTicketById(int id) {
+        MaintenanceTicket ticket = null;
+        String sql = "SELECT * FROM maintenance_tickets WHERE ticket_id = ?;";
+
+        try {
+            SqlRowSet results = template.queryForRowSet(sql, id);
+            if (results.next()) {
+                ticket = mapRowToMaintenanceTicket(results);
+            }
+        } catch (CannotGetJdbcConnectionException e){
+            throw new CannotGetJdbcConnectionException("[JDBC MaintenanceTicket DAO] Unable to connect to the database.");
+        } catch (DataIntegrityViolationException e){
+            throw new DataIntegrityViolationException("[JDBC MaintenanceTicket DAO] Unable to get ticket: " + id);
+        }
+
+        return ticket;
+    }
+
+    @Override
+    public MaintenanceTicket completeMaintenanceTicket(MaintenanceTicketDto maintenanceTicketDto) {
+        String sql = "UPDATE maintenance_tickets SET is_complete = ? WHERE ticket_id = ?;";
+
+        try {
+            template.update(sql, maintenanceTicketDto.isComplete(), maintenanceTicketDto.getTicketId());
+        } catch (CannotGetJdbcConnectionException e){
+            throw new CannotGetJdbcConnectionException("[JDBC MaintenanceTicket DAO] Unable to connect to the database.");
+        } catch (DataIntegrityViolationException e){
+            throw new DataIntegrityViolationException("[JDBC MaintenanceTicket DAO] Unable to update ticket: " + maintenanceTicketDto.getTicketId());
+        }
+
+        return getMaintenanceTicketById(maintenanceTicketDto.getTicketId());
     }
 
     private MaintenanceTicket mapRowToMaintenanceTicket(SqlRowSet results){
