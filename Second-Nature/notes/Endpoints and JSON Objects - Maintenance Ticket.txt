@@ -99,6 +99,26 @@ Update Maintenance Ticket DTO
 }
 // Updated by user id and updated on date is added on the server side.
 
+	     **For Front End Update MX Ticket**
+data() {
+    return: {
+	maintenanceTicket: {
+	   maintenancePerformed: [ALREADY_IN_DATABASE]
+	},
+	additionalMaintenancePerformed: [V-MODEL_TO_INPUT_FIELDS],
+	maintenanceUpdateDTO: {}
+    }
+}
+methods:
+maintenanceService.updateMaintenanceTicket() {
+	maintenanceUpdateDTO.notes = this.maintenanceTicket.notes;
+	maintenanceUpdateDTO.complete = this.maintenanceTicket.complete;
+	maintenanceUpdateDTO.maintenancePerformed = this.additionalMaintenancePerformed;
+};
+	     **End Front End Update MX Ticket**
+
+
+
 Complete Maintenance Ticket DTO
 {
 	"ticketId" : -1,
