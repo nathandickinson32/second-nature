@@ -89,6 +89,14 @@ Create Maintenance Ticket DTO
 }
 // Entered by user id and date is added on the server side.
 
+Create Maintenance Performed DTO
+{
+	"equipmentId" : -1,
+	"description" : "What is being done."",
+	"preformedBy" : "Person or vendor performing the maintenance.",
+	"notes" : "Misc notes about the ticket or equipment."
+}
+
 Update Maintenance Ticket DTO
 {
 	"notes" : "Updated notes",

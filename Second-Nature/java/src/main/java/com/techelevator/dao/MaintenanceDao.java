@@ -6,12 +6,13 @@ import java.util.List;
 
 public interface MaintenanceDao {
     // Create
-    public MaintenanceTicket createMaintenanceTicket(CreateMaintenanceTicketDTO createMaintenanceTicketDTO, int userId);
-    public MaintenanceTicket addMaintenancePerformed(CreateMaintenancePerformedDto createMaintenancePerformedDTO);
+    public MaintenanceTicket createMaintenanceTicket(CreateMaintenanceTicketDto createMaintenanceTicketDTO, int userId);
+    public MaintenancePerformed createMaintenancePerformed(CreateMaintenancePerformedDto createMaintenancePerformedDto, int ticketId);
     // Read
     public List<MaintenanceTicket> getAllMaintenanceTickets();
     public MaintenanceTicket getMaintenanceTicketById(int id);
     public List<MaintenancePerformed> getMaintenancePerformedByTicket(int id);
+    public MaintenancePerformed getMaintenancePerformed(int maintenancePerformedId);
     // Update
     public MaintenanceTicket completeMaintenanceTicket(CompleteMaintenanceTicketDto completeMaintenanceTicketDto);
     // Delete / Archive

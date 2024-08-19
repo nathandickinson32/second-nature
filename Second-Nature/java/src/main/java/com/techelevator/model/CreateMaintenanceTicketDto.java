@@ -2,12 +2,12 @@ package com.techelevator.model;
 
 import java.util.List;
 
-public class CreateMaintenanceTicketDTO {
+public class CreateMaintenanceTicketDto {
     private int equipmentId;
     private int hours;
     private String notes;
     private boolean isComplete;
-    private List<MaintenancePerformed> maintenancePerformedList;
+    private List<CreateMaintenancePerformedDto> createMaintenancePerformedDto;
 
     public int getEquipmentId() {
         return equipmentId;
@@ -41,11 +41,11 @@ public class CreateMaintenanceTicketDTO {
         isComplete = complete;
     }
 
-    public List<MaintenancePerformed> getMaintenancePerformedList() {
-        return maintenancePerformedList;
+    public List<CreateMaintenancePerformedDto> getMaintenancePerformedList() {
+        return createMaintenancePerformedDto;
     }
 
-    public void setMaintenancePerformedList(List<MaintenancePerformed> maintenancePerformedList) {
-        this.maintenancePerformedList = maintenancePerformedList;
+    public void setMaintenancePerformedList(List<CreateMaintenancePerformedDto> createMaintenancePerformedDto) {
+        this.createMaintenancePerformedDto = createMaintenancePerformedDto;
     }
 }
