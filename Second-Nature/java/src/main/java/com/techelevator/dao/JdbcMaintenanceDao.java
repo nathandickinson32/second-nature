@@ -5,9 +5,11 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +23,62 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
     }
 
     @Override
-    public MaintenanceTicket createMaintenanceTicket(CreateMaintenanceTicketDTO createMaintenanceTicketDTO) {
-        return null;
+    public MaintenanceTicket createMaintenanceTicket(CreateMaintenanceTicketDTO createMaintenanceTicketDTO, int userId) {
+
+        String sql = "INSERT INTO maintenance_tickets (equipment_id, hours, entered_by_user_id, date, notes, is_complete, is_archived) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING ticket_id;";
+
+        int ticketId = -1;
+
+        try {
+            ticketId = template.queryForObject(
+                    sql,
+                    int.class,
+                    createMaintenanceTicketDTO.getEquipmentId(),
+                    createMaintenanceTicketDTO.getHours(),
+                    userId,
+                    LocalDateTime.now(),
+                    createMaintenanceTicketDTO.getNotes(),
+                    false,
+                    false
+            );
+        } catch (CannotGetJdbcConnectionException e){
+            throw new CannotGetJdbcConnectionException("[JDBC Maintenance DAO] Unable to connect to the database.");
+        } catch (DataIntegrityViolationException e){
+            throw new DataIntegrityViolationException("[JDBC Maintenance DAO] Unable to create a new maintenance ticket.");
+        }
+
+        for (MaintenancePerformed maintenancePerformed : createMaintenanceTicketDTO.getMaintenancePerformedList()){
+            // Add maintenance performed to the database.
+            createMaintenancePerformed(maintenancePerformed);
+        }
+
+        return getMaintenanceTicketById(ticketId);
+    }
+
+    private MaintenancePerformed createMaintenancePerformed(MaintenancePerformed maintenancePerformed){
+        int maintenancePerformedId = -1;
+
+        String sql = "INSERT INTO maintenance_performed (equipment_id, ticket_id, description, performed_by, notes "
+                + "VALUES (?, ?, ?, ?, ?) RETURNING maintenance_performed_id;";
+
+        try {
+            maintenancePerformedId = template.queryForObject(
+                    sql,
+                    int.class,
+                    maintenancePerformed.getEquipmentId(),
+                    maintenancePerformed.getTicketId(),
+                    maintenancePerformed.getDescription(),
+                    maintenancePerformed.getPerformedBy(),
+                    maintenancePerformed.getNotes()
+            );
+        } catch (CannotGetJdbcConnectionException e){
+            throw new CannotGetJdbcConnectionException("[JDBC Maintenance DAO] Unable to connect to the database.");
+        } catch (DataIntegrityViolationException e){
+            throw new DataIntegrityViolationException("[JDBC Maintenance DAO] Unable to create a new maintenance performed for ticket ID: " + maintenancePerformed.getTicketId());
+        }
+
+        return getMaintenancePerformed(maintenancePerformedId);
     }
 
     @Override
@@ -80,7 +136,7 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
             if (results.next()) {
                 ticket = mapRowToMaintenanceTicket(results);
             }
-            ticket.setMaintenancePerformedList(getMaintenancePerformedByTicket(id));
+            //ticket.setMaintenancePerformedList(getMaintenancePerformedByTicket(id));
         } catch (CannotGetJdbcConnectionException e){
             throw new CannotGetJdbcConnectionException("[JDBC MaintenanceTicket DAO] Unable to connect to the database.");
         } catch (DataIntegrityViolationException e){
@@ -107,6 +163,24 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
         }
 
         return performed;
+    }
+
+    public MaintenancePerformed getMaintenancePerformed(int maintenancePerformedId){
+        MaintenancePerformed maintenancePerformed = null;
+        String sql = "SELECT * FROM maintenance_performed WHERE maintenance_performed_id = ?;";
+
+        try {
+            SqlRowSet results = template.queryForRowSet(sql, maintenancePerformedId);
+            if(results.next()){
+                maintenancePerformed = mapRowToMaintenancePerformed(results);
+            }
+        } catch(CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Maintenance DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Maintenance DAO] Error getting maintenance performed id: " + maintenancePerformedId);
+        }
+
+        return maintenancePerformed;
     }
 
     @Override
@@ -136,6 +210,7 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
         maintenanceTicket.setUpdatedByUserId(results.getInt("updated_by_user_id"));
         maintenanceTicket.setUpdatedOnDate(results.getDate("updated_on_date"));
         maintenanceTicket.setArchived(results.getBoolean("is_archived"));
+        maintenanceTicket.setMaintenancePerformedList(getMaintenancePerformedByTicket(results.getInt("ticket_id")));
         return maintenanceTicket;
     }
 

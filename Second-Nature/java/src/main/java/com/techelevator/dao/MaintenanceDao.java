@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MaintenanceDao {
     // Create
-    public MaintenanceTicket createMaintenanceTicket(CreateMaintenanceTicketDTO createMaintenanceTicketDTO);
+    public MaintenanceTicket createMaintenanceTicket(CreateMaintenanceTicketDTO createMaintenanceTicketDTO, int userId);
     public MaintenanceTicket addMaintenancePerformed(CreateMaintenancePerformedDto createMaintenancePerformedDTO);
     // Read
     public List<MaintenanceTicket> getAllMaintenanceTickets();
