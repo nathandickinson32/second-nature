@@ -1,10 +1,10 @@
 <template>
-    <div class="container">
-       
-        <div class="MaintenanceTicket-list" v-if="filteredMaintenanceTickets.length === 0">No Maintenance Tickets have been entered yet.</div>
-        <div class="MaintenanceTicket-list" v-else>
-            <MaintenanceTicket v-for="MaintenanceTicket in filteredMaintenanceTickets" :key="MaintenanceTicket.ticketId" :MaintenanceTicket="MaintenanceTicket"></MaintenanceTicket>
-        </div>
+    <div class="maintenanceTicket-list" v-if="filteredMaintenanceTickets.length === 0">No Maintenance Tickets have been
+        entered yet.
+    </div>
+    <div class="maintenanceTicket-list" v-else>
+        <MaintenanceTicket v-for="MaintenanceTicket in filteredMaintenanceTickets" :key="MaintenanceTicket.ticketId"
+            :MaintenanceTicket="MaintenanceTicket"></MaintenanceTicket>
     </div>
 </template>
 
@@ -55,5 +55,11 @@ export default {
 </script>
 
 <style scoped>
-
+.maintenanceTicket-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
 </style>

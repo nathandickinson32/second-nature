@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <h1>Maintenence Ticket List</h1>
+  <div class="content">
+    <h1>Maintenence Tickets</h1>
+    <!-- Create a Maintenance Ticket Button -->
     <maintenance-ticket-list/>
   </div>
 </template>
@@ -15,6 +16,10 @@ components: {
 }
 </script>
 
-<style>
-
+<style scoped>
+.content {
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
 </style>

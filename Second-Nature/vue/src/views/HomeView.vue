@@ -26,6 +26,10 @@
         <img src="/src/images/tools.png" alt="">
         <router-link v-bind:to="{ name: 'equipmentList' }">Equipment</router-link>
       </div>
+      <div class="menu-icon">
+        <img src="/src/images/to-do.png" alt="">
+        <router-link v-bind:to="{ name: 'maintenance-ticket-List'}">Maintenance</router-link>
+      </div>
     </div>
   </div>
 </template>
