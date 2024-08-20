@@ -3,9 +3,18 @@ package com.techelevator.model;
 import java.util.List;
 
 public class UpdateMaintenanceTicketDto {
+    private int ticketId;
     private String notes;
     private boolean isComplete;
-    private List<MaintenancePerformed> maintenancePerformedList;
+    private List<CreateMaintenancePerformedDto> createMaintenancePerformedDto;
+
+    public int getTicketId() {
+        return ticketId;
+    }
+
+    public void setTicketId(int ticketId) {
+        this.ticketId = ticketId;
+    }
 
     public String getNotes() {
         return notes;
@@ -23,11 +32,11 @@ public class UpdateMaintenanceTicketDto {
         isComplete = complete;
     }
 
-    public List<MaintenancePerformed> getMaintenancePerformedList() {
-        return maintenancePerformedList;
+    public List<CreateMaintenancePerformedDto> getCreateMaintenancePerformedDto() {
+        return createMaintenancePerformedDto;
     }
 
-    public void setMaintenancePerformedList(List<MaintenancePerformed> maintenancePerformedList) {
-        this.maintenancePerformedList = maintenancePerformedList;
+    public void setCreateMaintenancePerformedDto(List<CreateMaintenancePerformedDto> createMaintenancePerformedDto) {
+        this.createMaintenancePerformedDto = createMaintenancePerformedDto;
     }
 }

@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.sun.tools.javac.Main;
 import com.techelevator.model.*;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
@@ -21,6 +22,7 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
         template = new JdbcTemplate(ds);
     }
 
+    // Create
     @Override
     public MaintenanceTicket createMaintenanceTicket(CreateMaintenanceTicketDto createMaintenanceTicketDTO, int userId) {
 
@@ -54,8 +56,7 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
         return getMaintenanceTicketById(ticketId);
     }
 
-    @Override
-    public MaintenancePerformed createMaintenancePerformed(CreateMaintenancePerformedDto createMaintenancePerformedDto, int ticketId){
+    private MaintenancePerformed createMaintenancePerformed(CreateMaintenancePerformedDto createMaintenancePerformedDto, int ticketId){
         int maintenancePerformedId = -1;
 
         String sql = "INSERT INTO maintenance_performed (equipment_id, ticket_id, description, performed_by, notes) "
@@ -80,6 +81,7 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
         return getMaintenancePerformed(maintenancePerformedId);
     }
 
+    // Read
     @Override
     public List<MaintenanceTicket> getAllMaintenanceTickets() {
         List<MaintenanceTicket> maintenanceTickets = new ArrayList<>();
@@ -119,8 +121,7 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
         return ticket;
     }
 
-    @Override
-    public List<MaintenancePerformed> getMaintenancePerformedByTicket(int id) {
+    private List<MaintenancePerformed> getMaintenancePerformedByTicket(int id) {
         List<MaintenancePerformed> performed = new ArrayList<>();
         String sql = "SELECT * FROM maintenance_performed WHERE ticket_id = ?;";
 
@@ -138,8 +139,7 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
         return performed;
     }
 
-    @Override
-    public MaintenancePerformed getMaintenancePerformed(int maintenancePerformedId){
+    private MaintenancePerformed getMaintenancePerformed(int maintenancePerformedId){
         MaintenancePerformed maintenancePerformed = null;
         String sql = "SELECT * FROM maintenance_performed WHERE maintenance_performed_id = ?;";
 
@@ -157,6 +157,32 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
         return maintenancePerformed;
     }
 
+    // Update
+    @Override
+    public MaintenanceTicket updateMaintenanceTicket(UpdateMaintenanceTicketDto updateMaintenanceTicketDto){
+        MaintenanceTicket maintenanceTicket = new MaintenanceTicket();
+        String sql = "UPDATE maintenance_tickets SET notes = ?, is_complete = ? WHERE ticket_id = ?;";
+
+        try {
+            template.update(
+                    sql,
+                    updateMaintenanceTicketDto.getNotes(),
+                    updateMaintenanceTicketDto.isComplete(),
+                    updateMaintenanceTicketDto.getTicketId()
+            );
+
+            for (CreateMaintenancePerformedDto createMaintenancePerformedDto : updateMaintenanceTicketDto.getCreateMaintenancePerformedDto()){
+                createMaintenancePerformed(createMaintenancePerformedDto, updateMaintenanceTicketDto.getTicketId());
+            }
+        } catch(CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Maintenance DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Maintenance DAO] Error updating maintenance ticket ID: " + updateMaintenanceTicketDto.getTicketId());
+        }
+
+        return getMaintenanceTicketById(updateMaintenanceTicketDto.getTicketId());
+    }
+
     @Override
     public MaintenanceTicket completeMaintenanceTicket(CompleteMaintenanceTicketDto completeMaintenanceTicketDto) {
         String sql = "UPDATE maintenance_tickets SET is_complete = ? WHERE ticket_id = ?;";
@@ -170,6 +196,15 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
         }
 
         return getMaintenanceTicketById(completeMaintenanceTicketDto.getTicketId());
+    }
+
+    // Delete
+    public void deleteMaintenanceTicket(int ticketId){
+
+    }
+
+    public void archiveMaintenanceTicket(int ticketId){
+
     }
 
     private MaintenanceTicket mapRowToMaintenanceTicket(SqlRowSet results){

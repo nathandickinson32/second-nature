@@ -2,10 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.MaintenanceDao;
 import com.techelevator.dao.UserDao;
-import com.techelevator.model.CreateMaintenancePerformedDto;
-import com.techelevator.model.CreateMaintenanceTicketDto;
-import com.techelevator.model.MaintenanceTicket;
-import com.techelevator.model.CompleteMaintenanceTicketDto;
+import com.techelevator.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -54,6 +51,13 @@ public class MaintenanceController {
     }
 
     // Update
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @PostMapping(path = "/update")
+    public MaintenanceTicket updateMaintenanceTicket(@RequestBody UpdateMaintenanceTicketDto updateMaintenanceTicketDto, Principal principal){
+        System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is updating maintenance ticket ID: " + updateMaintenanceTicketDto.getTicketId());
+        return maintenanceDao.updateMaintenanceTicket(updateMaintenanceTicketDto);
+    }
+
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping(path = "/complete")
     public MaintenanceTicket completeMaintenanceTicket(@RequestBody CompleteMaintenanceTicketDto completeMaintenanceTicketDto, Principal principal) {
