@@ -46,12 +46,12 @@ HTTP Status: 200 OK
 Expects: The Maintenance Ticket ID as a path variable.
 Returns: Nothing
 
-/maintenance-tickets/archive/{id}
+/maintenance-tickets/archive
 Request Type: POST
 Updates the Maintenance Ticket "is_archived" field to true.
 HTTP Status: 202 Accepted
-Expects: The maintenance ticket id as a path variable.
-Returns: Nothing.
+Expects: An Archive Maintenance Ticket DTO.
+Returns: The updated Maintenance Ticket JSON object.
 
 JSON Objects
 Maintenance Ticket
@@ -100,9 +100,10 @@ Create Maintenance Performed DTO
 
 Update Maintenance Ticket DTO
 {
+	"ticketId" : -1,
 	"notes" : "Updated notes",
 	"complete" : false,
-	[
+	"createMaintenancePerformedDto" : [
 		{ Maintenance Performed JSON Object array }
 	]
 }
@@ -135,5 +136,9 @@ Complete Maintenance Ticket DTO
 }
 // Updated by user id and updated on date is added on the server side.
 
-Archive Maintenance Ticket
+Archive Maintenance Ticket DTO
+{
+	"ticketId" : -1,
+	"archived" : true
+}
 // Updated by user id and updated on date is added on the server side.

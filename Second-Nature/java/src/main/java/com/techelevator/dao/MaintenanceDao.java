@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.sun.tools.javac.Main;
 import com.techelevator.model.*;
 
 import java.util.List;
@@ -17,5 +18,5 @@ public interface MaintenanceDao {
     public MaintenanceTicket completeMaintenanceTicket(CompleteMaintenanceTicketDto completeMaintenanceTicketDto, int userId);
     // Delete / Archive
     public void deleteMaintenanceTicket(int ticketId);
-    public void archiveMaintenanceTicket(int ticketId);
+    public MaintenanceTicket archiveMaintenanceTicket(ArchiveMaintenanceTicketDto archiveMaintenanceTicketDto, int userId);
 }

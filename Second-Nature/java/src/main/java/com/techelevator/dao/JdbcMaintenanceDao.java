@@ -233,8 +233,25 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
         }
     }
 
-    public void archiveMaintenanceTicket(int ticketId){
+    @Override
+    public MaintenanceTicket archiveMaintenanceTicket(ArchiveMaintenanceTicketDto archiveMaintenanceTicketDto, int userId){
+        String sql = "UPDATE maintenance_tickets SET is_archived = ?, updated_by_user_id = ?, updated_on_date = ? WHERE ticket_id = ?;";
 
+        try {
+            template.update(
+                    sql,
+                    archiveMaintenanceTicketDto.isArchived(),
+                    userId,
+                    new Date(),
+                    archiveMaintenanceTicketDto.getTicketId()
+            );
+        } catch(CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC MaintenanceTicket DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC MaintenanceTicket DAO] Error archiving maintenance ticket ID: " + archiveMaintenanceTicketDto.getTicketId());
+        }
+
+        return getMaintenanceTicketById(archiveMaintenanceTicketDto.getTicketId());
     }
 
     private MaintenanceTicket mapRowToMaintenanceTicket(SqlRowSet results){

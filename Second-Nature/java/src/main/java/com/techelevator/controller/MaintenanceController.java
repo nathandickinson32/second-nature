@@ -74,4 +74,12 @@ public class MaintenanceController {
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is deleting maintenance ticket ID: " + ticketId);
         maintenanceDao.deleteMaintenanceTicket(ticketId);
     }
+
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @PostMapping(path = "/archive")
+    public MaintenanceTicket archiveMaintenanceTicket(@RequestBody ArchiveMaintenanceTicketDto archiveMaintenanceTicketDto, Principal principal){
+        System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is archiving maintenance ticket ID: " + archiveMaintenanceTicketDto.getTicketId());
+        int userId = userDao.getUserIdByUsername(principal.getName());
+        return maintenanceDao.archiveMaintenanceTicket(archiveMaintenanceTicketDto, userId);
+    }
 }
