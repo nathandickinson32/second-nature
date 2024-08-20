@@ -62,6 +62,7 @@ Maintenance Ticket
 	"date" : "2024-08-14",
 	"notes" : "Notes about the ticket", // Not required.
 	"complete" : false,
+	"archived" : false,
 	[
 		{ Maintenance Performed List JSON Object array }
 	]
