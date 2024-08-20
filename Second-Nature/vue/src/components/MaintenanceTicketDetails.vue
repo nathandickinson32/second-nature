@@ -1,6 +1,18 @@
 <template>
-  <h1>Ticket</h1>
+  <div class="large-container">
+    <span>Maintenance Ticket for {{ modelNumber }}</span>
+    <span>{{ modelName }} | {{serialNumber }} </span><br/>
+    <span>Hours Maintenance Performed: {{ this.MaintenanceTicket.hours }}</span><br/>
+    <span>Maintenance Performed:</span><br/>
+    <span>{{ this.MaintenanceTicket.description }}</span>
+
+
+  </div>
+ 
   {{ this.MaintenanceTicket }}
+  <br/>
+  <br/>
+  {{ this.MaintenanceTicket.maintenancePerformedList }}
   {{ modelName }}{{ modelNumber }} {{ serialNumber }}
 </template>
 
@@ -11,6 +23,7 @@ export default {
   data() {
     return {
       MaintenanceTicket: {},
+      maintenancePerformedList: [],
       modelName: "",
       serialNumber: "",
       modelNumber: "",
