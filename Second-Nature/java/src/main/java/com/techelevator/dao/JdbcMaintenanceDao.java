@@ -47,7 +47,7 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
             throw new DataIntegrityViolationException("[JDBC Maintenance DAO] Unable to create a new maintenance ticket.");
         }
 
-        for (CreateMaintenancePerformedDto createMaintenancePerformedDto : createMaintenanceTicketDTO.getMaintenancePerformedList()){
+        for (CreateMaintenancePerformedDto createMaintenancePerformedDto : createMaintenanceTicketDTO.getCreateMaintenancePerformedDto()){
             createMaintenancePerformed(createMaintenancePerformedDto, ticketId);
         }
 

@@ -41,11 +41,11 @@ public class CreateMaintenanceTicketDto {
         isComplete = complete;
     }
 
-    public List<CreateMaintenancePerformedDto> getMaintenancePerformedList() {
+    public List<CreateMaintenancePerformedDto> getCreateMaintenancePerformedDto() {
         return createMaintenancePerformedDto;
     }
 
-    public void setMaintenancePerformedList(List<CreateMaintenancePerformedDto> createMaintenancePerformedDto) {
+    public void setCreateMaintenancePerformedDto(List<CreateMaintenancePerformedDto> createMaintenancePerformedDto) {
         this.createMaintenancePerformedDto = createMaintenancePerformedDto;
     }
 }
