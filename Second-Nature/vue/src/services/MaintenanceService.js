@@ -5,8 +5,8 @@ export default {
         return axios.get('/maintenance-tickets/all');
     },
 
-    getMaintenanceTicketsByEquipmentId() {
-        return axios.get('/get-all-maintenance-tickets-by-equipment-id');
+    getMaintenanceTicketsByTicketId(ticketId) {
+        return axios.get(`maintenance-tickets/${ticketId}`);
     },
     getUserById(id) {
         return axios.get(`/get-user/${id}`)
