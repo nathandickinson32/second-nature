@@ -1,6 +1,6 @@
 <template>
  <div class="small-container">
-    <span>Maintenance Ticket for <span>{{ modelNumber }}</span></span><br/>
+    <span>Maintenance Ticket for {{ modelNumber }}</span>
     <span>{{ modelName }} | {{serialNumber }} </span><br/>
     <span>Complete {{ MaintenanceTicket.complete }}</span> <br/> 
     <button @click="viewMaintenanceTicket">View Ticket</button>
