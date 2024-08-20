@@ -74,4 +74,8 @@ h1 {
   text-align: center;
   margin-top: 0;
 }
+
+.content {
+  margin-top: 10px;
+}
 </style>

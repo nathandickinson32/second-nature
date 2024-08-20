@@ -108,4 +108,8 @@ select {
   width: 180px;
   height: 50px;
 }
+
+.content {
+  margin-top: 10px;
+}
 </style>
