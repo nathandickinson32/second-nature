@@ -104,7 +104,7 @@ Update Maintenance Ticket DTO
 	"notes" : "Updated notes",
 	"complete" : false,
 	"createMaintenancePerformedDto" : [
-		{ Maintenance Performed JSON Object array }
+		{ Create Maintenance Performed DTO JSON Object array }
 	]
 }
 // Updated by user id and updated on date is added on the server side.
