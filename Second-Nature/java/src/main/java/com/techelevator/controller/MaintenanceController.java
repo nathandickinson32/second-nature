@@ -3,6 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.MaintenanceDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.CreateMaintenancePerformedDto;
+import com.techelevator.model.CreateMaintenanceTicketDto;
 import com.techelevator.model.MaintenanceTicket;
 import com.techelevator.model.CompleteMaintenanceTicketDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,17 @@ public class MaintenanceController {
     private UserDao userDao;
 
     // Create
-    @PostMapping(path = "/add-maintenance-performed")
-    public MaintenanceTicket addMaintenancePerformed(@RequestBody CreateMaintenancePerformedDto createMaintenancePerformedDto, Principal principal) {
-        System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " added performed maintenance.");
-        return maintenanceDao.addMaintenancePerformed(createMaintenancePerformedDto);
+    // Need to update path to include ticketId
+//    @PostMapping(path = "/add-maintenance-performed")
+//    public MaintenanceTicket addMaintenancePerformed(@RequestBody CreateMaintenancePerformedDto createMaintenancePerformedDto, Principal principal) {
+//        System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " added performed maintenance.");
+//        return maintenanceDao.createMaintenancePerformed(createMaintenancePerformedDto);
+//    }
+
+    @PostMapping(path = "/create")
+    public MaintenanceTicket createMaintenanceTicket(@RequestBody CreateMaintenanceTicketDto createMaintenanceTicketDto, Principal principal) {
+        System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " created a new maintenance ticket.");
+        return maintenanceDao.createMaintenanceTicket(createMaintenanceTicketDto, userDao.getUserIdByUsername(principal.getName()));
     }
 
     // Read
