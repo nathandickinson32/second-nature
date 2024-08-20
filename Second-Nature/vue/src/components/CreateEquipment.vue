@@ -32,7 +32,6 @@
 
                 <input type="submit" value="Add Equipment">
             </form>
-            {{ equipment }}
         </div>
     </div>
 </template>

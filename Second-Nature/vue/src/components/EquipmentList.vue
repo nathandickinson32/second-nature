@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content">
     <Equipment class="equipmentCard" v-for="equipment in equipmentList" v-bind:key="equipment.id" :equipment="equipment"></Equipment>
   </div>
 </template>
@@ -24,7 +24,6 @@ export default {
         getEquipment() {
             EquipmentService.getAllEquipment()
                 .then((response) => {
-                    console.log(response.data);
                     this.equipmentList = response.data;
                 })
         }
@@ -33,6 +32,11 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.content {
+    box-sizing: border-box;
+    width: 100%;
+    gap: 10px;
+    flex-direction: column;
+}
 </style>

@@ -2,7 +2,7 @@
   <div class="small-container">
     <div>
       <span class="line-display"> 
-        <p id="model" >{{ equipment.model }}</p>
+        <p id="model" >{{ equipment.name }}</p>
         <p id="status" :class="equipment.active ? 'active' : 'inactive' "> {{ equipment.active ?  'Active' : 'Inactive' }}</p>
       </span>
       <span class="line-display">
@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import EquipmentService from '../services/EquipmentService';
 import router from '../router';
 
 export default {
@@ -47,7 +46,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .line-display {
   display: flex;
