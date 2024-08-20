@@ -49,14 +49,12 @@ export default {
   created() {
     ProfessionalCheckInService.getAllProfessionalCheckInByEmployeeUserId().then(
       (response) => {
-        console.log(response);
         this.professionalCheckIns = response.data;
         this.managerId = response.data.managerId
       }
     );
     ProfessionalCheckInService.getAllProfessionalCheckInByManagerUserId().then(
       (response) => {
-        console.log(response);
         this.allProfessionalCheckIns = response.data;
       }
     );

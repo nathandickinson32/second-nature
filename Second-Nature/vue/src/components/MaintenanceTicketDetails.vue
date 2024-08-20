@@ -44,7 +44,6 @@ export default {
   },
 
   mounted() {
-    console.log(this.$route.params.ticketId)
     MaintenanceService.getMaintenanceTicketsByTicketId(
       this.$route.params.ticketId
     )
@@ -63,7 +62,6 @@ export default {
       EquipmentService.getEquipmentById(
         this.MaintenanceTicket.equipmentId
       ).then((response) => {
-        console.log(response.data);
         this.modelName = response.data.name;
         this.serialNumber = response.data.serialNumber;
         this.modelNumber = response.data.model;

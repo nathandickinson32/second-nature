@@ -57,10 +57,8 @@ export default {
         fetchRequests() {
             LeaveRequestService.getAllTimeOffRequests()
                 .then((response) => {
-                    console.log(response.data);
                     this.requests = response.data;
                     this.requests.forEach(request => {
-                        console.log(request.userId);
                         if (request.userId) {
                             this.getUserName(request);
                         }
@@ -72,7 +70,6 @@ export default {
             request.status = 'Approved'
             LeaveRequestService.updateTimeOffRequest(request)
                 .then((response) => {
-                    console.log(response);
                     if (response.status === 202) {
                         window.alert('Request has been approved');
                     }
@@ -84,7 +81,6 @@ export default {
             request.status = 'Denied'
             LeaveRequestService.updateTimeOffRequest(request)
                 .then((response) => {
-                    console.log(response);
                     if (response.status === 202) {
                         window.alert('Request has been denied');
                     }
@@ -95,7 +91,6 @@ export default {
         getUserName(request) {
             LeaveRequestService.getUserById(request.userId)
                 .then((response) => {
-                    console.log(response.data);
                     if (response.status == 200) {
                         request.userName = response.data.firstName + ' ' + response.data.lastName;
                     }

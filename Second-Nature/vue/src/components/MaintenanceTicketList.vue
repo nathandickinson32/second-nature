@@ -42,7 +42,6 @@ export default {
             MaintenanceService.getAllMaintenanceTickets()
                 .then(
                     (response) => {
-                        console.log(response.data);
                         this.MaintenanceTickets = response.data;
                     }
                 );

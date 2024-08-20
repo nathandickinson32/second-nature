@@ -53,7 +53,6 @@ export default {
             KudosService.getAllKudos()
                 .then(
                     (response) => {
-                        console.log(response.data);
                         this.kudos = response.data;
                     }
                 );

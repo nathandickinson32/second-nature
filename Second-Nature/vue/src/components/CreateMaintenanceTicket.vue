@@ -86,7 +86,6 @@ export default {
             MaintenanceService.createMaintenanceTicket(this.createMaintenanceTicketDto).then((response) => {
                 console.log(response);
                 if (response.status == 201){
-                    console.log("Ticket created!");
                     window.alert("Ticket created!")
                     this.$router.push({ name: 'maintenance-ticket-List' });
                 }

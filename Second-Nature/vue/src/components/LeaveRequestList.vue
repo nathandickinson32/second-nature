@@ -27,7 +27,6 @@ export default {
     created() {
         LeaveRequestService.getAllTimeOffRequestsByUserId()
             .then((response) => {
-                console.log(response);
                 this.requests = response.data;
                 this.requests.forEach((request) => {
                     if (request.reviewDate == null) {

@@ -32,16 +32,12 @@ export default {
       ProfessionalCheckInService.getUserById(this.professionalCheckIn.managerId)
         .then(
           (response) => {
-            console.log('The Manager:');
-            console.log(response.data);
             professionalCheckIn.managerName = response.data.firstName + ' ' + response.data.lastName;
           }
         );
         ProfessionalCheckInService.getUserById(this.professionalCheckIn.employeeId)
         .then(
           (response) => {
-            console.log('The Employee:');
-            console.log(response.data);
             this.employeeName = response.data.firstName + ' ' + response.data.lastName;
           }
         );
