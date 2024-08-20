@@ -200,7 +200,28 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
 
     // Delete
     public void deleteMaintenanceTicket(int ticketId){
+        String sql = "DELETE FROM maintenance_tickets WHERE ticket_id = ?;";
 
+        try {
+            deleteMaintenancePerformed(ticketId);
+            template.update(sql, ticketId);
+        } catch(CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC MaintenanceTicket DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC MaintenanceTicket DAO] Error deleting maintenance ticket ID: " + ticketId);
+        }
+    }
+
+    private void deleteMaintenancePerformed(int ticketId){
+        String sql = "DELETE FROM maintenance_performed WHERE ticket_id = ?;";
+
+        try {
+            template.update(sql, ticketId);
+        } catch(CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC MaintenanceTicket DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC MaintenanceTicket DAO] Error deleting maintenance performed for maintenance ticket ID: " + ticketId);
+        }
     }
 
     public void archiveMaintenanceTicket(int ticketId){

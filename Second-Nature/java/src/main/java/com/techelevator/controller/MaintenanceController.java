@@ -66,4 +66,10 @@ public class MaintenanceController {
     }
 
     // Delete
+    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping(path = "/delete/{ticketId}")
+    public void deleteMaintenanceTicket(@PathVariable int ticketId, Principal principal){
+        System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is deleting maintenance ticket ID: " + ticketId);
+        maintenanceDao.deleteMaintenanceTicket(ticketId);
+    }
 }
