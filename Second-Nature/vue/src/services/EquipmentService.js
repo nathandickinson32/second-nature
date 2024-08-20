@@ -37,7 +37,7 @@ export default {
      * status: 201 CREATED
      */
     createEquipment(createdEquipment){
-        return axios.create('/equipment/create', createdEquipment);
+        return axios.post('/equipment/create', createdEquipment);
     },
 
     /**
