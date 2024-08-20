@@ -63,7 +63,7 @@ Maintenance Ticket
 	"notes" : "Notes about the ticket", // Not required.
 	"complete" : false,
 	[
-		{ Maintenance Performed JSON Object array }
+		{ Maintenance Performed List JSON Object array }
 	]
 }
 
@@ -83,15 +83,15 @@ Create Maintenance Ticket DTO
 	"hours" : -1,
 	"notes" : "Notes about the ticket.",
 	"complete" : false,
-	[
-		{ Maintenance Performed JSON Object array }
+	"createMaintenancePerformedDto" : [
+		{ Create Maintenance Performed DTO JSON Object array }
 	]
 }
 // Entered by user id and date is added on the server side.
 
 Create Maintenance Performed DTO
 {
-	"equipmentId" : -1,
+	"equipmentId" : -1, // Probably unnessesary, Most likely unnessesary. Yeah, this is unnessesary... Remove.
 	"description" : "What is being done."",
 	"preformedBy" : "Person or vendor performing the maintenance.",
 	"notes" : "Misc notes about the ticket or equipment."
