@@ -4,10 +4,16 @@
     </div>
     <div id="nav" v-if="$store.state.token != ''">
       <router-link v-bind:to="{ name: 'home' }">Home</router-link>
+
       <span v-if="route.name === 'kudosDetail' || route.name === 'newKudo'"> | </span>
       <router-link v-if="route.name === 'kudosDetail' || route.name === 'newKudo'" v-bind:to="{ name: 'kudos' }">Kudos Board</router-link>
+
       <span v-if="route.name === 'create-equipment' || route.name === 'equipment-detail'"> | </span>
       <router-link v-if="route.name === 'create-equipment' || route.name === 'equipment-detail'" v-bind:to="{ name: 'equipmentList' }">Equipment List</router-link>
+
+      <span v-if="route.name === 'create-maintenance-ticket' || route.name === 'maintenance-ticket-detail'"> | </span>
+      <router-link v-if="route.name === 'create-maintenance-ticket' || route.name === 'maintenance-ticket-detail'" v-bind:to="{ name: 'maintenance-ticket-List' }">Maintenance Tickets</router-link>
+
       <span> | </span>
       <router-link v-bind:to="{ name: 'logout' }">Logout</router-link>
     </div>
