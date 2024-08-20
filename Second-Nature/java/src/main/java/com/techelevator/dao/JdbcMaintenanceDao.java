@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import javax.sql.DataSource;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -159,15 +160,17 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
 
     // Update
     @Override
-    public MaintenanceTicket updateMaintenanceTicket(UpdateMaintenanceTicketDto updateMaintenanceTicketDto){
+    public MaintenanceTicket updateMaintenanceTicket(UpdateMaintenanceTicketDto updateMaintenanceTicketDto, int userId){
         MaintenanceTicket maintenanceTicket = new MaintenanceTicket();
-        String sql = "UPDATE maintenance_tickets SET notes = ?, is_complete = ? WHERE ticket_id = ?;";
+        String sql = "UPDATE maintenance_tickets SET notes = ?, is_complete = ?, updated_by_user_id = ?, updated_on_date = ? WHERE ticket_id = ?;";
 
         try {
             template.update(
                     sql,
                     updateMaintenanceTicketDto.getNotes(),
                     updateMaintenanceTicketDto.isComplete(),
+                    userId,
+                    new Date(),
                     updateMaintenanceTicketDto.getTicketId()
             );
 
@@ -184,11 +187,17 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
     }
 
     @Override
-    public MaintenanceTicket completeMaintenanceTicket(CompleteMaintenanceTicketDto completeMaintenanceTicketDto) {
-        String sql = "UPDATE maintenance_tickets SET is_complete = ? WHERE ticket_id = ?;";
+    public MaintenanceTicket completeMaintenanceTicket(CompleteMaintenanceTicketDto completeMaintenanceTicketDto, int userId) {
+        String sql = "UPDATE maintenance_tickets SET is_complete = ?, updated_by_user_id = ?, updated_on_date = ? WHERE ticket_id = ?;";
 
         try {
-            template.update(sql, completeMaintenanceTicketDto.isComplete(), completeMaintenanceTicketDto.getTicketId());
+            template.update(
+                    sql,
+                    completeMaintenanceTicketDto.isComplete(),
+                    userId,
+                    new Date(),
+                    completeMaintenanceTicketDto.getTicketId()
+            );
         } catch (CannotGetJdbcConnectionException e){
             throw new CannotGetJdbcConnectionException("[JDBC MaintenanceTicket DAO] Unable to connect to the database.");
         } catch (DataIntegrityViolationException e){

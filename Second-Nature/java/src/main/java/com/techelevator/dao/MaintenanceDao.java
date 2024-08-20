@@ -13,8 +13,8 @@ public interface MaintenanceDao {
     // public List<MaintenancePerformed> getMaintenancePerformedByTicket(int id);
     // public MaintenancePerformed getMaintenancePerformed(int maintenancePerformedId);
     // Update
-    public MaintenanceTicket updateMaintenanceTicket(UpdateMaintenanceTicketDto updateMaintenanceTicketDto);
-    public MaintenanceTicket completeMaintenanceTicket(CompleteMaintenanceTicketDto completeMaintenanceTicketDto);
+    public MaintenanceTicket updateMaintenanceTicket(UpdateMaintenanceTicketDto updateMaintenanceTicketDto, int userId);
+    public MaintenanceTicket completeMaintenanceTicket(CompleteMaintenanceTicketDto completeMaintenanceTicketDto, int userId);
     // Delete / Archive
     public void deleteMaintenanceTicket(int ticketId);
     public void archiveMaintenanceTicket(int ticketId);

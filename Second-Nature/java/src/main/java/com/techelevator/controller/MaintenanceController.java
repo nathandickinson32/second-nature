@@ -55,14 +55,16 @@ public class MaintenanceController {
     @PostMapping(path = "/update")
     public MaintenanceTicket updateMaintenanceTicket(@RequestBody UpdateMaintenanceTicketDto updateMaintenanceTicketDto, Principal principal){
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is updating maintenance ticket ID: " + updateMaintenanceTicketDto.getTicketId());
-        return maintenanceDao.updateMaintenanceTicket(updateMaintenanceTicketDto);
+        int userId = userDao.getUserIdByUsername(principal.getName());
+        return maintenanceDao.updateMaintenanceTicket(updateMaintenanceTicketDto, userId);
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping(path = "/complete")
     public MaintenanceTicket completeMaintenanceTicket(@RequestBody CompleteMaintenanceTicketDto completeMaintenanceTicketDto, Principal principal) {
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " completed maintenance ticket " + completeMaintenanceTicketDto.getTicketId());
-        return maintenanceDao.completeMaintenanceTicket(completeMaintenanceTicketDto);
+        int userId = userDao.getUserIdByUsername(principal.getName());
+        return maintenanceDao.completeMaintenanceTicket(completeMaintenanceTicketDto, userId);
     }
 
     // Delete
