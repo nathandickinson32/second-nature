@@ -1,62 +1,62 @@
 <template>
   <div class="content">
     <div class="small-container">
-        <form action="">
+        <form v-on:submit.prevent="createMaintenanceTicket">
             <label for="equipment-identity">Select Equipment: </label>
-            <select name="equipment-identity" id="equipment-identity" v-model.number="createMaintenanceTicket.equipmentId">
+            <select name="equipment-identity" id="equipment-identity" v-model.number="createMaintenanceTicketDto.equipmentId">
                 <option v-for="equipmentIdentity in equipmentIdentityList" v-bind:key="equipmentIdentity.equipmentId">{{ equipmentIdentity.equipmentId }}</option>
             </select>
-            <span class="label">Name: </span> {{ equipmentName }} <br>
-            <span class="label">Serial Number: </span> {{ serialNumber }}
+
+            <div v-show="createMaintenanceTicketDto.equipmentId != null" class="equipment-name-serial">
+                <span class="label">Name: {{ equipmentName }} </span> <br>
+                <span class="label">Serial Number: {{ serialNumber }}</span> 
+            </div>
+            
 
             <label for="hours">Current Hours</label>
-            <input type="text" name="hours" id="hours" placeholder="Current hours" v-model="createMaintenanceTicket.hours">
+            <input type="text" name="hours" id="hours" placeholder="Current hours" v-model="createMaintenanceTicketDto.hours">
 
             <label for="notes">Notes</label>
-            <textarea name="notes" id="notes" v-model="createMaintenanceTicket.notes"></textarea>
+            <textarea name="notes" id="notes" v-model="createMaintenanceTicketDto.notes"></textarea>
 
             <div class="checkbox-div">
-                <input type="checkbox" name="complete" id="complete" v-model="createMaintenanceTicket.complete">
+                <input type="checkbox" name="complete" id="complete" v-model="createMaintenanceTicketDto.complete">
                 <label for="complete"> Complete</label>
             </div>
 
-            <div class="maintenance-performed" v-for="number in maintenancePerformedCount" v-bind:key="number">
+            <div class="maintenance-performed" v-for="(performed, index) in createMaintenanceTicketDto.createMaintenancePerformedDto" v-bind:key="index">
                 <h4>Maintenance Performed: </h4>
-                <input type="text" name="maintenance-performed-description" id="" placeholder="What is being done?" v-model="createMaintenanceTicket.createMaintenancePerformedDto.description">
-                <input type="text" name="maintenance-performed-by" id="" placeholder="Who is doing the work?" v-model="createMaintenanceTicket.createMaintenancePerformedDto.performedBy">
-                <textarea name="maintenance-performed-notes" id="maintenance-performed-notes" v-model="createMaintenanceTicket.createMaintenancePerformedDto.notes"></textarea>
-                <button v-on:click.prevent="addMaintenancePerformed">+</button>
+                <input type="text" name="maintenance-performed-description" id="" placeholder="What is being done?" v-model="performed.description">
+                <input type="text" name="maintenance-performed-by" id="" placeholder="Who is doing the work?" v-model="performed.performedBy">
+                <textarea name="maintenance-performed-notes" id="maintenance-performed-notes" v-model="performed.notes"></textarea>
+                <button v-on:click.prevent="addMaintenancePerformed">Add maintenance performed</button>
             </div>
-            <button v-on:click.prevent="subtractMaintenancePerformed">Remove Last</button>
+            <button v-on:click.prevent="subtractMaintenancePerformed">Remove last maintenance performed</button>
+            <input type="submit" value="Create Ticket" id="submitTicket">
         </form>
     </div>
-    Maintenance Ticket <br>
-    {{ createMaintenanceTicket }}
-    <br>
-    Equipment Identity list <br>
-    {{  equipmentIdentityList }}
-
   </div>
 </template>
 
 <script>
 import EquipmentService from '../services/EquipmentService';
+import MaintenanceService from '../services/MaintenanceService';
 
 export default {
     data() {
         return {
-            createMaintenanceTicket : {
+            createMaintenanceTicketDto : {
                 equipmentId : null,
-                createMaintenancePerformedDto : []
-            },
-            maintenancePerformed : {
-                equipmentId : -1,
-                description : '',
-                performedBy : '',
-                notes : ''
+                createMaintenancePerformedDto : [
+                    {
+                        equipmentId : 1,
+                        description : '',
+                        performedBy : '',
+                        notes : ''
+                    }
+                ]
             },
             equipmentIdentityList : [],
-            maintenancePerformedCount : 1
         }
     },
     mounted() {
@@ -70,19 +70,38 @@ export default {
     },
     methods: {
         addMaintenancePerformed(){
-            this.maintenancePerformedCount++;
+            this.createMaintenanceTicketDto.createMaintenancePerformedDto.push(
+                {
+                    equipmentId : 1,
+                    description : '',
+                    performedBy : '',
+                    notes : ''
+                }
+            );
         },
         subtractMaintenancePerformed(){
-            this.maintenancePerformedCount--;
+            this.createMaintenanceTicketDto.createMaintenancePerformedDto.pop();
         },
+        createMaintenanceTicket(){
+            MaintenanceService.createMaintenanceTicket(this.createMaintenanceTicketDto).then((response) => {
+                console.log(response);
+                if (response.status == 201){
+                    console.log("Ticket created!");
+                    window.alert("Ticket created!")
+                    this.$router.push({ name: 'maintenance-ticket-List' });
+                }
+            }).catch((error) => {
+                console.log("Error creating ticket.")
+            })
+        }
     },
     computed: {
         equipmentName() {
-            const equipmentIdentity = this.equipmentIdentityList.find(equipmentIdentity => equipmentIdentity.equipmentId === this.createMaintenanceTicket.equipmentId);
+            const equipmentIdentity = this.equipmentIdentityList.find(equipmentIdentity => equipmentIdentity.equipmentId === this.createMaintenanceTicketDto.equipmentId);
             return equipmentIdentity ? equipmentIdentity.name : "Make a selection";
         },
         serialNumber() {
-            const equipmentIdentity =this.equipmentIdentityList.find(equipmentIdentity => equipmentIdentity.equipmentId === this.createMaintenanceTicket.equipmentId);
+            const equipmentIdentity =this.equipmentIdentityList.find(equipmentIdentity => equipmentIdentity.equipmentId === this.createMaintenanceTicketDto.equipmentId);
             return equipmentIdentity ? equipmentIdentity.serialNumber : "";
         }
     }
@@ -90,8 +109,13 @@ export default {
 </script>
 
 <style scoped>
+button {
+    width: 100%;
+    height: 4em;
+}
 form {
     align-items: baseline;
+    gap: 10px;
 }
 
 input {
@@ -104,16 +128,16 @@ label {
     font-size: 0.8em;
 }
 
-select {
-    margin-bottom: 10px;
-}
-
 textarea {
     resize: none;
     box-sizing: border-box;
     width: 100%;
     height: 6em;
     margin-bottom: 10px;
+}
+
+#submitTicket {
+    height: 4em;
 }
 
 .checkbox-div {
@@ -135,10 +159,5 @@ textarea {
 
 .label {
     font-size: 0.8em;
-    margin-bottom: 10px;
-}
-
-.maintenance-performed {
-    margin-bottom: 10px;
 }
 </style>

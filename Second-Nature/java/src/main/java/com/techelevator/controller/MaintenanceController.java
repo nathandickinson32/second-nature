@@ -31,6 +31,7 @@ public class MaintenanceController {
 //        return maintenanceDao.createMaintenancePerformed(createMaintenancePerformedDto);
 //    }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/create")
     public MaintenanceTicket createMaintenanceTicket(@RequestBody CreateMaintenanceTicketDto createMaintenanceTicketDto, Principal principal) {
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " created a new maintenance ticket.");
