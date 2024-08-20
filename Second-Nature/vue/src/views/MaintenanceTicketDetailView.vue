@@ -1,5 +1,5 @@
 <template>
-  <h1>hi</h1>
+  <h1>Ticket Details</h1>
   <maintenance-ticket-details></maintenance-ticket-details>
 </template>
  
@@ -12,6 +12,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+h1 {
+  text-align: center;
+}
 
+.content {
+  gap: 10px;
+}
 </style>

@@ -1,19 +1,32 @@
 <template>
-  <div class="large-container">
-    <span>Maintenance Ticket for {{ modelNumber }}</span>
-    <span>{{ modelName }} | {{serialNumber }} </span><br/>
-    <span>Hours Maintenance Performed: {{ this.MaintenanceTicket.hours }}</span><br/>
-    <span>Maintenance Performed:</span><br/>
-    <span>{{ this.MaintenanceTicket.description }}</span>
+  <div class="content">
+    <div class="large-container">
+      <span class="label">Ticket Number: {{ MaintenanceTicket.ticketId }}</span>
+      <span class="label">Machine Name: </span> {{ modelName }}
+      <span class="label">Model Number: {{ modelNumber }}</span> 
+      <span class="label">Serial Number: {{serialNumber }} </span>
+      <span class="label">Machine hours at maintenance: {{ this.MaintenanceTicket.hours }}</span>
+      
+      <div v-for="maintenancePerformed in MaintenanceTicket.maintenancePerformedList" v-bind:key="maintenancePerformed.maintenancePerformedId">
+        <hr>
+        <span class="label">Maintenance Performed</span> <br>
+        <span class="label">Description: </span> {{ maintenancePerformed.description }} <br>
+        <span class="label">Performed By: </span>{{ maintenancePerformed.performedBy }} <br>
+        <span class="label">Notes: </span> <br>
+        {{ maintenancePerformed.notes }}
+      </div>
 
+      <span>{{ this.MaintenanceTicket.description }}</span>
 
+    </div>
   </div>
+  
  
-  {{ this.MaintenanceTicket }}
+  <!-- {{ this.MaintenanceTicket }}
   <br/>
   <br/>
   {{ this.MaintenanceTicket.maintenancePerformedList }}
-  {{ modelName }}{{ modelNumber }} {{ serialNumber }}
+  {{ modelName }}{{ modelNumber }} {{ serialNumber }} -->
 </template>
 
 <script>
@@ -60,5 +73,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.label {
+  font-size: 0.8em;
+}
+
+.large-container {
+  gap: 10px;
+}
 </style>
