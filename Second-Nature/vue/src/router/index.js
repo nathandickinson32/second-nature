@@ -22,6 +22,7 @@ import MaintenanceTicketDetailView from '../views/MaintenanceTicketDetailView.vu
 import NewMaintenenceTicketView from '../views/NewMaintenenceTicketView.vue';
 import MaintenanceTicketDetails from '../components/MaintenanceTicketDetails.vue';
 import CreateEquipmentView from '../views/CreateEquipmentView.vue';
+import CreateMaintenanceTicketView from '../views/CreateMaintenanceTicketView.vue';
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
@@ -169,6 +170,14 @@ const routes = [
     component: MaintenanceTicketListView,
     meta: {
       requiresAuth  : true
+    }
+  },
+  {
+    path: '/maintenance-ticket/create',
+    name: 'create-maintenance-ticket',
+    component: CreateMaintenanceTicketView,
+    meta : {
+      requiresAuth : true
     }
   },
   {
