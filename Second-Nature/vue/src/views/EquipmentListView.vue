@@ -45,5 +45,6 @@ h1 {
 .content {
   flex-direction: column;
   align-items: center;
+  gap: 10px;
 }
 </style>

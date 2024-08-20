@@ -1,18 +1,11 @@
 <template>
   <div class="content">
+    <!-- {{ view }} -->
       <h1>Equipment Detail</h1>
-      <div v-show="getEquipmentDetailView == 'detail'">
-        <EquipmentDetail v-bind:equipmentId="this.$route.params.equipmentId" />
-      </div>
-      <div v-show="getEquipmentDetailView == 'modify'">
-        <EquipmentModify v-bind:equipmentId="this.$route.params.equipmentId" />
-      </div>
-      <div v-show="getEquipmentDetailView == 'activeStatus'">
-        <EquipmentActiveStatusChange v-bind:equipmentId="this.$route.params.equipmentId" />
-      </div>
-      <div v-show="getEquipmentDetailView == 'archive'">
-        <EquipmentDetailArchive v-bind:equipmentId="this.$route.params.equipmentId" />
-      </div>
+      <EquipmentDetail v-show="getEquipmentDetailView == 'detail'" v-bind:equipmentId="this.$route.params.equipmentId" />
+      <EquipmentModify v-show="getEquipmentDetailView == 'modify'" v-bind:equipmentId="this.$route.params.equipmentId" />
+      <EquipmentActiveStatusChange v-show="getEquipmentDetailView == 'activeStatus'" v-bind:equipmentId="this.$route.params.equipmentId" />
+      <EquipmentDetailArchive v-show="getEquipmentDetailView == 'archive'" v-bind:equipmentId="this.$route.params.equipmentId" />
   </div>
 </template>
 
@@ -69,11 +62,13 @@ export default {
 </script>
 
 <style scoped>
-.content {
-  flex-direction: column;
-}
 h1 {
   text-align: center;
 }
 
+.content {
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
 </style>

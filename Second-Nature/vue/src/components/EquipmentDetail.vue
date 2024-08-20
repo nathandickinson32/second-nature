@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-        <div class="large-container">
+        <div class="small-container">
                 <div class="detail-display">
                     <label for="label">Serial Number: </label>
                     <span> {{ equipment.serialNumber }}</span> 
@@ -161,14 +161,18 @@ export default {
 </script>
 
 <style scoped>
+label {
+    font-weight: normal;
+    font-size: 0.8em;
+}
+
+.detail-display span {
+    display: block;
+    margin-bottom: 10px;
+}
 
 .content {
-    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
 }
-
-.button-section {
-    padding-top: 15px;
-}
-
-
 </style>

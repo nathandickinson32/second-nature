@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="content">
         <div class="filter-section">
             <label @click="showAllKudos" class="clickable-label">Show All</label>
             <span class="separator"> | </span>
@@ -91,17 +91,18 @@ export default {
     text-align: center;
 }
 
-.container {
+.content {
+    flex-direction: column;
     width: 100%;
-    margin: 0;
+    box-sizing: border-box;
+    gap: 10px;
 }
 
 .kudos-list {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    margin-top: 20px;
+    gap: 10px;
     width: 100%;
 }
 </style>

@@ -42,12 +42,12 @@ h1 {
   max-width: 400px;
   height: 50px;
   text-align: center;
-  margin-bottom: 20px;
   color: #2a64bd;
 }
 
 .content {
   flex-direction: column;
   align-items: center;
+  gap: 10px;
 }
 </style>

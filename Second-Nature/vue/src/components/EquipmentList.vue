@@ -36,7 +36,6 @@ export default {
 .content {
     box-sizing: border-box;
     width: 100%;
-    gap: 10px;
     flex-direction: column;
 }
 </style>
