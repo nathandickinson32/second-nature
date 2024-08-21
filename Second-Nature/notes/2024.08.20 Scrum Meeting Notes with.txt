@@ -1,0 +1,25 @@
+2024.08.20 Scrum Meeting Notes with Katie
+
+What we did?
+
+Katies Feedback
+Kudos
+Will there one a way to remove kudos?
+Yes archive.
+
+Dinda
+Is there information about equipment that might be missing?
+Katie: Not that I can think of.
+
+Machine Hours? How important is this?
+50 hours for an oil change. (how long does that take, usually?)
+Add most recent maintenance hours at maintenance. 
+Use the equipment ID in maintenance performed
+Add date, and machine hours
+
+What's next?
+Finalize Equipment and Maintenance.
+
+Next Meeting
+9/5/2024
+6:30pm

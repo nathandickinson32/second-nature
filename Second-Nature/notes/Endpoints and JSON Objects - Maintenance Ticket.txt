@@ -2,7 +2,7 @@ Endpoints and JSON Objects - Maintenance Tickets
 
 Create
 /maintenance-tickets/create
-Request Type: POST
+Request Type: POST // Should be PUT
 Inserts a new maintenance ticket into the database. 
 HTTP Status: 201 CREATED
 Expects: Create Maintenance Ticket DTO JSON Object.
@@ -16,7 +16,7 @@ HTTP Status: 200 OK
 Expects: Nothing
 Returns: An array of maintenance ticket JSON objects.
 
-/maintenance-tickets/{id}
+/maintenance-tickets/{ticketId}
 Request Type: GET
 Returns a specific maintenance ticket from the database.
 HTTP Status: 200 OK
@@ -39,7 +39,7 @@ Expects: A Complete Maintenance Ticket DTO JSON Object.
 Returns: The updated maintenance ticket JSON object.
 
 Delete
-/maintenance-tickets/delete/{id}
+/maintenance-tickets/delete/{ticketId}
 Request Type: DELETE
 Deletes the maintenance ticket from the database.
 HTTP Status: 200 OK
@@ -52,6 +52,7 @@ Updates the Maintenance Ticket "is_archived" field to true.
 HTTP Status: 202 Accepted
 Expects: An Archive Maintenance Ticket DTO.
 Returns: The updated Maintenance Ticket JSON object.
+
 
 JSON Objects
 Maintenance Ticket
@@ -75,6 +76,8 @@ Maintenance Performed
 	"ticketId" : -1,
 	"description" : "What was done",
 	"performedBy" : "Person or Vendor",
+	"performedOnDate" : "Date of maintenance performed",
+	"hours" : -1 // Machine hours at the time of maintenance.
 	"notes" : "Note about the maintenance" // Not Required
 }
 
@@ -92,9 +95,11 @@ Create Maintenance Ticket DTO
 
 Create Maintenance Performed DTO
 {
-	"equipmentId" : -1, // Probably unnessesary, Most likely unnessesary. Yeah, this is unnessesary... Remove.
+	"equipmentId" : -1,
 	"description" : "What is being done."",
 	"preformedBy" : "Person or vendor performing the maintenance.",
+	"performedOnDate" : "Date of maintenance performed",
+	"hours" : -1 // Machine hours at the time of maintenance.
 	"notes" : "Misc notes about the ticket or equipment."
 }
 
@@ -139,6 +144,7 @@ Complete Maintenance Ticket DTO
 Archive Maintenance Ticket DTO
 {
 	"ticketId" : -1,
-	"archived" : true
+	"archived" : true,
+	"archived_notes" : "Notes for why a maintenance ticket was archived." // Cannot be empty.
 }
 // Updated by user id and updated on date is added on the server side.

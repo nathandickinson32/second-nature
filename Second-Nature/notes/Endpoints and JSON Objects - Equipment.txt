@@ -1,54 +1,72 @@
 Endpoint and JSON Objects - Equipment
 
-Endpoints:
+Create
+/equipment/create
+Request Type: POST // Should be PUT
+Inserts a new equipment record into the database. Returns the new equipment object
+HTTP Status: 201 CREATED
+Expects: A Create Equipment DTO JSON Object
+Returns: An Equipment JSON Object
+
+Read
 /equipment/get-all
+Request Type: GET
 Returns a list of equipment and their details.
 HTTP Status: 200 OK
 Expected: Nothing.
 Returns: List of Equipment JSON Objects.
 
-/equipment/{id}
+/equipment/{equipmentId}
+Request Type: GET
 Returns all the details of a piece of equipment
 HTTP Status: 200 OK
 Expected: Nothing
 Returns: An Equipment JSON object
 
 /equipment/identity-list
+Request Type: GET
 Returns a list of equipment serial numbers, models, and names.
 HTTP Status: 200 OK
 Expects: Nothing
 Returns: A list of Equipment Identity DTO JSON objects
 
-/equipment/create
-Inserts a new equipment record into the database. Returns the new equipment object
-HTTP Status: 201 CREATED
-Expects: A Create Equipment DTO JSON Object
-Returns: An Equipment JSON Object
+<-- Added 2024.08.21 -->
+/equipment/maintenance-performed/{equipmentId}
+Request Type: GET
+Returns a list of all maintenance performed on a piece of equipment. Sorted by most recent. (DESC by ID)
+HTTP Status: 200 OK
+Expects: An equipment ID as a path variable.
+Returns: An array of maintenance received JSON objects.
 
+Update
 /equipment/update
+Request Type: POST
 Updates an existing equipment record and returns the updated equipment object.
 HTTP Status: 202 ACCEPTED
 Expects: An Update Equipment DTO JSON Object
 Returns: An Equipment JSON Object
 
 /equipment/update-activity
+Request Type: POST
 Updates an existing equipment record's activity status and returns the updated equipment object.
 HTTP Status: 202 ACCEPTED
 Expects: An Update Equipment Activity DTO JSON Object.
 Returns: An Equipment JSON Object.
 
 /equipment/archive
+Request Type: POST
 Updates and existing equipment records archive status and returns the updated equipment object.
 HTTP Status: 202 ACCEPTED
 Expects: An Archive Equipment DTO JSON Object.
 Returns: An Equipment JSON Object.
 
-/equipment/delete/{id}
+Delete
+/equipment/delete/{equipmentId}
+Request Type: DELETE
 Deletes an existing equipment record.
 HTTP Status: None
 Expects: Path variable
 Returns: Nothing
-
 
 JSON Objects:
 Equipment
@@ -66,7 +84,7 @@ Equipment
 	"updatedByUserId" : 0,
 	"updatedOnDate" : "2024-08-08",
 	"archived" : false,
-	"type" : "Equipment Type"
+	"typeId" : "Equipment Type"
 }
 
 Equipment Identity
@@ -80,7 +98,8 @@ Equipment Identity
 Archive Equipment DTO
 {
 	"equipmentId" : 0,
-	"archived" : true
+	"archived" : true,
+	"archived_notes" : "Notes about why a piece of equipment was archived" // NOT NULL
 }
 
 Create Equipment DTO

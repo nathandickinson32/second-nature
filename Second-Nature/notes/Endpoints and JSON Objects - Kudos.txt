@@ -1,47 +1,67 @@
 Endpoints and JSON Objects - Kudos
 
-Endpoints:
+Create
 /give-kudos
+Request Type: POST // Should be PUT
 Inserts a Kudos object into the database and returns a kudos object.
+HTTP Status: 201 CREATED
 Expects: A Kudos JSON object and the Principal.
 Returns: The new Kudos JSON object.
 
-/update-kudos
-Updates a Kudos object in the database.
-Expects: A Kudos JSON object.
-Returns: The updated Kudos JSON object.
-
+Read
 /get-all-kudos
+Request Type: GET
 Returns ALL Kudos object in descending order by date.
+HTTP Status: 200 OK
 Expects: Nothing.
 Returns: An array of all Kudos JSON objects.
 
 /get-my-received-kudos
+Request Type: GET
 Gets all Kudos received by the logged in user.
+HTTP Status: 200 OK
 Expects: The Principal
 Returns: An array of all Kudos JSON objects received by me.
 
 /get-my-given-kudos
+Request Type: GET
 Gets all Kudos given by the logged in user.
+HTTP Status: 200 OK
 Expects: The Principal.
 Returns: An array of all Kudos JSON objects that I have given.
 
 /get-kudos
+Request Type: GET
 Gets a Kudos object by a Kudos object. Looks into the database by kudos_id.
+HTTP Status: 200 OK
 Expects: A Kudos JSON object.
 Returns: The retrieved Kudos JSON object.
 
-/delete-kudos
-Deletes a Kudos object from the database.
-Expects: A Kudos JSON object.
-Returns: Nothing.
-
-/archive-kudos
-Instead of removing the record like delete, archive changes the archive Boolean to true.
+Update
+/update-kudos
+Request Type: POST
+Updates a Kudos object in the database.
+HTTP Status: 202 Accepted
 Expects: A Kudos JSON object.
 Returns: The updated Kudos JSON object.
 
-Objects:
+/archive-kudos
+Request Type: POST
+Instead of removing the record like delete, archive changes the archive Boolean to true.
+HTTP Status: 202 Accepted
+Expects: A Kudos JSON object.
+Returns: The updated Kudos JSON object.
+
+Delete
+/delete-kudos
+Request Type: DELETE
+Deletes a Kudos object from the database.
+HTTP Status: 200 OK
+Expects: A Kudos JSON object.
+Returns: Nothing.
+
+
+JSON Objects:
 Default Kudos JSON Object:
 {
 	"kudosId": 1, // Not needed when giving kudos
