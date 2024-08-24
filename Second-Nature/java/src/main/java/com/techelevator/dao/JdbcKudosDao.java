@@ -35,7 +35,7 @@ public class JdbcKudosDao implements KudosDao{
                     kudos.getDate(),
                     kudos.getTitle(),
                     kudos.getNotes(),
-                    kudos.isArchive()
+                    kudos.isArchived()
             );
         } catch (CannotGetJdbcConnectionException e){
             throw new CannotGetJdbcConnectionException("[JDBC Kudos DAO] Unable to connect to the database.");
@@ -48,7 +48,7 @@ public class JdbcKudosDao implements KudosDao{
 
     @Override
     public Kudos updateKudos(Kudos kudos) {
-        String sql = "UPDATE kudos SET giver_user_id = ?, receiver_user_id = ?, date = ?, title = ?, notes = ?, archive = ? WHERE kudos_id = ?;";
+        String sql = "UPDATE kudos SET giver_user_id = ?, receiver_user_id = ?, date = ?, title = ?, notes = ?, is_archived = ? WHERE kudos_id = ?;";
 
         try {
             template.update(
@@ -58,7 +58,7 @@ public class JdbcKudosDao implements KudosDao{
                     kudos.getDate(),
                     kudos.getTitle(),
                     kudos.getNotes(),
-                    kudos.isArchive(),
+                    kudos.isArchived(),
                     kudos.getKudosId()
             );
         } catch (CannotGetJdbcConnectionException e){
@@ -163,7 +163,7 @@ public class JdbcKudosDao implements KudosDao{
 
     @Override
     public Kudos archiveKudos(Kudos kudos) {
-        String sql = "UPDATE kudos SET archive = ? WHERE kudos_id = ?;";
+        String sql = "UPDATE kudos SET is_archived = ? WHERE kudos_id = ?;";
 
         try {
             template.update(
@@ -189,7 +189,7 @@ public class JdbcKudosDao implements KudosDao{
         kudos.setDate(results.getDate("date"));
         kudos.setTitle(results.getString("title"));
         kudos.setNotes(results.getString("notes"));
-        kudos.setArchive(results.getBoolean("archive"));
+        kudos.setArchived(results.getBoolean("is_archived"));
         return kudos;
     }
 

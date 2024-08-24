@@ -9,7 +9,7 @@ public class Kudos {
     private Date date;
     private String title;
     private String notes;
-    private boolean archive;
+    private boolean isArchived;
 
     public int getKudosId() {
         return kudosId;
@@ -59,11 +59,11 @@ public class Kudos {
         this.notes = notes;
     }
 
-    public boolean isArchive() {
-        return archive;
+    public boolean isArchived() {
+        return isArchived;
     }
 
-    public void setArchive(boolean archive) {
-        this.archive = archive;
+    public void setArchived(boolean archived) {
+        this.isArchived = archived;
     }
 }

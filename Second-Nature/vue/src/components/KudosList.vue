@@ -53,7 +53,8 @@ export default {
             KudosService.getAllKudos()
                 .then(
                     (response) => {
-                        this.kudos = response.data;
+                        console.log(response.data);
+                        this.kudos = response.data.filter(kudo => kudo.archived === false);
                     }
                 );
         },
