@@ -11,6 +11,8 @@
             <span class="separator"> | </span>
             <label @click="showBlowers" class="clickable-label">Blowers</label>
          -->
+         <label v-if="isManager" @click="showArchivedEquipment" class="clickable-label">Archived</label>
+           
         </div>
     <Equipment class="equipmentCard" v-for="equipment in filteredEquipment" v-bind:key="equipment.id" :equipment="equipment"></Equipment>
   </div>
@@ -36,7 +38,7 @@ export default {
     computed: {
         filteredEquipment() {
             if (this.filterType === 'all') {
-                return this.equipmentList;
+                return this.equipmentList.filter(equipment => equipment.archived === false);
             }
             else if (this.filterType === 'active') {
                 return this.equipmentList.filter(equipment => equipment.active === true);
@@ -50,8 +52,14 @@ export default {
             // else if (this.filterType === 'blowers') {
             //     return this.equipmentList.filter(equipment => equipment.active === false);
             // }
+            else if (this.filterType === 'archived') {
+                return this.equipmentList.filter(equipment => equipment.archived === true);
+            }
             return []; // Default return for unexpected filterType
         },
+        isManager() {
+      return this.$store.getters.isManager;
+    }
     },
     methods: {
         getEquipment() {
@@ -74,6 +82,9 @@ export default {
         },
         showBlowers(){
             this.filterType= 'blowers'
+        },
+        showArchivedEquipment(){
+            this,this.filterType= 'archived'
         }
     }
 
