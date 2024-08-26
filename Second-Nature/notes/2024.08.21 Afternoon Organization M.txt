@@ -1,0 +1,18 @@
+2024.08.21 Afternoon Organization Meeting
+
+Maintenance Scheduling
+Tony Would like an alert for oil changes
+- Some machines would need to be logged once a day
+- Others once a week
+
+
+Dividing up the work:
+Chris
+Maintenance Feature
+(Front to back)
+
+Dinda
+Kudos
+
+Nathan
+Equipment
