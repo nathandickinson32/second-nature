@@ -27,13 +27,6 @@ Backend
 	- [] Read type by ID
 	- [] Update Type
 	- [] Delete Type
-- Maintenance Objects
-	- [] Update "Maintenance Ticket" model to support "archived notes"
-	- [] Update "Maintenance Performed" model to support "performed on date" and "hours"
-	- [] Update "Archive Maintenance Ticket DTO" to support "archived notes"
-- Maintenance DAO / JDBC Maintenance DAO
-	- [] Update "Create Maintenance Performed" to support "performed on date" and "hours"
-	- [] Update "Archive Maintenance Ticket" to support "archived notes"
 
 Front End
 
@@ -44,7 +37,18 @@ Monday
 -
 
 Tuesday
-- 
+- Maintenance Objects
+	- [x] Update "Maintenance Ticket" model to support "archived notes"
+	- [x] Update "Maintenance Performed" model to support "performed on date" and "hours"
+	- [x] Update "Archive Maintenance Ticket DTO" to support "archived notes"
+	- [x] Update "Create Maintenance Performed DTO" to remove "equipment ID"
+- Maintenance DAO / JDBC Maintenance DAO
+	- [x] Update "Create Maintenance Performed" to support "performed on date" and "hours"
+	- [x] Update "Update Maintenance Ticket" to support " performed on date" and "hours"
+	- [x] Update "Archive Maintenance Ticket" to support "archived notes"
+	- [x] Create "Get Equipment Hours for Maintenance Ticket ID"
+	- [x] Update "Map Row to Maintenance Performed" to support "performed on date" and "hours"
+	- [x] Update "Map Row to Maintenance Ticket" to support "archived notes"
 
 Wednesday
 - 

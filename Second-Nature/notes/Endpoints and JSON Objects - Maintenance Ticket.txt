@@ -96,13 +96,11 @@ Create Maintenance Ticket DTO
 
 Create Maintenance Performed DTO
 {
-	"equipmentId" : -1,
 	"description" : "What is being done."",
-	"preformedBy" : "Person or vendor performing the maintenance.",
-	"performedOnDate" : "Date of maintenance performed",
-	"notes" : "Misc notes about the ticket or equipment."
+	"performedBy" : "Person or vendor performing the maintenance.",
+	"notes" : "Misc notes about the maintenance performed."
 }
-// Hours and ticket ID are handled on the backend.
+// Hours, performed on date, and ticket ID are handled on the backend.
 
 Update Maintenance Ticket DTO
 {
