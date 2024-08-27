@@ -1,0 +1,59 @@
+Second Nature To Do - Week of 8/25/2024
+
+Sprint Backlog
+Backend
+- Equipment Objects
+	- [] Update "Equipment" model to support "type ID"
+	- [] Update "Archive Equipment DTO" to support "archive notes"
+	- [] Update "Create Equipment DTO" to support "type ID"
+	- [] Update "Update Equipment DTO" to support "type ID" and "archived notes"
+- Equipment DAO / JDBC Equipment DAO
+	- [] Update "Create Equipment" to support "type ID"
+	- [] Update "Map Row to Equipment' to support "type ID"
+	- [] Update "Update Equipment" to support "type ID" and "archived notes"
+	- [] Update "Archive Equipment" to support "archived notes"
+- Type Objects
+	- [] Create "Type" model
+	- [] Update Type DTO
+- Type DAO / JDBC Type DAO
+	- [] Create Type
+	- [] Read Type by ID
+	- [] Read all Types
+	- [] Update Type
+	- [] Delete Type
+- Type Controller
+	- [] Create Type
+	- [] Read all Types
+	- [] Read type by ID
+	- [] Update Type
+	- [] Delete Type
+- Maintenance Objects
+	- [] Update "Maintenance Ticket" model to support "archived notes"
+	- [] Update "Maintenance Performed" model to support "performed on date" and "hours"
+	- [] Update "Archive Maintenance Ticket DTO" to support "archived notes"
+- Maintenance DAO / JDBC Maintenance DAO
+	- [] Update "Create Maintenance Performed" to support "performed on date" and "hours"
+	- [] Update "Archive Maintenance Ticket" to support "archived notes"
+
+Front End
+
+Sunday
+- 
+
+Monday
+-
+
+Tuesday
+- 
+
+Wednesday
+- 
+
+Thursday
+- 
+
+Friday
+- 
+
+Saturday
+-

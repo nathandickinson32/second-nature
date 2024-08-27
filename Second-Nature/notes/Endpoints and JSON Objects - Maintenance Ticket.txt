@@ -64,6 +64,7 @@ Maintenance Ticket
 	"notes" : "Notes about the ticket", // Not required.
 	"complete" : false,
 	"archived" : false,
+	"archivedNotes" :  "Notes about why this maintenance ticket was archived"
 	[
 		{ Maintenance Performed List JSON Object array }
 	]
@@ -77,7 +78,7 @@ Maintenance Performed
 	"description" : "What was done",
 	"performedBy" : "Person or Vendor",
 	"performedOnDate" : "Date of maintenance performed",
-	"hours" : -1 // Machine hours at the time of maintenance.
+	"hours" : -1, // Machine hours at the time of maintenance.
 	"notes" : "Note about the maintenance" // Not Required
 }
 
@@ -99,9 +100,9 @@ Create Maintenance Performed DTO
 	"description" : "What is being done."",
 	"preformedBy" : "Person or vendor performing the maintenance.",
 	"performedOnDate" : "Date of maintenance performed",
-	"hours" : -1 // Machine hours at the time of maintenance.
 	"notes" : "Misc notes about the ticket or equipment."
 }
+// Hours and ticket ID are handled on the backend.
 
 Update Maintenance Ticket DTO
 {

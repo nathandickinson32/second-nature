@@ -75,6 +75,7 @@ Equipment
 	"serialNumber" : "Equipment Serial Number",
 	"model" : "Equipment Model",
 	"name" : "Equipment Name",
+	"typeId" : -1,
 	"startingHours" : 0,
 	"enteredByUserId" : 0,
 	"enteredOnDate" : "2024-08-08",
@@ -84,7 +85,6 @@ Equipment
 	"updatedByUserId" : 0,
 	"updatedOnDate" : "2024-08-08",
 	"archived" : false,
-	"typeId" : "Equipment Type"
 }
 
 Equipment Identity
@@ -99,7 +99,7 @@ Archive Equipment DTO
 {
 	"equipmentId" : 0,
 	"archived" : true,
-	"archived_notes" : "Notes about why a piece of equipment was archived" // NOT NULL
+	"archivedNotes" : "Notes about why a piece of equipment was archived"
 }
 
 Create Equipment DTO
@@ -107,6 +107,7 @@ Create Equipment DTO
 	"serialNumber" : "Equipment Serial Number",
 	"model" : "Equipment Model",
 	"name" : "Equipment Name",
+	"typeId" : -1,
 	"startingHours" : 0,
 	"notes" : "Equipment Notes",
 	"active" : true,
@@ -127,8 +128,10 @@ Update Equipment DTO
 	"serialNumber" : "Equipment Serial Number",
 	"model" : "Equipment Model",
 	"name" : "Equipment Name",
+	"typeId" : -1,
 	"notes" : "Equipment Notes",
 	"active" : true,
 	"activeNotes" : "Equipment active notes",
 	"archived" : false
+	"archivedNotes" : "Notes about why a piece of equipment was archived"
 }
