@@ -17,6 +17,7 @@ public class Equipment {
     private int updatedByUserId;
     private Date updatedOnDate;
     private boolean isArchived;
+    private String archivedNotes;
 
     public int getEquipmentId() {
         return equipmentId;
@@ -128,5 +129,13 @@ public class Equipment {
 
     public void setArchived(boolean archived) {
         isArchived = archived;
+    }
+
+    public String getArchivedNotes() {
+        return archivedNotes;
+    }
+
+    public void setArchivedNotes(String archivedNotes) {
+        this.archivedNotes = archivedNotes;
     }
 }

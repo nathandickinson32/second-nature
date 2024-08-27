@@ -10,11 +10,13 @@ public class UpdateEquipmentDto {
     @NotEmpty
     private String model;
     private String name;
+    private int typeId;
     private String notes;
     @NotEmpty
     private boolean isActive;
     private String activeNotes;
     private boolean isArchived;
+    private String archivedNotes;
 
     public int getEquipmentId() {
         return equipmentId;
@@ -48,6 +50,14 @@ public class UpdateEquipmentDto {
         this.name = name;
     }
 
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
+    }
+
     public String getNotes() {
         return notes;
     }
@@ -78,5 +88,13 @@ public class UpdateEquipmentDto {
 
     public void setArchived(boolean archived) {
         isArchived = archived;
+    }
+
+    public String getArchivedNotes() {
+        return archivedNotes;
+    }
+
+    public void setArchivedNotes(String archivedNotes) {
+        this.archivedNotes = archivedNotes;
     }
 }
