@@ -132,6 +132,6 @@ Update Equipment DTO
 	"notes" : "Equipment Notes",
 	"active" : true,
 	"activeNotes" : "Equipment active notes",
-	"archived" : false
+	"archived" : false,
 	"archivedNotes" : "Notes about why a piece of equipment was archived"
 }
