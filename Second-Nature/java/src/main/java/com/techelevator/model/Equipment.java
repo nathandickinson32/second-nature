@@ -7,6 +7,7 @@ public class Equipment {
     private String serialNumber;
     private String model;
     private String name;
+    private int typeId;
     private int startingHours;
     private int enteredByUserId;
     private Date enteredOnDate;
@@ -47,6 +48,14 @@ public class Equipment {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
     }
 
     public int getStartingHours() {

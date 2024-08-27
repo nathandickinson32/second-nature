@@ -132,7 +132,6 @@ maintenanceService.updateMaintenanceTicket() {
 	     **End Front End Update MX Ticket**
 
 
-
 Complete Maintenance Ticket DTO
 {
 	"ticketId" : -1,
@@ -144,6 +143,6 @@ Archive Maintenance Ticket DTO
 {
 	"ticketId" : -1,
 	"archived" : true,
-	"archived_notes" : "Notes for why a maintenance ticket was archived." // Cannot be empty.
+	"archivedNotes" : "Notes for why a maintenance ticket was archived." // Cannot be empty.
 }
 // Updated by user id and updated on date is added on the server side.
