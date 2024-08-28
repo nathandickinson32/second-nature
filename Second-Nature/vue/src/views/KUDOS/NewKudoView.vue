@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import KudosService from '../services/KudosService';
+import KudosService from '../../services/KudosService';
 
 export default {
     data() {

@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import LeaveRequestService from '../services/LeaveRequestService';
+import LeaveRequestService from '../../services/LeaveRequestService';
 
 export default {
     data() {

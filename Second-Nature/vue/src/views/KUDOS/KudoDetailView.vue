@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import KudoDetail from '../components/KUDOS/KudoDetail.vue';
-import KudosService from '../services/KudosService';
-import LeaveRequestService from '../services/LeaveRequestService';
+import KudoDetail from '../../components/KUDOS/KudoDetail.vue';
+import KudosService from '../../services/KudosService';
+import LeaveRequestService from '../../services/LeaveRequestService';
 
 export default {
   components: {

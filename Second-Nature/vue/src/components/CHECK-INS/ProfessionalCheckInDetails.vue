@@ -8,15 +8,15 @@
     
       </span>
     </p>
-    <p class="label">
+    <div class="label">
      <div v-if="!isManager">Performed By:</div> 
      <div v-if="!isManager"> {{ managerName }}</div> 
-      </p>
-      <p class="label">
+    </div>
+      <div class="label">
      <div v-if="isManager">Check In With </div> 
      
      <div v-if="isManager">{{ employeeName }} </div> 
-      </p>
+      </div>
       <label>
         Check In Notes <br/>
         <div class="notes">

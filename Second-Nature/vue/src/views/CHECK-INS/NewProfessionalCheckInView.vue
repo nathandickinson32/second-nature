@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import ProfessionalCheckInService from "../services/ProfessionalCheckInService";
+import ProfessionalCheckInService from "../../services/ProfessionalCheckInService";
 
 export default {
   computed: {

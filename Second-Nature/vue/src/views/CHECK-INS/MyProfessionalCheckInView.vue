@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import ProfessionalCheckInList from "../components/CHECK-INS/ProfessionalCheckInList.vue";
-import ProfessionalCheckInService from "../services/ProfessionalCheckInService";
+import ProfessionalCheckInList from "../../components/CHECK-INS/ProfessionalCheckInList.vue";
+import ProfessionalCheckInService from "../../services/ProfessionalCheckInService";
 export default {
   data() {
     return {

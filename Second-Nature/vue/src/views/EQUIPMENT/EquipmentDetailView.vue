@@ -10,10 +10,10 @@
 </template>
 
 <script>
-import EquipmentDetail from '../components/EQUIPMENT/EquipmentDetail.vue';
-import EquipmentModify from '../components/EQUIPMENT/EquipmentModify.vue';
-import EquipmentService from '../services/EquipmentService';
-import EquipmentActiveStatusChange from '../components/EQUIPMENT/EquipmentActiveStatusChange.vue';
+import EquipmentDetail from '../../components/EQUIPMENT/EquipmentDetail.vue';
+import EquipmentModify from '../../components/EQUIPMENT/EquipmentModify.vue';
+import EquipmentService from '../../services/EquipmentService';
+import EquipmentActiveStatusChange from '../../components/EQUIPMENT/EquipmentActiveStatusChange.vue';
 import EquipmentDetailArchive from './EquipmentDetailArchive.vue';
 
 export default {

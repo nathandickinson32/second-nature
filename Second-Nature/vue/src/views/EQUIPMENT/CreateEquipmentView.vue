@@ -1,16 +1,15 @@
 <template>
   <div class="content">
-    <h1>Create A Ticket</h1>
-    <CreateMaintenanceTicket/>
+    <h1>Add Equipment</h1>
+    <CreateEquipment />
   </div>
 </template>
 
 <script>
-import CreateMaintenanceTicket from '../components/MAINTENANCE/CreateMaintenanceTicket.vue';
-
+import CreateEquipment from '../../components/EQUIPMENT/CreateEquipment.vue';
 export default {
     components: {
-        CreateMaintenanceTicket
+        CreateEquipment
     }
 }
 </script>
@@ -23,5 +22,6 @@ h1 {
 .content {
     flex-direction: column;
     align-items: center;
+    gap: 10px;
 }
 </style>

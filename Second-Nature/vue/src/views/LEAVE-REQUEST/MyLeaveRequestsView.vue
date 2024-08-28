@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import LeaveRequestList from '../components/LEAVE-REQUEST/LeaveRequestList.vue'
-import LeaveRequestService from '../services/LeaveRequestService'
+import LeaveRequestList from '../../components/LEAVE-REQUEST/LeaveRequestList.vue'
+import LeaveRequestService from '../../services/LeaveRequestService'
 
 export default {
     components: {

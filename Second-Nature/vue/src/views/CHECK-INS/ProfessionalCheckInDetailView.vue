@@ -6,9 +6,9 @@
 </template>
 
 <script>
-import ProfessionalCheckInService from "../services/ProfessionalCheckInService";
-import LeaveRequestService from "../services/LeaveRequestService";
-import ProfessionalCheckInDetails from "../components/CHECK-INS/ProfessionalCheckInDetails.vue";
+import ProfessionalCheckInService from "../../services/ProfessionalCheckInService";
+import LeaveRequestService from "../../services/LeaveRequestService";
+import ProfessionalCheckInDetails from "../../components/CHECK-INS/ProfessionalCheckInDetails.vue";
 export default {
   components: {
    ProfessionalCheckInDetails
