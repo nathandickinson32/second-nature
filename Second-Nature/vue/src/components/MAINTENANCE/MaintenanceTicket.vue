@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import router from '../router/index.js';
-import EquipmentService from '../services/EquipmentService.js';
+import router from '../../router/index.js';
+import EquipmentService from '../../services/EquipmentService.js';
 
 export default {
   props: {

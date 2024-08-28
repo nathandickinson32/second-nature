@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import CreateMaintenanceTicket from '../components/CreateMaintenanceTicket.vue';
+import CreateMaintenanceTicket from '../components/MAINTENANCE/CreateMaintenanceTicket.vue';
 
 export default {
     components: {

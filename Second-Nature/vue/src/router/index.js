@@ -20,7 +20,7 @@ import EquipmentDetailView from '../views/EquipmentDetailView.vue';
 import MaintenanceTicketListView from '../views/MaintenanceTicketListView.vue';
 import MaintenanceTicketDetailView from '../views/MaintenanceTicketDetailView.vue'; 
 import NewMaintenenceTicketView from '../views/NewMaintenenceTicketView.vue';
-import MaintenanceTicketDetails from '../components/MaintenanceTicketDetails.vue';
+import MaintenanceTicketDetails from '../components/MAINTENANCE/MaintenanceTicketDetails.vue';
 import CreateEquipmentView from '../views/CreateEquipmentView.vue';
 import CreateMaintenanceTicketView from '../views/CreateMaintenanceTicketView.vue';
 /**

@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import router from '../router/index.js';
-import LeaveRequestService from '../services/LeaveRequestService.js'
+import router from '../../router/index.js';
+import LeaveRequestService from '../../services/LeaveRequestService.js'
 
 export default {
   props: {

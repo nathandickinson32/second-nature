@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import MaintenanceTicketList from '../components/MaintenanceTicketList.vue';
+import MaintenanceTicketList from '../components/MAINTENANCE/MaintenanceTicketList.vue';
 
 export default {
 components: {

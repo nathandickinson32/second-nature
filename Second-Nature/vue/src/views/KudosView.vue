@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import KudosList from '../components/KudosList.vue';
+import KudosList from '../components/KUDOS/KudosList.vue';
 
 export default {
   components: {

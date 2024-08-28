@@ -20,7 +20,7 @@
 
 <script>
 import Equipment from './Equipment.vue';
-import EquipmentService from '../services/EquipmentService';
+import EquipmentService from '../../services/EquipmentService';
 
 export default {
     components: {

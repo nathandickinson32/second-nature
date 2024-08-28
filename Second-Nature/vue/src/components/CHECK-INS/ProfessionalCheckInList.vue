@@ -32,7 +32,7 @@
   
   <script>
   import ProfessionalCheckIn from "./ProfessionalCheckIn.vue";
-import ProfessionalCheckInService from "../services/ProfessionalCheckInService";
+import ProfessionalCheckInService from "../../services/ProfessionalCheckInService";
 
 export default {
   components: {

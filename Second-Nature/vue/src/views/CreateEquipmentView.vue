@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import CreateEquipment from '../components/CreateEquipment.vue';
+import CreateEquipment from '../components/EQUIPMENT/CreateEquipment.vue';
 export default {
     components: {
         CreateEquipment

@@ -32,51 +32,45 @@
 </template>
 
 <script>
-import ProfessionalCheckInService from "../services/ProfessionalCheckInService";
+import ProfessionalCheckInService from "../../services/ProfessionalCheckInService";
 export default {
-
-props: {
-professionalCheckIn: {
-  type: Object,
-  required: true
-},
-managerName: {
-  type: String,
-  required: true
-},
-employeeName: {
-  type: String,
-  required: true
-},
-
-},
-   computed: {
+  props: {
+    professionalCheckIn: {
+      type: Object,
+      required: true,
+    },
+    managerName: {
+      type: String,
+      required: true,
+    },
+    employeeName: {
+      type: String,
+      required: true,
+    },
+  },
+  computed: {
     isManager() {
       return this.$store.getters.isManager;
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-
 .label {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
-.notes{
+.notes {
   border: 1px;
   border-style: solid;
   border-color: black;
   padding: 50px 50px 50px 50px;
   text-align: center;
 }
-.check-in{
+.check-in {
   margin-left: 10px;
   margin-right: 10px;
-
-
-  
 }
 </style>

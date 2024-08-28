@@ -39,8 +39,8 @@
 </template>
 
 <script>
-import EquipmentService from '../services/EquipmentService';
-import MaintenanceService from '../services/MaintenanceService';
+import EquipmentService from '../../services/EquipmentService';
+import MaintenanceService from '../../services/MaintenanceService';
 
 export default {
     data() {

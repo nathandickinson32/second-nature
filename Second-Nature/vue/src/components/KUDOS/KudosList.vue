@@ -16,7 +16,7 @@
 
 <script>
 import Kudo from './Kudo.vue';
-import KudosService from '../services/KudosService';
+import KudosService from '../../services/KudosService';
 
 export default {
     components: {

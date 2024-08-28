@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import router from '../router/index.js';
-import ProfessionalCheckInService from '../services/ProfessionalCheckInService';
+import router from '../../router/index.js';
+import ProfessionalCheckInService from '../../services/ProfessionalCheckInService';
 export default {
   data() {
     return {

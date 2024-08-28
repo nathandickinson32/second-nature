@@ -10,7 +10,7 @@
 
 <script>
 import MaintenanceTicket from './MaintenanceTicket.vue';
-import MaintenanceService from '../services/MaintenanceService';
+import MaintenanceService from '../../services/MaintenanceService';
 
 export default {
     components: {

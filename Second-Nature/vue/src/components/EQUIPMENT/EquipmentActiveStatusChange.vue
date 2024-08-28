@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import EquipmentService from '../services/EquipmentService';    
+import EquipmentService from '../../services/EquipmentService';    
 
 export default {
   props: {

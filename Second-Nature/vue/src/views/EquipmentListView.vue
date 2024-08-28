@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import EquipmentList from '../components/EquipmentList.vue';
+import EquipmentList from '../components/EQUIPMENT/EquipmentList.vue';
 
 export default {
     components: {
