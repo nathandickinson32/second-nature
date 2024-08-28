@@ -30,8 +30,7 @@ HTTP Status: 200 OK
 Expects: Nothing
 Returns: A list of Equipment Identity DTO JSON objects
 
-<-- Added 2024.08.21 -->
-/equipment/maintenance-performed/{equipmentId}
+/equipment/{equipmentId}/maintenance-performed
 Request Type: GET
 Returns a list of all maintenance performed on a piece of equipment. Sorted by most recent. (DESC by ID)
 HTTP Status: 200 OK
