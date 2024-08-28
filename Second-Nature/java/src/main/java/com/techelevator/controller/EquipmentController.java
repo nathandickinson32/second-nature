@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.EquipmentDao;
+import com.techelevator.dao.MaintenanceDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,6 +21,9 @@ import java.util.List;
 public class EquipmentController {
     @Autowired
     private EquipmentDao equipmentDao;
+
+    @Autowired
+    private MaintenanceDao maintenanceDao;
 
     @Autowired
     private UserDao userDao;
@@ -33,6 +38,12 @@ public class EquipmentController {
     public Equipment getEquipmentById(@PathVariable int id, Principal principal){
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " accessed equipment ID: " + id);
         return equipmentDao.getEquipmentById(id);
+    }
+
+    @GetMapping(path = "/{equipmentId}/maintenance-performed")
+    public List<MaintenancePerformed> getMaintenancePerformedByEquipmentId(@PathVariable int equipmentId, Principal principal){
+        System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " accessed a list of maintenance performed for equipment ID: " + equipmentId);
+        return maintenanceDao.getMaintenancePerformedByEquipmentId(equipmentId);
     }
 
     @GetMapping(path = "/identity-list")

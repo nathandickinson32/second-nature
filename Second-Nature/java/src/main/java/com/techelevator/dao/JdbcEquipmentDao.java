@@ -113,7 +113,6 @@ public class JdbcEquipmentDao implements EquipmentDao {
         return equipmentIdentityDtoList;
     }
 
-
     @Override
     public Equipment updateEquipment(UpdateEquipmentDto updateEquipmentDto, int userId) {
         String sql = "UPDATE equipment SET serial_number = ?, model = ?, name = ?, type_id = ?, notes = ?, is_active = ?, active_notes = ?, updated_by_user_id = ?, updated_on_date = ?, is_archived = ? WHERE equipment_id = ?;";

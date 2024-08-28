@@ -201,6 +201,25 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
         return hours;
     }
 
+    @Override
+    public List<MaintenancePerformed> getMaintenancePerformedByEquipmentId(int equipmentId){
+        List<MaintenancePerformed> maintenancePerformed = new ArrayList<>();
+        String sql = "SELECT * FROM maintenance_performed WHERE equipment_id = ? ORDER BY maintenance_performed_id DESC LIMIT 10;";
+
+        try {
+            SqlRowSet results = template.queryForRowSet(sql, equipmentId);
+            while (results.next()){
+                maintenancePerformed.add(mapRowToMaintenancePerformed(results));
+            }
+        } catch(CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Equipment DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Equipment DAO] Cannot get a list of maintenance performed by equipment ID: " + equipmentId);
+        }
+
+        return maintenancePerformed;
+    }
+
     // Update
     @Override
     public MaintenanceTicket updateMaintenanceTicket(UpdateMaintenanceTicketDto updateMaintenanceTicketDto, int userId){
