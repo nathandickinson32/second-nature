@@ -16,3 +16,7 @@ Kudos
 
 Nathan
 Equipment
+- type of equipment
+- checkboxes to buttons
+- archive, archive notes
+- move equipmentDetail.vue "endpoints" into router
