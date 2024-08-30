@@ -1,18 +1,9 @@
 package com.techelevator.model;
 
 public class CreateMaintenancePerformedDto {
-    private int equipmentId;
     private String description;
     private String performedBy;
     private String notes;
-
-    public int getEquipmentId() {
-        return equipmentId;
-    }
-
-    public void setEquipmentId(int equipmentId) {
-        this.equipmentId = equipmentId;
-    }
 
     public String getDescription() {
         return description;

@@ -14,6 +14,7 @@ public class MaintenanceTicket {
     private int updatedByUserId;
     private Date updatedOnDate;
     private boolean isArchived;
+    private String archivedNotes;
     private List<MaintenancePerformed> maintenancePerformedList;
 
     public int getTicketId() {
@@ -94,6 +95,14 @@ public class MaintenanceTicket {
 
     public void setArchived(boolean archived) {
         isArchived = archived;
+    }
+
+    public String getArchivedNotes() {
+        return archivedNotes;
+    }
+
+    public void setArchivedNotes(String archivedNotes) {
+        this.archivedNotes = archivedNotes;
     }
 
     public List<MaintenancePerformed> getMaintenancePerformedList() { return maintenancePerformedList; }

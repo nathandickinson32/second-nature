@@ -7,6 +7,7 @@ public class Equipment {
     private String serialNumber;
     private String model;
     private String name;
+    private int typeId;
     private int startingHours;
     private int enteredByUserId;
     private Date enteredOnDate;
@@ -16,6 +17,7 @@ public class Equipment {
     private int updatedByUserId;
     private Date updatedOnDate;
     private boolean isArchived;
+    private String archivedNotes;
 
     public int getEquipmentId() {
         return equipmentId;
@@ -47,6 +49,14 @@ public class Equipment {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
     }
 
     public int getStartingHours() {
@@ -119,5 +129,13 @@ public class Equipment {
 
     public void setArchived(boolean archived) {
         isArchived = archived;
+    }
+
+    public String getArchivedNotes() {
+        return archivedNotes;
+    }
+
+    public void setArchivedNotes(String archivedNotes) {
+        this.archivedNotes = archivedNotes;
     }
 }

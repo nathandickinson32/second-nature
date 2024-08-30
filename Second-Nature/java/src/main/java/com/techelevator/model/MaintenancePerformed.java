@@ -1,12 +1,16 @@
 package com.techelevator.model;
 
+import java.util.Date;
+
 public class MaintenancePerformed {
     private int maintenancePerformedId;
     private int equipmentId;
     private int ticketId;
     private String description;
     private String performedBy;
+    private Date performedOnDate;
     private String notes;
+    private int hours;
 
     public int getMaintenancePerformedId() {
         return maintenancePerformedId;
@@ -48,11 +52,27 @@ public class MaintenancePerformed {
         this.performedBy = performedBy;
     }
 
+    public Date getPerformedOnDate() {
+        return performedOnDate;
+    }
+
+    public void setPerformedOnDate(Date performedOnDate) {
+        this.performedOnDate = performedOnDate;
+    }
+
     public String getNotes() {
         return notes;
     }
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public int getHours() {
+        return hours;
+    }
+
+    public void setHours(int hours) {
+        this.hours = hours;
     }
 }

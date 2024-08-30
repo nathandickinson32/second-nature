@@ -7,6 +7,7 @@ public class ArchiveEquipmentDto {
     private int equipmentId;
     @NotEmpty
     private boolean isArchived;
+    private String archivedNotes;
 
     public int getEquipmentId() {
         return equipmentId;
@@ -22,5 +23,13 @@ public class ArchiveEquipmentDto {
 
     public void setArchived(boolean archived) {
         isArchived = archived;
+    }
+
+    public String getArchivedNotes() {
+        return archivedNotes;
+    }
+
+    public void setArchivedNotes(String archivedNotes) {
+        this.archivedNotes = archivedNotes;
     }
 }

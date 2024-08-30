@@ -1,0 +1,87 @@
+Second Nature To Do - Week of 8/25/2024
+
+Sprint Backlog
+Backend
+- Type Objects
+	- [] Create "Type" model
+	- [] Update Type DTO
+- Type DAO / JDBC Type DAO
+	- [] Create Type
+	- [] Read Type by ID
+	- [] Read all Types
+	- [] Update Type
+	- [] Delete Type
+- Type Controller
+	- [] Create Type
+	- [] Read all Types
+	- [] Read type by ID
+	- [] Update Type
+	- [] Delete Type
+
+Front End
+- Equipment
+	Equipment List
+		- [] Add functionality to the "maintenance" button
+		- [] Add functionality to the "new ticket" button
+	Equipment Details
+		- [] Display a list of all maintenance performed on that piece of equipment
+		- [] Drop down to select equipment Type
+		- [] Checkbox and required text field to archive equipment (manager, mechanic)
+		- [] Checkbox for active status (manager, mechanic)
+		- [] Update status button to update the equipment status (manager, mechanic)
+- Maintenance
+	Ticket Details
+		- [] Add a checkbox and a required text box to archive a maintenance ticket
+		- [] Add a button to update a maintenance ticket
+		- [] Display the ticket date
+	- [] Create a page for updating maintenance tickets
+	Create a Ticket
+		- [] Update the dropdown to support more than just the equipment_id
+- Kudos
+	Kudos Detail
+		- [] Style archive button
+
+Sunday
+- 
+
+Monday
+-
+
+Tuesday
+- Maintenance Objects
+	- [x] Update "Maintenance Ticket" model to support "archived notes"
+	- [x] Update "Maintenance Performed" model to support "performed on date" and "hours"
+	- [x] Update "Archive Maintenance Ticket DTO" to support "archived notes"
+	- [x] Update "Create Maintenance Performed DTO" to remove "equipment ID"
+- Maintenance DAO / JDBC Maintenance DAO
+	- [x] Update "Create Maintenance Performed" to support "performed on date" and "hours"
+	- [x] Update "Update Maintenance Ticket" to support " performed on date" and "hours"
+	- [x] Update "Archive Maintenance Ticket" to support "archived notes"
+	- [x] Create "Get Equipment Hours for Maintenance Ticket ID"
+	- [x] Update "Map Row to Maintenance Performed" to support "performed on date" and "hours"
+	- [x] Update "Map Row to Maintenance Ticket" to support "archived notes"
+- Equipment Objects
+	- [x] Update "Equipment" model to support "type ID"
+	- [x] Update "Archive Equipment DTO" to support "archive notes"
+	- [x] Update "Create Equipment DTO" to support "type ID"
+	- [x] Update "Update Equipment DTO" to support "type ID" and "archived notes"
+- Equipment DAO / JDBC Equipment DAO
+	- [x] Update "Create Equipment" to support "type ID"
+	- [x] Update "Map Row to Equipment" to support "type ID" and "archived notes"
+	- [x] Update "Update Equipment" to support "type ID" and "archived notes"
+	- [x] Update "Archive Equipment" to support "archived notes"
+
+Wednesday
+- Equipment Controller
+	- [x] Get All Maintenance Performed by Equipment ID (sorted by most recent)
+- Maintenance DAO / JDBC Maintenance DAO
+	- [x] Create "Get All Maintenance Performed by Equipment ID"
+
+Thursday
+- 
+
+Friday
+- 
+
+Saturday
+-

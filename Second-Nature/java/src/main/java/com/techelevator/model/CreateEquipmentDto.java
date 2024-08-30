@@ -9,6 +9,7 @@ public class CreateEquipmentDto {
     @NotEmpty(message = "Please enter a model.")
     private String model;
     private String name;
+    private int typeId;
     @NotEmpty(message = "Please enter the machines starting hours.")
     private int startingHours;
     private String notes;
@@ -40,6 +41,14 @@ public class CreateEquipmentDto {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
     }
 
     public int getStartingHours() {

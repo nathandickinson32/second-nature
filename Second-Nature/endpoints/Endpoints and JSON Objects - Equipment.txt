@@ -1,0 +1,136 @@
+Endpoint and JSON Objects - Equipment
+
+Create
+/equipment/create
+Request Type: POST // Should be PUT
+Inserts a new equipment record into the database. Returns the new equipment object
+HTTP Status: 201 CREATED
+Expects: A Create Equipment DTO JSON Object
+Returns: An Equipment JSON Object
+
+Read
+/equipment/get-all
+Request Type: GET
+Returns a list of equipment and their details.
+HTTP Status: 200 OK
+Expected: Nothing.
+Returns: List of Equipment JSON Objects.
+
+/equipment/{equipmentId}
+Request Type: GET
+Returns all the details of a piece of equipment
+HTTP Status: 200 OK
+Expected: Nothing
+Returns: An Equipment JSON object
+
+/equipment/identity-list
+Request Type: GET
+Returns a list of equipment serial numbers, models, and names.
+HTTP Status: 200 OK
+Expects: Nothing
+Returns: A list of Equipment Identity DTO JSON objects
+
+/equipment/{equipmentId}/maintenance-performed
+Request Type: GET
+Returns a list of all maintenance performed on a piece of equipment. Sorted by most recent. (DESC by ID)
+HTTP Status: 200 OK
+Expects: An equipment ID as a path variable.
+Returns: An array of maintenance received JSON objects.
+
+Update
+/equipment/update
+Request Type: POST
+Updates an existing equipment record and returns the updated equipment object.
+HTTP Status: 202 ACCEPTED
+Expects: An Update Equipment DTO JSON Object
+Returns: An Equipment JSON Object
+
+/equipment/update-activity
+Request Type: POST
+Updates an existing equipment record's activity status and returns the updated equipment object.
+HTTP Status: 202 ACCEPTED
+Expects: An Update Equipment Activity DTO JSON Object.
+Returns: An Equipment JSON Object.
+
+/equipment/archive
+Request Type: POST
+Updates and existing equipment records archive status and returns the updated equipment object.
+HTTP Status: 202 ACCEPTED
+Expects: An Archive Equipment DTO JSON Object.
+Returns: An Equipment JSON Object.
+
+Delete
+/equipment/delete/{equipmentId}
+Request Type: DELETE
+Deletes an existing equipment record.
+HTTP Status: None
+Expects: Path variable
+Returns: Nothing
+
+JSON Objects:
+Equipment
+{
+	"equipmentId" : 0,
+	"serialNumber" : "Equipment Serial Number",
+	"model" : "Equipment Model",
+	"name" : "Equipment Name",
+	"typeId" : -1,
+	"startingHours" : 0,
+	"enteredByUserId" : 0,
+	"enteredOnDate" : "2024-08-08",
+	"notes" : "Equipment Notes",
+	"isActive" : true,
+	"activeNotes" : "Equipment active notes",
+	"updatedByUserId" : 0,
+	"updatedOnDate" : "2024-08-08",
+	"archived" : false,
+}
+
+Equipment Identity
+{
+	"equipmentId" : 0,
+	"serialNumber" : "Equipment Serial Number",
+	"model" : "Equipment Model",
+	"name" : "Equipment Name",
+}
+
+Archive Equipment DTO
+{
+	"equipmentId" : 0,
+	"archived" : true,
+	"archivedNotes" : "Notes about why a piece of equipment was archived"
+}
+
+Create Equipment DTO
+{
+	"serialNumber" : "Equipment Serial Number",
+	"model" : "Equipment Model",
+	"name" : "Equipment Name",
+	"typeId" : -1,
+	"startingHours" : 0,
+	"notes" : "Equipment Notes",
+	"active" : true,
+	"activeNotes" : "Equipment active notes",
+	"archived" : false
+}
+
+Update Equipment Activity DTO
+{
+	"equipmentId" : 0,
+	"active" : true,
+	"activeNotes" : "Equipment active notes"
+}
+
+Update Equipment DTO
+{
+	"equipmentId" : 0,
+	"serialNumber" : "Equipment Serial Number",
+	"model" : "Equipment Model",
+	"name" : "Equipment Name",
+	"typeId" : -1,
+	"notes" : "Equipment Notes",
+	"active" : true,
+	"activeNotes" : "Equipment active notes",
+	"archived" : false,
+	"archivedNotes" : "Notes about why a piece of equipment was archived"
+}

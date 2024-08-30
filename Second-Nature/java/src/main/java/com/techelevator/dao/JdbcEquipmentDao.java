@@ -24,7 +24,7 @@ public class JdbcEquipmentDao implements EquipmentDao {
     @Override
     public Equipment createEquipment(CreateEquipmentDto createEquipmentDto, int userId) {
         int equipmentId = -1;
-        String sql = "INSERT INTO equipment (serial_number, model, name, starting_hours, entered_by_user_id, entered_on_date, notes, is_active, active_notes, is_archived) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING equipment_id;";
+        String sql = "INSERT INTO equipment (serial_number, model, name, type_id, starting_hours, entered_by_user_id, entered_on_date, notes, is_active, active_notes, is_archived) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING equipment_id;";
 
         try {
             equipmentId = template.queryForObject(
@@ -33,6 +33,7 @@ public class JdbcEquipmentDao implements EquipmentDao {
                     createEquipmentDto.getSerialNumber(),
                     createEquipmentDto.getModel(),
                     createEquipmentDto.getName(),
+                    createEquipmentDto.getTypeId(),
                     createEquipmentDto.getStartingHours(),
                     userId,
                     new Date(),
@@ -112,10 +113,9 @@ public class JdbcEquipmentDao implements EquipmentDao {
         return equipmentIdentityDtoList;
     }
 
-
     @Override
     public Equipment updateEquipment(UpdateEquipmentDto updateEquipmentDto, int userId) {
-        String sql = "UPDATE equipment SET serial_number = ?, model = ?, name = ?, notes = ?, is_active = ?, active_notes = ?, updated_by_user_id = ?, updated_on_date = ?, is_archived = ? WHERE equipment_id = ?;";
+        String sql = "UPDATE equipment SET serial_number = ?, model = ?, name = ?, type_id = ?, notes = ?, is_active = ?, active_notes = ?, updated_by_user_id = ?, updated_on_date = ?, is_archived = ? WHERE equipment_id = ?;";
 
         try {
             template.update(
@@ -123,6 +123,7 @@ public class JdbcEquipmentDao implements EquipmentDao {
                     updateEquipmentDto.getSerialNumber(),
                     updateEquipmentDto.getModel(),
                     updateEquipmentDto.getName(),
+                    updateEquipmentDto.getTypeId(),
                     updateEquipmentDto.getNotes(),
                     updateEquipmentDto.isActive(),
                     updateEquipmentDto.getActiveNotes(),
@@ -177,7 +178,7 @@ public class JdbcEquipmentDao implements EquipmentDao {
 
     @Override
     public Equipment archiveEquipment(ArchiveEquipmentDto archiveEquipmentDto, int userId) {
-        String sql = "UPDATE equipment SET updated_by_user_id = ?, updated_on_date = ?, is_archived = ? WHERE equipment_id = ?;";
+        String sql = "UPDATE equipment SET updated_by_user_id = ?, updated_on_date = ?, is_archived = ?, archived_notes = ? WHERE equipment_id = ?;";
 
         try {
             template.update(
@@ -185,6 +186,7 @@ public class JdbcEquipmentDao implements EquipmentDao {
                     userId,
                     new Date(),
                     archiveEquipmentDto.isArchived(),
+                    archiveEquipmentDto.getArchivedNotes(),
                     archiveEquipmentDto.getEquipmentId()
             );
         } catch(CannotGetJdbcConnectionException e) {
@@ -202,17 +204,17 @@ public class JdbcEquipmentDao implements EquipmentDao {
         equipment.setSerialNumber(results.getString("serial_number"));
         equipment.setModel(results.getString("model"));
         equipment.setName(results.getString("name"));
+        equipment.setTypeId(results.getInt("type_id"));
         equipment.setStartingHours(results.getInt("starting_hours"));
         equipment.setEnteredByUserId(results.getInt("entered_by_user_id"));
         equipment.setEnteredOnDate(results.getDate("entered_on_date"));
         equipment.setNotes(results.getString("notes"));
         equipment.setActive(results.getBoolean("is_active"));
         equipment.setActiveNotes(results.getString("active_notes"));
-//        These subsequent rows are not returned from the equipment table
-//        The /equipment/get-all endpoint is erroring out
         equipment.setUpdatedByUserId(results.getInt("updated_by_user_id"));
         equipment.setUpdatedOnDate(results.getDate("updated_on_date"));
         equipment.setArchived(results.getBoolean("is_archived"));
+        equipment.setArchivedNotes(results.getString("archived_notes"));
         return equipment;
     }
 }

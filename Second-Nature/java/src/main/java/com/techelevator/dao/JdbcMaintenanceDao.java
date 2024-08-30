@@ -51,27 +51,34 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
         }
 
         for (CreateMaintenancePerformedDto createMaintenancePerformedDto : createMaintenanceTicketDTO.getCreateMaintenancePerformedDto()){
-            createMaintenancePerformed(createMaintenancePerformedDto, ticketId);
+            createMaintenancePerformed(
+                    createMaintenancePerformedDto,
+                    ticketId,
+                    createMaintenanceTicketDTO.getEquipmentId(),
+                    createMaintenanceTicketDTO.getHours()
+            );
         }
 
         return getMaintenanceTicketById(ticketId);
     }
 
-    private MaintenancePerformed createMaintenancePerformed(CreateMaintenancePerformedDto createMaintenancePerformedDto, int ticketId){
+    private MaintenancePerformed createMaintenancePerformed(CreateMaintenancePerformedDto createMaintenancePerformedDto, int ticketId, int equipmentId, int hours){
         int maintenancePerformedId = -1;
 
-        String sql = "INSERT INTO maintenance_performed (equipment_id, ticket_id, description, performed_by, notes) "
-                + "VALUES (?, ?, ?, ?, ?) RETURNING maintenance_performed_id;";
+        String sql = "INSERT INTO maintenance_performed (equipment_id, ticket_id, description, performed_by, performed_on_date, notes, hours) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING maintenance_performed_id;";
 
         try {
             maintenancePerformedId = template.queryForObject(
                     sql,
                     int.class,
-                    createMaintenancePerformedDto.getEquipmentId(),
+                    equipmentId,
                     ticketId,
                     createMaintenancePerformedDto.getDescription(),
                     createMaintenancePerformedDto.getPerformedBy(),
-                    createMaintenancePerformedDto.getNotes()
+                    LocalDateTime.now(), // Performed on date
+                    createMaintenancePerformedDto.getNotes(),
+                    hours // Current machine hours
             );
         } catch (CannotGetJdbcConnectionException e){
             throw new CannotGetJdbcConnectionException("[JDBC Maintenance DAO] Unable to connect to the database.");
@@ -158,10 +165,64 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
         return maintenancePerformed;
     }
 
+    private int getEquipmentIdForMaintenanceTicketId(int ticketId){
+        int equipmentId = -1;
+        String sql = "SELECT equipment_id FROM maintenance_tickets WHERE ticket_id = ?;";
+
+        try {
+            SqlRowSet results = template.queryForRowSet(sql, ticketId);
+            if (results.next()){
+                equipmentId = results.getInt("equipment_id");
+            }
+        } catch(CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Maintenance DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Maintenance DAO] Error getting equipment hours for maintenance ticket id: " + ticketId);
+        }
+
+        return equipmentId;
+    }
+
+    private int getEquipmentHoursForMaintenanceTicketId(int ticketId){
+        int hours = -1;
+        String sql = "SELECT hours FROM maintenance_tickets WHERE ticket_id = ?;";
+
+        try {
+            SqlRowSet results = template.queryForRowSet(sql, ticketId);
+            if (results.next()){
+                hours = results.getInt("hours");
+            }
+        } catch(CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Maintenance DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Maintenance DAO] Error getting equipment hours for maintenance ticket id: " + ticketId);
+        }
+
+        return hours;
+    }
+
+    @Override
+    public List<MaintenancePerformed> getMaintenancePerformedByEquipmentId(int equipmentId){
+        List<MaintenancePerformed> maintenancePerformed = new ArrayList<>();
+        String sql = "SELECT * FROM maintenance_performed WHERE equipment_id = ? ORDER BY maintenance_performed_id DESC LIMIT 10;";
+
+        try {
+            SqlRowSet results = template.queryForRowSet(sql, equipmentId);
+            while (results.next()){
+                maintenancePerformed.add(mapRowToMaintenancePerformed(results));
+            }
+        } catch(CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Equipment DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Equipment DAO] Cannot get a list of maintenance performed by equipment ID: " + equipmentId);
+        }
+
+        return maintenancePerformed;
+    }
+
     // Update
     @Override
     public MaintenanceTicket updateMaintenanceTicket(UpdateMaintenanceTicketDto updateMaintenanceTicketDto, int userId){
-        MaintenanceTicket maintenanceTicket = new MaintenanceTicket();
         String sql = "UPDATE maintenance_tickets SET notes = ?, is_complete = ?, updated_by_user_id = ?, updated_on_date = ? WHERE ticket_id = ?;";
 
         try {
@@ -175,7 +236,12 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
             );
 
             for (CreateMaintenancePerformedDto createMaintenancePerformedDto : updateMaintenanceTicketDto.getCreateMaintenancePerformedDto()){
-                createMaintenancePerformed(createMaintenancePerformedDto, updateMaintenanceTicketDto.getTicketId());
+                createMaintenancePerformed(
+                        createMaintenancePerformedDto,
+                        updateMaintenanceTicketDto.getTicketId(),
+                        getEquipmentIdForMaintenanceTicketId(updateMaintenanceTicketDto.getTicketId()), // Get the equipment ID.
+                        getEquipmentHoursForMaintenanceTicketId(updateMaintenanceTicketDto.getTicketId()) // Get equipment hours from the maintenance ticket.
+                );
             }
         } catch(CannotGetJdbcConnectionException e) {
             throw new CannotGetJdbcConnectionException("[JDBC Maintenance DAO] Problem connecting to the database.");
@@ -235,7 +301,7 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
 
     @Override
     public MaintenanceTicket archiveMaintenanceTicket(ArchiveMaintenanceTicketDto archiveMaintenanceTicketDto, int userId){
-        String sql = "UPDATE maintenance_tickets SET is_archived = ?, updated_by_user_id = ?, updated_on_date = ? WHERE ticket_id = ?;";
+        String sql = "UPDATE maintenance_tickets SET is_archived = ?, updated_by_user_id = ?, updated_on_date = ?, archived_notes = ? WHERE ticket_id = ?;";
 
         try {
             template.update(
@@ -243,6 +309,7 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
                     archiveMaintenanceTicketDto.isArchived(),
                     userId,
                     new Date(),
+                    archiveMaintenanceTicketDto.getArchivedNotes(),
                     archiveMaintenanceTicketDto.getTicketId()
             );
         } catch(CannotGetJdbcConnectionException e) {
@@ -266,6 +333,7 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
         maintenanceTicket.setUpdatedByUserId(results.getInt("updated_by_user_id"));
         maintenanceTicket.setUpdatedOnDate(results.getDate("updated_on_date"));
         maintenanceTicket.setArchived(results.getBoolean("is_archived"));
+        maintenanceTicket.setArchivedNotes(results.getString("archived_notes"));
         maintenanceTicket.setMaintenancePerformedList(getMaintenancePerformedByTicket(results.getInt("ticket_id")));
         return maintenanceTicket;
     }
@@ -277,7 +345,9 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
         performed.setTicketId(results.getInt("ticket_id"));
         performed.setDescription(results.getString("description"));
         performed.setPerformedBy(results.getString("performed_by"));
+        performed.setPerformedOnDate((results.getDate("performed_on_date")));
         performed.setNotes(results.getString("notes"));
+        performed.setHours(results.getInt("hours"));
         return performed;
     }
 }

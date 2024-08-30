@@ -24,13 +24,6 @@ public class MaintenanceController {
     private UserDao userDao;
 
     // Create
-    // Need to update path to include ticketId
-//    @PostMapping(path = "/add-maintenance-performed")
-//    public MaintenanceTicket addMaintenancePerformed(@RequestBody CreateMaintenancePerformedDto createMaintenancePerformedDto, Principal principal) {
-//        System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " added performed maintenance.");
-//        return maintenanceDao.createMaintenancePerformed(createMaintenancePerformedDto);
-//    }
-
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/create")
     public MaintenanceTicket createMaintenanceTicket(@RequestBody CreateMaintenanceTicketDto createMaintenanceTicketDto, Principal principal) {
