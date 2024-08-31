@@ -23,6 +23,8 @@ import NewMaintenenceTicketView from '../views/MAINTENANCE/NewMaintenenceTicketV
 import MaintenanceTicketDetails from '../components/MAINTENANCE/MaintenanceTicketDetails.vue';
 import CreateEquipmentView from '../views/EQUIPMENT/CreateEquipmentView.vue';
 import CreateMaintenanceTicketView from '../views/MAINTENANCE/CreateMaintenanceTicketView.vue';
+import EquipmentDetailView2 from '../views/EQUIPMENT/EquipmentDetailView2.vue';
+import EquipmentModifyView from '../views/EQUIPMENT/EquipmentModifyView.vue';
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
@@ -160,6 +162,22 @@ const routes = [
     path: '/equipment/:equipmentId',
     name: 'equipment-detail',
     component: EquipmentDetailView,
+    meta: {
+      requiresAuth  : true
+    }
+  },
+  {
+    path: '/equipment2/:equipmentId',
+    name: 'equipment-detail2',
+    component: EquipmentDetailView2,
+    meta: {
+      requiresAuth  : true
+    }
+  },
+  {
+    path: '/equipmentModify/:equipmentId',
+    name: 'equipment-modify',
+    component: EquipmentModifyView,
     meta: {
       requiresAuth  : true
     }

@@ -40,7 +40,7 @@ export default {
     },
     detailView(equipment) {
       // Need to actually make components for this view
-      router.push({ name: 'equipment-detail', params: { equipmentId: equipment.equipmentId } });
+      router.push({ name: 'equipment-detail2', params: { equipmentId: equipment.equipmentId } });
     }
   }
 }

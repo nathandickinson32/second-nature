@@ -42,7 +42,8 @@ export default {
         equipmentId: {
             type: Number,
             required: true
-        }
+        },
+      
     },
     data() {
         return {
@@ -62,7 +63,8 @@ export default {
                 equipmentId: 0,
                 serialNumber: '',
                 model: '',
-                name: '',
+                name: '', 
+                typeId: '',
                 // hours: 0,
                 notes: '',
                 active: true,
@@ -80,6 +82,7 @@ export default {
                 this.updateEquipment.serialNumber = this.equipment.serialNumber;    
                 this.updateEquipment.model = this.equipment.model;  
                 this.updateEquipment.name = this.equipment.name;
+                this.updateEquipment.typeId = this.equipment.typeId;
                 // this.updateEquipment.hours = this.equipment.startingHours;
                 this.updateEquipment.notes = this.equipment.notes;
                 this.updateEquipment.active = this.equipment.active;
@@ -91,15 +94,15 @@ export default {
         })
     },
     methods: {
-        goBack() {
-            this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'detail');
+        goBack(equipment) {
+            this.router.push({ name: 'equipment-detail2', params: { equipmentId: this.updateEquipment.equipmentId } });
         },
         saveEquipment() {
             EquipmentService.updateEquipment(this.updateEquipment)
             .then(response => {
                 console.log(response.data);
                 alert('Equipment Modifications updated!');
-                this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'detail');
+                // this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'detail');
                 this.$router.push({ name: 'equipmentList' });
             })
             .catch(error => {
