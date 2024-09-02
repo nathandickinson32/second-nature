@@ -95,7 +95,7 @@ export default {
     },
     methods: {
         goBack(equipment) {
-            this.router.push({ name: 'equipment-detail2', params: { equipmentId: this.updateEquipment.equipmentId } });
+            this.$router.push({ name: 'equipment-detail2', params: { equipmentId: this.updateEquipment.equipmentId } });
         },
         saveEquipment() {
             EquipmentService.updateEquipment(this.updateEquipment)
@@ -103,7 +103,9 @@ export default {
                 console.log(response.data);
                 alert('Equipment Modifications updated!');
                 // this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'detail');
-                this.$router.push({ name: 'equipmentList' });
+                // this.$router.push({ name: 'equipmentList' });
+                this.$router.push({ name: 'equipment-detail2', params: { equipmentId: this.updateEquipment.equipmentId } });
+
             })
             .catch(error => {
                 console.log(error);

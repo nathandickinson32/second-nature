@@ -29,11 +29,12 @@
                     <label for="label">Notes: </label>
                     <span id="notes"> {{ equipment.notes }}</span>
                 </div>
+                <label @click="toggleActivity" class="clickable-label">Change Active Status</label>
+
         </div>
         <div class="button-section">
             <router-link v-bind:to="{ name: 'equipment-modify' }">Modify</router-link>
             <span class="separator"> | </span>
-                <label @click="toggleActivity" class="clickable-label">Change Active Status</label>
                 <span class="separator"> | </span>
                 <label @click="archive" class="clickable-label">Archive</label>
                 <span class="separator"> | </span>
