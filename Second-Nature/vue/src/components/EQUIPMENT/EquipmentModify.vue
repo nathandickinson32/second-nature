@@ -38,13 +38,13 @@
 import EquipmentService from '../../services/EquipmentService';
 
 export default {
-    props: {
-        equipmentId: {
-            type: Number,
-            required: true
-        },
+    // props: {
+    //     equipmentId: {
+    //         type: Number,
+    //         required: true
+    //     },
       
-    },
+    // },
     data() {
         return {
             equipment: {
@@ -94,7 +94,7 @@ export default {
         })
     },
     methods: {
-        goBack(equipment) {
+        goBack() {
             this.$router.push({ name: 'equipment-detail2', params: { equipmentId: this.updateEquipment.equipmentId } });
         },
         saveEquipment() {

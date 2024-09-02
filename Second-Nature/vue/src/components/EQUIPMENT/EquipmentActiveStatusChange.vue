@@ -31,12 +31,12 @@
 import EquipmentService from '../../services/EquipmentService';    
 
 export default {
-  props: {
-    equipmentId: {
-      type: Number,
-      required: true
-    }
-  },
+  // props: {
+  //   equipmentId: {
+  //     type: Number,
+  //     required: true
+  //   }
+  // },
   data() {
     return {
       equipment: {
@@ -72,14 +72,14 @@ export default {
   },
   methods: {
     getEquipment() {
-      EquipmentService.getEquipmentById(this.equipmentId)
+      EquipmentService.getEquipmentById(this.$route.params.equipmentId)
         .then((response) => {
           this.equipment = response.data;
           this.equipment.activeNotes = '';
         })
     },
     goBack() {
-        this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'detail');
+      this.$router.push({ name: 'equipment-detail2', params: { equipmentId: this.equipment.equipmentId } });
     },
     saveActiveStatus() {
       EquipmentService.updateEquipmentActivity(this.equipmentActivity)

@@ -29,12 +29,13 @@
                     <label for="label">Notes: </label>
                     <span id="notes"> {{ equipment.notes }}</span>
                 </div>
-                <label @click="toggleActivity" class="clickable-label">Change Active Status</label>
-
         </div>
         <div class="button-section">
             <router-link v-bind:to="{ name: 'equipment-modify' }">Modify</router-link>
             <span class="separator"> | </span>
+                <!-- <label @click="toggleActivity" class="clickable-label">Change Active Status</label> -->
+                <router-link v-bind:to="{ name: 'equipment-status' }">Status</router-link>
+
                 <span class="separator"> | </span>
                 <label @click="archive" class="clickable-label">Archive</label>
                 <span class="separator"> | </span>
@@ -56,11 +57,12 @@ export default {
    
  
     methods: {
-        modify(equipment) {
-            this.router.push({ name: 'equipment-modify', params: { equipmentId: equipment.equipmentId } });
-        },
+        // modify(equipment) {
+        //     this.router.push({ name: 'equipment-modify', params: { equipmentId: equipment.equipmentId } });
+        // },
         toggleActivity() {
-            this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'activeStatus');
+
+            // this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'activeStatus');
 
         },
         archive() {
