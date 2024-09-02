@@ -37,7 +37,9 @@
                 <router-link v-bind:to="{ name: 'equipment-status' }">Status</router-link>
 
                 <span class="separator"> | </span>
-                <label @click="archive" class="clickable-label">Archive</label>
+                <!-- <label @click="archive" class="clickable-label">Archive</label> -->
+                <button id="archive-equipment" @click="archiveEquipment" v-if="isManager" class="button">Archive</button>
+
                 <span class="separator"> | </span>
                 <router-link v-bind:to="{ name: 'equipmentList' }">Back to Equipment List</router-link>
         </div>
@@ -48,6 +50,11 @@
 import EquipmentService from '../../services/EquipmentService';
 
 export default {
+     computed: {
+    isManager() {
+      return this.$store.getters.isManager;
+    }
+  },
     props: {
         equipment: {
             type: Object,
