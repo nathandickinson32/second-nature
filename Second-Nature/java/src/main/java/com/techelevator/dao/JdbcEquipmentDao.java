@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @Component
-public class dJdbcEquipmentDao implements EquipmentDao {
+public class JdbcEquipmentDao implements EquipmentDao {
 
     private JdbcTemplate template;
 
