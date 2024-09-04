@@ -29,9 +29,19 @@
         <label for="label">Notes: </label>
         <span id="notes"> {{ equipment.notes }}</span>
       </div>
+      
 
       <form v-if="isManager" id="equipment-activity-form" @submit.prevent="onSubmit">
+        <div v-for="maintenanceTicket in maintenanceTickets" v-bind:key="maintenanceTicket.maintenanceTicketId">
+        <hr>
+        <span class="label">Maintenance Performed</span> <br>
+        <span class="label">Description: </span> {{ maintenanceTicket.description }} <br>
+        <span class="label">Performed By: </span>{{ maintenanceTicket.performedBy }} <br>
+        <span class="label">Notes: </span> <br>
+        {{ maintenanceTicket.notes }}
+      </div>
 
+      <!-- <span>{{ maintenanceTicket.description }}</span> -->
       <span>
         <input
         v-model="statusEquipment.active"
@@ -96,6 +106,8 @@ export default {
           activeNotes: '',
           updatedByUserId: '',
       },
+      maintenanceTickets: [],
+
       statusChange: false,
     };
   },
@@ -114,6 +126,8 @@ export default {
   },
   mounted() {
     this.getEquipment();
+    this.getEquipmentMaintenanceTickets();
+
   },
   methods: {
     getEquipment(){
@@ -148,7 +162,16 @@ export default {
        .catch(error => {
          console.log(error);
        });
-    }
+    },
+    getEquipmentMaintenanceTickets(){
+       
+          EquipmentService.getEquipmentMaintenanceById(this.$route.params.equipmentId)
+            .then((response) => {
+              console.log(response.data);
+              this.maintenanceTickets = response.data;
+            })
+        
+      }
   },
 };
 </script>
