@@ -13,6 +13,8 @@
                   {{ option }}
               </option>
           </select>
+          <input type="text" v-model="archivedEquipment.archivedNotes" />
+
         </div>
       </form>
     </div>
@@ -33,7 +35,8 @@ export default {
       archivedEquipment: {
           equipmentId: 0,
           updatedByUserId: '',
-          archived: true
+          archived: '',
+          archivedNotes: ''
       },
       equipment: {
           equipmentId: -1,
