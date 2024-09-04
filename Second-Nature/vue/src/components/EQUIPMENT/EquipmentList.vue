@@ -6,7 +6,7 @@
             <label @click="showActiveEquipment" class="clickable-label">Active</label>
             <span class="separator"> | </span>
             <label @click="showInactiveEquipment" class="clickable-label">Inactive</label>
-            <span class="separator"> | </span>
+            <span class="separator" v-if="isManager"> | </span>
             <!-- <label @click="showMowers" class="clickable-label">Mowers</label>
             <span class="separator"> | </span>
             <label @click="showBlowers" class="clickable-label">Blowers</label>
