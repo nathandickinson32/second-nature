@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     getEquipment(){
-      EquipmentService.getEquipmentById(this.equipmentId)
+      EquipmentService.getEquipmentById(this.$route.params.equipmentId)
         .then((response) => {
           this.equipment = response.data;
           this.archivedEquipment.equipmentId = this.equipment.equipmentId;
@@ -72,7 +72,7 @@ export default {
         })
     },
     goBack() {
-        this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'detail');
+      this.$router.push({ name: 'equipment-detail2', params: { equipmentId: this.equipmentId } });
     },
     saveArchiveStatus() {
       EquipmentService.archiveEquipment(this.archivedEquipment)

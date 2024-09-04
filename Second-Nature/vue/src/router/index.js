@@ -26,6 +26,7 @@ import CreateMaintenanceTicketView from '../views/MAINTENANCE/CreateMaintenanceT
 import EquipmentDetailView2 from '../views/EQUIPMENT/EquipmentDetailView2.vue';
 import EquipmentModifyView from '../views/EQUIPMENT/EquipmentModifyView.vue';
 import EquipmentStatusView from '../views/EQUIPMENT/EquipmentStatusView.vue';
+import EquipmentDetailArchive from '../views/EQUIPMENT/EquipmentDetailArchive.vue';
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
@@ -187,6 +188,14 @@ const routes = [
     path: '/equipmentStatus/:equipmentId',
     name: 'equipment-status',
     component: EquipmentStatusView,
+    meta: {
+      requiresAuth  : true
+    }
+  },
+  {
+    path: '/equipmentArchive/:equipmentId',
+    name: 'equipment-archive',
+    component: EquipmentDetailArchive,
     meta: {
       requiresAuth  : true
     }

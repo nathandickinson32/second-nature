@@ -1,99 +1,154 @@
 <template>
-    <div class="content">
-        <div class="small-container">
-                <div class="detail-display">
-                    <label for="label">Serial Number: </label>
-                    <span> {{ equipment.serialNumber }}</span> 
-                </div>
-                <div class="detail-display">
-                    <label for="label">Model: </label>
-                    <span> {{ equipment.model }}</span>
-                </div>
-                <div class="detail-display">
-                    <label for="label">Name: </label>
-                    <span> {{ equipment.name }}</span>
-                </div>
-                <div class="detail-display">
-                    <label for="label">Current Hours: </label>
-                    <span> {{ equipment.startingHours }}</span>
-                </div>
-                <div class="detail-display">
-                    <label for="label">Currently Active: </label>
-                    <span> {{ equipment.active }}</span>
-                </div>
-                <div class="detail-display">
-                    <label for="label">Notes about Active Status: </label>
-                    <span> {{ equipment.activeNotes }}</span>
-                </div>
-                <div class="detail-display">
-                    <label for="label">Notes: </label>
-                    <span id="notes"> {{ equipment.notes }}</span>
-                </div>
-        </div>
-        <div class="button-section">
-            <router-link v-bind:to="{ name: 'equipment-modify' }">Modify</router-link>
-            <span class="separator"> | </span>
-                <!-- <label @click="toggleActivity" class="clickable-label">Change Active Status</label> -->
-                <router-link v-bind:to="{ name: 'equipment-status' }">Status</router-link>
+  <div class="content">
+    <div class="small-container">
+      <div class="detail-display">
+        <label for="label">Serial Number: </label>
+        <span> {{ equipment.serialNumber }}</span>
+      </div>
+      <div class="detail-display">
+        <label for="label">Model: </label>
+        <span> {{ equipment.model }}</span>
+      </div>
+      <div class="detail-display">
+        <label for="label">Name: </label>
+        <span> {{ equipment.name }}</span>
+      </div>
+      <div class="detail-display">
+        <label for="label">Current Hours: </label>
+        <span> {{ equipment.startingHours }}</span>
+      </div>
+      <div class="detail-display">
+        <label for="label">Currently Active: </label>
+        <span> {{ equipment.active ? 'Yes' : 'No'}}</span>
+      </div>
+      <div class="detail-display">
+        <label for="label">Notes about Active Status: </label>
+        <span> {{ equipment.activeNotes }}</span>
+      </div>
+      <div class="detail-display">
+        <label for="label">Notes: </label>
+        <span id="notes"> {{ equipment.notes }}</span>
+      </div>
+      
+      <span>
+        <input
+        v-model="statusEquipment.active"
+          type="radio"
+          id="activeBtn"
+          :value="true"
+          :checked="equipment.active == true"
+          @change="toggleActivity"
+          
+        />
+        <label for="activeBtn">Active</label>
+        <input
+        v-model="statusEquipment.active"
 
-                <span class="separator"> | </span>
-                <!-- <label @click="archive" class="clickable-label">Archive</label> -->
-                <button id="archive-equipment" @click="archiveEquipment" v-if="isManager" class="button">Archive</button>
-
-                <span class="separator"> | </span>
-                <router-link v-bind:to="{ name: 'equipmentList' }">Back to Equipment List</router-link>
-        </div>
+          type="radio"
+          id="inactiveBtn"
+          :value="false"
+          :checked="equipment.active == false"
+          @change="toggleActivity"
+        />
+        <label for="inactiveBtn">Inactive</label>
+        <input type="text" v-show="statusChange"/>
+        <button v-show="statusChange">Submit</button>
+      </span>
     </div>
+    <div class="button-section">
+      <router-link v-bind:to="{ name: 'equipment-modify' }">Modify</router-link>
+      <span class="separator"> | </span>
+      <!-- <label @click="toggleActivity" class="clickable-label">Change Active Status</label> -->
+      <router-link v-bind:to="{ name: 'equipment-status' }">Status</router-link>
+
+      <span class="separator"> | </span>
+      <!-- <label @click="archive" class="clickable-label">Archive</label> -->
+      <router-link
+        v-bind:to="{ name: 'equipment-archive' }"
+        v-if="isManager"
+        class="button"
+        >Archive</router-link
+      >
+
+      <span class="separator"> | </span>
+      <router-link v-bind:to="{ name: 'equipmentList' }"
+        >Back to Equipment List</router-link
+      >
+      
+    </div>
+  </div>
 </template>
 
 <script>
-import EquipmentService from '../../services/EquipmentService';
+import EquipmentService from "../../services/EquipmentService";
 
 export default {
-     computed: {
+  data() {
+    return {
+        statusEquipment: {
+          equipmentId: 0,
+          updatedByUserId: '',
+          active: true
+      },
+      statusChange: false,
+    };
+  },
+  computed: {
+   
     isManager() {
       return this.$store.getters.isManager;
-    }
-  },
-    props: {
-        equipment: {
-            type: Object,
-            required: true
-        }
     },
-   
- 
-    methods: {
-        // modify(equipment) {
-        //     this.router.push({ name: 'equipment-modify', params: { equipmentId: equipment.equipmentId } });
-        // },
-        toggleActivity() {
+    
+  },
+  props: {
+    equipment: {
+      type: Object,
+      required: true,
+    },
+  },
+  mounted() {
+    this.getEquipment();
+  },
+  methods: {
+    getEquipment(){
+      EquipmentService.getEquipmentById(this.$route.params.equipmentId)
+        .then((response) => {
+        //   this.archivedEquipment = response.data;
+          this.statusEquipment.equipmentId = response.data.equipmentId;
+          this.statusEquipment.active = response.data.active;
+        })
+    },
+    toggleActivity() {
+      // this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'activeStatus');
+        // if(this.statusEquipment.active!=this.equipment.active){
+        //     this.statusChange = true;
 
-            // this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'activeStatus');
+        // }else{
+        //     this.statusChange= false;
+        // }
+        this.statusChange = this.statusEquipment.active !== this.equipment.active;
 
-        },
-        archive() {
-            this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'archive');
-
-        },
-       
-    }
-}
+    },
+    archive() {
+      // this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'archive');
+    },
+  },
+};
 </script>
 
 <style scoped>
 label {
-    font-weight: normal;
-    font-size: 0.8em;
+  font-weight: normal;
+  font-size: 0.8em;
 }
 
 .detail-display span {
-    display: block;
-    margin-bottom: 10px;
+  display: block;
+  margin-bottom: 10px;
 }
 
 .content {
-    width: 100%;
-    box-sizing: border-box;
+  width: 100%;
+  box-sizing: border-box;
 }
 </style>
