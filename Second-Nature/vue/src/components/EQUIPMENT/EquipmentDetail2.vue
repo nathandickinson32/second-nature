@@ -30,7 +30,7 @@
         <span id="notes"> {{ equipment.notes }}</span>
       </div>
 
-      <form id="equipment-activity-form" @submit.prevent="onSubmit">
+      <form v-if="isManager" id="equipment-activity-form" @submit.prevent="onSubmit">
 
       <span>
         <input
@@ -61,12 +61,12 @@
     </div>
     
     <div class="button-section">
-      <router-link v-bind:to="{ name: 'equipment-modify' }">Modify</router-link>
-      <span class="separator"> | </span>
+      <router-link v-if="isManager" v-bind:to="{ name: 'equipment-modify' }">Modify</router-link>
+      <span v-if="isManager" class="separator"> | </span>
       <!-- <label @click="toggleActivity" class="clickable-label">Change Active Status</label> -->
-      <router-link v-bind:to="{ name: 'equipment-status' }">Status</router-link>
+      <!-- <router-link v-bind:to="{ name: 'equipment-status' }">Status</router-link> -->
 
-      <span class="separator"> | </span>
+      <!-- <span class="separator"> | </span> -->
       <!-- <label @click="archive" class="clickable-label">Archive</label> -->
       <router-link
         v-bind:to="{ name: 'equipment-archive' }"
@@ -75,7 +75,7 @@
         >Archive</router-link
       >
 
-      <span class="separator"> | </span>
+      <span class="separator" v-if="isManager"> | </span>
       <router-link v-bind:to="{ name: 'equipmentList' }"
         >Back to Equipment List</router-link
       >
