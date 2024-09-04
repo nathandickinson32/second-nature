@@ -204,7 +204,7 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
     @Override
     public List<MaintenancePerformed> getMaintenancePerformedByEquipmentId(int equipmentId){
         List<MaintenancePerformed> maintenancePerformed = new ArrayList<>();
-        String sql = "SELECT * FROM maintenance_performed WHERE equipment_id = ? ORDER BY maintenance_performed_id DESC LIMIT 10;";
+        String sql = "SELECT * FROM maintenance_performed WHERE equipment_id = ? ORDER BY maintenance_performed_id DESC LIMIT 10 ;";
 
         try {
             SqlRowSet results = template.queryForRowSet(sql, equipmentId);

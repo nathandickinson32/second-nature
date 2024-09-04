@@ -23,7 +23,7 @@ public class JdbcKudosDao implements KudosDao{
 
     @Override
     public Kudos insertKudos(Kudos kudos) {
-        String sql = "INSERT INTO kudos (giver_user_id, receiver_user_id, date, title, notes, archive) VALUES (?, ?, ?, ?, ?, ?) RETURNING kudos_id;";
+        String sql = "INSERT INTO kudos (giver_user_id, receiver_user_id, date, title, notes, is_archived) VALUES (?, ?, ?, ?, ?, ?) RETURNING kudos_id;";
         int newKudosId = -1;
 
         try {

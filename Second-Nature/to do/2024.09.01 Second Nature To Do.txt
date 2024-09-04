@@ -1,0 +1,91 @@
+Second Nature To Do - Week of 9/1/2024
+
+Sprint Backlog
+Backend
+- Type Objects
+	- [] Create "Type" model
+	- [] Update Type DTO
+- Type DAO / JDBC Type DAO
+	- [] Create Type
+	- [] Read Type by ID
+	- [] Read all Types
+	- [] Update Type
+	- [] Delete Type
+- Type Controller
+	- [] Create Type
+	- [] Read all Types
+	- [] Read type by ID
+	- [] Update Type
+	- [] Delete Type
+
+Front End
+- Equipment
+	Equipment List
+		- [] Add functionality to the "maintenance" button
+		- [] Add functionality to the "new ticket" button
+	Equipment Details
+		- [] Display a list of all maintenance performed on that piece of equipment
+		- [] Drop down to select equipment Type
+		- [] Checkbox and required text field to archive equipment (manager, mechanic)
+		- [] Checkbox for active status (manager, mechanic)
+		- [] Update status button to update the equipment status (manager, mechanic)
+- Maintenance
+	Ticket Details
+		- [] Add a checkbox and a required text box to archive a maintenance ticket
+		- [] Add a button to update a maintenance ticket
+		- [] Display the ticket date
+	- [] Create a page for updating maintenance tickets
+	Create a Ticket
+		- [] Update the dropdown to support more than just the equipment_id
+- Kudos
+	Kudos Detail
+		- [] Style archive button
+
+Sunday
+- 
+
+Monday
+-
+
+Tuesday
+-
+
+Wednesday
+-
+
+Thursday
+- 
+
+Friday
+- 
+
+Saturday
+-
+
+
+** KNOWN ISSUES **
+Back End
+Equipment
+- Archiving a piece of equipment does not set the equipment to inactive.
+	Task: Set the is_active db field to false when archiving a piece of equipment
+
+Front End
+Equipment
+- Updating a piece of equipment prints a console log of the object.
+	Task: Remove the console log.
+
+Kudos
+- Creating a Kudos makes a console log of the new object
+	Task: Remove the console log.
+- The list of Kudos prints a console log of the array of kudos objects
+	Task: Remove the console log.
+
+Maintenance
+- Creating a new ticket prints a status code to the console
+	Task: Remove the console log.
+- When adding a maintenance performed, the button "Add maintenance performed" is showing twice.
+	- Remove the first instance of that button.
+- The "Add Maintenance Performed" button is not clear
+	Task: Rename the button to indicate that the user is adding ANOTHER maintenance performed.
+- The equipment dropdown for Creating a new maintenance ticket is not clear
+	Task: Add a serial number, model, and name to the dropdown list.
