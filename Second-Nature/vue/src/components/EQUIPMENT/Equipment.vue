@@ -36,7 +36,7 @@ export default {
     },
     newMaintenance(equipment) {
       // Need to actually make components for this view
-      router.push({ name: 'new-maintenance-ticket', params: { equipmentId: equipment.equipmentId } });
+      router.push({ name: 'create-maintenance-ticket', params: { equipmentId: equipment.equipmentId } });
     },
     detailView(equipment) {
       // Need to actually make components for this view
