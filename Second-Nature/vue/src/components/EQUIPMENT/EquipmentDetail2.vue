@@ -29,7 +29,9 @@
         <label for="label">Notes: </label>
         <span id="notes"> {{ equipment.notes }}</span>
       </div>
-      
+
+      <form id="equipment-activity-form" @submit.prevent="onSubmit">
+
       <span>
         <input
         v-model="statusEquipment.active"
@@ -51,10 +53,13 @@
           @change="toggleActivity"
         />
         <label for="inactiveBtn">Inactive</label>
-        <input type="text" v-show="statusChange"/>
-        <button v-show="statusChange">Submit</button>
+        <input type="text" v-model="statusEquipment.activeNotes" v-show="statusChange"/>
+        <button v-show="statusChange" @click="saveActiveStatus">Submit</button>
       </span>
+    </form>
+
     </div>
+    
     <div class="button-section">
       <router-link v-bind:to="{ name: 'equipment-modify' }">Modify</router-link>
       <span class="separator"> | </span>
@@ -87,8 +92,9 @@ export default {
     return {
         statusEquipment: {
           equipmentId: 0,
+          active: true,
+          activeNotes: '',
           updatedByUserId: '',
-          active: true
       },
       statusChange: false,
     };
@@ -132,6 +138,17 @@ export default {
     archive() {
       // this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'archive');
     },
+    saveActiveStatus() {
+      EquipmentService.updateEquipmentActivity(this.statusEquipment)
+      .then(response => {
+         console.log(response.data);
+         alert('Equipment activity updated!');
+         this.$router.push({ name: 'equipmentList' });
+       })
+       .catch(error => {
+         console.log(error);
+       });
+    }
   },
 };
 </script>
