@@ -1,6 +1,54 @@
 <template>
   <div class="content">
+    <div class="button-section">
+      <router-link v-if="isManager" v-bind:to="{ name: 'equipment-modify' }">Modify</router-link>
+      <span v-if="isManager" class="separator"> | </span>
+      <!-- <label @click="toggleActivity" class="clickable-label">Change Active Status</label> -->
+      <!-- <router-link v-bind:to="{ name: 'equipment-status' }">Status</router-link> -->
+
+      <!-- <span class="separator"> | </span> -->
+      <!-- <label @click="archive" class="clickable-label">Archive</label> -->
+      <router-link
+        v-bind:to="{ name: 'equipment-archive' }"
+        v-if="isManager"
+        class="button"
+        >Archive</router-link
+      >
+
+      <span class="separator" v-if="isManager"> | </span>
+      <router-link v-bind:to="{ name: 'equipmentList' }"
+        >Back to Equipment List</router-link
+      >
+      
+    </div>
     <div class="small-container">
+      <form v-if="isManager" id="equipment-activity-form" @submit.prevent="onSubmit">
+
+<span>
+  <input
+  v-model="statusEquipment.active"
+    type="radio"
+    id="activeBtn"
+    :value="true"
+    :checked="equipment.active == true"
+    @change="toggleActivity"
+    
+  />
+  <label for="activeBtn">Active</label>
+  <input
+  v-model="statusEquipment.active"
+
+    type="radio"
+    id="inactiveBtn"
+    :value="false"
+    :checked="equipment.active == false"
+    @change="toggleActivity"
+  />
+  <label for="inactiveBtn">Inactive</label>
+  <input type="text" v-model="statusEquipment.activeNotes" v-show="statusChange"/>
+  <button v-show="statusChange" @click="saveActiveStatus">Submit</button>
+</span>
+</form>
       <div class="detail-display">
         <label for="label">Serial Number: </label>
         <span> {{ equipment.serialNumber }}</span>
@@ -29,58 +77,23 @@
         <label for="label">Notes: </label>
         <span id="notes"> {{ equipment.notes }}</span>
       </div>
+      
 
-      <form v-if="isManager" id="equipment-activity-form" @submit.prevent="onSubmit">
+        <div v-for="maintenanceTicket in maintenanceTickets" v-bind:key="maintenanceTicket.maintenanceTicketId">
+        <hr>
+        <span class="label">Maintenance Performed</span> <br>
+        <span class="label">Description: </span> {{ maintenanceTicket.description }} <br>
+        <span class="label">Performed By: </span>{{ maintenanceTicket.performedBy }} <br>
+        <span class="label">Notes: </span> <br>
+        {{ maintenanceTicket.notes }}
+      </div>
 
-      <span>
-        <input
-        v-model="statusEquipment.active"
-          type="radio"
-          id="activeBtn"
-          :value="true"
-          :checked="equipment.active == true"
-          @change="toggleActivity"
-          
-        />
-        <label for="activeBtn">Active</label>
-        <input
-        v-model="statusEquipment.active"
-
-          type="radio"
-          id="inactiveBtn"
-          :value="false"
-          :checked="equipment.active == false"
-          @change="toggleActivity"
-        />
-        <label for="inactiveBtn">Inactive</label>
-        <input type="text" v-model="statusEquipment.activeNotes" v-show="statusChange"/>
-        <button v-show="statusChange" @click="saveActiveStatus">Submit</button>
-      </span>
-    </form>
+      <!-- <span>{{ maintenanceTicket.description }}</span> -->
+     
 
     </div>
     
-    <div class="button-section">
-      <router-link v-if="isManager" v-bind:to="{ name: 'equipment-modify' }">Modify</router-link>
-      <span v-if="isManager" class="separator"> | </span>
-      <!-- <label @click="toggleActivity" class="clickable-label">Change Active Status</label> -->
-      <!-- <router-link v-bind:to="{ name: 'equipment-status' }">Status</router-link> -->
-
-      <!-- <span class="separator"> | </span> -->
-      <!-- <label @click="archive" class="clickable-label">Archive</label> -->
-      <router-link
-        v-bind:to="{ name: 'equipment-archive' }"
-        v-if="isManager"
-        class="button"
-        >Archive</router-link
-      >
-
-      <span class="separator" v-if="isManager"> | </span>
-      <router-link v-bind:to="{ name: 'equipmentList' }"
-        >Back to Equipment List</router-link
-      >
-      
-    </div>
+    
   </div>
 </template>
 
@@ -96,6 +109,8 @@ export default {
           activeNotes: '',
           updatedByUserId: '',
       },
+      maintenanceTickets: [],
+
       statusChange: false,
     };
   },
@@ -114,6 +129,8 @@ export default {
   },
   mounted() {
     this.getEquipment();
+    this.getEquipmentMaintenanceTickets();
+
   },
   methods: {
     getEquipment(){
@@ -148,7 +165,16 @@ export default {
        .catch(error => {
          console.log(error);
        });
-    }
+    },
+    getEquipmentMaintenanceTickets(){
+       
+          EquipmentService.getEquipmentMaintenanceById(this.$route.params.equipmentId)
+            .then((response) => {
+              console.log(response.data);
+              this.maintenanceTickets = response.data;
+            })
+        
+      }
   },
 };
 </script>

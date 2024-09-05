@@ -19,6 +19,17 @@ export default {
     getEquipmentById(id) {
         return axios.get(`/equipment/${id}`);
     },
+
+
+     /**
+     * Returns all the maintenance tickets for a piece of equipment
+     * @param {equpmentId} id 
+     * @returns list of maintenance tickets
+     * status: 200 OK
+     */
+     getEquipmentMaintenanceById(equipmentId) {
+        return axios.get(`/equipment/${equipmentId}/maintenance-performed`);
+    },
     
     /**
      * Returns a list of equipment serial numbers, models, and names.

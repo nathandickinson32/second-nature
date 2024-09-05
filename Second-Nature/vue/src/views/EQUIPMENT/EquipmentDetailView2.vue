@@ -29,6 +29,7 @@ export default {
           archived: false
         },
       }
+     
     },
  
     mounted() {
@@ -42,7 +43,8 @@ export default {
               this.equipment = response.data;
             })
         }
-      }
+      },
+     
     }
   }
   </script>
