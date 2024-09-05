@@ -3,12 +3,15 @@
     <div class="small-container">
         <form v-on:submit.prevent="createMaintenanceTicket">
             <label for="equipment-identity">Select Equipment: </label>
-            <select name="equipment-identity" id="equipment-identity" v-model.number="createMaintenanceTicketDto.equipmentId">
-                <option v-for="equipmentIdentity in equipmentIdentityList" v-bind:key="equipmentIdentity.equipmentId">{{ equipmentIdentity.equipmentId }}</option>
+            <select name="equipment-identity" id="equipment-identity" v-model="createMaintenanceTicketDto.equipmentId">
+                <option value="" disabled>Select Equipment</option>
+                <option v-for="equipmentIdentity in equipmentIdentityList" v-bind:key="equipmentIdentity.equipmentId">
+                    {{ equipmentIdentity.name }} {{ equipmentIdentity.serialNumber }} {{ equipmentIdentity.model }}
+                </option>
             </select>
 
             <div v-show="createMaintenanceTicketDto.equipmentId != null" class="equipment-name-serial">
-                <span class="label">Name: {{ equipmentName }} </span> <br>
+                <span class="label">Name: {{ createMaintenanceTicketDto.createMaintenancePerformedDto.name }} </span> <br>
                 <span class="label">Serial Number: {{ serialNumber }}</span> 
             </div>
             
@@ -102,6 +105,17 @@ export default {
         serialNumber() {
             const equipmentIdentity =this.equipmentIdentityList.find(equipmentIdentity => equipmentIdentity.equipmentId === this.createMaintenanceTicketDto.equipmentId);
             return equipmentIdentity ? equipmentIdentity.serialNumber : "";
+        },
+        equipmentId() {
+            return this.createMaintenanceTicketDto.equipmentId;
+        },
+        createMaintenancePerformedDto() { 
+            return{
+                equipmentId : 1,
+                description : '',
+                performedBy : '',
+                notes : '',
+            };
         }
     }
 }

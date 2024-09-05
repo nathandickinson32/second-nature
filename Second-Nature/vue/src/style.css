@@ -39,6 +39,17 @@ a {
 a:hover {
     text-decoration: underline;
 }
+.clickable-label:hover {
+    text-decoration: underline;
+}
+.clickable-label {
+    color: #2a64bd;
+    text-decoration: none;
+}
+
+.clickable-label:visited {
+    color: #a1af9f;
+}
 
 a:visited {
     color: #a1af9f;

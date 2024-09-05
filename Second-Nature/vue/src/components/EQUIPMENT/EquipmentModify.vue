@@ -1,5 +1,10 @@
 <template>
-  <div class="content">
+  <div class="content">   
+    <div class="button-section">
+        <span @click="goBack" class="clickable-label">Back to Details</span>
+        <span class="separator"> | </span>
+        <span @click="saveEquipment" class="clickable-label">Save Changes</span>
+    </div>
     <div class="large-container">
         <form id="equipment-form" @submit.prevent="onSubmit">
             <div class="form-input-group">
@@ -26,11 +31,7 @@
             </div>
         </form>
     </div>
-    <div class="button-section">
-        <label @click="goBack" class="clickable-label">Back to Equipment Details</label>
-        <span class="separator"> | </span>
-        <label @click="saveEquipment" class="clickable-label">Save Equipment Changes</label>
-    </div>
+ 
   </div>
 </template>
 
@@ -115,6 +116,15 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.content {
+    flex-direction: column;
+}
+
+.button-section {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
 </style>
