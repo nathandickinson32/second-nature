@@ -1,0 +1,52 @@
+Endpoints and JSON Objects - Type
+
+Create
+/type/create
+Request Type: PUT
+Inserts a new type into the database. 
+HTTP Status: 201 CREATED
+Expects: Type DTO JSON Object.
+Returns: Type JSON Object.
+
+Read 
+/type/{typeId}
+Request Type: GET
+Returns a Type JSON object
+HTTP Status: 200 OK
+Expects: A type ID as a path variable.
+Returns: A type JSON object.
+
+/type/all
+Request Type: GET
+Returns a list of all types.
+HTTP Status: 200 OK
+Expects: Nothing
+Returns: An array of Type JSON objects.
+
+Update
+/type/update
+Request Type: POST
+Updates a type in the database.
+HTTP Status: 202 ACCEPTED
+Expects: A type JSON object
+Returns: A type JSON object
+
+Delete
+/type/delete/{typeId}
+Request Type: DELETE
+Deletes a type from the database.
+HTTP Status: 200 OK
+Expects: A type ID path variable
+Returns: Nothing
+
+JSON Objects
+Type
+{
+	"typeId" : -1,
+	"name" : "Type Name"
+}
+
+Type DTO
+{
+	"name" : "Type Name"
+}

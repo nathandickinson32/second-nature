@@ -84,6 +84,7 @@ public class EquipmentController {
         return equipmentDao.archiveEquipment(archiveEquipmentDto, userId);
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(path = "/delete/{id}")
     public void deleteEquipment(@PathVariable int id, Principal principal){
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is deleting equipment ID: " + id);
