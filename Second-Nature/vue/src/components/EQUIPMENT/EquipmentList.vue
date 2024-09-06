@@ -7,20 +7,26 @@
             <span class="separator"> | </span>
             <label @click="showInactiveEquipment" class="clickable-label">Inactive</label>
             <span class="separator" v-if="isManager"> | </span>
-            <!-- <label @click="showMowers" class="clickable-label">Mowers</label>
-            <span class="separator"> | </span>
-            <label @click="showBlowers" class="clickable-label">Blowers</label>
-         -->
          <label v-if="isManager" @click="showArchivedEquipment" class="clickable-label">Archived</label>
-           
+         <!-- Dropdown list of equippment types -->>
+         <div class="form-input-group">
+                    <label for="equipmentType">Type of Equipment: </label>
+                    <select v-model="typeFilter" id="equipmentType" required>
+                        <option value='0'>Any Equipment Type</option>
+                        <option v-for="type in types" :key="type.typeId" :value="type.typeId">
+                            {{ type.name }}
+                        </option>
+                    </select>
+                </div>
         </div>
-    <Equipment class="equipmentCard" v-for="equipment in filteredEquipment" v-bind:key="equipment.id" :equipment="equipment"></Equipment>
+    <Equipment class="equipmentCard" v-for="equipment in filteredByType" v-bind:key="equipment.id" :equipment="equipment"></Equipment>
   </div>
 </template>
 
 <script>
 import Equipment from './Equipment.vue';
 import EquipmentService from '../../services/EquipmentService';
+import TypeService from '../../services/TypeService';
 
 export default {
     components: {
@@ -29,37 +35,41 @@ export default {
     data() {
         return {
             equipmentList: [],
-            filterType: 'all'
+            filterType: 'all',
+            types: [],
+            typeFilter: '0',
+            filteredByTypeArray: []
         };
     },
     created() {
         this.getEquipment();
+        this.getTypes();
     },
     computed: {
         filteredEquipment() {
-            if (this.filterType === 'all') {
-                return this.equipmentList.filter(equipment => equipment.archived === false);
+            console.log("filterType: " + this.filterType);
+            switch (this.filterType) {
+                case 'active':
+                    return this.equipmentList.filter(equipment => equipment.active === true && equipment.archived === false);
+                case 'inactive':
+                    return this.equipmentList.filter(equipment => equipment.active === false && equipment.archived === false);
+                case 'archived':
+                    return this.equipmentList.filter(equipment => equipment.archived === true);
+                case 'all':
+                default:
+                    return this.equipmentList.filter(equipment => equipment.archived === false);
             }
-            else if (this.filterType === 'active') {
-                return this.equipmentList.filter(equipment => equipment.active === true);
-            }
-            else if (this.filterType === 'inactive') {
-                return this.equipmentList.filter(equipment => equipment.active === false);
-            }
-            // else if (this.filterType === 'mowers') {
-            //     return this.equipmentList.filter(equipment => equipment.active === false);
-            // }
-            // else if (this.filterType === 'blowers') {
-            //     return this.equipmentList.filter(equipment => equipment.active === false);
-            // }
-            else if (this.filterType === 'archived') {
-                return this.equipmentList.filter(equipment => equipment.archived === true);
-            }
-            return []; // Default return for unexpected filterType
         },
         isManager() {
-      return this.$store.getters.isManager;
-    }
+            return this.$store.getters.isManager;
+        },
+        filteredByType() {
+            console.log("typeFilter: " + this.typeFilter);
+            if(this.typeFilter === '0') {
+                return this.filteredEquipment;
+            }
+            return this.filteredEquipment.filter(equipment => equipment.typeId === this.typeFilter);
+        }
     },
     methods: {
         getEquipment() {
@@ -68,6 +78,12 @@ export default {
                     this.equipmentList = response.data;
                 })
         },
+        getTypes() {
+            TypeService.getAllTypes()
+            .then((response) => {
+                    this.types = response.data;
+                })
+        },  
         showAllEquipment() {
             this.filterType = 'all';
         },
@@ -77,14 +93,8 @@ export default {
         showInactiveEquipment(){
             this.filterType ='inactive'
         },
-        showMowers(){
-            this.filterType= 'mowers'
-        },
-        showBlowers(){
-            this.filterType= 'blowers'
-        },
         showArchivedEquipment(){
-            this,this.filterType= 'archived'
+            this.filterType= 'archived'
         }
     }
 
