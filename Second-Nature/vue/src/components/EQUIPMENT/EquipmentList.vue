@@ -8,7 +8,7 @@
             <label @click="showInactiveEquipment" class="clickable-label">Inactive</label>
             <span class="separator" v-if="isManager"> | </span>
          <label v-if="isManager" @click="showArchivedEquipment" class="clickable-label">Archived</label>
-         <!-- Dropdown list of equippment types -->>
+         <!-- Dropdown list of equippment types -->
          <div class="form-input-group">
                     <label for="equipmentType">Type of Equipment: </label>
                     <select v-model="typeFilter" id="equipmentType" required>
