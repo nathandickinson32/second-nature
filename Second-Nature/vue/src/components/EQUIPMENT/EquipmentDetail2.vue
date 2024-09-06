@@ -45,7 +45,7 @@
     @change="toggleActivity"
   />
   <label for="inactiveBtn">Inactive</label>
-  <input type="text" v-model="statusEquipment.activeNotes" v-show="statusChange"/>
+  <input type="text" v-model="statusEquipment.activeNotes" v-show="statusChange"/> <br/>
   <button v-show="statusChange" @click="saveActiveStatus">Submit</button>
 </span>
 </form>
