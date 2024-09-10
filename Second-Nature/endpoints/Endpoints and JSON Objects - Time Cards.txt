@@ -1,0 +1,81 @@
+Endpoints and JSON Objects - Time Cards
+
+Create
+/time-card/register
+Request Type: PUT
+Inserts a new time card record into the database.
+HTTP Status: 201 CREATED
+Expects: A CreateTimeCardDto JSON object.
+Returns: A TimeCard JSON object.
+
+Read
+/time-card/{userId}/time-cards
+Request Type: GET
+Returns a list of all my time cards.
+HTTP Status: 200 OK
+Expects: The user ID as a path variable.
+Returns: An array of TimeCard JSON objects.
+
+Update
+/time-card/update
+Request Type: POST
+Updates a time card record in the database.
+HTTP Status: 202 ACCEPTED
+Expects: An UpdateTimeCardDto JSON object.
+Returns: An updated TimeCard JSON object.
+
+/time-card/archive
+Request Type: POST
+Updates a time card record in the database, changing its archived status to TRUE, requiring an archived note.
+HTTP Status: 202 ACCEPTED
+Expects: An ArchiveTimeCardDto JSON object.
+Returns: An updated TimeCard JSON object.
+
+Delete
+/time-card/delete/{timeCardId}
+Request Type: DELETE
+Deletes a time card record from the database.
+HTTP Status: 200 OK
+Expects: A time card ID as a path variable.
+Returns: Nothing
+
+JSON Objects
+TimeCard JSON Object
+{
+	"timeCardId" : Integer / Number,
+	"userId" : Integer / Number,
+	"hourType" : String (options: "shift_begin", "meal_begin", "meal_end", "shift_end")
+	"dateTime" : TimeStamp / String,
+	"updatedOnDate" : Date / String,
+	"updatedByUserId" : Integer / Number,
+	"archived" : Boolean (Defaults to FALSE),
+	"archivedNotes" : String (Required once the archived option is selected)
+}
+
+//Create
+CreateTimeCardDto
+{
+	"userId" : Integer / Number,
+	"hourType" : String  (options: "shift_begin", "meal_begin", "meal_end", "shift_end"),
+	"dateTime" : TimeStamp / String
+}
+// isArchived is updated on the backend and set to FALSE.
+
+//Update
+UpdateTimeCardDto
+{
+	"timeCardId" : Integer / Number,
+	"hourType" : String (options: "shift_begin", "meal_begin", "meal_end", "shift_end"),
+	"dateTime" : TimeStamp / String
+}
+// updatedOnDate and updatedByUserId are handled on the backend by the principal.
+
+ArchiveTimeCardDto
+{
+	"timeCardId" : Integer / Number,
+	"archivedNotes" : String (Required once the archived option is selected)
+}
+// updatedOnDate and updatedByUserId are handled on the backend by the principal.
+// isArchived is updated on the backend and set to TRUE.
+
+

@@ -2,7 +2,7 @@ Second Nature Onboarding
 
 Initial meeting
 - Discuss project, architecture, and walk them through the current application.
-- Discus current roles and expectations
+- Discuss current roles and expectations
 - Ask about department preferences
 
 Read through the documentation and codebase.

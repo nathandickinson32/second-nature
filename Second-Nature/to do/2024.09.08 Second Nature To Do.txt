@@ -36,24 +36,10 @@ Monday
 -
 
 Tuesday
--
+- Documentation - Time Cards - Endpoints
 
 Wednesday
-- Type Objects
-	- [x] Create "Type" model
-	- [x] Type DTO
-- Type DAO / JDBC Type DAO
-	- [x] Create Type
-	- [x] Read Type by ID
-	- [x] Read all Types
-	- [x] Update Type
-	- [x] Delete Type
-- Type Controller
-	- [x] Create Type
-	- [x] Read all Types
-	- [x] Read type by ID
-	- [x] Update Type
-	- [x] Delete Type
+-
 
 
 Thursday
