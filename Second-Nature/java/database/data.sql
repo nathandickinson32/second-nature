@@ -21,7 +21,7 @@ VALUES (3, 1, 'Default note', '2024-07-26');
 INSERT INTO kudos (giver_user_id, receiver_user_id, date, title, notes, is_archived)
 VALUES (3, 1, '2024-07-26', 'Default Title', 'Default Note', false);
 
-INSERT INTO type (name) VALUES ('Mower'),('Blower');
+INSERT INTO type (name) VALUES ('Mower'),('Blower'),('Skid Steer Loader'),('Tractor'),('Mini Skid Steer Loader'),('Fertilizer Spreader'),('Trailer');
 
 INSERT INTO equipment (serial_number, model, name, type_id, starting_hours, entered_by_user_id, entered_on_date, notes, is_active, active_notes, is_archived)
 VALUES
@@ -30,7 +30,15 @@ VALUES
 ('406990672', '72523', 'Toro MultiForce', 1, 0, 3, '2024-08-23', '61 inch deck, has QwikChute', false, 'SMOKING, Burning spilled oil from tipping accident', false),
 ('123607GC', 'WSZK61S61E8E-49S', 'Wright Stander 1',1, 0, 3, '2024-08-23', '61 inch deck, Currently the oldest Wright Stander, has QwikChute, Yellow Blade Guards', true, 'No Current Issues', false),
 ('158298GA', 'WSZK61S61E8E-49S', 'Wright Stander 2', 1, 0, 3, '2024-08-23', '61 inch deck, Currently the newest Wright Stander, has QwikChute, Black Blade Guards', true, 'No Current Issues', false),
-('WindStorm1', 'LSCGPNHEQ001', 'Scag WindStorm', 2, 0, 3, '2024-08-23', 'Primarily used during Spring and Fall', true, 'No Current Issues', false);
+('WindStorm1', 'LSCGPNHEQ001', 'Scag WindStorm', 2, 0, 3, '2024-08-23', 'Primarily used during Spring and Fall', true, 'No Current Issues', false),
+('B3NK30446', 'T595', '2019 Bobcat', 3, 0, 3, '2024-08-23', '2019 Bobcat', true, 'No Current Issues', false),
+('519014863', '773', 'Bobcat G Series', 3, 0, 3, '2024-08-23', 'G Series Bobcat', true, 'No Current Issues', false),
+('0008P20287', 'PK-3KBB-NA1C-XLXX', 'SG46 Fertilizer Spreader', 6, 0, 3, '2024-08-23', 'RiderFertilizer Spreader', true, 'No Current Issues', false),
+('A6346', 'TL500', 'B26 Kubota Tractor', 4, 0, 3, '2024-08-23', 'Orange Kubota Tractor', true, 'No Current Issues', false),
+('4WXBD172061D29961', 'D147', 'DLH Gray Dump Trailer', 7, 0, 3, '2024-08-23', 'DLH Series Gray Dump Trailer', true, 'No Current Issues', false),
+('4WXBD1929E1025613', 'DLBC68', 'Black Dump Trailer', 7, 0, 3, '2024-08-23', 'Black Dump Trailer', true, 'No Current Issues', false),
+('B3NL19206', 'S595', '2020 Bobcat', 3, 0, 3, '2024-08-23', '2020 Bobcat', true, 'No Current Issues', false),
+('B52P34004', 'MT100', 'Bobcat Track Loader', 5, 0, 3, '2024-08-23', '2023 Bobcat Track Loader', true, 'No Current Issues', false);
 
 INSERT INTO maintenance_tickets (equipment_id, hours, entered_by_user_id, date, notes, is_complete, is_archived)
 VALUES (1, 0, 3, '2024-07-26', 'Default Note', false, false);
