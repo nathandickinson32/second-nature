@@ -46,4 +46,7 @@ VALUES (1, 0, 3, '2024-07-26', 'Default Note', false, false);
 INSERT INTO maintenance_performed (equipment_id, ticket_id, description, performed_by, performed_on_date, notes, hours)
 VALUES (1, 1, 'Default Description', 'Default Performed By', '2024-08-27', 'Default Notes', 0);
 
+INSERT INTO time_cards (user_id, hour_type, date_time, is_archived)
+VALUES (1, 'shift_begin', '2024-09-10 09:05:00', false);
+
 COMMIT TRANSACTION;

@@ -1,5 +1,6 @@
 BEGIN TRANSACTION;
 
+DROP TABLE IF EXISTS time_cards;
 DROP TABLE IF EXISTS equipment_type;
 DROP TABLE IF EXISTS maintenance_performed;
 DROP TABLE IF EXISTS maintenance_ticket;
@@ -110,6 +111,19 @@ CREATE TABLE maintenance_performed (
     hours INT NOT NULL,
     FOREIGN KEY (equipment_id) REFERENCES equipment (equipment_id),
     FOREIGN KEY (ticket_id) REFERENCES maintenance_tickets (ticket_id)
+);
+
+CREATE TABLE time_cards (
+    time_card_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    hour_type VARCHAR NOT NULL,
+    date_time TIMESTAMP NOT NULL,
+    updated_on_date DATE,
+    updated_by_user_id INT,
+    is_archived BOOLEAN,
+    archived_notes VARCHAR,
+    FOREIGN KEY (user_id) REFERENCES users (user_id),
+    FOREIGN KEY (updated_by_user_id) REFERENCES users (user_id)
 );
 
 COMMIT TRANSACTION;

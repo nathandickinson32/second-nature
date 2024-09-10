@@ -1,33 +1,67 @@
-Second Nature To Do - Week of 9/1/2024
+Second Nature To Do - Week of 9/8/2024
 
 Sprint Backlog
 Backend
+- TimeCard Objects
+	- [] TimeCard model (update dateTime to TimeStamp)
+	- [] CreateTimeCardDto
+	- [] UpdateTimeCardDto
+	- [] ArchiveTimeCardDto
+- TimeCard DAO / JDBC TimeCard DAO
+	- [] Create TimeCard ("Register Time Stamp")
+	- [] Read all TimeCards by User ID
+	- [] Update TimeCard
+	- [] Archive TimeCard
+	- [] Delete TimeCard
+- TimeCard Controller
+	- [] Create TimeCard ("Register Time Stamp" / Does not require authentication)
+	- [] Read all TimeCards by User ID
+	- [] Update TimeCard
+	- [] Archive TimeCard
+	- [] Delete TimeCard
+	
 
 Front End
 - Equipment
 	Equipment List
 		- [] Add functionality to the "maintenance" button
 		- [] Add functionality to the "new ticket" button
+			- [] Pass in the Equipment ID to populate the create ticket dropdown
 	Equipment Details
-		- [] Drop down to select equipment Type
+		- [] Remove console logs from the Equipment Type drop down
+		- [] Style Equipment Type dropdown list to fix styling errors
 		- [] Checkbox and required text field to archive equipment (manager, mechanic)
-		- [] Checkbox for active status (manager, mechanic)
-		- [] Update status button to update the equipment status (manager, mechanic)
+		- [] Style Active / Inactive checkbox and reason text field
+		- [] Style Archive page
 - Maintenance
 	Maintenance ticket List
-		- [] Sort list by most recent
 		- [] Filter by equipment type
 	Ticket Details
 		- [] Add a checkbox and a required text box to archive a maintenance ticket
 		- [] Add a button to update a maintenance ticket
 		- [] Display the ticket date
-	- [] Create a page for updating maintenance tickets
+	Update Maintenance Ticket
+		- [] Create a page for updating maintenance tickets
 	Create a Ticket
-		- [] Update the dropdown to support more than just the equipment_id
+		- [] Style the dropdown so it fits on the screen
 - Kudos
 	Kudos Detail
 		- [] Require note for archiving
 		- [] Style archive button
+- Time Cards
+	Register Time Stamp Page
+		- [] Create the Register Time Stamp Page (separate, not authenticated URL)
+	Second Nature Home Page
+		- [] Time Card home button
+	Time Card List View
+		- [] Displaying a list of all recent Time Cards. (think about a limit by dropdown)
+	Time Card Detail View
+		- [] Time Card Detail View
+	Edit / Update Time Card View
+		- [] Edit / Update Time Card Page
+	Archive Time Card Functionality
+		- [] Archive Time Card (button, page, whatever. Make sure a reason is required)
+
 
 Sunday
 - 
@@ -36,7 +70,11 @@ Monday
 -
 
 Tuesday
-- Documentation - Time Cards - Endpoints
+// Chris
+- [x] Documentation - Time Cards - Endpoints
+- [x] Database - Time Cards
+// Koi
+- [] Continue troubleshooting the database issues.
 
 Wednesday
 -
