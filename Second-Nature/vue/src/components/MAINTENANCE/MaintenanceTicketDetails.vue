@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+
     <div class="large-container">
       <span class="label">Ticket Number: {{ MaintenanceTicket.ticketId }}</span>
       <span class="label">Machine Name: </span> {{ modelName }}
@@ -17,8 +18,10 @@
       </div>
 
       <span>{{ this.MaintenanceTicket.description }}</span>
+      <router-link v-bind:to="{ name: 'maintenance-ticket-modify',params: { ticketId: this.$route.params.ticketId } }">Modify</router-link>
 
     </div>
+
   </div>
   
  

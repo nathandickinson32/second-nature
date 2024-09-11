@@ -17,10 +17,14 @@ export default {
     },
     getUserById(id) {
         return axios.get(`/get-user/${id}`)
-    }
+    },
 
     // Update
     // Update Maintenance Ticket
+
+    updateMaintenanceTicket(updateMaintenanceTicket){
+        return axios.post('/maintenance-tickets/update',updateMaintenanceTicket);
+    },
     // Complete Maintenance Ticket
 
     // Delete
