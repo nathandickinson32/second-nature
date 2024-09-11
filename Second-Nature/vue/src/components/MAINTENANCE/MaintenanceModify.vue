@@ -6,14 +6,28 @@
           <span @click="saveTicket" class="clickable-label">Save Changes</span>
       </div>
       <div class="large-container">
-          <form id="ticket-form" @submit.prevent="onSubmit">
+          <form id="ticket-form" @submit.prevent="saveTicket">
               
               <div class="form-input-group">
-                  <label for="title">Notes: </label>
+                  <label for="notes">Notes: </label>
                   <input type="text" v-model="updateMaintenanceTicket.notes" id="notes" required />
               </div>
+              <div class="form-input-group">
+                  <label for="complete">Complete: </label>
+                  <input type="checkbox" v-model="updateMaintenanceTicket.complete" id="isComplete" required />
+              </div>
+              <div class="form-input-group" v-for="(performed, index) in maintenanceTicket.maintenancePerformedList" v-bind:key="index">
+                    <h4>Maintenance Performed: </h4>
+                    <input type="text" name="maintenance-performed-description" id="" placeholder="What is being done?" v-model="performed.description">
+                    <input type="text" name="maintenance-performed-by" id="" placeholder="Who is doing the work?" v-model="performed.performedBy">
+                    <textarea name="maintenance-performed-notes" id="maintenance-performed-notes" v-model="performed.notes"></textarea>
+                </div>
+                <button v-on:click.prevent="addMaintenancePerformed">Add another maintenance performed</button>
+                <button v-on:click.prevent="subtractMaintenancePerformed">Remove last maintenance performed</button>
+               
+              
            
-           
+
              
           </form>
       </div>
@@ -28,8 +42,18 @@ import MaintenanceService from '../../services/MaintenanceService'
    
       data() {
           return {
-              MaintenanceTicket: {},
-              updateMaintenanceTicket: {}
+              maintenanceTicket: {},
+              updateMaintenanceTicket: {
+                ticketId: '',
+            notes: '',
+            complete: false,
+            createMaintenancePerformedDto: [{
+                description: '',
+                performedBy: '',
+                notes: ''
+                
+            }]
+              }
           }
       },
       mounted(){
@@ -37,16 +61,16 @@ import MaintenanceService from '../../services/MaintenanceService'
               if (response.status == 200) {
                   this.maintenanceTicket = response.data;
 
-                  this.updateMaintenanceTicket.ticketId = this.maintenanceTicket.ticketId;
+                  this.updateMaintenanceTicket.ticketId = this.maintenanceTicket.ticketId;    
                   this.updateMaintenanceTicket.equipmentId = this.maintenanceTicket.equipmentId;    
                   this.updateMaintenanceTicket.hours = this.maintenanceTicket.hours;  
                   this.updateMaintenanceTicket.enteredByUserId = this.maintenanceTicket.enteredByUserId;
                   this.updateMaintenanceTicket.date = this.maintenanceTicket.date;
                   this.updateMaintenanceTicket.notes = this.maintenanceTicket.notes;
-                  this.updateMaintenanceTicket.isComplete = this.maintenanceTicket.isComplete;
+                  this.updateMaintenanceTicket.complete = this.maintenanceTicket.complete;
                   this.updateMaintenanceTicket.updatedByUserId = this.maintenanceTicket.updatedByUserId;  
                   this.updateMaintenanceTicket.updatedOnDate = this.maintenanceTicket.updatedOnDate;
-                  this.updateMaintenanceTicket.isArchived = this.maintenanceTicket.isArchived;
+                  this.updateMaintenanceTicket.archived = this.maintenanceTicket.isArchived;
                   this.updateMaintenanceTicket.archivedNotes = this.maintenanceTicket.archivedNotes;
                   this.updateMaintenanceTicket.maintenancePerformedList = this.maintenanceTicket.maintenancePerformedList;
 
