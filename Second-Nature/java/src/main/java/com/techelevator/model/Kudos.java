@@ -10,6 +10,7 @@ public class Kudos {
     private String title;
     private String notes;
     private boolean isArchived;
+    private String archivedNotes;
 
     public int getKudosId() {
         return kudosId;
@@ -66,4 +67,8 @@ public class Kudos {
     public void setArchived(boolean archived) {
         this.isArchived = archived;
     }
+
+    public String getArchivedNotes() { return archivedNotes; }
+
+    public void setArchivedNotes(String archiveNotes) { this.archivedNotes = archivedNotes; }
 }

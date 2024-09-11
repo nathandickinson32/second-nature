@@ -54,6 +54,7 @@ CREATE TABLE kudos (
     title VARCHAR NOT NULL,
     notes VARCHAR,
     is_archived BOOLEAN NOT NULL,
+    archived_notes VARCHAR,
     FOREIGN KEY (giver_user_id) REFERENCES users (user_id),
     FOREIGN KEY (receiver_user_id) REFERENCES users (user_id)
 );
