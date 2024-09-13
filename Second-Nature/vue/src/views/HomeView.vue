@@ -30,6 +30,11 @@
         <img src="/src/images/to-do.png" alt="">
         <router-link v-bind:to="{ name: 'maintenance-ticket-List'}">Maintenance</router-link>
       </div>
+      <div class="menu-icon">
+        <!-- need to find time card icon that matches the other icons -->
+        <img src="/src/images/to-do.png" alt="">
+        <router-link v-bind:to="{ name: 'time-card'}">Time Card</router-link>
+      </div>
     </div>
   </div>
 </template>

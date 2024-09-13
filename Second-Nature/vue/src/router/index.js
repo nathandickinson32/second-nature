@@ -28,6 +28,15 @@ import EquipmentModifyView from '../views/EQUIPMENT/EquipmentModifyView.vue';
 import EquipmentStatusView from '../views/EQUIPMENT/EquipmentStatusView.vue';
 import EquipmentDetailArchive from '../views/EQUIPMENT/EquipmentDetailArchive.vue';
 import MaintenanceModifyView from '../views/MAINTENANCE/MaintenanceModifyView.vue';
+import TimeCardView from '../views/TIME-CARD/TimeCardView.vue';
+import TimeCardClockInView from '../views/TIME-CARD/TimeCardClockInView.vue';
+import TimeCardClockOutView from '../views/TIME-CARD/TimeCardClockOutView.vue';
+import TimeCardMealInView from '../views/TIME-CARD/TimeCardMealInView.vue';
+import TimeCardMealOutView from '../views/TIME-CARD/TimeCardMealOutView.vue';
+
+
+
+
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
@@ -241,6 +250,47 @@ const routes = [
       requiresAuth  : true
     }
   
+  },
+  {
+    path: '/time-card',
+    name: 'time-card',
+    component: TimeCardView,
+    meta: {
+      requiresAuth: true
+    }
+  
+  },
+  {
+    path: '/time-card/clock-in',
+    name: 'clock-in',
+    component: TimeCardClockInView,
+    meta:{
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/time-card/clock-out',
+    name: 'clock-out',
+    component: TimeCardClockOutView,
+    meta:{
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/time-card/meal-in',
+    name: 'meal-in',
+    component: TimeCardMealInView,
+    meta:{
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/time-card/meal-out',
+    name: 'meal-out',
+    component: TimeCardMealOutView,
+    meta:{
+      requiresAuth: false
+    }
   }
 ];
 
