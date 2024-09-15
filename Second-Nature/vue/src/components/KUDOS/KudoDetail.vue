@@ -6,7 +6,7 @@
     <span class="small-font">To: {{ receiverUserName }}</span>
     <span class="small-font">Date: {{ kudo.date }}</span> <br>
     <button id="show-modal" @click="showModal" v-if="isManager" class="button">Archive</button>
-    <Modal v-if="isModalVisible" @close="closeModal"/>
+    <Modal v-if="isModalVisible" @close="closeModal" @updateNotes="updateNotes" />
   </div>
 </template>
 
@@ -22,8 +22,7 @@ export default {
     return {
       isModalVisible: false,
       currentKudo: {},
-      isArchived: false,
-      archiveNotes: ''
+      archivedNotes: ''
     }
   },
   props: {
@@ -47,8 +46,9 @@ export default {
   },
   methods: {
     archiveKudo() {
-      this.currentKudo.isArchived = this.isArchived;
-      this.currentKudo.archiveNotes = this.archiveNotes;
+      this.currentKudo = this.kudo;
+      this.currentKudo.archive = true;
+      this.currentKudo.archivedNotes = this.archivedNotes;
       KudosService.archiveKudos(this.currentKudo)
       .then(() => {
         window.alert('Kudo archived!');
@@ -63,9 +63,10 @@ export default {
     closeModal() {
       this.isModalVisible = false;
     },
-    printStatus() {
-      console.log("Status: " + this.isArchived);
-    }
+    updateNotes(notes) {
+      this.archivedNotes = notes;
+      this.archiveKudo();
+    },
   }
 }
 

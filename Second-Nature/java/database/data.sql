@@ -18,8 +18,8 @@ VALUES (1, '2024-07-15', '2024-07-22', '2024-07-26', 'Approved', 'Need time off.
 INSERT INTO professional_check_in (manager_id, employee_id, notes, date)
 VALUES (3, 1, 'Default note', '2024-07-26');
 
-INSERT INTO kudos (giver_user_id, receiver_user_id, date, title, notes, is_archived)
-VALUES (3, 1, '2024-07-26', 'Default Title', 'Default Note', false);
+INSERT INTO kudos (giver_user_id, receiver_user_id, date, title, notes, is_archived, archived_notes)
+VALUES (3, 1, '2024-07-26', 'Default Title', 'Default Note', false, '');
 
 INSERT INTO type (name) VALUES ('Mower'),('Blower'),('Skid Steer Loader'),('Tractor'),('Mini Skid Steer Loader'),('Fertilizer Spreader'),('Trailer'),('String Trimmer'),('Hedge Trimmer'),('Push Mower'),('Chainsaw'),('Demosaw');
 

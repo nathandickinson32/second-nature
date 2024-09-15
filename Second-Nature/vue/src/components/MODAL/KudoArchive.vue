@@ -5,18 +5,26 @@
         <button type="button" class="btn-close" @click="close">x</button>
         
         <header class="modal-header">
-          <slot name="header"> This is the default title! </slot>
+          <slot name="header">Archiving Kudos</slot>
         </header>
 
         <section class="modal-body">
-          <slot name="body"> This is the default body! </slot>
+          <slot name="body"></slot>
+          <p class="prompt">Please list reason(s) for archiving kudo:</p>
+          <span id="data-container">
+            <label for="kudoNotes">Notes </label>
+            <input id="kudoNotes" type="text" v-model="archivedNotes" placeholder="Enter notes here..."/>
+          </span>
         </section>
 
         <footer class="modal-footer">
-          <slot name="footer"> This is the default footer! </slot>
-          <button type="button" class="btn-green" @click="close">
-            Close Modal
-          </button>
+          <slot name="footer"></slot>
+          <span id="btn-container">
+            <button class="btn-green" @click="updateNotes">Save</button>
+            <button type="button" class="btn-green" @click="close">
+              Cancel
+            </button>
+          </span>
         </footer>
       </div>
     </div>
@@ -26,7 +34,17 @@
 <script>
 export default {
   name: "Modal",
+  data() {
+    return {
+      archivedNotes: '',
+    };
+  },
   methods: {
+    updateNotes() {
+      console.log(this.archivedNotes);
+      this.$emit("updateNotes", this.archivedNotes);
+      this.$emit("close");
+    },
     close() {
       this.$emit("close");
     },
@@ -53,39 +71,61 @@ export default {
   overflow-x: auto;
   display: flex;
   flex-direction: column;
-  height: 20rem;
-  width: 20rem;
+  height: 25rem;
+  width: 25rem;
   margin: auto;
 }
 
 .modal-content {
   display: flex;
   flex-direction: column;
-  margin: auto;
+  height: 100%;
 }
 
 .modal-header,
 .modal-footer {
-  padding: 15px;
+  padding: 20px;
   display: flex;
 }
 
 .modal-header {
   position: relative;
+  top: 1rem;
   border-bottom: 1px solid #eeeeee;
   color: #4aae9b;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: flex-start;
+  width: 70%;
+  margin: auto;
 }
 
 .modal-footer {
+  position: relative;
+  bottom: 1rem;
   border-top: 1px solid #eeeeee;
-  flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
+  width: 70%;
+  margin: auto;
 }
 
 .modal-body {
   position: relative;
   padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.prompt {
+  margin-top: 5rem;
+  margin-bottom: 1rem;
+}
+
+#data-container {
+  margin-bottom: 5rem;
+  margin-top: 1rem;
 }
 
 .btn-close {
@@ -109,5 +149,14 @@ export default {
   background: #4aae9b;
   border: 1px solid #4aae9b;
   border-radius: 2px;
+  cursor: pointer;
+  width: fit-content;
+}
+
+#btn-container {
+  display: flex;
+  justify-content: space-around;
+  width: 75%;
+  margin: auto;
 }
 </style>
