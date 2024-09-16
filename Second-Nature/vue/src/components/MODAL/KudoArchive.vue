@@ -20,7 +20,7 @@
         <footer class="modal-footer">
           <slot name="footer"></slot>
           <span id="btn-container">
-            <button class="btn-green" @click="updateNotes">Save</button>
+            <button :class="archivedNotes.length > 3 ? 'btn-green' : 'btn-disabled'" :disabled="archivedNotes.length < 4" @click="updateNotes">Save</button>
             <button type="button" class="btn-green" @click="close">
               Cancel
             </button>
@@ -147,6 +147,15 @@ export default {
 .btn-green {
   color: white;
   background: #4aae9b;
+  border: 1px solid #4aae9b;
+  border-radius: 2px;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.btn-disabled {
+  color: rgba(255, 255, 255, 0.822);
+  background: #4aae9c54;
   border: 1px solid #4aae9b;
   border-radius: 2px;
   cursor: pointer;
