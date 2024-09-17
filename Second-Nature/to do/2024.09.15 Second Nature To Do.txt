@@ -49,22 +49,13 @@ Front End
 		- [] Require note for archiving
 		- [] Style archive button
 - Time Cards
-	Register Time Stamp Page
-		- [x] Create the Register Time Stamp Page
-		- [] Rename "/time-card" to "/time-stamp"
-		- [] The Time Stamp page should be unauthenticated
-		- [] prompt the user for their user id (hide this is the user is already logged in)
-	Second Nature Home Page
-		- [x] Time Card home button
-		- [] Time Card button should lead to a list of time cards (stamps) (Time Card List View)
-		- [] Add a new "Time Stamp" button to register a time stamp if logged in.
-	Time Card List View
+	Time Card List View (Backend dependency)
 		- [] Displaying a list of all recent Time Cards. (think about a limit by dropdown)
-	Time Card Detail View
+	Time Card Detail View (Backend dependency)
 		- [] Time Card Detail View
-	Edit / Update Time Card View
+	Edit / Update Time Card View (Backend dependency)
 		- [] Edit / Update Time Card Page
-	Archive Time Card Functionality
+	Archive Time Card Functionality (Backend dependency)
 		- [] Archive Time Card (button, page, whatever. Make sure a reason is required)
 
 
@@ -72,10 +63,21 @@ Sunday
 - 
 
 Monday
-- [] Chris - Review Site
+Chris
+- [x] Review Site
+Cody - Register Time Stamp Page
+- [x] Create the Register Time Stamp Page
+- [x] Rename "/time-card" to "/time-stamp"
+- [x] The Time Stamp page should be unauthenticated
+- [x] prompt the user for their user id (hide this is the user is already logged in)
+Second Nature home page
+- [x] Time Card home button
+- [x] Time Card button should lead to a list of time cards (stamps) (Time Card List View)
+Dinda
+- [x] Kudos - Archive - Require a reason for archiving.
 
 Tuesday
--
+-[x] Chris - Review Site
 
 Wednesday
 -
