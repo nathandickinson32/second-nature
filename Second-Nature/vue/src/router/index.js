@@ -28,11 +28,12 @@ import EquipmentModifyView from '../views/EQUIPMENT/EquipmentModifyView.vue';
 import EquipmentStatusView from '../views/EQUIPMENT/EquipmentStatusView.vue';
 import EquipmentDetailArchive from '../views/EQUIPMENT/EquipmentDetailArchive.vue';
 import MaintenanceModifyView from '../views/MAINTENANCE/MaintenanceModifyView.vue';
-import TimeCardView from '../views/TIME-CARD/TimeCardView.vue';
-import TimeCardClockInView from '../views/TIME-CARD/TimeCardClockInView.vue';
-import TimeCardClockOutView from '../views/TIME-CARD/TimeCardClockOutView.vue';
-import TimeCardMealInView from '../views/TIME-CARD/TimeCardMealInView.vue';
-import TimeCardMealOutView from '../views/TIME-CARD/TimeCardMealOutView.vue';
+import TimeStampView from '../views/TIME-STAMP/TimeStampView.vue';
+import TimeStampClockInView from '../views/TIME-STAMP/TimeStampClockInView.vue';
+import TimeStampClockOutView from '../views/TIME-STAMP/TimeStampClockOutView.vue';
+import TimeStampMealInView from '../views/TIME-STAMP/TimeStampMealInView.vue';
+import TimeStampMealOutView from '../views/TIME-STAMP/TimeStampMealOutView.vue';
+import TimeCardsView from '../views/TIME-CARD/TimeCardsView.vue';
 
 
 
@@ -252,44 +253,52 @@ const routes = [
   
   },
   {
-    path: '/time-card',
-    name: 'time-card',
-    component: TimeCardView,
+    path: '/time-stamp',
+    name: 'time-stamp',
+    component: TimeStampView,
     meta: {
-      requiresAuth: true
+      requiresAuth: false
     }
   
   },
   {
-    path: '/time-card/clock-in',
+    path: '/time-stamp/clock-in',
     name: 'clock-in',
-    component: TimeCardClockInView,
+    component: TimeStampClockInView,
     meta:{
       requiresAuth: false
     }
   },
   {
-    path: '/time-card/clock-out',
+    path: '/time-stamp/clock-out',
     name: 'clock-out',
-    component: TimeCardClockOutView,
+    component: TimeStampClockOutView,
     meta:{
       requiresAuth: false
     }
   },
   {
-    path: '/time-card/meal-in',
+    path: '/time-stamp/meal-in',
     name: 'meal-in',
-    component: TimeCardMealInView,
+    component: TimeStampMealInView,
     meta:{
       requiresAuth: false
     }
   },
   {
-    path: '/time-card/meal-out',
+    path: '/time-stamp/meal-out',
     name: 'meal-out',
-    component: TimeCardMealOutView,
+    component: TimeStampMealOutView,
     meta:{
       requiresAuth: false
+    }
+  },
+  {
+    path: '/time-card',
+    name: 'time-card',
+    component: TimeCardsView,
+    meta:{
+      requiresAuth: true
     }
   }
 ];

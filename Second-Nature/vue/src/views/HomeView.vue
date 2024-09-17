@@ -31,9 +31,16 @@
         <router-link v-bind:to="{ name: 'maintenance-ticket-List'}">Maintenance</router-link>
       </div>
       <div class="menu-icon">
-        <!-- need to find time card icon that matches the other icons -->
+      <!-- need to find unique time card icon that 
+       matches the other icons stylistically -->
         <img src="/src/images/to-do.png" alt="">
-        <router-link v-bind:to="{ name: 'time-card'}">Time Card</router-link>
+        <router-link v-bind:to="{ name: 'time-stamp'}">Time Stamp</router-link>
+      </div>
+      <div class="menu-icon">
+      <!-- need to find unique time card icon that 
+       matches the other icons stylistically -->
+        <img src="/src/images/to-do.png" alt="">
+        <router-link v-bind:to="{ name: 'time-card'}">Time Cards</router-link>
       </div>
     </div>
   </div>

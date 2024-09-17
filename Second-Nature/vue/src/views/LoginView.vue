@@ -58,7 +58,12 @@ export default {
             this.invalidCredentials = true;
           }
         });
+    },
+
+    timeStamp(){
+      this.$router.push("time-stamp");
     }
+    
   }
 };
 </script>

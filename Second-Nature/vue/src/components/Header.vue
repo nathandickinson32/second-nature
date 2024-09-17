@@ -15,10 +15,13 @@
       <router-link v-if="route.name === 'create-maintenance-ticket' || route.name === 'maintenance-ticket-detail'" v-bind:to="{ name: 'maintenance-ticket-List' }">Maintenance Tickets</router-link>
 
       <span v-if="route.name === 'clock-in' || route.name === 'clock-out' || route.name === 'meal-in' || route.name === 'meal-out'"> | </span>
-      <router-link v-if="route.name === 'clock-in' || route.name === 'clock-out' || route.name === 'meal-in' || route.name === 'meal-out'" v-bind:to="{ name: 'time-card' }">Time Card Board</router-link>
+      <router-link v-if="route.name === 'clock-in' || route.name === 'clock-out' || route.name === 'meal-in' || route.name === 'meal-out'" v-bind:to="{ name: 'time-stamp' }">Time Stamp</router-link>
 
       <span> | </span>
       <router-link v-bind:to="{ name: 'logout' }">Logout</router-link>
+    </div>
+    <div id="nav" v-else>
+      <router-link v-if="route.name === 'time-stamp'" v-bind:to="{ name: 'home' }">Back</router-link>
     </div>
 </template>
 

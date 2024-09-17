@@ -40,6 +40,10 @@ export function createStore(currentToken, currentUser) {
       },
       getEquipmentDetailView(state) {
         return state.equipmentDetailView;
+      },
+      // check if someone is logged in
+      isLoggedIn(state){
+        return !!state.token;
       }
     }
   });
