@@ -1,9 +1,8 @@
-Second Nature To Do - Week of 9/15/2024
+Second Nature To Do - Week of 9/22/2024
 
 Sprint Backlog
 Backend
 - TimeCard Objects
-	- [] TimeCard model (update dateTime to TimeStamp)
 	- [] CreateTimeCardDto
 	- [] UpdateTimeCardDto
 	- [] ArchiveTimeCardDto
@@ -64,24 +63,14 @@ Sunday
 
 Monday
 Chris
-- [x] Review Site
-Cody - Register Time Stamp Page
-- [x] Create the Register Time Stamp Page
-- [x] Rename "/time-card" to "/time-stamp"
-- [x] The Time Stamp page should be unauthenticated
-- [x] prompt the user for their user id (hide this is the user is already logged in)
-Second Nature home page
-- [x] Time Card home button
-- [x] Time Card button should lead to a list of time cards (stamps) (Time Card List View)
-Dinda
-- [x] Kudos - Archive - Require a reason for archiving.
+- [] Review Site
+
 
 Tuesday
--[x] Chris - Review Site
+- [] Chris - Review Site
 
 Wednesday
 -
-
 
 Thursday
 - 
