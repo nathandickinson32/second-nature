@@ -8,6 +8,10 @@ public class UpdateTimeCardDto {
     private String hourType;
     private Timestamp dateTime;
 
+    public void setTimeCardId() {
+        this.timeCardId = timeCardId;
+    }
+
     public Integer getTimeCardId() {
         return timeCardId;
     }
