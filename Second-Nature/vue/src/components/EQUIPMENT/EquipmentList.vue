@@ -1,26 +1,26 @@
 <template>
-  <div class="content">
-    <div class="filter-section">
-            <label @click="showAllEquipment" class="clickable-label">Show All</label>
-            <span class="separator"> | </span>
-            <label @click="showActiveEquipment" class="clickable-label">Active</label>
-            <span class="separator"> | </span>
-            <label @click="showInactiveEquipment" class="clickable-label">Inactive</label>
-            <span class="separator" v-if="isManager"> | </span>
-         <label v-if="isManager" @click="showArchivedEquipment" class="clickable-label">Archived</label>
-         <!-- Dropdown list of equippment types -->
-         <div class="form-input-group">
-                    <label for="equipmentType">Type of Equipment: </label>
-                    <select v-model="typeFilter" id="equipmentType" required>
-                        <option value=0>Any Equipment Type</option>
-                        <option v-for="type in types" :key="type.typeId" :value="type.typeId">
-                            {{ type.name }}
-                        </option>
-                    </select>
-                </div>
+    <div class="content">
+        <div class="filter-section">
+                <label @click="showAllEquipment" class="clickable-label">Show All</label>
+                <span class="separator"> | </span>
+                <label @click="showActiveEquipment" class="clickable-label">Active</label>
+                <span class="separator"> | </span>
+                <label @click="showInactiveEquipment" class="clickable-label">Inactive</label>
+                <span class="separator" v-if="isManager"> | </span>
+            <label v-if="isManager" @click="showArchivedEquipment" class="clickable-label">Archived</label>
+            <!-- Dropdown list of equippment types -->
+            <div class="form-input-group">
+                <label for="equipmentType">Type of Equipment: </label>
+                <select v-model="typeFilter" id="equipmentType" required>
+                    <option value=0>Any Equipment Type</option>
+                    <option v-for="type in types" :key="type.typeId" :value="type.typeId">
+                        {{ type.name }}
+                    </option>
+                </select>
+            </div>
         </div>
-    <Equipment class="equipmentCard" v-for="equipment in filteredByType" v-bind:key="equipment.id" :equipment="equipment"></Equipment>
-  </div>
+        <Equipment class="equipmentCard" v-for="equipment in filteredByType" v-bind:key="equipment.id" :equipment="equipment"></Equipment>
+    </div>
 </template>
 
 <script>

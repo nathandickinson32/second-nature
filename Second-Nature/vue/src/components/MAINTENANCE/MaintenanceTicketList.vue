@@ -8,7 +8,7 @@
             <label @click="showCompletedMaintenanceTickets" class="clickable-label">Completed</label>
             <span class="separator"> | </span>
             <label @click="showArchivedTickets" class="clickable-label">Archived</label>
-         </div>
+        </div>
         <div class="maintenanceTicket-list" v-if="filteredMaintenanceTickets.length === 0">
             No Maintenance Tickets to show.
         </div>
@@ -30,8 +30,7 @@ export default {
     data() {
         return {
             MaintenanceTickets: [],
-            filterType: 'active',
-           
+            filterType: 'active'
         }
     },
     created() {
