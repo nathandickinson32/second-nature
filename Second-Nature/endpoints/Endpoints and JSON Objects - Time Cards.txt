@@ -40,7 +40,7 @@ Expects: A time card ID as a path variable.
 Returns: Nothing
 
 JSON Objects
-TimeCard JSON Object
+TimeCard JSON Object "Model"
 {
 	"timeCardId" : Integer / Number,
 	"userId" : Integer / Number,
