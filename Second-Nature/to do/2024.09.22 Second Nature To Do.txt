@@ -3,9 +3,9 @@ Second Nature To Do - Week of 9/22/2024
 Sprint Backlog
 Backend
 - TimeCard Objects
-	- [] CreateTimeCardDto
-	- [] UpdateTimeCardDto
-	- [] ArchiveTimeCardDto
+	- [x] CreateTimeCardDto
+	- [x] UpdateTimeCardDto
+	- [x] ArchiveTimeCardDto
 - TimeCard DAO / JDBC TimeCard DAO
 	- [] Create TimeCard ("Register Time Stamp")
 	- [] Read all TimeCards by User ID
@@ -63,11 +63,18 @@ Sunday
 
 Monday
 Chris
-- [] Review Site
+- [x] Review Site
+Koi
+- TimeCard Objects
+	- [x] CreateTimeCardDto
+	- [x] UpdateTimeCardDto
+	- [x] ArchiveTimeCardDto
+Cody
+- Time Stamp / Card updates
 
 
 Tuesday
-- [] Chris - Review Site
+- [x] Chris - Review Site
 
 Wednesday
 -
