@@ -8,7 +8,7 @@ public class UpdateTimeCardDto {
     private String hourType;
     private Timestamp dateTime;
 
-    public void setTimeCardId() {
+    public void setTimeCardId(Integer timeCardId) {
         this.timeCardId = timeCardId;
     }
 
