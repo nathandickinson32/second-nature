@@ -12,7 +12,7 @@
          <div class="form-input-group">
                     <label for="equipmentType">Type of Equipment: </label>
                     <select v-model="typeFilter" id="equipmentType" required>
-                        <option value='0'>Any Equipment Type</option>
+                        <option value=0>Any Equipment Type</option>
                         <option v-for="type in types" :key="type.typeId" :value="type.typeId">
                             {{ type.name }}
                         </option>
@@ -37,7 +37,7 @@ export default {
             equipmentList: [],
             filterType: 'all',
             types: [],
-            typeFilter: '0',
+            typeFilter: 0,
             filteredByTypeArray: []
         };
     },
@@ -65,7 +65,7 @@ export default {
         },
         filteredByType() {
             console.log("typeFilter: " + this.typeFilter);
-            if(this.typeFilter === '0') {
+            if(this.typeFilter == '0') {
                 return this.filteredEquipment;
             }
             return this.filteredEquipment.filter(equipment => equipment.typeId === this.typeFilter);

@@ -39,14 +39,16 @@ export default {
     },
     computed: {
         filteredMaintenanceTickets() {
+            console.log(this.filterType);
+            console.log(this.MaintenanceTickets);
             if (this.filterType === 'all') {
                 return this.MaintenanceTickets;
             }else if (this.filterType === 'archived') {
                 return this.MaintenanceTickets.filter(MaintenanceTicket => MaintenanceTicket.archived === true);
             }else if (this.filterType === 'active') {
-                return this.MaintenanceTickets.filter(MaintenanceTicket => (MaintenanceTicket.archived === false && MaintenanceTicket.completed === false));
+                return this.MaintenanceTickets.filter(MaintenanceTicket => MaintenanceTicket.archived === false && MaintenanceTicket.complete === false);
             }else if (this.filterType === 'completed') {
-                return this.MaintenanceTickets.filter(MaintenanceTicket => (MaintenanceTicket.completed === true && MaintenanceTicket.archived === false));
+                return this.MaintenanceTickets.filter(MaintenanceTicket => MaintenanceTicket.complete === true && MaintenanceTicket.archived === false);
             }
                 return []; // Default return for unexpected filterType
         }
