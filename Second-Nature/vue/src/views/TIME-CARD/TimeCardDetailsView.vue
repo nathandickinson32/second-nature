@@ -1,8 +1,7 @@
 <template>
     <div class="content">
-        
+        <h1>Time Card Detail</h1>
 
-    
     </div>
 </template>
 
@@ -11,5 +10,7 @@
 </script>
 
 <style scoped>
+
+
 
 </style>
