@@ -4,6 +4,7 @@
     <span class="label">Model Number: </span>{{ modelNumber }} <br />
     <span class="label">Model Name: </span>{{ modelName }} <br />
     <span class="label">Is Complete: </span>{{ MaintenanceTicket.complete }} <br />
+    <span class="label">Is Archived: </span>{{ MaintenanceTicket.archived }} <br />
     <button v-on:click="viewMaintenanceTicket">View Ticket</button>
   </div>
 </template>
@@ -23,8 +24,8 @@ export default {
     return {
       modelName: '',
       serialNumber: '',
-      modelNumber: '',
-    }
+      modelNumber: ''
+      }
   },
   methods: {
     getModels() {

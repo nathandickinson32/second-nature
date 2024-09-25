@@ -1,7 +1,6 @@
 <template>
   <div class="content">
     <h1>Equipment</h1>
-    <!-- <router-link v-if="isManager" v-bind:to="{ name: 'equipment-detail' , params: { equipmentId: 0} }" id="add-new-equipment-button">Add a piece of Equipment</router-link> -->
     <router-link v-if="isManager" v-bind:to="{ name: 'create-equipment' }" id="add-new-equipment-button">Add a piece of Equipment</router-link>
     <EquipmentList />
 </div>

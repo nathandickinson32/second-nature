@@ -10,7 +10,7 @@
               
               <div class="form-input-group">
                   <label for="notes">Notes: </label>
-                  <input type="text" v-model="updateMaintenanceTicket.notes" id="notes" required />
+                  <input type="text" v-model="updateMaintenanceTicket.notes" id="notes" required :readonly="!isManager"/>
               </div>
               <div class="form-input-group">
                   <label for="complete">Complete: </label>
@@ -18,9 +18,9 @@
               </div>
               <div class="form-input-group" v-for="(performed, index) in maintenanceTicket.maintenancePerformedList" v-bind:key="index">
                     <h4>Maintenance Performed: </h4>
-                    <input type="text" name="maintenance-performed-description" id="" placeholder="What is being done?" v-model="performed.description">
-                    <input type="text" name="maintenance-performed-by" id="" placeholder="Who is doing the work?" v-model="performed.performedBy">
-                    <textarea name="maintenance-performed-notes" id="maintenance-performed-notes" v-model="performed.notes"></textarea>
+                    <input type="text" name="maintenance-performed-description" id="" placeholder="What is being done?" v-model="performed.description" :readonly="!isManager">
+                    <input type="text" name="maintenance-performed-by" id="" placeholder="Who is doing the work?" v-model="performed.performedBy" :readonly="!isManager">
+                    <textarea name="maintenance-performed-notes" id="maintenance-performed-notes" v-model="performed.notes" :readonly="!isManager"></textarea>
                 </div>
                 <button v-on:click.prevent="addMaintenancePerformed">Add another maintenance performed</button>
                 <button v-on:click.prevent="subtractMaintenancePerformed">Remove last maintenance performed</button>
@@ -78,6 +78,11 @@ import MaintenanceService from '../../services/MaintenanceService'
           }).catch((error) => {
               console.log(error);
           })
+      },
+      computed: {
+        isManager() {
+            return this.$store.getters.isManager;
+        },
       },
       methods: {
           goBack() {
