@@ -26,8 +26,17 @@ export default {
         return axios.post('/maintenance-tickets/update',updateMaintenanceTicket);
     },
     // Complete Maintenance Ticket
-
+    completeMaintenanceTicket(completeMaintenanceTicket){
+        return axios.post('/maintenance-tickets/complete',completeMaintenanceTicket);
+    },
     // Delete
     // Delete Maintenance Ticket
+    deleteMaintenanceTicket(ticketId){
+        return axios.delete(`/maintenance-tickets/delete/${ticketId}`);
+    },
     // Archive Maintenacne Ticket
+    archiveMaintenanceTicket(archiveMaintenanceTicket){
+        return axios.post('/maintenance-tickets/archive', archiveMaintenanceTicket);
+    }
+
 }

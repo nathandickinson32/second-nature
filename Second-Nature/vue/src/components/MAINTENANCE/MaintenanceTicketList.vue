@@ -38,10 +38,10 @@ export default {
     },
     computed: {
         filteredMaintenanceTickets() {
-            console.log(this.filterType);
-            console.log(this.MaintenanceTickets);
+            // console.log(this.filterType);
+            // console.log(this.MaintenanceTickets);
             if (this.filterType === 'all') {
-                return this.MaintenanceTickets;
+                return this.MaintenanceTickets.filter(MaintenanceTicket => MaintenanceTicket.archived === false);
             }else if (this.filterType === 'archived') {
                 return this.MaintenanceTickets.filter(MaintenanceTicket => MaintenanceTicket.archived === true);
             }else if (this.filterType === 'active') {

@@ -3,7 +3,7 @@
 
     <div class="large-container">
       <span class="label">Ticket Number: {{ MaintenanceTicket.ticketId }}</span>
-      <span class="label">Machine Name: </span> {{ modelName }}
+      <span class="label">Machine Name:  {{ modelName }} </span>
       <span class="label">Model Number: {{ modelNumber }}</span> 
       <span class="label">Serial Number: {{serialNumber }} </span>
       <span class="label">Machine hours at maintenance: {{ this.MaintenanceTicket.hours }}</span>
@@ -18,18 +18,20 @@
       </div>
 
       <span>{{ this.MaintenanceTicket.description }}</span>
-      <router-link v-bind:to="{ name: 'maintenance-ticket-modify',params: { ticketId: this.$route.params.ticketId } }">Modify</router-link>
-
+      <div> 
+        <router-link v-if="isManager" v-bind:to="{ name: 'maintenance-ticket-modify',params: { ticketId: this.$route.params.ticketId } }">Modify</router-link>
+      </div>
+      <div>
+        <button v-if="!MaintenanceTicket.archived && isManager" id="archive-ticket" @click="toggleAttemptArchive" class="button">Archive?</button>
+        <button v-if="!MaintenanceTicket.complete" id="archive-ticket" @click="completeTicket" class="button">Mark as Complete</button>
+      </div>
+      <div v-if="archiveAttempted && isManager">
+        <span class="label">Note on why archiving this ticket: </span> 
+        <input type="archiveNotes" id="archiveNotes" v-model="archiveNotes" placeholder="Enter notes here" autofocus /> <br>
+        <button id="archive-ticket" @click="archiveTicket" class="button" :disabled="!archiveNotes" >Archive</button>
+      </div>
     </div>
-
   </div>
-  
- 
-  <!-- {{ this.MaintenanceTicket }}
-  <br/>
-  <br/>
-  {{ this.MaintenanceTicket.maintenancePerformedList }}
-  {{ modelName }}{{ modelNumber }} {{ serialNumber }} -->
 </template>
 
 <script>
@@ -43,6 +45,8 @@ export default {
       modelName: "",
       serialNumber: "",
       modelNumber: "",
+      archiveNotes: "",
+      archiveAttempted: false
     };
   },
 
@@ -70,7 +74,48 @@ export default {
         this.modelNumber = response.data.model;
       });
     },
+    createArchiveTicket() {
+      return {
+        ticketId: this.MaintenanceTicket.ticketId,
+        archived: true,
+        archivedNotes: this.archiveNotes,
+      };
+    },
+    createCompleteTicket() {
+      return {
+        ticketId: this.MaintenanceTicket.ticketId,
+        complete: true,
+      };
+    },
+    archiveTicket() {
+      const archiveTicket = this.createArchiveTicket();
+      MaintenanceService.archiveMaintenanceTicket(archiveTicket)
+      .then(() => {
+        window.alert('Maintenance Ticket archived!');
+        this.$router.push({ name: 'maintenance-ticket-List' });
+      }).catch(() => {
+        console.log("Error archiving the ticket.");
+      });
+    },
+    completeTicket() {
+      const completeTicket = this.createCompleteTicket();
+      MaintenanceService.completeMaintenanceTicket(completeTicket)
+      .then(() => {
+        window.alert('Ticket marked as complete!');
+        this.$router.push({ name: 'maintenance-ticket-List' });
+      }).catch(() => {
+        console.log("Error completing ticket.");
+      });
+    },
+    toggleAttemptArchive() {
+      this.archiveAttempted = !this.archiveAttempted;
+    }
   },
+  computed: {
+    isManager() {
+      return this.$store.getters.isManager;
+    }
+  }
 };
 </script>
 

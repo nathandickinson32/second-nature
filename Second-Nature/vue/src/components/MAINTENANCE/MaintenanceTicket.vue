@@ -1,11 +1,11 @@
 <template>
-  <div class="small-container">
+  <div class="small-container" v-on:click="viewMaintenanceTicket">
     <span class="label">Ticket Number: </span>{{ MaintenanceTicket.ticketId }} <br />
     <span class="label">Model Number: </span>{{ modelNumber }} <br />
     <span class="label">Model Name: </span>{{ modelName }} <br />
     <span class="label">Is Complete: </span>{{ MaintenanceTicket.complete }} <br />
     <span class="label">Is Archived: </span>{{ MaintenanceTicket.archived }} <br />
-    <button v-on:click="viewMaintenanceTicket">View Ticket</button>
+    <!-- <button v-on:click="viewMaintenanceTicket">View Ticket</button> -->
   </div>
 </template>
 

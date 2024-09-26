@@ -146,6 +146,10 @@ textarea {
     height: 4em;
 }
 
+#equipment-identity {
+    max-width: 100%;
+}
+
 .checkbox-div {
     display: flex;
     justify-content: baseline;
