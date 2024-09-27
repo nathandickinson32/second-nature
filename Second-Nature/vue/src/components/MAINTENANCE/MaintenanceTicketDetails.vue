@@ -18,10 +18,8 @@
       </div>
 
       <span>{{ this.MaintenanceTicket.description }}</span>
-      <div> 
-        <router-link v-if="isManager" v-bind:to="{ name: 'maintenance-ticket-modify',params: { ticketId: this.$route.params.ticketId } }">Modify</router-link>
-      </div>
-      <div>
+      <div class="buttons"> 
+        <button v-if="isManager" v-bind:to="{ name: 'maintenance-ticket-modify',params: { ticketId: this.$route.params.ticketId } }">Modify</button>
         <button v-if="!MaintenanceTicket.archived && isManager" id="archive-ticket" @click="toggleAttemptArchive" class="button">Archive?</button>
         <button v-if="!MaintenanceTicket.complete" id="archive-ticket" @click="completeTicket" class="button">Mark as Complete</button>
       </div>
@@ -124,6 +122,15 @@ export default {
   font-size: 0.8em;
 }
 
+.buttons {
+  display: flex;
+  height: 40px;
+  justify-content: space-evenly;
+  margin-top: 10px;
+}
+button {
+  width: 75px;
+}
 .large-container {
   gap: 10px;
 }

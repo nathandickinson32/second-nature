@@ -1,14 +1,15 @@
 <template>
     <div class="content"> 
         <div class="filter-section">
-            <label @click="showActiveMaintenanceTickets" class="clickable-label">Active Tickets</label>
+            <label @click="showActiveMaintenanceTickets" class="clickable-label">Active</label>
             <span class="separator"> | </span>
-            <label @click="showAllMaintenanceTickets" class="clickable-label">Show All</label>
+            <label @click="showAllMaintenanceTickets" class="clickable-label">All</label>
             <span class="separator"> | </span>
-            <label @click="showCompletedMaintenanceTickets" class="clickable-label">Completed</label>
+            <label @click="showCompletedMaintenanceTickets" class="clickable-label">Complete</label>
             <span class="separator"> | </span>
             <label @click="showArchivedTickets" class="clickable-label">Archived</label>
         </div>
+        <p>Click or tap to view details</p>
         <div class="maintenanceTicket-list" v-if="filteredMaintenanceTickets.length === 0">
             No Maintenance Tickets to show.
         </div>
