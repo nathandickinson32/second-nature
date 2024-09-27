@@ -19,7 +19,7 @@
 
       <span>{{ this.MaintenanceTicket.description }}</span>
       <div class="buttons"> 
-        <button v-if="isManager" v-bind:to="{ name: 'maintenance-ticket-modify',params: { ticketId: this.$route.params.ticketId } }">Modify</button>
+        <button v-if="isManager" @click="modifyTicket">Modify</button>
         <button v-if="!MaintenanceTicket.archived && isManager" id="archive-ticket" @click="toggleAttemptArchive" class="button">Archive?</button>
         <button v-if="!MaintenanceTicket.complete" id="archive-ticket" @click="completeTicket" class="button">Mark as Complete</button>
       </div>
@@ -63,6 +63,9 @@ export default {
       });
   },
   methods: {
+    modifyTicket() {
+      this.$router.push({ name: 'maintenance-ticket-modify', params: { ticketId: this.$route.params.ticketId } });
+    },
     getModels() {
       EquipmentService.getEquipmentById(
         this.MaintenanceTicket.equipmentId
