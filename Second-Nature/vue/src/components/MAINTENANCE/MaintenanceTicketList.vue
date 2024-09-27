@@ -6,8 +6,8 @@
             <label @click="showAllMaintenanceTickets" class="clickable-label">All</label>
             <span class="separator"> | </span>
             <label @click="showCompletedMaintenanceTickets" class="clickable-label">Complete</label>
-            <span class="separator"> | </span>
-            <label @click="showArchivedTickets" class="clickable-label">Archived</label>
+            <span class="separator" v-if="isManager"> | </span>
+            <label @click="showArchivedTickets" class="clickable-label" v-if="isManager">Archived</label>
         </div>
         <p>Click or tap to view details</p>
         <div class="maintenanceTicket-list" v-if="filteredMaintenanceTickets.length === 0">
@@ -38,6 +38,9 @@ export default {
         this.getMaintenanceTickets();
     },
     computed: {
+        isManager() {
+            return this.$store.getters.isManager;
+        },
         filteredMaintenanceTickets() {
             // console.log(this.filterType);
             // console.log(this.MaintenanceTickets);
