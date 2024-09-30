@@ -6,8 +6,19 @@ public class ArchiveEquipmentDto {
     @NotEmpty
     private int equipmentId;
     @NotEmpty
+    private boolean isActive;
+    @NotEmpty
     private boolean isArchived;
     private String archivedNotes;
+
+    @NotEmpty
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(@NotEmpty boolean active) {
+        isActive = active;
+    }
 
     public int getEquipmentId() {
         return equipmentId;

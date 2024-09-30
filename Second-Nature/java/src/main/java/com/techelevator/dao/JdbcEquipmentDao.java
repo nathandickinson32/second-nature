@@ -178,13 +178,14 @@ public class JdbcEquipmentDao implements EquipmentDao {
 
     @Override
     public Equipment archiveEquipment(ArchiveEquipmentDto archiveEquipmentDto, int userId) {
-        String sql = "UPDATE equipment SET updated_by_user_id = ?, updated_on_date = ?, is_archived = ?, archived_notes = ? WHERE equipment_id = ?;";
+        String sql = "UPDATE equipment SET updated_by_user_id = ?, updated_on_date = ?, is_active = ?, is_archived = ?, archived_notes = ? WHERE equipment_id = ?;";
 
         try {
             template.update(
                     sql,
                     userId,
                     new Date(),
+                    false,
                     archiveEquipmentDto.isArchived(),
                     archiveEquipmentDto.getArchivedNotes(),
                     archiveEquipmentDto.getEquipmentId()
