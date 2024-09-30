@@ -16,6 +16,7 @@ Maintenance: Submit and track equipment maintenance requests.
 5. Time Management
 Time Stamp: Employees can clock in and out of shifts directly through the app.
 Time Cards: Review your time cards to ensure accurate work-hour tracking.
+
 Technologies Used
 Front-End
 Vue.js: Front-end framework for building user interfaces.
