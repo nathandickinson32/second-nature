@@ -4,6 +4,7 @@ public class ArchiveTimeCardDto {
 
     private Integer timeCardId;
     private String archivedNotes;
+    private boolean isArchived;
 
     public void setTimeCardId(Integer timeCardId) {
         this.timeCardId = timeCardId;
@@ -21,4 +22,11 @@ public class ArchiveTimeCardDto {
         return archivedNotes;
     }
 
+    public void setIsArchived(boolean isArchived) {
+        this.isArchived = isArchived;
+    }
+
+    public boolean getIsArchived() {
+        return isArchived;
+    }
 }
