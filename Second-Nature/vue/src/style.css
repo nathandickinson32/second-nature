@@ -110,7 +110,16 @@ p {
 .content {
     display: flex;
     justify-content: center;
-    margin: 0 5% 20px 5%;
+    margin-bottom: 20px;
+}
+
+.document-container {
+    background-color: white;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    box-shadow: -2px 2px 4px #a1af9f;
+    box-sizing: border-box;
 }
 
 .form-input-group {
@@ -127,7 +136,7 @@ p {
     border: 1px solid #a1af9f;
     border-radius: 10px;
     padding: 20px;
-    width: 100%;
+    width: 90%;
     max-width: 800px;
     align-content: space-between;
     justify-content: space-between;
@@ -177,11 +186,13 @@ p {
     background-color: white;
     border: 1px solid #a1af9f;
     border-radius: 10px;
-    width: 100%;
+    width: 90%;
     max-width: 400px;
     padding: 20px;
     box-shadow: -2px 2px 4px #a1af9f;
     box-sizing: border-box;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .small-font {

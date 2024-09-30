@@ -38,7 +38,7 @@ h1 {
   border: 1px solid #2a64bd ;
   border-radius: 10px;
   background-color: white;
-  width: 100%;
+  width: 90%;
   max-width: 400px;
   height: 50px;
   text-align: center;

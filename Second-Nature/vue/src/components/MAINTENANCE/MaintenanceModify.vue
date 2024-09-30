@@ -1,21 +1,16 @@
 <template>
   <div class="content">
-    <div class="button-section">
-      <span @click="goBack" class="clickable-label">Back to Details</span>
-      <span class="separator"> | </span>
-      <span @click="saveTicket" class="clickable-label">Save Changes</span>
-    </div>
-    <div class="large-container">
+    
+    <div class="document-container">
+      <h4>Update Maintenance Ticket</h4>
       <form id="ticket-form" @submit.prevent="saveTicket">
-        <div class="form-input-group">
-          <label for="notes">Notes: </label>
-          <input type="text" v-model="updateMaintenanceTicket.notes" id="notes" required :readonly="!isManager" />
+        <label for="notes">Notes: </label>
+        <textarea name="notes" id="notes" v-model="updateMaintenanceTicket.notes" :readonly="!isManager"></textarea>
+        <div class="checkbox-div">
+          <input type="checkbox" name="complete" v-model="updateMaintenanceTicket.complete" id="complete" />
+          <label for="complete"> Complete</label>
         </div>
-        <div class="form-input-group">
-          <label for="complete">Complete: </label>
-          <input type="checkbox" v-model="updateMaintenanceTicket.complete" id="isComplete" required />
-        </div>
-        <div class="form-input-group" v-for="(performed, index) in maintenanceTicket.maintenancePerformedList" v-bind:key="index">
+        <div class="maintenance-performed" v-for="(performed, index) in updateMaintenanceTicket.createMaintenancePerformedDto" v-bind:key="index">
           <h4>Maintenance Performed:</h4>
           <input
             type="text"
@@ -37,7 +32,11 @@
         </div>
         <button v-on:click.prevent="addMaintenancePerformed">Add another maintenance performed</button>
         <button v-on:click.prevent="subtractMaintenancePerformed">Remove last maintenance performed</button>
+        <input type="submit" value="Save" id="submitTicket">
       </form>
+      <div class="button-section">
+        <span @click="goBack" class="clickable-label">Back to Details</span>
+      </div>
     </div>
   </div>
 </template>
@@ -53,13 +52,7 @@ export default {
         ticketId: '',
         notes: '',
         complete: false,
-        createMaintenancePerformedDto: [
-          {
-            description: '',
-            performedBy: '',
-            notes: '',
-          },
-        ],
+        createMaintenancePerformedDto: [],
       },
     };
   },
@@ -108,18 +101,80 @@ export default {
           console.log(error);
         });
     },
+    addMaintenancePerformed(){
+            this.updateMaintenanceTicket.createMaintenancePerformedDto.push(
+                {
+                    description : '',
+                    performedBy : '',
+                    notes : 'Additional notes'
+                }
+            );
+        },
+        subtractMaintenancePerformed(){
+            this.updateMaintenanceTicket.createMaintenancePerformedDto.pop();
+        },
   },
 };
 </script>
 
 <style scoped>
-.content {
-  flex-direction: column;
+button {
+    width: 100%;
+    height: 4em;
+}
+
+form {
+    align-items: baseline;
+    gap: 10px;
+}
+
+input {
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 4em;
+}
+
+label {
+    font-size: 0.8em;
+}
+
+textarea {
+    resize: none;
+    box-sizing: border-box;
+    width: 100%;
+    height: 6em;
+    margin-bottom: 10px;
+}
+
+#submitTicket {
+    height: 4em;
 }
 
 .button-section {
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.checkbox-div {
+    display: flex;
+    justify-content: baseline;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.checkbox-div input {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.content {
+  gap: 10px;
+}
+
+.label {
+    font-size: 0.8em;
 }
 </style>

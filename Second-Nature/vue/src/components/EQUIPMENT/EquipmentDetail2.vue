@@ -21,7 +21,7 @@
       >
       
     </div>
-    <div class="small-container">
+    <div class="document-container">
       <form v-if="isManager" id="equipment-activity-form" @submit.prevent="onSubmit">
 
 <span>

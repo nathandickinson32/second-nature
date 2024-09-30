@@ -1,6 +1,5 @@
 <template>
-    <div class="content"> 
-        <div class="filter-section">
+    <div class="filter-section">
             <label @click="showActiveMaintenanceTickets" class="clickable-label">Active</label>
             <span class="separator"> | </span>
             <label @click="showAllMaintenanceTickets" class="clickable-label">All</label>
@@ -17,7 +16,6 @@
             <MaintenanceTicket v-for="MaintenanceTicket in filteredMaintenanceTickets" :key="MaintenanceTicket.ticketId"
                 :MaintenanceTicket="MaintenanceTicket"></MaintenanceTicket>
         </div>
-    </div>
 </template>
 
 <script>
