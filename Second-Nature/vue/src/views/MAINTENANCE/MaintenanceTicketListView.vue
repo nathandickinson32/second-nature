@@ -4,14 +4,17 @@
     <router-link v-bind:to="{ name: 'create-maintenance-ticket'}" id="create-ticket-btn">Create a Ticket</router-link>
     <maintenance-ticket-list/>
   </div>
+  <FooterVue/>
 </template>
 
 <script>
+import FooterVue from '../../components/Footer.vue';
 import MaintenanceTicketList from '../../components/MAINTENANCE/MaintenanceTicketList.vue';
 
 export default {
 components: {
-  MaintenanceTicketList
+  MaintenanceTicketList,
+  FooterVue
 }
 }
 </script>
@@ -24,7 +27,7 @@ components: {
   border: 1px solid #2a64bd ;
   border-radius: 10px;
   background-color: white;
-  width: 100%;
+  width: 90%;
   max-width: 400px;
   height: 50px;
   text-align: center;

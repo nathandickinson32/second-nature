@@ -1,17 +1,19 @@
 <template>
   <div class="content">
-    <h1>Equipment</h1>
     <router-link v-if="isManager" v-bind:to="{ name: 'create-equipment' }" id="add-new-equipment-button">Add a piece of Equipment</router-link>
     <EquipmentList />
-</div>
+  </div>
+  <FooterVue/>
 </template>
 
 <script>
 import EquipmentList from '../../components/EQUIPMENT/EquipmentList.vue';
+import FooterVue from '../../components/Footer.vue';
 
 export default {
     components: {
-        EquipmentList
+        EquipmentList,
+        FooterVue
     },
     computed: {
         isManager() {
@@ -34,7 +36,7 @@ h1 {
   border: 1px solid #2a64bd ;
   border-radius: 10px;
   background-color: white;
-  width: 100%;
+  width: 90%;
   max-width: 400px;
   height: 50px;
   text-align: center;

@@ -1,0 +1,10 @@
+Second Nature Site Review - 9/27/2024
+
+Update Maintenance Ticket
+** BUG ** Updating the maintenance ticket does not add the first maintenance performed.
+- Only populate the first maintenance performed after clicking "add maintenance performed."
+** BUG ** Add another maintenance performed button is not working.
+** FORMAT ISSUE ** Update maintenance performed styling is not complete.
+** FORMAT ISSUE ** Modify Maintenance Ticket should be a button.
+** FUNCTIONALIT ** Maintenance ticket list cannot be unfiltered to show tickets that have not been completed.
+** QUESTION ** Maintenance Ticket List - What is the difference between "Archive Tickets" and "Archived"?

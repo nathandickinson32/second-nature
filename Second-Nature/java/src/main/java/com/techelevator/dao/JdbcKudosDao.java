@@ -23,7 +23,7 @@ public class JdbcKudosDao implements KudosDao{
 
     @Override
     public Kudos insertKudos(Kudos kudos) {
-        String sql = "INSERT INTO kudos (giver_user_id, receiver_user_id, date, title, notes, is_archived) VALUES (?, ?, ?, ?, ?, ?) RETURNING kudos_id;";
+        String sql = "INSERT INTO kudos (giver_user_id, receiver_user_id, date, title, notes, is_archived, archived_notes) VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING kudos_id;";
         int newKudosId = -1;
 
         try {
@@ -35,7 +35,8 @@ public class JdbcKudosDao implements KudosDao{
                     kudos.getDate(),
                     kudos.getTitle(),
                     kudos.getNotes(),
-                    kudos.isArchived()
+                    kudos.isArchived(),
+                    kudos.getArchivedNotes()
             );
         } catch (CannotGetJdbcConnectionException e){
             throw new CannotGetJdbcConnectionException("[JDBC Kudos DAO] Unable to connect to the database.");
@@ -168,6 +169,7 @@ public class JdbcKudosDao implements KudosDao{
             template.update(
                     sql,
                     true,
+                    kudos.getArchivedNotes(),
                     kudos.getKudosId()
             );
         } catch (CannotGetJdbcConnectionException e){

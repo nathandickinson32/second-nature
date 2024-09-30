@@ -68,7 +68,11 @@ public class Kudos {
         this.isArchived = archived;
     }
 
-    public String getArchivedNotes() { return archivedNotes; }
+    public String getArchivedNotes() {
+        return archivedNotes;
+    }
 
-    public void setArchivedNotes(String archiveNotes) { this.archivedNotes = archivedNotes; }
+    public void setArchivedNotes(String archivedNotes) {
+        this.archivedNotes = archivedNotes;
+    }
 }

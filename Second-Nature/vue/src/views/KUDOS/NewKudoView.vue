@@ -46,7 +46,8 @@ export default {
                 giverUserId: '',
                 receiverUserId: '',
                 date: '',
-                archive: ''
+                archive: '',
+                archivedNotes: ''
             },
             currentDate: new Date().toISOString().slice(0, 10),
         }

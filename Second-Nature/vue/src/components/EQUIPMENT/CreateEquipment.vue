@@ -1,6 +1,7 @@
 <template>
     <div class="content">
-        <div class="small-container">
+        <div class="document-container">
+            <h4>Add Equipment</h4>
             <form v-on:submit.prevent="createEquipment">
                 <label for="serial-number">Serial Number: </label>
                 <input type="text" name="serial-number" id="serial-number" placeholder="Serial Number" v-model="createEquipmentDto.serialNumber">

@@ -1,18 +1,21 @@
 <template>
     <div class="content">
       <!-- {{ view }} -->
-        <h1>Equipment Detail</h1>
-<equipment-detail-2 :equipment="equipment" ></equipment-detail-2>
+      <h1>Equipment Detail</h1>
+      <equipment-detail-2 :equipment="equipment" ></equipment-detail-2>
     </div>
+    <FooterVue/>
   </template>
   
   <script>
 import EquipmentDetail2 from '../../components/EQUIPMENT/EquipmentDetail2.vue';
+import FooterVue from '../../components/Footer.vue';
 import EquipmentService from '../../services/EquipmentService';
   
 export default {
     components: {
-     EquipmentDetail2
+     EquipmentDetail2,
+     FooterVue
     },
     data() {
       return {

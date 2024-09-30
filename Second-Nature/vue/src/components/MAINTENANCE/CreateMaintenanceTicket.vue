@@ -1,21 +1,22 @@
 <template>
   <div class="content">
-    <div class="small-container">
+    <div class="document-container">
+        <h4>Create a Maintenance Ticket</h4>
         <form v-on:submit.prevent="createMaintenanceTicket">
             <label for="equipment-identity">Select Equipment: </label>
             <select name="equipment-identity" id="equipment-identity" v-model="createMaintenanceTicketDto.equipmentId">
                 <option value="" disabled>Select Equipment</option>
                 <option v-for="equipmentIdentity in equipmentIdentityList" v-bind:key="equipmentIdentity.equipmentId" :value="equipmentIdentity.equipmentId">
-                    {{ equipmentIdentity.name }} {{ equipmentIdentity.serialNumber }} {{ equipmentIdentity.model }}
+                    {{ equipmentIdentity.name }} {{ equipmentIdentity.model }}
                 </option>
             </select>
 
             <div v-if="selectedEquipment != null">
                 <div v-show="createMaintenanceTicketDto.equipmentId != null" class="equipment-name-serial">
                     <span class="label">Name: {{ selectedEquipment.name }} </span> <br>
+                    <span class="label">Model: {{ selectedEquipment.model }}</span> <br>
                     <span class="label">Serial Number: {{ selectedEquipment.serialNumber }}</span> 
                 </div>
-                
 
                 <label for="hours">Current Hours</label>
                 <input type="text" name="hours" id="hours" placeholder="Current hours" v-model="createMaintenanceTicketDto.hours">
@@ -99,14 +100,6 @@ export default {
         }
     },
     computed: {
-        // equipmentName() {
-        //     const equipmentIdentity = this.equipmentIdentityList.find(equipmentIdentity => equipmentIdentity.equipmentId === this.createMaintenanceTicketDto.equipmentId);
-        //     return equipmentIdentity ? equipmentIdentity.name : "Make a selection";
-        // },
-        // serialNumber() {
-        //     const equipmentIdentity =this.equipmentIdentityList.find(equipmentIdentity => equipmentIdentity.equipmentId === this.createMaintenanceTicketDto.equipmentId);
-        //     return equipmentIdentity ? equipmentIdentity.serialNumber : "";
-        // },
         selectedEquipment() {            
             return this.equipmentIdentityList.find(equipmentIdentity => equipmentIdentity.equipmentId === this.createMaintenanceTicketDto.equipmentId);
         }
@@ -118,7 +111,9 @@ export default {
 button {
     width: 100%;
     height: 4em;
+    margin-top: 10px;
 }
+
 form {
     align-items: baseline;
     gap: 10px;
@@ -128,6 +123,7 @@ input {
     margin-bottom: 10px;
     width: 100%;
     box-sizing: border-box;
+    height: 4em;
 }
 
 label {
@@ -144,6 +140,7 @@ textarea {
 
 #submitTicket {
     height: 4em;
+    margin-top: 10px;
 }
 
 #equipment-identity {
@@ -170,4 +167,6 @@ textarea {
 .label {
     font-size: 0.8em;
 }
+
+
 </style>

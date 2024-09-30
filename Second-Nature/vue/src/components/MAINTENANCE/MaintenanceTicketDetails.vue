@@ -1,12 +1,14 @@
 <template>
   <div class="content">
-
-    <div class="large-container">
+    <div class="document-container">
+      <h4>Maintenance Ticket Details</h4>
       <span class="label">Ticket Number: {{ MaintenanceTicket.ticketId }}</span>
       <span class="label">Machine Name:  {{ modelName }} </span>
       <span class="label">Model Number: {{ modelNumber }}</span> 
-      <span class="label">Serial Number: {{serialNumber }} </span>
+      <span class="label">Serial Number: {{ serialNumber }} </span>
       <span class="label">Machine hours at maintenance: {{ this.MaintenanceTicket.hours }}</span>
+      <span class="label">Notes: </span> <br>
+      <span class="label"> {{ MaintenanceTicket.notes }}</span>
       
       <div v-for="maintenancePerformed in MaintenanceTicket.maintenancePerformedList" v-bind:key="maintenancePerformed.maintenancePerformedId">
         <hr>
@@ -18,13 +20,9 @@
       </div>
 
       <span>{{ this.MaintenanceTicket.description }}</span>
-      <div> 
-        <router-link v-if="isManager" v-bind:to="{ name: 'maintenance-ticket-modify',params: { ticketId: this.$route.params.ticketId } }">Modify</router-link>
-      </div>
-      <div>
-        <button v-if="!MaintenanceTicket.archived && isManager" id="archive-ticket" @click="toggleAttemptArchive" class="button">Archive?</button>
-        <button v-if="!MaintenanceTicket.complete" id="archive-ticket" @click="completeTicket" class="button">Mark as Complete</button>
-      </div>
+      <button v-if="isManager" @click="modifyTicket">Modify</button>
+      <button v-if="!MaintenanceTicket.archived && isManager" id="archive-ticket" @click="toggleAttemptArchive" class="button">Archive?</button>
+      <button v-if="!MaintenanceTicket.complete" id="archive-ticket" @click="completeTicket" class="button">Mark as Complete</button>
       <div v-if="archiveAttempted && isManager">
         <span class="label">Note on why archiving this ticket: </span> 
         <input type="archiveNotes" id="archiveNotes" v-model="archiveNotes" placeholder="Enter notes here" autofocus /> <br>
@@ -65,6 +63,9 @@ export default {
       });
   },
   methods: {
+    modifyTicket() {
+      this.$router.push({ name: 'maintenance-ticket-modify', params: { ticketId: this.$route.params.ticketId } });
+    },
     getModels() {
       EquipmentService.getEquipmentById(
         this.MaintenanceTicket.equipmentId
@@ -120,11 +121,29 @@ export default {
 </script>
 
 <style scoped>
+button {
+    width: 100%;
+    height: 4em;
+}
+
+input {
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 4em;
+}
+
+form {
+  gap: 10px;
+}
+
 .label {
   font-size: 0.8em;
 }
 
-.large-container {
+.document-container {
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 </style>
