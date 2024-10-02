@@ -1,6 +1,9 @@
 package com.techelevator.model;
 
-import java.security.Timestamp;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class CreateTimeCardDto {
 
@@ -24,8 +27,13 @@ public class CreateTimeCardDto {
         return hourType;
     }
 
-    public void setDateTime(Timestamp dateTime) {
-        this.dateTime = dateTime;
+    public void setDateTime(String dateTimeStr) {
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime localDateTime = LocalDateTime.parse(dateTimeStr, formatter);
+            this.dateTime = Timestamp.valueOf(localDateTime);
+
+
     }
 
     public Timestamp getDateTime() {
