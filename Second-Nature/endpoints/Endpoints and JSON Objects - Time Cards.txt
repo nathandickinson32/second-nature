@@ -57,9 +57,8 @@ CreateTimeCardDto
 {
 	"userId" : Integer / Number,
 	"hourType" : String  (options: "shift_begin", "meal_begin", "meal_end", "shift_end"),
-	"dateTime" : TimeStamp / String
 }
-// isArchived is updated on the backend and set to FALSE.
+// dateTime and isArchived is updated on the backend. isArchived is set to FALSE.
 
 //Update
 UpdateTimeCardDto

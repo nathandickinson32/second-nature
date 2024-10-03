@@ -1,0 +1,110 @@
+Second Nature To Do - Week of 9/22/2024
+
+Next Demo: Wednesday, 10/16/2024
+
+Sprint Backlog
+Backend
+- TimeCard DAO / JDBC TimeCard DAO
+	- [] Create TimeCard ("Register Time Stamp")
+	- [] Read all TimeCards by User ID
+	- [] Update TimeCard
+	- [] Archive TimeCard
+	- [] Delete TimeCard
+- TimeCard Controller
+	- [] Create TimeCard ("Register Time Stamp" / Does not require authentication)
+	- [] Read all TimeCards by User ID
+	- [] Update TimeCard
+	- [] Archive TimeCard
+	- [] Delete TimeCard
+
+
+Front End
+- Equipment
+	Equipment List
+		- [] Add functionality to the "maintenance" button
+		- [] Add functionality to the "new ticket" button
+			- [] Pass in the Equipment ID to populate the create ticket dropdown
+	Equipment Details
+		- [] Remove console logs from the Equipment Type drop down
+		- [] Style Equipment Type dropdown list to fix styling errors
+		- [] Checkbox and required text field to archive equipment (manager, mechanic)
+		- [] Style Active / Inactive checkbox and reason text field
+		- [] Style Archive page
+- Maintenance
+	Maintenance ticket List
+		- [x] Filter by equipment type
+	Ticket Details
+		- [] Add a checkbox and a required text box to archive a maintenance ticket
+		- [] Add a button to update a maintenance ticket
+		- [] Display the ticket date
+	Update Maintenance Ticket
+		- [] Create a page for updating maintenance tickets
+	Create a Ticket
+		- [] Style the dropdown so it fits on the screen
+- Time Cards
+	Time Card List View (Backend dependency)
+		- [] Displaying a list of all recent Time Cards. (think about a limit by dropdown)
+	Time Card Detail View (Backend dependency)
+		- [] Time Card Detail View
+	Edit / Update Time Card View (Backend dependency)
+		- [] Edit / Update Time Card Page
+	Archive Time Card Functionality (Backend dependency)
+		- [] Archive Time Card (button, page, whatever. Make sure a reason is required)
+
+
+Sunday
+- Formatting changes (Dinda)
+
+Monday
+- Created a ReadMe (Nathan)
+- Finalized Time Card DAO's (Koi)
+- Various Styling Updates (Chris)
+- Maintenance - Reworked Update Maintenance Ticket (Chris)
+- Created a Footer (Chris)
+
+Tuesday
+-
+
+Wednesday
+- Time Cards - Finalizing backend (Nathan)
+
+Thursday
+- Schedule Next Demo 10/14/2024
+- Training and Reference - User Stories
+- Training and Reference - Database design
+- Training and Reference - Endpoints and JSON Objects Documentation
+- Training and Reference - Branch
+
+Friday
+- 
+
+Saturday
+-
+
+
+** KNOWN ISSUES **
+Back End
+Equipment
+- Archiving a piece of equipment does not set the equipment to inactive.
+	Task: Set the is_active db field to false when archiving a piece of equipment
+
+Front End
+Equipment
+- Updating a piece of equipment prints a console log of the object.
+	Task: Remove the console log.
+
+Kudos
+- Creating a Kudos makes a console log of the new object
+	Task: Remove the console log.
+- The list of Kudos prints a console log of the array of kudos objects
+	Task: Remove the console log.
+
+Maintenance
+- Creating a new ticket prints a status code to the console
+	Task: Remove the console log.
+- When adding a maintenance performed, the button "Add maintenance performed" is showing twice.
+	- Remove the first instance of that button.
+- The "Add Maintenance Performed" button is not clear
+	Task: Rename the button to indicate that the user is adding ANOTHER maintenance performed.
+- The equipment dropdown for Creating a new maintenance ticket is not clear
+	Task: Add a serial number, model, and name to the dropdown list.

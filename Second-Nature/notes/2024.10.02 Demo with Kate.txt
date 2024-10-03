@@ -1,0 +1,16 @@
+Meeting with Kate 10/2/2024
+
+Time Card Notes
+- Select a date range to display (or a start date and a time frame)
+- Display the total number of hours
+- Display as a list
+
+- Think about flagging missed punches
+
+Fix equipment bugs
+- Create equipment
+- Date of maintenance performed
+
+Next meeting?
+Week of 14th
+Wednesday the 16th
