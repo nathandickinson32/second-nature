@@ -3,6 +3,7 @@ package com.techelevator.dao;
 import com.techelevator.model.CreateTimeCardDto;
 import com.techelevator.model.Equipment;
 import com.techelevator.model.TimeCards;
+import com.techelevator.model.UpdateTimeCardDto;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,19 +26,19 @@ public class JdbcTimeCardDao implements TimeCardDao {
 
     public TimeCards createTimeCard(CreateTimeCardDto createTimeCardDto, int userId, Timestamp timestamp) {
         int timeCardId = -1;
-        String sql = "INSERT INTO time_cards (user_id, hour_type, date_time) VALUES (?,?,?) RETURNING time_card_id;";
+        String sql = "INSERT INTO time_cards (user_id, hour_type, date_time, updated_on_date) VALUES (?,?,?,?) RETURNING time_card_id;";
         timeCardId = template.queryForObject(
                 sql,
                 int.class,
                 userId,
                 createTimeCardDto.getHourType(),
-                timestamp
+                timestamp,
+                new Date()
 
         );
         return getTimeCardById(timeCardId);
     }
 
-    ;
 
     public TimeCards getTimeCardById(int timeCardId) {
         TimeCards timeCard = new TimeCards();
@@ -57,7 +58,6 @@ public class JdbcTimeCardDao implements TimeCardDao {
         return timeCard;
     }
 
-    ;
 
     private TimeCards mapRowToTimeCard(SqlRowSet results) {
         TimeCards timeCard = new TimeCards();
@@ -100,5 +100,28 @@ public class JdbcTimeCardDao implements TimeCardDao {
         }
 
         return timeCards;
+    }
+
+    @Override
+    public TimeCards updateTimeCard(UpdateTimeCardDto updateTimeCardDto, int userId, Timestamp timestamp) {
+        String sql = "UPDATE time_cards SET time_card_id = ?, hour_type = ?, date_time = ?, updated_on_date = ?, updated_by_user_id = ? WHERE time_card_id = ?;";
+
+        try {
+            template.update(
+                    sql,
+                    updateTimeCardDto.getTimeCardId(),
+                    updateTimeCardDto.getHourType(),
+                    timestamp,
+                    new Date(),
+                    userId,
+                    updateTimeCardDto.getTimeCardId()
+            );
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Equipment DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Equipment DAO] Error updating equipment ID: " + updateTimeCardDto.getTimeCardId());
+        }
+
+        return getTimeCardById(updateTimeCardDto.getTimeCardId());
     }
 }
