@@ -1,4 +1,4 @@
-package com.techelevator.model;
+package com.techelevator.model.EquipmentFolder;
 
 import javax.validation.constraints.NotEmpty;
 

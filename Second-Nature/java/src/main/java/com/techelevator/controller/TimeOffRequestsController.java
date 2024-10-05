@@ -2,7 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.TimeOffRequestsDao;
 import com.techelevator.dao.UserDao;
-import com.techelevator.model.TimeOffRequests;
+import com.techelevator.model.TimeOffRequest.TimeOffRequests;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

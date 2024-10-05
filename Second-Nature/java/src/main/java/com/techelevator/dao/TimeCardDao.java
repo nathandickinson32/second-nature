@@ -1,9 +1,8 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.CreateTimeCardDto;
-import com.techelevator.model.Equipment;
-import com.techelevator.model.TimeCards;
-import com.techelevator.model.UpdateTimeCardDto;
+import com.techelevator.model.TimeCard.CreateTimeCardDto;
+import com.techelevator.model.TimeCard.TimeCards;
+import com.techelevator.model.TimeCard.UpdateTimeCardDto;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -16,5 +15,6 @@ public interface TimeCardDao {
     public TimeCards getTimeCardById(int timeCardId);
     public List<TimeCards> getTimeCardsByUserId(int userId);
 
+    //update
     public TimeCards updateTimeCard(UpdateTimeCardDto updateTimeCardDto, int userId, Timestamp timestamp);
 }

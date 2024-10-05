@@ -1,7 +1,6 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.Kudos;
-import com.techelevator.model.TimeOffRequests;
+import com.techelevator.model.Kudos.Kudos;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.management.StandardMBean;
 import javax.sql.DataSource;
 
 @Component

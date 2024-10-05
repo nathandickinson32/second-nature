@@ -1,4 +1,4 @@
-package com.techelevator.model;
+package com.techelevator.model.UserFolder;
 
 public class UserInformation {
     private int userId;

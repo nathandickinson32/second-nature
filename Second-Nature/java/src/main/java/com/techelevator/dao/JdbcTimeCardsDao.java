@@ -1,16 +1,15 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.ArchiveTimeCardDto;
-import com.techelevator.model.CreateTimeCardDto;
-import com.techelevator.model.TimeCards;
-import com.techelevator.model.UpdateTimeCardDto;
+import com.techelevator.model.TimeCard.ArchiveTimeCardDto;
+import com.techelevator.model.TimeCard.CreateTimeCardDto;
+import com.techelevator.model.TimeCard.TimeCards;
+import com.techelevator.model.TimeCard.UpdateTimeCardDto;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import javax.sql.DataSource;
-import java.sql.Time;
 
 public class JdbcTimeCardsDao implements TimeCardsDao{
 

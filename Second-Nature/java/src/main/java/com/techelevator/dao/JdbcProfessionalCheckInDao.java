@@ -1,14 +1,11 @@
 package com.techelevator.dao;
 
 
-import com.techelevator.model.Kudos;
-import com.techelevator.model.ProfessionalCheckIn;
-import com.techelevator.model.TimeOffRequests;
+import com.techelevator.model.ProfessionalCheckIn.ProfessionalCheckIn;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;

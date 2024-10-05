@@ -1,9 +1,9 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.ArchiveTimeCardDto;
-import com.techelevator.model.CreateTimeCardDto;
-import com.techelevator.model.TimeCards;
-import com.techelevator.model.UpdateTimeCardDto;
+import com.techelevator.model.TimeCard.ArchiveTimeCardDto;
+import com.techelevator.model.TimeCard.CreateTimeCardDto;
+import com.techelevator.model.TimeCard.TimeCards;
+import com.techelevator.model.TimeCard.UpdateTimeCardDto;
 
 public interface TimeCardsDao {
 

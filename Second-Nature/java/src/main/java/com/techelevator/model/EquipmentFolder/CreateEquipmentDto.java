@@ -1,7 +1,6 @@
-package com.techelevator.model;
+package com.techelevator.model.EquipmentFolder;
 
 import javax.validation.constraints.NotEmpty;
-import java.util.Date;
 
 public class CreateEquipmentDto {
     @NotEmpty(message = "Please enter a serial number.")

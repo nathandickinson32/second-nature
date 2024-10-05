@@ -2,9 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.ProfessionalCheckInDao;
 import com.techelevator.dao.UserDao;
-import com.techelevator.model.Kudos;
-import com.techelevator.model.ProfessionalCheckIn;
-import com.techelevator.model.TimeOffRequests;
+import com.techelevator.model.ProfessionalCheckIn.ProfessionalCheckIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

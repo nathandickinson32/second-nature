@@ -1,7 +1,6 @@
 package com.techelevator.dao;
 
-import com.sun.tools.javac.Main;
-import com.techelevator.model.*;
+import com.techelevator.model.Maintenance.*;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;

@@ -1,6 +1,6 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.ProfessionalCheckIn;
+import com.techelevator.model.ProfessionalCheckIn.ProfessionalCheckIn;
 
 import java.util.List;
 

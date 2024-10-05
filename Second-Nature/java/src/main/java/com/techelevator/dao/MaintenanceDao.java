@@ -1,7 +1,6 @@
 package com.techelevator.dao;
 
-import com.sun.tools.javac.Main;
-import com.techelevator.model.*;
+import com.techelevator.model.Maintenance.*;
 
 import java.util.List;
 

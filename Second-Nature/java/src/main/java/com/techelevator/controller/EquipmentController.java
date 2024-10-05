@@ -3,7 +3,15 @@ package com.techelevator.controller;
 import com.techelevator.dao.EquipmentDao;
 import com.techelevator.dao.MaintenanceDao;
 import com.techelevator.dao.UserDao;
-import com.techelevator.model.*;
+
+
+import com.techelevator.model.ArchiveEquipmentDto;
+import com.techelevator.model.Equipment;
+import com.techelevator.model.EquipmentFolder.CreateEquipmentDto;
+import com.techelevator.model.EquipmentFolder.UpdateEquipmentActivityDto;
+import com.techelevator.model.EquipmentFolder.UpdateEquipmentDto;
+import com.techelevator.model.EquipmentIdentityDto;
+import com.techelevator.model.Maintenance.MaintenancePerformed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

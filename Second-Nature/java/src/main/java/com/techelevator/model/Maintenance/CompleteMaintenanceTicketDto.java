@@ -1,4 +1,4 @@
-package com.techelevator.model;
+package com.techelevator.model.Maintenance;
 
 public class CompleteMaintenanceTicketDto {
     private int ticketId;
