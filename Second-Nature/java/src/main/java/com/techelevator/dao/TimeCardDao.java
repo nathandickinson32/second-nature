@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.TimeCard.ArchiveTimeCardDto;
 import com.techelevator.model.TimeCard.CreateTimeCardDto;
 import com.techelevator.model.TimeCard.TimeCards;
 import com.techelevator.model.TimeCard.UpdateTimeCardDto;
@@ -15,6 +16,10 @@ public interface TimeCardDao {
     public TimeCards getTimeCardById(int timeCardId);
     public List<TimeCards> getTimeCardsByUserId(int userId);
 
-    //update
+    // Update
     public TimeCards updateTimeCard(UpdateTimeCardDto updateTimeCardDto, int userId, Timestamp timestamp);
+
+    // Archive
+
+
 }

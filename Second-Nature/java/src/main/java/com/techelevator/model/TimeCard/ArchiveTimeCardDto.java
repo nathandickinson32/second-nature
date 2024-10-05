@@ -2,15 +2,16 @@ package com.techelevator.model.TimeCard;
 
 public class ArchiveTimeCardDto {
 
-    private Integer timeCardId;
-    private String archivedNotes;
+    private int timeCardId;
     private boolean isArchived;
+    private String archivedNotes;
 
-    public void setTimeCardId(Integer timeCardId) {
+
+    public void setTimeCardId(int timeCardId) {
         this.timeCardId = timeCardId;
     }
 
-    public Integer getTimeCardId() {
+    public int getTimeCardId() {
         return timeCardId;
     }
 

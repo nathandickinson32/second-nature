@@ -3,6 +3,9 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.TimeCardDao;
 import com.techelevator.dao.UserDao;
+import com.techelevator.model.ArchiveEquipmentDto;
+import com.techelevator.model.Equipment;
+import com.techelevator.model.TimeCard.ArchiveTimeCardDto;
 import com.techelevator.model.TimeCard.CreateTimeCardDto;
 import com.techelevator.model.TimeCard.TimeCards;
 import com.techelevator.model.TimeCard.UpdateTimeCardDto;
