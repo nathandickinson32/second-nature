@@ -1,0 +1,87 @@
+Endpoints and JSON Objects - Training Resources
+
+Create
+/training/create
+Request Type: PUT
+Inserts a new training resource record into the database.
+HTTP Status: 201 CREATED
+Expects: A CreateTrainingResourceDTO JSON object.
+Returns: A TrainingResource JSON object.
+
+Read
+/training/all
+Request Type: GET
+Gets a list of ALL training resource objects from the database.
+HTTP Status: 200 OK
+Expects: Nothing
+Returns: An array of training resource objects.
+
+/training/{training_resource_id}
+Request Type: GET
+Gets a training resource object by the training_resource_id as  path variable.
+HTTP Status: 200 OK
+Expects: The training_resource_id as a path variable
+Returns: A training resource JSON object
+
+Update
+/training/update
+Request Type: POST
+Updates a training resource record in the database.
+HTTP Status: 202 ACCEPTED
+Expects: An Update Training Resource DTO
+Returns: The updated Training Resource JSON Object
+
+/training/archive
+Request Type: POST
+Archives a training resource record in the database.
+HTTP Status: 202 ACCEPTED
+Expects: An Archive Training Resource DTO
+Returns: The updated Training Resource JSON object
+
+Delete
+/training/delete/{training_resource_id}
+Request Type: DELETE
+Deletes a training resource record from the database
+HTTP Status: 200 OK
+Expects: The training_resource_id as path variable.
+Returns: Nothing.
+
+JSON Objects
+TrainingResource (Model)
+{
+	"training_resource_id" : Integery / Number,
+	"category" : String (options include: "general", "policies", "winter", "spring", "summer", etc...)
+	"content" : String,
+	"resource_source" : String (upload location),
+	"entered_on_date" : Time Stamp,
+	"entered_by_user_id" : Intiger,
+	"updated_on_date" : Time Stamp,
+	"updated_by_user_id" : Intiger,
+	"archived" : Boolean (Defaults to false),
+	"archived_notes" : String (Required once the archived option is selected)
+}
+
+CreateTrainingResourceDTO
+{
+	"category" : String (options include: "general", "policies", "winter", "spring", "summer", etc...)
+	"content" : String,
+	"resource_source" : String (upload location),
+}
+// Entered on date, and user id is handled on the backend Create controller.
+
+Update Training Resource DTO
+{
+	"training_resource_id" : Intiger,
+	"category" : String (options include: "general", "policies", "winter", "spring", "summer", etc...),
+	"content" : String,
+	"resource_source" : String (upload location),
+}
+// Updated on date, and user id is handled on the backend Update controller.
+
+Archive Training Resource DTO
+{
+	"training_resource_id" : Integery / Number,
+	"archived_notes" : String (Required once the archived option is selected)
+}
+// updatedOnDate and updatedByUserId are handled on the backend by the principal.
+// isArchived is updated on the backend and set to TRUE.
