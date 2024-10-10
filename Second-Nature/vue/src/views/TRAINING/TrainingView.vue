@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { pdf } from 'vue-pdf';
+import pdf  from 'vue-pdf';
 
 export default {
   components: {
@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       documents: [
-        { name: 'Stihl Backpack Blower', url: '../public/assets/documents/Stihl Backpack Blower Manual.pdf' },
+        { name: 'Stihl Backpack Blower', url: '../public/assets/documents/StihlBackpackBlowerManual.pdf' },
         // { name: 'Document 2', url: '/path/to/document2.pdf' },
         // Add more documents as needed
       ],
