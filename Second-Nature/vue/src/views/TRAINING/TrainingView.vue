@@ -15,7 +15,8 @@
 </template>
 
 <script>
-import pdf  from 'vue-pdf';
+import pdf  from 'vue-pdf-embed';
+// https://www.npmjs.com/package/vue-pdf-embed <<-- Currently trying to change to this implementation
 
 export default {
   components: {
