@@ -35,7 +35,7 @@ import TimeStampMealInView from '../views/TIME-STAMP/TimeStampMealInView.vue';
 import TimeStampMealOutView from '../views/TIME-STAMP/TimeStampMealOutView.vue';
 import TimeCardsView from '../views/TIME-CARD/TimeCardsView.vue';
 import TimeCardDetailsView from '../views/TIME-CARD/TimeCardDetailsView.vue'
-
+import TrainingView from '../views/TRAINING/TrainingView.vue';
 
 
 
@@ -306,6 +306,14 @@ const routes = [
     path: '/time-card/:timeCardId',
     name: 'time-card-detail',
     component: TimeCardDetailsView,
+    meta:{
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/training',
+    name: 'training',
+    component: TrainingView,
     meta:{
       requiresAuth: true
     }
