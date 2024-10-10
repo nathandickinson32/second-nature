@@ -35,6 +35,7 @@ import TimeStampMealInView from '../views/TIME-STAMP/TimeStampMealInView.vue';
 import TimeStampMealOutView from '../views/TIME-STAMP/TimeStampMealOutView.vue';
 import TimeCardsView from '../views/TIME-CARD/TimeCardsView.vue';
 import TimeCardDetailsView from '../views/TIME-CARD/TimeCardDetailsView.vue'
+import TrainingListView from '../views/TRAINING/TrainingListView.vue';
 
 
 
@@ -309,7 +310,15 @@ const routes = [
     meta:{
       requiresAuth: true
     }
-  }
+  },
+  {
+    path: '/training',
+    name: 'training-view',
+    component: TrainingListView,
+    meta:{
+      requiresAuth: true
+    }
+  },
 ];
 
 // Create the router

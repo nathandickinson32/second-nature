@@ -23,11 +23,11 @@
         <router-link v-bind:to="{ name: 'kudos' }">Kudos Board</router-link>
       </div>
       <div class="menu-icon">
-        <img src="/src/images/tools.png" alt="">
+        <img src="/src/images/lawnmower.png" alt="">
         <router-link v-bind:to="{ name: 'equipmentList' }">Equipment</router-link>
       </div>
       <div class="menu-icon">
-        <img src="/src/images/to-do.png" alt="">
+        <img src="/src/images/tools.png" alt="">
         <router-link v-bind:to="{ name: 'maintenance-ticket-List'}">Maintenance</router-link>
       </div>
       <div class="menu-icon">
@@ -41,6 +41,10 @@
        matches the other icons stylistically -->
         <img src="/src/images/to-do.png" alt="">
         <router-link v-bind:to="{ name: 'time-card'}">Time Cards</router-link>
+      </div>
+      <div class="menu-icon">
+        <img src="/src/images/research.png" alt="">
+        <router-link v-bind:to="{ name: 'training-view' }">Training</router-link>
       </div>
     </div>
   </div>
