@@ -93,7 +93,7 @@ public class JdbcEquipmentDao implements EquipmentDao {
 
         return equipment;
     }
-
+ 
     @Override
     public List<EquipmentIdentityDto> getEquipmentIdentityList() {
         List<EquipmentIdentityDto> equipmentIdentityDtoList = new ArrayList<>();
