@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.TrainingResourceDao;
 import com.techelevator.dao.UserDao;
+import com.techelevator.model.TrainingResource.ArchiveTrainingResourceDto;
 import com.techelevator.model.TrainingResource.CreateTrainingResourceDTO;
 import com.techelevator.model.TrainingResource.TrainingResource;
 import com.techelevator.model.TrainingResource.UpdateTrainingResourceDto;
@@ -51,5 +52,13 @@ public class TrainingResourceController {
         int userId = userDao.getUserIdByUsername(principal.getName());
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is updating training resource ID: " + updateTrainingResourceDto.getTrainingResourceId());
         return trainingResourceDao.updateTrainingResource(updateTrainingResourceDto, userId);
+    }
+
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @PostMapping(path = "/archive")
+    public TrainingResource archiveTrainingResource(@RequestBody ArchiveTrainingResourceDto archiveTrainingResourceDto, Principal principal){
+        int userId = userDao.getUserIdByUsername(principal.getName());
+        System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is archiving training resource ID: " + archiveTrainingResourceDto.getTrainingResourceId());
+        return trainingResourceDao.archiveTrainingResource(archiveTrainingResourceDto, userId);
     }
 }
