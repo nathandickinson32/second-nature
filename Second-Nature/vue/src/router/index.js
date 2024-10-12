@@ -311,14 +311,6 @@ const routes = [
       requiresAuth: true
     }
   },
-  {
-    path: '/training',
-    name: 'training-view',
-    component: TrainingListView,
-    meta:{
-      requiresAuth: true
-    }
-  },
 ];
 
 // Create the router
