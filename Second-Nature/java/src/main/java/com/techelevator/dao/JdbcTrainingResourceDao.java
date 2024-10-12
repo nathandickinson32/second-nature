@@ -1,7 +1,8 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.Equipment;
-import com.techelevator.model.EquipmentFolder.UpdateEquipmentDto;
+
+
+import com.techelevator.model.TrainingResource.ArchiveTrainingResourceDto;
 import com.techelevator.model.TrainingResource.CreateTrainingResourceDTO;
 import com.techelevator.model.TrainingResource.TrainingResource;
 import com.techelevator.model.TrainingResource.UpdateTrainingResourceDto;
@@ -18,7 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 @Component
-public class JdbcTrainingResourceDao {
+public class JdbcTrainingResourceDao implements TrainingResourceDao{
     private JdbcTemplate template;
     public JdbcTrainingResourceDao(DataSource ds) {
         template = new JdbcTemplate(ds);
@@ -113,6 +114,25 @@ public class JdbcTrainingResourceDao {
         return getTrainingResourceById(updateTrainingResourceDto.getTrainingResourceId());
     }
 
+    public TrainingResource archiveTrainingResource(ArchiveTrainingResourceDto archiveTrainingResourceDto, int userId) {
+        String sql = "UPDATE training_resource SET updated_by_user_id = ?, updated_on_date = ?, is_archived = ?, archived_notes = ? WHERE training_resource_id = ?;";
+
+        try {
+            template.update(
+                    sql,
+                    userId,
+                    new Date(),
+                    true,
+                    archiveTrainingResourceDto.getArchivedNotes()
+            );
+        } catch(CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Training Resource DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Training Resource DAO] Error archiving Training Resource ID: " + archiveTrainingResourceDto.getTrainingResourceId());
+        }
+
+        return getTrainingResourceById(archiveTrainingResourceDto.getTrainingResourceId());
+    }
 
     private TrainingResource mapRowToTrainingResource(SqlRowSet results) {
         TrainingResource trainingResource = new TrainingResource();
