@@ -1,6 +1,10 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.Equipment;
+import com.techelevator.model.EquipmentFolder.UpdateEquipmentDto;
+import com.techelevator.model.TrainingResource.CreateTrainingResourceDTO;
 import com.techelevator.model.TrainingResource.TrainingResource;
+import com.techelevator.model.TrainingResource.UpdateTrainingResourceDto;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -8,6 +12,10 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Component
 public class JdbcTrainingResourceDao {
@@ -16,6 +24,36 @@ public class JdbcTrainingResourceDao {
         template = new JdbcTemplate(ds);
     }
 
+
+
+    public TrainingResource createTrainingResource(CreateTrainingResourceDTO createTrainingResourceDTO, int userId) {
+
+        String sql = "INSERT INTO training_resource (category, content, resource_source, entered_on_date, entered_by_user_id) "
+                + "VALUES (?, ?, ?, ?, ?, ?) RETURNING training_resource_id;";
+
+        int trainingResourceId = -1;
+
+        try {
+            trainingResourceId = template.queryForObject(
+                    sql,
+                    int.class,
+                    createTrainingResourceDTO.getCategory(),
+                    createTrainingResourceDTO.getContent(),
+                    createTrainingResourceDTO.getResourceSource(),
+                    new Date(),
+                    userId
+
+            );
+        } catch (CannotGetJdbcConnectionException e){
+            throw new CannotGetJdbcConnectionException("[JDBC Training Resource DAO] Unable to connect to the database.");
+        } catch (DataIntegrityViolationException e){
+            throw new DataIntegrityViolationException("[JDBC Training Resource DAO] Unable to create a new Training Resource.");
+        }
+
+
+
+        return getTrainingResourceById(trainingResourceId);
+    }
 
     public TrainingResource getTrainingResourceById(int trainingResourceId) {
         TrainingResource trainingResource = new TrainingResource();
@@ -34,6 +72,47 @@ public class JdbcTrainingResourceDao {
 
         return trainingResource;
     }
+
+    public List<TrainingResource> getListOfTrainingResources() {
+        List<TrainingResource> trainingResources = new ArrayList<>();
+        String sql = "SELECT * FROM training_resource;";
+
+        try {
+            SqlRowSet results = template.queryForRowSet(sql);
+            while (results.next()){
+                trainingResources.add(mapRowToTrainingResource(results));
+            }
+        } catch(CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Training Resource DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Training Resource DAO] Cannot get a list of all Training Resources");
+        }
+
+        return trainingResources;
+    }
+
+    public TrainingResource updateTrainingResource(UpdateTrainingResourceDto updateTrainingResourceDto, int userId) {
+        String sql = "UPDATE training_resource SET category = ?, content = ?, resource_source = ?, updated_by_user_id = ?, updated_on_date = ? WHERE training_resource_id = ?;";
+
+        try {
+            template.update(
+                    sql,
+                    updateTrainingResourceDto.getCategory(),
+                    updateTrainingResourceDto.getContent(),
+                    updateTrainingResourceDto.getResourceSource(),
+                    userId,
+                    new Date()
+
+            );
+        } catch(CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Training Resource DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Training Resource DAO] Error updating Training Resource ID: " + updateTrainingResourceDto.getTrainingResourceId());
+        }
+
+        return getTrainingResourceById(updateTrainingResourceDto.getTrainingResourceId());
+    }
+
 
     private TrainingResource mapRowToTrainingResource(SqlRowSet results) {
         TrainingResource trainingResource = new TrainingResource();
