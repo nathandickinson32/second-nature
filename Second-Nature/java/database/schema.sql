@@ -126,5 +126,19 @@ CREATE TABLE time_cards (
     FOREIGN KEY (user_id) REFERENCES users (user_id),
     FOREIGN KEY (updated_by_user_id) REFERENCES users (user_id)
 );
-
+CREATE TABLE training_resource (
+    training_resource_id SERIAL PRIMARY KEY,
+    title VARCHAR,
+    category VARCHAR NOT NULL,
+    content VARCHAR NOT NULL,
+    resource_source VARCHAR NOT NULL,
+    entered_on_date DATE NOT NULL,
+    entered_by_user_id INT NOT NULL,
+    updated_on_date Date,
+    updated_by_user_id INT,
+    is_archived BOOLEAN,
+    archived_notes VARCHAR,
+    FOREIGN KEY (entered_by_user_id) REFERENCES users (user_id),
+    FOREIGN KEY (updated_by_user_id) REFERENCES users (user_id)
+);
 COMMIT TRANSACTION;
