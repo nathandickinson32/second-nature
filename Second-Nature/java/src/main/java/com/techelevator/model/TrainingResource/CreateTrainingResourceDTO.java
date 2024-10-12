@@ -1,18 +1,9 @@
-package com.techelevator.model;
+package com.techelevator.model.TrainingResource;
 
-public class UpdateTrainingResourceDto {
-    private int trainingResourceId;
+public class CreateTrainingResourceDTO {
     private String category;
     private String content;
     private String resourceSource;
-
-    public int getTrainingResourceId() {
-        return trainingResourceId;
-    }
-
-    public void setTrainingResourceId(int trainingResourceId) {
-        this.trainingResourceId = trainingResourceId;
-    }
 
     public String getCategory() {
         return category;

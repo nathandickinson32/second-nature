@@ -1,4 +1,4 @@
-package com.techelevator.model;
+package com.techelevator.model.TrainingResource;
 
 public class ArchiveTrainingResourceDto {
     private int trainingResourceId;

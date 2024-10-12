@@ -1,4 +1,4 @@
-package com.techelevator.model;
+package com.techelevator.model.TrainingResource;
 
 import java.sql.Timestamp;
 import java.util.Date;
