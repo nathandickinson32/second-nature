@@ -61,4 +61,11 @@ public class TrainingResourceController {
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is archiving training resource ID: " + archiveTrainingResourceDto.getTrainingResourceId());
         return trainingResourceDao.archiveTrainingResource(archiveTrainingResourceDto, userId);
     }
+
+    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping(path = "/delete/{id}")
+    public void deleteTrainingResource(@PathVariable int id, Principal principal){
+        System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is deleting training resource ID: " + id);
+        trainingResourceDao.deleteTrainingResource(id);
+    }
 }

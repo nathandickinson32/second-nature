@@ -134,6 +134,18 @@ public class JdbcTrainingResourceDao implements TrainingResourceDao{
         return getTrainingResourceById(archiveTrainingResourceDto.getTrainingResourceId());
     }
 
+    public void deleteTrainingResource(int trainingResourceId) {
+        String sql = "DELETE FROM training_resource WHERE training_resource_id = ?;";
+
+        try {
+            template.update(sql, trainingResourceId);
+        } catch(CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Training Resource DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Equipment DAO] Error deleting Training Resource ID: " + trainingResourceId);
+        }
+    }
+
     private TrainingResource mapRowToTrainingResource(SqlRowSet results) {
         TrainingResource trainingResource = new TrainingResource();
         trainingResource.setTrainingResourceId(results.getInt("training_resource_id"));

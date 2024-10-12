@@ -20,4 +20,8 @@ public interface TrainingResourceDao {
 
     // Archive
     public TrainingResource archiveTrainingResource(ArchiveTrainingResourceDto archiveTrainingResourceDto, int userId);
+
+    // Delete
+    public void deleteTrainingResource(int trainingResourceId);
+
 }
