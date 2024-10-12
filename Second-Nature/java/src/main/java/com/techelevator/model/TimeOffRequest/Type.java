@@ -1,4 +1,4 @@
-package com.techelevator.model;
+package com.techelevator.model.TimeOffRequest;
 
 public class Type {
     private int typeId;

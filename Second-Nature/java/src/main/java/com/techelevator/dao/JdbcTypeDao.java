@@ -1,7 +1,7 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.Type;
-import com.techelevator.model.TypeDto;
+import com.techelevator.model.TimeOffRequest.Type;
+import com.techelevator.model.TimeOffRequest.TypeDto;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;

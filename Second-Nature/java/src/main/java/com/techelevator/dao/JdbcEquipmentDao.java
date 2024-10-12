@@ -1,6 +1,11 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.*;
+import com.techelevator.model.ArchiveEquipmentDto;
+import com.techelevator.model.Equipment;
+import com.techelevator.model.EquipmentFolder.CreateEquipmentDto;
+import com.techelevator.model.EquipmentFolder.UpdateEquipmentActivityDto;
+import com.techelevator.model.EquipmentFolder.UpdateEquipmentDto;
+import com.techelevator.model.EquipmentIdentityDto;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;

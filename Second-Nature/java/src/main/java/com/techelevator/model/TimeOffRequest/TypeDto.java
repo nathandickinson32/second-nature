@@ -1,4 +1,4 @@
-package com.techelevator.model;
+package com.techelevator.model.TimeOffRequest;
 
 public class TypeDto {
     private String name;

@@ -1,13 +1,14 @@
 package com.techelevator.controller;
 
-import com.techelevator.dao.EquipmentDao;
-import com.techelevator.dao.MaintenanceDao;
+
 import com.techelevator.dao.TimeCardDao;
 import com.techelevator.dao.UserDao;
-import com.techelevator.model.CreateEquipmentDto;
-import com.techelevator.model.CreateTimeCardDto;
+import com.techelevator.model.ArchiveEquipmentDto;
 import com.techelevator.model.Equipment;
-import com.techelevator.model.TimeCards;
+import com.techelevator.model.TimeCard.ArchiveTimeCardDto;
+import com.techelevator.model.TimeCard.CreateTimeCardDto;
+import com.techelevator.model.TimeCard.TimeCards;
+import com.techelevator.model.TimeCard.UpdateTimeCardDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -40,7 +41,6 @@ public class TimeCardController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/register")
     public TimeCards createTimeCard(@RequestBody CreateTimeCardDto createTimeCardDto, Principal principal){
-        // need to get timestamp and assign here Maybe: Java.Time /instant
         int userId = userDao.getUserIdByUsername(principal.getName());
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is creating a new time card.");
@@ -52,6 +52,13 @@ public class TimeCardController {
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " accessed Time Card ID: " + userId);
         return timeCardDao.getTimeCardsByUserId(userId);
     }
-
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @PostMapping(path = "/update")
+    public TimeCards updateTimeCard(@RequestBody UpdateTimeCardDto updateTimeCardDto, Principal principal){
+        int userId = userDao.getUserIdByUsername(principal.getName());
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is updating time card ID: " + updateTimeCardDto.getTimeCardId());
+        return timeCardDao.updateTimeCard(updateTimeCardDto, userId, timestamp);
+    }
 
 }

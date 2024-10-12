@@ -1,8 +1,9 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.CreateTimeCardDto;
-import com.techelevator.model.Equipment;
-import com.techelevator.model.TimeCards;
+import com.techelevator.model.TimeCard.ArchiveTimeCardDto;
+import com.techelevator.model.TimeCard.CreateTimeCardDto;
+import com.techelevator.model.TimeCard.TimeCards;
+import com.techelevator.model.TimeCard.UpdateTimeCardDto;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,19 +26,19 @@ public class JdbcTimeCardDao implements TimeCardDao {
 
     public TimeCards createTimeCard(CreateTimeCardDto createTimeCardDto, int userId, Timestamp timestamp) {
         int timeCardId = -1;
-        String sql = "INSERT INTO time_cards (user_id, hour_type, date_time) VALUES (?,?,?) RETURNING time_card_id;";
+        String sql = "INSERT INTO time_cards (user_id, hour_type, date_time, updated_on_date) VALUES (?,?,?,?) RETURNING time_card_id;";
         timeCardId = template.queryForObject(
                 sql,
                 int.class,
                 userId,
                 createTimeCardDto.getHourType(),
-                timestamp
+                timestamp,
+                new Date()
 
         );
         return getTimeCardById(timeCardId);
     }
 
-    ;
 
     public TimeCards getTimeCardById(int timeCardId) {
         TimeCards timeCard = new TimeCards();
@@ -57,21 +58,7 @@ public class JdbcTimeCardDao implements TimeCardDao {
         return timeCard;
     }
 
-    ;
 
-    private TimeCards mapRowToTimeCard(SqlRowSet results) {
-        TimeCards timeCard = new TimeCards();
-        timeCard.setTimeCardId(results.getInt("time_card_id"));
-        timeCard.setUserId(results.getInt("user_id"));
-        timeCard.setHourType(results.getString("hour_type"));
-        timeCard.setDateTime(results.getTimestamp("date_time"));
-        timeCard.setUpdatedOnDate(results.getDate("updated_on_date"));
-        timeCard.setUpdatedByUserId(results.getInt("updated_by_user_id"));
-
-        timeCard.setIsArchived(results.getBoolean("is_archived"));
-        timeCard.setArchivedNotes(results.getString("archived_notes"));
-        return timeCard;
-    }
 
     public List<TimeCards> getTimeCardsByUserId(int userId) {
         List<TimeCards> timeCards = new ArrayList<>();
@@ -100,5 +87,44 @@ public class JdbcTimeCardDao implements TimeCardDao {
         }
 
         return timeCards;
+    }
+
+    @Override
+    public TimeCards updateTimeCard(UpdateTimeCardDto updateTimeCardDto, int userId, Timestamp timestamp) {
+        String sql = "UPDATE time_cards SET time_card_id = ?, hour_type = ?, date_time = ?, updated_on_date = ?, updated_by_user_id = ? WHERE time_card_id = ?;";
+
+        try {
+            template.update(
+                    sql,
+                    updateTimeCardDto.getTimeCardId(),
+                    updateTimeCardDto.getHourType(),
+                    timestamp,
+                    new Date(),
+                    userId,
+                    updateTimeCardDto.getTimeCardId()
+            );
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Time Card DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Time Card DAO] Error updating time card ID: " + updateTimeCardDto.getTimeCardId());
+        }
+
+        return getTimeCardById(updateTimeCardDto.getTimeCardId());
+    }
+
+
+
+    private TimeCards mapRowToTimeCard(SqlRowSet results) {
+        TimeCards timeCard = new TimeCards();
+        timeCard.setTimeCardId(results.getInt("time_card_id"));
+        timeCard.setUserId(results.getInt("user_id"));
+        timeCard.setHourType(results.getString("hour_type"));
+        timeCard.setDateTime(results.getTimestamp("date_time"));
+        timeCard.setUpdatedOnDate(results.getDate("updated_on_date"));
+        timeCard.setUpdatedByUserId(results.getInt("updated_by_user_id"));
+
+        timeCard.setIsArchived(results.getBoolean("is_archived"));
+        timeCard.setArchivedNotes(results.getString("archived_notes"));
+        return timeCard;
     }
 }

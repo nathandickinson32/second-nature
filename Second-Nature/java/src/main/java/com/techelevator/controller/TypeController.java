@@ -1,8 +1,8 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.TypeDao;
-import com.techelevator.model.Type;
-import com.techelevator.model.TypeDto;
+import com.techelevator.model.TimeOffRequest.Type;
+import com.techelevator.model.TimeOffRequest.TypeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;

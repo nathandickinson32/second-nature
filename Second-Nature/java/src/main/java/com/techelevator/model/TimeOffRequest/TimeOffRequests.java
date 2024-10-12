@@ -1,7 +1,6 @@
-package com.techelevator.model;
+package com.techelevator.model.TimeOffRequest;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class TimeOffRequests {
     private int requestId;

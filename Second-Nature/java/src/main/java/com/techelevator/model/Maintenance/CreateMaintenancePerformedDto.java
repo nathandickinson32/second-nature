@@ -1,4 +1,4 @@
-package com.techelevator.model;
+package com.techelevator.model.Maintenance;
 
 public class CreateMaintenancePerformedDto {
     private String description;

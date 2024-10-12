@@ -1,6 +1,6 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.Kudos;
+import com.techelevator.model.Kudos.Kudos;
 
 import java.util.List;
 

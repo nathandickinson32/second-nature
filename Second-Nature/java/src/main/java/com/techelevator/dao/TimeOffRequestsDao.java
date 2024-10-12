@@ -1,7 +1,6 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.TimeOffRequests;
-import com.techelevator.model.User;
+import com.techelevator.model.TimeOffRequest.TimeOffRequests;
 
 import java.util.List;
 
