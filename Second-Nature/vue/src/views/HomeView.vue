@@ -44,7 +44,7 @@
       </div>
       <div class="menu-icon">
         <img src="/src/images/research.png" alt="">
-        <router-link v-bind:to="{ name: 'training-view' }">Training</router-link>
+        <router-link v-bind:to="{ name: 'training' }">Training</router-link>
       </div>
     </div>
   </div>
