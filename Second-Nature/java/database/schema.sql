@@ -11,6 +11,8 @@ DROP TABLE IF EXISTS kudos;
 DROP TABLE IF EXISTS professional_check_in;
 DROP TABLE IF EXISTS time_off_requests;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS training_resource;
+
 
 CREATE TABLE users (
 	user_id SERIAL,

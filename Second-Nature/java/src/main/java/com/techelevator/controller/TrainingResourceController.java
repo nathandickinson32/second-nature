@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path="/training")
 @CrossOrigin
-@PreAuthorize("isAuthenticated")
+@PreAuthorize("isAuthenticated()")
 public class TrainingResourceController {
 
     @Autowired
