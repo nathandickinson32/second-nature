@@ -2,9 +2,18 @@ package com.techelevator.model.TrainingResource;
 
 public class UpdateTrainingResourceDto {
     private int trainingResourceId;
+    private String title;
     private String category;
     private String content;
     private String resourceSource;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public int getTrainingResourceId() {
         return trainingResourceId;

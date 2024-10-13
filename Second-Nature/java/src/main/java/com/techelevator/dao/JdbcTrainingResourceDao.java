@@ -29,8 +29,8 @@ public class JdbcTrainingResourceDao implements TrainingResourceDao{
 
     public TrainingResource createTrainingResource(CreateTrainingResourceDTO createTrainingResourceDTO, int userId) {
 
-        String sql = "INSERT INTO training_resource (category, content, resource_source, entered_on_date, entered_by_user_id) "
-                + "VALUES (?, ?, ?, ?, ?) RETURNING training_resource_id;";
+        String sql = "INSERT INTO training_resource (title, category, content, resource_source, entered_on_date, entered_by_user_id) "
+                + "VALUES (?, ?, ?, ?, ?, ?) RETURNING training_resource_id;";
 
         int trainingResourceId = -1;
 
@@ -38,6 +38,7 @@ public class JdbcTrainingResourceDao implements TrainingResourceDao{
             trainingResourceId = template.queryForObject(
                     sql,
                     int.class,
+                    createTrainingResourceDTO.getTitle(),
                     createTrainingResourceDTO.getCategory(),
                     createTrainingResourceDTO.getContent(),
                     createTrainingResourceDTO.getResourceSource(),
@@ -93,11 +94,12 @@ public class JdbcTrainingResourceDao implements TrainingResourceDao{
     }
 
     public TrainingResource updateTrainingResource(UpdateTrainingResourceDto updateTrainingResourceDto, int userId) {
-        String sql = "UPDATE training_resource SET category = ?, content = ?, resource_source = ?, updated_by_user_id = ?, updated_on_date = ? WHERE training_resource_id = ?;";
+        String sql = "UPDATE training_resource SET title = ?, category = ?, content = ?, resource_source = ?, updated_by_user_id = ?, updated_on_date = ? WHERE training_resource_id = ?;";
 
         try {
             template.update(
                     sql,
+                    updateTrainingResourceDto.getTitle(),
                     updateTrainingResourceDto.getCategory(),
                     updateTrainingResourceDto.getContent(),
                     updateTrainingResourceDto.getResourceSource(),
