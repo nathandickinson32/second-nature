@@ -89,6 +89,6 @@ VALUES (1, 1, 'Default Description', 'Default Performed By', '2024-08-27', 'Defa
 INSERT INTO time_cards (user_id, hour_type, date_time, is_archived)
 VALUES (1, 'shift_begin', '2024-09-10 09:05:00', false);
 
-INSERT INTO training_resource (title, category, content, resource_source, entered_on_date, entered_by_user_id )
-VALUES ('Default Title', 'Default Category', 'Default Content', 'Default Source', '2024-09-10 09:05:00', 3);
+INSERT INTO training_resource (title, category, content, resource_source, entered_on_date, entered_by_user_id, is_archived)
+VALUES ('Default Title', 'Default Category', 'Default Content', 'Default Source', '2024-09-10 09:05:00', 3, false);
 COMMIT TRANSACTION;
