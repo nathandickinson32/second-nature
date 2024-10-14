@@ -29,8 +29,8 @@ public class JdbcTrainingResourceDao implements TrainingResourceDao{
 
     public TrainingResource createTrainingResource(CreateTrainingResourceDTO createTrainingResourceDTO, int userId) {
 
-        String sql = "INSERT INTO training_resource (title, category, content, resource_source, entered_on_date, entered_by_user_id) "
-                + "VALUES (?, ?, ?, ?, ?, ?) RETURNING training_resource_id;";
+        String sql = "INSERT INTO training_resource (title, category, content, resource_source, entered_on_date, entered_by_user_id, is_archived) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING training_resource_id;";
 
         int trainingResourceId = -1;
 
@@ -43,7 +43,8 @@ public class JdbcTrainingResourceDao implements TrainingResourceDao{
                     createTrainingResourceDTO.getContent(),
                     createTrainingResourceDTO.getResourceSource(),
                     new Date(),
-                    userId
+                    userId,
+                    false
 
             );
         } catch (CannotGetJdbcConnectionException e){
