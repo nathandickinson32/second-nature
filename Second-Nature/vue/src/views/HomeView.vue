@@ -42,10 +42,6 @@
         <img src="/src/images/to-do.png" alt="">
         <router-link v-bind:to="{ name: 'time-card'}">Time Cards</router-link>
       </div>
-      <div class="menu-icon">
-        <img src="/src/images/research.png" alt="">
-        <router-link v-bind:to="{ name: 'training-view' }">Training</router-link>
-      </div>
     </div>
   </div>
 </template>
