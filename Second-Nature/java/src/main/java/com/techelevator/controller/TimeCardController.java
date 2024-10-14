@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 
 import com.techelevator.dao.TimeCardDao;
+import com.techelevator.dao.TimeCardsDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.ArchiveEquipmentDto;
 import com.techelevator.model.Equipment;
@@ -28,6 +29,9 @@ import java.util.List;
 public class TimeCardController {
     @Autowired
     private TimeCardDao timeCardDao;
+
+    @Autowired
+    private TimeCardsDao timeCardsDao;
 
     @Autowired
     private UserDao userDao;
@@ -59,6 +63,14 @@ public class TimeCardController {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is updating time card ID: " + updateTimeCardDto.getTimeCardId());
         return timeCardDao.updateTimeCard(updateTimeCardDto, userId, timestamp);
+    }
+
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @PostMapping(path = "/archive")
+    public TimeCards archiveTimeCard(@RequestBody ArchiveTimeCardDto archiveTimeCardDto, Principal principal) {
+        int userId = userDao.getUserIdByUsername(principal.getName());
+        System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is archiving time card ID ID: " + archiveTimeCardDto.getTimeCardId());
+        return timeCardsDao.archiveTimeCard(archiveTimeCardDto, userId);
     }
 
 }
