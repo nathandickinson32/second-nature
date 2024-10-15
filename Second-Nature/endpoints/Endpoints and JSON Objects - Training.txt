@@ -50,6 +50,7 @@ JSON Objects
 TrainingResource (Model)
 {
 	"training_resource_id" : Integery / Number,
+	"title" : String
 	"category" : String (options include: "general", "policies", "winter", "spring", "summer", etc...)
 	"content" : String,
 	"resource_source" : String (upload location),
@@ -63,6 +64,7 @@ TrainingResource (Model)
 
 CreateTrainingResourceDTO
 {
+	"title" : String
 	"category" : String (options include: "general", "policies", "winter", "spring", "summer", etc...)
 	"content" : String,
 	"resource_source" : String (upload location),
@@ -72,6 +74,7 @@ CreateTrainingResourceDTO
 Update Training Resource DTO
 {
 	"training_resource_id" : Intiger,
+	"title" : String
 	"category" : String (options include: "general", "policies", "winter", "spring", "summer", etc...),
 	"content" : String,
 	"resource_source" : String (upload location),
