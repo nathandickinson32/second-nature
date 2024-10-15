@@ -143,4 +143,5 @@ CREATE TABLE training_resource (
     FOREIGN KEY (entered_by_user_id) REFERENCES users (user_id),
     FOREIGN KEY (updated_by_user_id) REFERENCES users (user_id)
 );
+
 COMMIT TRANSACTION;
