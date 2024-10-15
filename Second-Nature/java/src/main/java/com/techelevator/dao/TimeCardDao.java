@@ -20,6 +20,7 @@ public interface TimeCardDao {
     public TimeCards updateTimeCard(UpdateTimeCardDto updateTimeCardDto, int userId, Timestamp timestamp);
 
     // Archive
+    public TimeCards archiveTimeCard(ArchiveTimeCardDto archiveTimeCardDto, int userId);
 
 
 }

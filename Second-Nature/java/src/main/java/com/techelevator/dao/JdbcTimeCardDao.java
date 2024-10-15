@@ -112,6 +112,27 @@ public class JdbcTimeCardDao implements TimeCardDao {
         return getTimeCardById(updateTimeCardDto.getTimeCardId());
     }
 
+    public TimeCards archiveTimeCard(ArchiveTimeCardDto archiveTimeCardDto, int userId) {
+        String sql = "UPDATE time_cards SET updated_on_date = ?, updated_by_user_id = ?, is_archived = ?, " +
+                "archived_notes = ? WHERE time_card_id = ?;";
+
+        try {
+            template.update(sql,
+                    new Date(),
+                    userId,
+                    archiveTimeCardDto.getIsArchived(),
+                    archiveTimeCardDto.getArchivedNotes(),
+                    archiveTimeCardDto.getTimeCardId())
+                    ;
+        } catch(CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Equipment DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Equipment DAO] Error archiving time card ID: " + archiveTimeCardDto.getTimeCardId());
+        }
+
+        return getTimeCardById(archiveTimeCardDto.getTimeCardId());
+    }
+
 
 
     private TimeCards mapRowToTimeCard(SqlRowSet results) {

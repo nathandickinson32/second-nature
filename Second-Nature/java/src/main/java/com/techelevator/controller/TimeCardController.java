@@ -70,7 +70,7 @@ public class TimeCardController {
     public TimeCards archiveTimeCard(@RequestBody ArchiveTimeCardDto archiveTimeCardDto, Principal principal) {
         int userId = userDao.getUserIdByUsername(principal.getName());
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is archiving time card ID ID: " + archiveTimeCardDto.getTimeCardId());
-        return timeCardsDao.archiveTimeCard(archiveTimeCardDto, userId);
+        return timeCardDao.archiveTimeCard(archiveTimeCardDto, userId);
     }
 
 }
