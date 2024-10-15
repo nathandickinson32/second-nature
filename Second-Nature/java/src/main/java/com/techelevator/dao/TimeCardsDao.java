@@ -5,20 +5,22 @@ import com.techelevator.model.TimeCard.CreateTimeCardDto;
 import com.techelevator.model.TimeCard.TimeCards;
 import com.techelevator.model.TimeCard.UpdateTimeCardDto;
 
+import java.sql.Timestamp;
+import java.util.List;
+
 public interface TimeCardsDao {
+    // Create
+    public TimeCards createTimeCard(CreateTimeCardDto createTimeCardDto, int userId, Timestamp timestamp);
 
-    //Create
-    public TimeCards createTimeCards(CreateTimeCardDto timeCardDto, int userId);
-
-    //Read
-    public TimeCards getTimeCardByUserId(int userId);
+    // Read
     public TimeCards getTimeCardById(int timeCardId);
+    public List<TimeCards> getTimeCardsByUserId(int userId);
 
-    //Update
-    public TimeCards updateTimeCard(UpdateTimeCardDto updateTimeCardDto, int timeCardId);
+    // Update
+    public TimeCards updateTimeCard(UpdateTimeCardDto updateTimeCardDto, int userId, Timestamp timestamp);
 
-    //Delete
-    public void deleteTimeCard(int timeCardId);
-    public TimeCards archiveTimeCard(ArchiveTimeCardDto archiveTimeCardDto, int timeCardId);
+    // Archive
+    public TimeCards archiveTimeCard(ArchiveTimeCardDto archiveTimeCardDto, int userId);
+
 
 }
