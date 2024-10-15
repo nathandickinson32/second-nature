@@ -1,12 +1,46 @@
 <template>
-  <div class="content">
-
-  </div>
+  <TrainingDocumentViewer :url="pdfUrl" />
+    <FooterVue/>
 </template>
 
 <script>
-export default {
 
+import FooterVue from '../../components/Footer.vue';
+import TrainingDocumentViewer from '../../components/TRAINING/TrainingDocumentViewer.vue';
+
+export default {
+    data() {
+        return {
+            //Placeholder of the hard-coded stuff for now. Will delete this for 
+            //server-sourced data in near future.
+            documents: [
+                { name: 'Stihl Backpack Blower', url: 'https://www.stihlusa.com/webcontent/cmsfilelibrary/instructionmanuals/stihl-br-350-430-owners-instruction-manual.pdf' },
+                // { name: 'Document 2', url: '/path/to/document2.pdf' },
+                // Add more documents as needed
+            ],
+            pdfUrl:'',
+        };
+    },
+    created() {
+        this.pdfUrl = this.documents[0].url;
+    },
+
+    // computed: {
+    //     pdfUrl() {
+    //         return this.pdfUrl;
+    //     }
+    // },
+    components: {
+        TrainingDocumentViewer
+    },
+    methods: {
+        viewDocument(url) {
+            this.pdfUrl = url;
+        },
+        clearPdf(){
+            this.pdfUrl='';
+        }
+    }
 
     // TrainingResource (Model)
     // {
