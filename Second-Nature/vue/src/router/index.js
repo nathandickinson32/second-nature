@@ -36,6 +36,9 @@ import TimeStampMealOutView from '../views/TIME-STAMP/TimeStampMealOutView.vue';
 import TimeCardsView from '../views/TIME-CARD/TimeCardsView.vue';
 import TimeCardDetailsView from '../views/TIME-CARD/TimeCardDetailsView.vue'
 import TrainingListView from '../views/TRAINING/TrainingListView.vue';
+import TrainingDetailView from '../views/TRAINING/TrainingDetailView.vue';
+import NewTrainingView from '../views/TRAINING/NewTrainingView.vue';
+import TrainingModifyView from '../views/TRAINING/TrainingModifyView.vue';
 
 
 
@@ -314,6 +317,30 @@ const routes = [
     path: '/training',
     name: 'training',
     component: TrainingListView,
+    meta:{
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/training/:trainingId',
+    name: 'training-detail',
+    component: TrainingDetailView,
+    meta:{
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/training/new',
+    name: 'training-new',
+    component: NewTrainingView,
+    meta:{
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/training/modify/:trainingId',
+    name: 'training-modify',
+    component: TrainingModifyView,
     meta:{
       requiresAuth: true
     }
