@@ -14,7 +14,6 @@
                 <div class="review-container">
                     <h5>Approval Status</h5>
                     <p>{{ request.status }}</p>
-                    <h5 v-if="request.comment != ''">Comment</h5>
                     <p v-if="request.status != 'Pending'">{{ request.comment }}</p>
                     <div v-if="request.status == 'Pending'" class="manager-comment">
                         <h5>Comment</h5>
