@@ -1,37 +1,33 @@
 <template>
-    <div class="small-container">
-    <!-- <router-link class="small-container" :to="{name: 'time-card-detail' , params: {timeCardId: timeCard.timeCardId}}"> -->
-        <h3>Hour Type</h3>
-        <!-- {{ timeCard.hour_type }} -->
-        <h5>Date and Time</h5>
-        <!-- timeCard.date_time -->
-    <!-- </router-link> -->
-    </div>
+    <!-- <div class="small-container"> -->
+    <router-link class="small-container" :to="{name: 'time-card-detail' , params: {timeCardId: timeCard.timeCardId}}">
+        <!-- <h3>Hour Type</h3> -->
+        <h3>{{timeCard.hourType}} </h3>
+        <!-- <h5>Date and Time</h5> -->
+        <h5>{{timeCard.dateTime}}</h5>
+    </router-link>
+    <!-- </div> -->
 </template>
 
 <script>
-// import router from '../../router/index.js';
-/*
-import LeaveRequestService from '../../services/LeaveRequestService.js'
+import router from '../../router/index.js';
 
 export default{
-    props: {
-        timeCard: {
-            type: Object,
-            required: true
-        }
-    },
-    data(){
-        return {
+  data(){
+    return{
 
-        }
+    }
+  },
+  props: {
+    timeCard: {
+      type: Object,
+      required: true
+    }
     },
-    methods: {
+    // methods: {
 
-    },
+    // },
 }
-
-*/
 </script>
 
 <style scoped>
