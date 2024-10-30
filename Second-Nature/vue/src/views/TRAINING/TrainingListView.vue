@@ -2,6 +2,7 @@
   <div class="content">
     <h1>Training</h1>
         <ul v-if="!pdfUrl">
+          <!-- Add a filter? For training category; Mowers/blowers/Summer/Winter/etc -ask Nathan? -->
           <li v-for="(doc) in documents" :key="doc.id" @click="viewDocument(doc.url)">
             {{ doc.name }}
           </li>
