@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 public class UpdateTimeCardDto {
 
     private Integer timeCardId;
-    private String hourType;
     private Timestamp dateTime;
     private Date updatedOnDate;
     private int updatedByUserId;
@@ -21,13 +20,6 @@ public class UpdateTimeCardDto {
         return timeCardId;
     }
 
-    public void setHourType(String hourType) {
-        this.hourType = hourType;
-    }
-
-    public String getHourType() {
-        return hourType;
-    }
 
     public void setDateTime(String dateTimeStr) {
 

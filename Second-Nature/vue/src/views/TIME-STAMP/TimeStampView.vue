@@ -1,7 +1,8 @@
 <template>
     <div class="content">
         <h1>Time Stamp</h1>
-        <section></section>
+       {{ currentDate }} 
+        <section>{{ currentTime }}</section>
         <div class="small-container" v-if="!isLoggedIn">
           <form id="user-id-form" v-on:submit.prevent="displayTimeCards">
           <div class="form-input-group">
@@ -12,7 +13,7 @@
         </form>
         </div>
         <form v-else class="small-container" @submit.prevent="submitTimeStamp">
-          <div class="time-stamp-options">
+          <!-- <div class="time-stamp-options">
             <div class="form-input-group">
               <label for="reason">Hour Type </label>
                     <select id="title" v-model="timeCard.hourType" required>
@@ -22,7 +23,7 @@
                         <option value="meal-out">Meal Out</option>
 
                     </select>
-            </div>
+            </div> -->
                     
             <!-- <div id="in-options"> -->
               <!-- <router-link v-bind:to="{ name: 'clock-in'}" class="choice-btn" id="clock-in-btn">Clock In</router-link>
@@ -37,8 +38,8 @@
               <!-- <button @:click="setHourType('Clock Out')" type="button" class="choice-btn" id="clock-in-btn">Clock In</button>
               <button @:click="setHourType('Meal Out')" type="button" class="choice-btn" id="meal-out-btn">Meal Out</button> -->
             <!-- </div> -->
-          </div>
-          <button type="submit" id="submitTimeBtn">Submit Time Stamp</button>
+          <!-- </div> -->
+          <button type="submit" id="submitTimeBtn">Punch</button>
         </form>
         
     </div>
@@ -54,14 +55,20 @@ export default{
         timeCard:{
         // "timeCardId": 1,
         // "userId": 1,
-        hourType: '',
+        // hourType: '',
         // "dateTime": "new Date().toISOString()",
         updatedOnDate: null,
         // "updatedByUserId": 0,
         isArchived: false,
         archivedNotes: null
       },
+      
+      currentTime: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      currentDate: new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })
+    
     }
+      
+    
   },
   computed:{
     isLoggedIn(){
@@ -82,7 +89,18 @@ export default{
         }
       })
     }
+  },
+  mounted() {
+    this.timer = setInterval(() => {
+      this.currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      this.currentDate = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })
+    }, 60000) 
+  },
+  beforeUnmount() {
+    clearInterval(this.timer)
   }
+
+
 }
 </script>
 

@@ -7,7 +7,6 @@ public class TimeCards {
 
     private int timeCardId;
     private int userId;
-    private String hourType;
     private Timestamp dateTime;
     private Date updatedOnDate;
     private int updatedByUserId;
@@ -16,11 +15,10 @@ public class TimeCards {
 
     public TimeCards() {}
 
-    public TimeCards(int timeCardId, int userId, String hourType, Timestamp dateTime, Date updatedOnDate, int updatedByUserId,
+    public TimeCards(int timeCardId, int userId, Timestamp dateTime, Date updatedOnDate, int updatedByUserId,
                      boolean isArchived, String archivedNotes) {
         this.timeCardId = timeCardId;
         this.userId = userId;
-        this.hourType = hourType;
         this.dateTime = dateTime;
         this.updatedOnDate = updatedOnDate;
         this.updatedByUserId = updatedByUserId;
@@ -44,13 +42,6 @@ public class TimeCards {
         return userId;
     }
 
-    public void setHourType(String hourType) {
-        this.hourType = hourType;
-    }
-
-    public String getHourType() {
-        return hourType;
-    }
 
     public void setDateTime(Timestamp dateTime) {
         this.dateTime = dateTime;
