@@ -26,28 +26,31 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
         template = new JdbcTemplate(ds);
     }
 
-    private LocalDateTime roundToNearestQuarterHour(LocalDateTime dateTime) {
-        int minutes = dateTime.get(ChronoField.MINUTE_OF_HOUR);
+    private Timestamp roundToNearestQuarterHour(Timestamp timestamp) {
+        LocalDateTime localDateTime = timestamp.toLocalDateTime();
+        int minutes = localDateTime.getMinute();
 
-        int roundedMinutes = ((minutes + 7) /15) * 15;
+        int roundedMinutes;
 
-        if (roundedMinutes == 60 ) {
-            dateTime = dateTime.plusHours(1).withMinute(0);
+        if (minutes % 15 < 8 ) {
+            roundedMinutes = minutes - ( minutes%15);
 
         } else {
-            dateTime.withMinute(roundedMinutes);
+            roundedMinutes = minutes + ( 15 - (minutes % 15));
         }
-        return  dateTime.withSecond(0).withNano(0);
+        LocalDateTime roundedDateTime = localDateTime.withMinute(roundedMinutes).withSecond(0).withNano(0);
+        return Timestamp.valueOf(roundedDateTime);
     }
 
     public TimeCards createTimeCard(CreateTimeCardDto createTimeCardDto, int userId, Timestamp timestamp) {
         int timeCardId = -1;
-        String sql = "INSERT INTO time_cards (user_id, date_time, updated_on_date) VALUES (?,?,?) RETURNING time_card_id;";
+        String sql = "INSERT INTO time_cards (user_id, date_time, rounded_date_time, updated_on_date) VALUES (?,?,?,?) RETURNING time_card_id;";
         timeCardId = template.queryForObject(
                 sql,
                 int.class,
                 userId,
                 timestamp,
+                roundToNearestQuarterHour(timestamp),
                 new Date()
 
         );
@@ -86,6 +89,7 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
                 timeCard.setTimeCardId(results.getInt("time_card_id"));
                 timeCard.setUserId(results.getInt("user_id"));
                 timeCard.setDateTime(results.getTimestamp("date_time"));
+                timeCard.setDateTime(results.getTimestamp("rounded_date_time"));
                 timeCard.setUpdatedOnDate(results.getDate("updated_on_date"));
                 timeCard.setUpdatedByUserId(results.getInt("user_id"));
                 timeCard.setIsArchived(results.getBoolean("is_archived"));
@@ -105,13 +109,14 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
 
     @Override
     public TimeCards updateTimeCard(UpdateTimeCardDto updateTimeCardDto, int userId, Timestamp timestamp) {
-        String sql = "UPDATE time_cards SET time_card_id = ?, date_time = ?, updated_on_date = ?, updated_by_user_id = ? WHERE time_card_id = ?;";
+        String sql = "UPDATE time_cards SET time_card_id = ?, date_time = ?, rounded_date_time = ?, updated_on_date = ?, updated_by_user_id = ? WHERE time_card_id = ?;";
 
         try {
             template.update(
                     sql,
                     updateTimeCardDto.getTimeCardId(),
                     timestamp,
+                    roundToNearestQuarterHour(timestamp),
                     new Date(),
                     userId,
                     updateTimeCardDto.getTimeCardId()
@@ -153,6 +158,7 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
         timeCard.setTimeCardId(results.getInt("time_card_id"));
         timeCard.setUserId(results.getInt("user_id"));
         timeCard.setDateTime(results.getTimestamp("date_time"));
+        timeCard.setRoundedDateTime(results.getTimestamp("rounded_date_time"));
         timeCard.setUpdatedOnDate(results.getDate("updated_on_date"));
         timeCard.setUpdatedByUserId(results.getInt("updated_by_user_id"));
 

@@ -9,6 +9,7 @@ public class UpdateTimeCardDto {
 
     private Integer timeCardId;
     private Timestamp dateTime;
+    private Timestamp roundedDateTime;
     private Date updatedOnDate;
     private int updatedByUserId;
 
@@ -48,5 +49,17 @@ public class UpdateTimeCardDto {
 
     public void setUpdatedOnDate(Date updatedOnDate) {
         this.updatedOnDate = updatedOnDate;
+    }
+
+    public void setDateTime(Timestamp dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public Timestamp getRoundedDateTime() {
+        return roundedDateTime;
+    }
+
+    public void setRoundedDateTime(Timestamp roundedDateTime) {
+        this.roundedDateTime = roundedDateTime;
     }
 }

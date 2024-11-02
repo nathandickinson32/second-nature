@@ -118,6 +118,7 @@ CREATE TABLE time_cards (
     time_card_id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
     date_time TIMESTAMP NOT NULL,
+    rounded_date_time TIMESTAMP NOT NULL,
     updated_on_date DATE,
     updated_by_user_id INT,
     is_archived BOOLEAN,
