@@ -72,7 +72,6 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
         } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityViolationException("[JDBC Time Card DAO] Cannot get time card with ID: " + timeCardId);
         }
-
         return timeCard;
     }
 
@@ -89,7 +88,7 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
                 timeCard.setTimeCardId(results.getInt("time_card_id"));
                 timeCard.setUserId(results.getInt("user_id"));
                 timeCard.setDateTime(results.getTimestamp("date_time"));
-                timeCard.setDateTime(results.getTimestamp("rounded_date_time"));
+                timeCard.setRoundedDateTime(results.getTimestamp("rounded_date_time"));
                 timeCard.setUpdatedOnDate(results.getDate("updated_on_date"));
                 timeCard.setUpdatedByUserId(results.getInt("user_id"));
                 timeCard.setIsArchived(results.getBoolean("is_archived"));

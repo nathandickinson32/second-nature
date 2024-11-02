@@ -36,6 +36,7 @@ public class TimeCardController {
     @GetMapping(path = "/{id}")
     public TimeCards getTimeCardById(@PathVariable int id, Principal principal){
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " accessed Time Card ID: " + id);
+        System.out.println(timeCardsDao.getTimeCardById(id).getDateTime());
         return timeCardsDao.getTimeCardById(id);
     }
     @ResponseStatus(HttpStatus.CREATED)

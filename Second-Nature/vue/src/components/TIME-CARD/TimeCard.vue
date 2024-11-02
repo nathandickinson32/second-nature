@@ -2,9 +2,9 @@
     <!-- <div class="small-container"> -->
     <router-link class="small-container" :to="{name: 'time-card-detail' , params: {timeCardId: timeCard.timeCardId}}">
         <!-- <h3>Hour Type</h3> -->
-        <h3>{{timeCard.hourType}} </h3>
+        <h3>{{timeCard}} </h3>
         <!-- <h5>Date and Time</h5> -->
-        <h5>{{timeCard.dateTime}}</h5>
+        <!-- <h5>{{timeCard.dateTime}}</h5> -->
     </router-link>
     <!-- </div> -->
 </template>

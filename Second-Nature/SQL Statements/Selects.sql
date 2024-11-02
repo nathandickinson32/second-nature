@@ -4,4 +4,5 @@ SELECT * FROM professional_check_in
 SELECT * FROM maintenance_tickets
 SELECT * FROM maintenance_performed
 SELECT * FROM equipment
+SELECT * FROM time_cards
 
