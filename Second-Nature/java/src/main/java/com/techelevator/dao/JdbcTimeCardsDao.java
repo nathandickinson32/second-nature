@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.Timestamp;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoField;
 import java.util.ArrayList;
@@ -68,7 +69,7 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
 
     public TimeCards createTimeCard(int userId, Timestamp timestamp) {
         int timeCardId = -1;
-        String sql = "INSERT INTO time_cards (user_id, date_time, clocked_in, clock_in_time) VALUES (?,?,?,?) RETURNING time_card_id;";
+        String sql = "INSERT INTO time_cards (user_id, date_time_in, clocked_in, clock_in_time) VALUES (?,?,?,?) RETURNING time_card_id;";
         timeCardId = template.queryForObject(
                 sql,
                 int.class,
@@ -112,7 +113,8 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
                 TimeCards timeCard = new TimeCards();
                 timeCard.setTimeCardId(results.getInt("time_card_id"));
                 timeCard.setUserId(results.getInt("user_id"));
-                timeCard.setDateTime(results.getTimestamp("date_time"));
+                timeCard.setDateTimeIn(results.getTimestamp("date_time_in"));
+                timeCard.setDateTimeOut(results.getTimestamp("date_time_out"));
                 timeCard.setClockedIn(results.getBoolean("clocked_in"));
                 timeCard.setTotalMinutesWorked(results.getInt("total_minutes_worked"));
                 timeCard.setClockInTime(results.getTimestamp("clock_in_time"));
@@ -136,14 +138,22 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
 
     @Override
     public TimeCards updateTimeCard(UpdateTimeCardDto updateTimeCardDto, int userId, Timestamp timestamp) {
-        String sql = "UPDATE time_cards SET time_card_id = ?, date_time = ?, rounded_date_time = ?, updated_on_date = ?, updated_by_user_id = ? WHERE time_card_id = ?;";
+        String sql = "UPDATE time_cards SET time_card_id = ?, date_time_in = ?,date_time_out = ?, clocked_in = ?, total_minutes_worked = ?, clock_in_time = ?, clock_out_time = ?, updated_on_date = ?, updated_by_user_id = ? WHERE time_card_id = ?;";
 
         try {
+            Timestamp clockInTime = updateTimeCardDto.getClockInTime();
+            Timestamp roundedTimeStamp = roundToNearestQuarterHour(timestamp);
+            int totalMinutesWorked = calculateMinutesWorked(clockInTime,roundedTimeStamp);
             template.update(
                     sql,
                     updateTimeCardDto.getTimeCardId(),
                     timestamp,
+                    new Timestamp(System.currentTimeMillis()),
+                    false,
+                    calculateMinutesWorked(updateTimeCardDto.getClockInTime(),roundToNearestQuarterHour(timestamp)),
+                    updateTimeCardDto.getClockInTime(),
                     roundToNearestQuarterHour(timestamp),
+                    userId,
                     new Date(),
                     userId,
                     updateTimeCardDto.getTimeCardId()
@@ -184,7 +194,8 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
         TimeCards timeCard = new TimeCards();
         timeCard.setTimeCardId(results.getInt("time_card_id"));
         timeCard.setUserId(results.getInt("user_id"));
-        timeCard.setDateTime(results.getTimestamp("date_time"));
+        timeCard.setDateTimeIn(results.getTimestamp("date_time_in"));
+        timeCard.setDateTimeOut(results.getTimestamp("date_time_out"));
         timeCard.setClockedIn(results.getBoolean("clocked_in"));
         timeCard.setTotalMinutesWorked(results.getInt("total_minutes_worked"));
         timeCard.setClockInTime(results.getTimestamp("clock_in_time"));
@@ -196,6 +207,17 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
         return timeCard;
     }
 
+    public static int calculateMinutesWorked(Timestamp startTimestamp, Timestamp endTimestamp) {
+        // Convert Timestamp to LocalDateTime
+        LocalDateTime start = startTimestamp.toLocalDateTime();
+        LocalDateTime end = endTimestamp.toLocalDateTime();
 
+        // Calculate the duration between the two LocalDateTime instances
+        Duration duration = Duration.between(start, end);
 
+        // Convert duration to total minutes
+        long totalMinutes = duration.toMinutes();
+
+        return (int) totalMinutes; // Cast to int
+    }
 }

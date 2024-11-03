@@ -117,7 +117,8 @@ CREATE TABLE maintenance_performed (
 CREATE TABLE time_cards (
     time_card_id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
-    date_time TIMESTAMP NOT NULL,
+    date_time_in TIMESTAMP NOT NULL,
+    date_time_out TIMESTAMP,
     clocked_in BOOLEAN,
     total_minutes_worked int,
     clock_in_time TIMESTAMP,

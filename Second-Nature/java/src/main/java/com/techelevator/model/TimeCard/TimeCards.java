@@ -9,7 +9,8 @@ public class TimeCards {
 
     private int timeCardId;
     private int userId;
-    private Timestamp dateTime;
+    private Timestamp dateTimeIn;
+    private Timestamp dateTimeOut;
     private boolean clockedIn;
     private int totalMinutesWorked;
     private Timestamp clockInTime;
@@ -22,10 +23,10 @@ public class TimeCards {
     public TimeCards() {
     }
 
-    public TimeCards(int timeCardId, int userId, Timestamp dateTime, boolean clockedIn, int totalMinutesWorked, Timestamp clockInTime, Timestamp clockOutTime, Date updatedOnDate, int updatedByUserId, boolean isArchived, String archivedNotes) {
+    public TimeCards(int timeCardId, int userId, Timestamp dateTimeIn, boolean clockedIn, int totalMinutesWorked, Timestamp clockInTime, Timestamp clockOutTime, Date updatedOnDate, int updatedByUserId, boolean isArchived, String archivedNotes) {
         this.timeCardId = timeCardId;
         this.userId = userId;
-        this.dateTime = dateTime;
+        this.dateTimeIn = dateTimeIn;
         this.clockedIn = clockedIn;
         this.totalMinutesWorked = totalMinutesWorked;
         this.clockInTime = clockInTime;
@@ -60,13 +61,12 @@ public class TimeCards {
         isArchived = archived;
     }
 
-
-    public void setDateTime(Timestamp dateTime) {
-        this.dateTime = dateTime;
+    public Timestamp getDateTimeIn() {
+        return dateTimeIn;
     }
 
-    public Timestamp getDateTime() {
-        return dateTime;
+    public void setDateTimeIn(Timestamp dateTimeIn) {
+        this.dateTimeIn = dateTimeIn;
     }
 
     public void setUpdatedOnDate(Date updatedOnDate) {
@@ -95,8 +95,13 @@ public class TimeCards {
         return archivedNotes;
     }
 
+    public Timestamp getDateTimeOut() {
+        return dateTimeOut;
+    }
 
-
+    public void setDateTimeOut(Timestamp dateTimeOut) {
+        this.dateTimeOut = dateTimeOut;
+    }
 
     public boolean isClockedIn() {
         return clockedIn;

@@ -1,17 +1,13 @@
 package com.techelevator.model.TimeCard;
 
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
 
 public class UpdateTimeCardDto {
 
     private Integer timeCardId;
-    private Timestamp dateTime;
-    private Timestamp roundedDateTime;
-    private Date updatedOnDate;
-    private int updatedByUserId;
+    private Timestamp clockInTime;
+
 
     public void setTimeCardId(Integer timeCardId) {
         this.timeCardId = timeCardId;
@@ -22,44 +18,14 @@ public class UpdateTimeCardDto {
     }
 
 
-    public void setDateTime(String dateTimeStr) {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime localDateTime = LocalDateTime.parse(dateTimeStr, formatter);
-        this.dateTime = java.sql.Timestamp.valueOf(localDateTime);
-
-
+    public Timestamp getClockInTime() {
+        return clockInTime;
     }
-    public Timestamp getDateTime() {
-        return dateTime;
+
+    public void setClockInTime(Timestamp clockInTime) {
+        this.clockInTime = clockInTime;
     }
 
 
-    public int getUpdatedByUserId() {
-        return updatedByUserId;
-    }
-
-    public void setUpdatedByUserId(int updatedByUserId) {
-        this.updatedByUserId = updatedByUserId;
-    }
-
-    public Date getUpdatedOnDate() {
-        return updatedOnDate;
-    }
-
-    public void setUpdatedOnDate(Date updatedOnDate) {
-        this.updatedOnDate = updatedOnDate;
-    }
-
-    public void setDateTime(Timestamp dateTime) {
-        this.dateTime = dateTime;
-    }
-
-    public Timestamp getRoundedDateTime() {
-        return roundedDateTime;
-    }
-
-    public void setRoundedDateTime(Timestamp roundedDateTime) {
-        this.roundedDateTime = roundedDateTime;
-    }
 }
