@@ -9,7 +9,7 @@ public class CreateTimeCardDto {
 
     private Integer userId;
     private Timestamp dateTime;
-    private Timestamp roundedDateTime;
+    private Timestamp clockInTime;
 
     public void setUserId(Integer userId) {
         this.userId = userId;
@@ -37,11 +37,11 @@ public class CreateTimeCardDto {
         this.dateTime = dateTime;
     }
 
-    public Timestamp getRoundedDateTime() {
-        return roundedDateTime;
+    public Timestamp getClockInTime() {
+        return clockInTime;
     }
 
-    public void setRoundedDateTime(Timestamp roundedDateTime) {
-        this.roundedDateTime = roundedDateTime;
+    public void setClockInTime(Timestamp clockInTime) {
+        this.clockInTime = clockInTime;
     }
 }

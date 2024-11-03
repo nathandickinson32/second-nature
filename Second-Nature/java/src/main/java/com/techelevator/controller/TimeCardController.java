@@ -40,11 +40,11 @@ public class TimeCardController {
     }
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/register")
-    public TimeCards createTimeCard(@RequestBody CreateTimeCardDto createTimeCardDto, Principal principal){
+    public TimeCards createTimeCard(Principal principal){
         int userId = userDao.getUserIdByUsername(principal.getName());
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is creating a new time card.");
-        return timeCardsDao.createTimeCard(createTimeCardDto, userId,timestamp);
+        return timeCardsDao.createTimeCard(userId,timestamp);
     }
     @GetMapping(path = "/{id}/time-cards")
     public List <TimeCards> getTimeCardByUserId(Principal principal){

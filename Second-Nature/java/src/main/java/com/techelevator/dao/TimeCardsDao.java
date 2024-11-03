@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface TimeCardsDao {
     // Create
-    public TimeCards createTimeCard(CreateTimeCardDto createTimeCardDto, int userId, Timestamp timestamp);
+    public TimeCards createTimeCard(int userId, Timestamp timestamp);
 
     // Read
     public TimeCards getTimeCardById(int timeCardId);

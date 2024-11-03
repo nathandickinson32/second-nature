@@ -42,16 +42,40 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
         return Timestamp.valueOf(roundedDateTime);
     }
 
-    public TimeCards createTimeCard(CreateTimeCardDto createTimeCardDto, int userId, Timestamp timestamp) {
+    // method for determining clocked in status to either update current time card or create new one.
+    // if clocked in update
+    // else create new
+    // keep method params in mind
+
+//    private TimeCards clockedInStatus(int timeCardId) {
+//        TimeCards timeCard = new TimeCards();
+//        String sql = "SELECT * FROM time_cards LIMIT 1 ORDER BY time_card_id DESC";
+//        try {
+//            SqlRowSet results = template.queryForRowSet(sql, timeCardId);
+//            if (results.next()) {
+//                timeCard = mapRowToTimeCard(results);
+//            }
+//        } catch (CannotGetJdbcConnectionException e) {
+//            throw new CannotGetJdbcConnectionException("[JDBC Time Card DAO] Problem connecting to the database.");
+//        } catch (DataIntegrityViolationException e) {
+//            throw new DataIntegrityViolationException("[JDBC Time Card DAO] Cannot get time card with ID: " + timeCardId);
+//        }
+//        if(timeCard.isClockedIn()){
+//            updateTimeCard()
+//
+//        }
+//    }
+
+    public TimeCards createTimeCard(int userId, Timestamp timestamp) {
         int timeCardId = -1;
-        String sql = "INSERT INTO time_cards (user_id, date_time, rounded_date_time, updated_on_date) VALUES (?,?,?,?) RETURNING time_card_id;";
+        String sql = "INSERT INTO time_cards (user_id, date_time, clocked_in, clock_in_time) VALUES (?,?,?,?) RETURNING time_card_id;";
         timeCardId = template.queryForObject(
                 sql,
                 int.class,
                 userId,
                 timestamp,
-                roundToNearestQuarterHour(timestamp),
-                new Date()
+                true,
+                roundToNearestQuarterHour(timestamp)
 
         );
         return getTimeCardById(timeCardId);
@@ -72,6 +96,7 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
         } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityViolationException("[JDBC Time Card DAO] Cannot get time card with ID: " + timeCardId);
         }
+        
         return timeCard;
     }
 
@@ -88,10 +113,13 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
                 timeCard.setTimeCardId(results.getInt("time_card_id"));
                 timeCard.setUserId(results.getInt("user_id"));
                 timeCard.setDateTime(results.getTimestamp("date_time"));
-                timeCard.setRoundedDateTime(results.getTimestamp("rounded_date_time"));
+                timeCard.setClockedIn(results.getBoolean("clocked_in"));
+                timeCard.setTotalMinutesWorked(results.getInt("total_minutes_worked"));
+                timeCard.setClockInTime(results.getTimestamp("clock_in_time"));
+                timeCard.setClockOutTime(results.getTimestamp("clock_out_time"));
                 timeCard.setUpdatedOnDate(results.getDate("updated_on_date"));
-                timeCard.setUpdatedByUserId(results.getInt("user_id"));
-                timeCard.setIsArchived(results.getBoolean("is_archived"));
+                timeCard.setUpdatedByUserId(results.getInt("updated_by_user_id"));
+                timeCard.setArchived(results.getBoolean("is_archived"));
                 timeCard.setArchivedNotes(results.getString("archived_notes"));
                 timeCards.add(timeCard);
 
@@ -157,11 +185,13 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
         timeCard.setTimeCardId(results.getInt("time_card_id"));
         timeCard.setUserId(results.getInt("user_id"));
         timeCard.setDateTime(results.getTimestamp("date_time"));
-        timeCard.setRoundedDateTime(results.getTimestamp("rounded_date_time"));
+        timeCard.setClockedIn(results.getBoolean("clocked_in"));
+        timeCard.setTotalMinutesWorked(results.getInt("total_minutes_worked"));
+        timeCard.setClockInTime(results.getTimestamp("clock_in_time"));
+        timeCard.setClockOutTime(results.getTimestamp("clock_out_time"));
         timeCard.setUpdatedOnDate(results.getDate("updated_on_date"));
         timeCard.setUpdatedByUserId(results.getInt("updated_by_user_id"));
-
-        timeCard.setIsArchived(results.getBoolean("is_archived"));
+        timeCard.setArchived(results.getBoolean("is_archived"));
         timeCard.setArchivedNotes(results.getString("archived_notes"));
         return timeCard;
     }

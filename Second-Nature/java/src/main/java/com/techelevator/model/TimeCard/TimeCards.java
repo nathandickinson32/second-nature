@@ -2,29 +2,37 @@ package com.techelevator.model.TimeCard;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 public class TimeCards {
 
     private int timeCardId;
     private int userId;
     private Timestamp dateTime;
-    private Timestamp roundedDateTime;
+    private boolean clockedIn;
+    private int totalMinutesWorked;
+    private Timestamp clockInTime;
+    private Timestamp clockOutTime;
     private Date updatedOnDate;
     private int updatedByUserId;
     private boolean isArchived;
     private String archivedNotes;
 
-    public TimeCards() {}
+    public TimeCards() {
+    }
 
-    public TimeCards(int timeCardId, int userId, Timestamp dateTime, Timestamp roundedDateTime, Date updatedOnDate, int updatedByUserId,
-                     boolean isArchived, String archivedNotes) {
+    public TimeCards(int timeCardId, int userId, Timestamp dateTime, boolean clockedIn, int totalMinutesWorked, Timestamp clockInTime, Timestamp clockOutTime, Date updatedOnDate, int updatedByUserId, boolean isArchived, String archivedNotes) {
         this.timeCardId = timeCardId;
         this.userId = userId;
         this.dateTime = dateTime;
-        this.roundedDateTime= roundedDateTime;
+        this.clockedIn = clockedIn;
+        this.totalMinutesWorked = totalMinutesWorked;
+        this.clockInTime = clockInTime;
+        this.clockOutTime = clockOutTime;
         this.updatedOnDate = updatedOnDate;
         this.updatedByUserId = updatedByUserId;
-        this. isArchived = isArchived;
+        this.isArchived = isArchived;
         this.archivedNotes = archivedNotes;
     }
 
@@ -52,13 +60,6 @@ public class TimeCards {
         isArchived = archived;
     }
 
-    public Timestamp getRoundedDateTime() {
-        return roundedDateTime;
-    }
-
-    public void setRoundedDateTime(Timestamp roundedDateTime) {
-        this.roundedDateTime = roundedDateTime;
-    }
 
     public void setDateTime(Timestamp dateTime) {
         this.dateTime = dateTime;
@@ -84,13 +85,7 @@ public class TimeCards {
         return updatedByUserId;
     }
 
-    public void setIsArchived(boolean isArchived) {
-        this.isArchived = isArchived;
-    }
 
-    public boolean getIsArchived() {
-        return isArchived;
-    }
 
     public void setArchivedNotes(String archivedNotes) {
         this.archivedNotes = archivedNotes;
@@ -100,4 +95,41 @@ public class TimeCards {
         return archivedNotes;
     }
 
+
+
+
+    public boolean isClockedIn() {
+        return clockedIn;
+    }
+
+    public void setClockedIn(boolean clockedIn) {
+        this.clockedIn = clockedIn;
+    }
+
+    public int getTotalMinutesWorked() {
+        return totalMinutesWorked;
+    }
+
+
+    public Timestamp getClockInTime() {
+        return clockInTime;
+    }
+
+
+
+    public Timestamp getClockOutTime() {
+        return clockOutTime;
+    }
+
+    public void setTotalMinutesWorked(int totalMinutesWorked) {
+        this.totalMinutesWorked = totalMinutesWorked;
+    }
+
+    public void setClockInTime(Timestamp clockInTime) {
+        this.clockInTime = clockInTime;
+    }
+
+    public void setClockOutTime(Timestamp clockOutTime) {
+        this.clockOutTime = clockOutTime;
+    }
 }
