@@ -53,7 +53,7 @@ public class TimeCardController {
         return timeCardsDao.getTimeCardsByUserId(userId);
     }
     @ResponseStatus(HttpStatus.ACCEPTED)
-    @PostMapping(path = "/update")
+    @PutMapping(path = "/update")
     public TimeCards updateTimeCard(@RequestBody UpdateTimeCardDto updateTimeCardDto, Principal principal){
         int userId = userDao.getUserIdByUsername(principal.getName());
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());

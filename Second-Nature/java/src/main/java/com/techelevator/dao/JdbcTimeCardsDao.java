@@ -138,7 +138,7 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
 
     @Override
     public TimeCards updateTimeCard(UpdateTimeCardDto updateTimeCardDto, int userId, Timestamp timestamp) {
-        String sql = "UPDATE time_cards SET time_card_id = ?, date_time_in = ?,date_time_out = ?, clocked_in = ?, total_minutes_worked = ?, clock_in_time = ?, clock_out_time = ?, updated_on_date = ?, updated_by_user_id = ? WHERE time_card_id = ?;";
+        String sql = "UPDATE time_cards SET date_time_out = ?, clocked_in = ?, total_minutes_worked = ?,clock_out_time = ?, updated_on_date = ?, updated_by_user_id = ? WHERE time_card_id = ?;";
 
         try {
             Timestamp clockInTime = updateTimeCardDto.getClockInTime();
@@ -146,14 +146,10 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
             int totalMinutesWorked = calculateMinutesWorked(clockInTime,roundedTimeStamp);
             template.update(
                     sql,
-                    updateTimeCardDto.getTimeCardId(),
                     timestamp,
-                    new Timestamp(System.currentTimeMillis()),
                     false,
-                    calculateMinutesWorked(updateTimeCardDto.getClockInTime(),roundToNearestQuarterHour(timestamp)),
-                    updateTimeCardDto.getClockInTime(),
-                    roundToNearestQuarterHour(timestamp),
-                    userId,
+                    totalMinutesWorked,
+                    roundedTimeStamp,
                     new Date(),
                     userId,
                     updateTimeCardDto.getTimeCardId()
