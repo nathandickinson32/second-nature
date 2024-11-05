@@ -48,24 +48,30 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
     // else create new
     // keep method params in mind
 
-//    private TimeCards clockedInStatus(int timeCardId) {
-//        TimeCards timeCard = new TimeCards();
-//        String sql = "SELECT * FROM time_cards LIMIT 1 ORDER BY time_card_id DESC";
-//        try {
-//            SqlRowSet results = template.queryForRowSet(sql, timeCardId);
-//            if (results.next()) {
-//                timeCard = mapRowToTimeCard(results);
-//            }
-//        } catch (CannotGetJdbcConnectionException e) {
-//            throw new CannotGetJdbcConnectionException("[JDBC Time Card DAO] Problem connecting to the database.");
-//        } catch (DataIntegrityViolationException e) {
-//            throw new DataIntegrityViolationException("[JDBC Time Card DAO] Cannot get time card with ID: " + timeCardId);
-//        }
-//        if(timeCard.isClockedIn()){
-//            updateTimeCard()
-//
-//        }
-//    }
+    public TimeCards clockedInStatus(int userId) {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        TimeCards timeCard = new TimeCards();
+        String sql = "SELECT * FROM time_cards ORDER BY time_card_id DESC LIMIT 1 ";
+        try {
+            SqlRowSet results = template.queryForRowSet(sql);
+            if (results.next()) {
+                timeCard = mapRowToTimeCard(results);
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Time Card DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Time Card DAO] Cannot get time card with ID: ");
+        }
+        if(timeCard.isClockedIn()) {
+
+            UpdateTimeCardDto updateTimeCardDto = new UpdateTimeCardDto(timeCard.getTimeCardId(),timeCard.getClockInTime());
+            updateTimeCard(updateTimeCardDto,userId,timestamp);
+            return getTimeCardById(timeCard.getTimeCardId());
+        }else{
+            createTimeCard(userId,timestamp);
+        }
+        return timeCard;
+    }
 
     public TimeCards createTimeCard(int userId, Timestamp timestamp) {
         int timeCardId = -1;

@@ -38,13 +38,22 @@ public class TimeCardController {
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " accessed Time Card ID: " + id);
         return timeCardsDao.getTimeCardById(id);
     }
+//    @ResponseStatus(HttpStatus.CREATED)
+//    @PostMapping(path = "/register")
+//    public TimeCards createTimeCard(Principal principal){
+//        int userId = userDao.getUserIdByUsername(principal.getName());
+//        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+//        System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is creating a new time card.");
+//        return timeCardsDao.createTimeCard(userId,timestamp);
+//    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/register")
     public TimeCards createTimeCard(Principal principal){
         int userId = userDao.getUserIdByUsername(principal.getName());
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is creating a new time card.");
-        return timeCardsDao.createTimeCard(userId,timestamp);
+        return timeCardsDao.clockedInStatus(userId);
     }
     @GetMapping(path = "/{id}/time-cards")
     public List <TimeCards> getTimeCardByUserId(Principal principal){

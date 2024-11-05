@@ -8,6 +8,10 @@ public class UpdateTimeCardDto {
     private Integer timeCardId;
     private Timestamp clockInTime;
 
+    public UpdateTimeCardDto(Integer timeCardId, Timestamp clockInTime) {
+        this.timeCardId = timeCardId;
+        this.clockInTime = clockInTime;
+    }
 
     public void setTimeCardId(Integer timeCardId) {
         this.timeCardId = timeCardId;
