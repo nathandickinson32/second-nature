@@ -20,8 +20,6 @@ export default {
                 { name: 'Stihl Blower BG 46', url: 'https://cdnassets.stihlusa.com/1625857590-bg46manual.pdf'},
                 { name: 'Stihl Mower RM 655.0 V', url: 'https://cdnassets.stihlusa.com/1705942922-stihl-rm-655v-mower-owners-instruction-manual.pdf'},
                 { name: 'Stihl Trimmer FE 55', url: 'https://cdnassets.stihlusa.com/1625863311-stihl-fe-55-owners-instruction-manual.pdf'},
-                // { name: 'Document 2', url: '/path/to/document2.pdf' },
-                // Add more documents as needed
             ],
             pdfUrl: '',
         };
