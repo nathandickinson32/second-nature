@@ -1,44 +1,19 @@
 <template>
   <div class="content">
     <h1>Training</h1>
-    <!-- TrainingList component -->
-        <ul v-if="!pdfUrl">
-          <!-- Add a filter? For training category; Mowers/blowers/Summer/Winter/etc -ask Nathan? -->
-          <li v-for="(doc) in documents" :key="doc.id" @click="viewDocument(doc.url)">
-            {{ doc.name }}
-          </li>
-        </ul>
-    <TrainingDocumentViewer  :url="pdfUrl" v-if="pdfUrl" @clear="clearPdf"/>
+    <TrainingDocumentList/>
   </div>
 </template>
 
 <script>
-import TrainingDocumentViewer from '../../components/TRAINING/TrainingDocumentViewer.vue';
+import TrainingDocumentList from '../../components/TRAINING/TrainingDocumentList.vue';
 
 export default {
-  data() {
-    return {
-      documents: [
-        { name: 'Stihl Backpack Blower', url: 'https://www.stihlusa.com/webcontent/cmsfilelibrary/instructionmanuals/stihl-br-350-430-owners-instruction-manual.pdf' },
-        // { name: 'Document 2', url: '/path/to/document2.pdf' },
-        // Add more documents as needed
-      ],
-      pdfUrl: '',
-    };
-  },
+  
   components: {
-    TrainingDocumentViewer
+    TrainingDocumentList
   },
-  methods: {
-    viewDocument(url) {
-      // console.log("Here's our attempt at looking at the document" + JSON.stringify(url));
-      this.pdfUrl = url;
-      // console.log(JSON.stringify(this.pdfUrl));
-    },
-    clearPdf(){
-      this.pdfUrl='';
-    }
-  },
+  
 };
 </script>
 
@@ -54,5 +29,7 @@ embed {
   justify-content: center;
   align-items: center;
 }
+
+
 
 </style>
