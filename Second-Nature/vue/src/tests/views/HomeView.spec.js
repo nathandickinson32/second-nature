@@ -22,7 +22,7 @@ describe('HomeView', () => {
   });
 
   it('renders with Bob as name', () => {
-    const wrapper = mount(HomeView, {
+    wrapper = mount(HomeView, {
       global: {
         plugins: [store]
       }
@@ -35,7 +35,7 @@ describe('HomeView', () => {
 
   //will need to be updated if adding/removing icons
   it('renders expected number of menu icons for a manager', () => {
-    const wrapper = mount(HomeView, {
+    wrapper = mount(HomeView, {
       global: {
         plugins: [store]
       }
@@ -44,7 +44,7 @@ describe('HomeView', () => {
     const menuIcons = wrapper.findAll('.menu-icon');
 
     expect(store.getters.isManager).toBe(true);
-    expect(menuIcons.length).toBe(10);
+    expect(menuIcons.length).toBe(9);
   });
 
   it('renders expected number of menu icons for a non-manager', async () => {
@@ -58,7 +58,7 @@ describe('HomeView', () => {
         isManager: () => false
       }
     })
-    const wrapper = mount(HomeView, {
+    wrapper = mount(HomeView, {
       global: {
         plugins: [store]
       }
@@ -69,6 +69,6 @@ describe('HomeView', () => {
     await nextTick();
 
     expect(store.getters.isManager).toBe(false);
-    expect(menuIcons.length).toBe(9);
+    expect(menuIcons.length).toBe(8);
   })
 });
