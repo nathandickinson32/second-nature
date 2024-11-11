@@ -1,35 +1,36 @@
 <template>
   <div class="content">
-       <h2>Create Training</h2>
+       <h2>Add New Training Document</h2>
         <div class="large-container">
             <form id="new-training-form" @submit.prevent="onSubmit">
-                <!-- Upload the new file -->
-                <input type="file" @change="onFileChange" required/>
                 <!-- <button @click="uploadFile">Upload</button> -->
                 <!-- <div v-if="createTraining.fileUrl">Uploaded File: <a :href="createTraining.fileUrl" target="_blank">View Document</a></div> -->
- 
 
                 <!-- Title text field -->
                 <div class="form-input-group">
-                    <label for="title">Title: </label>
+                    <label class="title-label" for="title">Title: </label>
                     <input type="text" v-model="createTraining.title" id="title" required />
                 </div>
 
                 <!-- Category text field -->
                 <div class="form-input-group">
-                    <textarea v-model="createTraining.category" id="category" rows="1" required></textarea>
+                    <label class="category-label" for="category">Category: </label> 
+                    <input v-model="createTraining.category" id="category" rows="1" required/>
                 </div>
 
+                <!-- Upload the new file -->
+                <input class="add-file" type="file" @change="onFileChange" required/>
+
                 <!-- Submit button -->
-                <button type="submit">Add this document</button>
+                <button type="submit">Add Document</button>
             </form>
         </div>
-
-
   </div>
+  <Footer/>
 </template>
 
 <script>
+import Footer from '../../components/Footer.vue';
 import Trainingservice from '../../services/Trainingservice';
 
 export default {
@@ -43,6 +44,9 @@ export default {
             },
             filePresent: false,
         };
+    },
+    components: {
+        Footer
     },
     methods: {
         onFileChange(event) {
@@ -85,7 +89,7 @@ export default {
 <style>
 button {
     height: 50px;
-    width: 200px;
+    width: 150px;
 }
 
 h2 {
@@ -112,4 +116,18 @@ label {
     flex-direction: column;
     align-items: center;
 }
+
+.large-container {
+    width: 400px;
+}
+
+.add-file {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.title-label {
+    margin-right: 44px;
+}
+
 </style>
