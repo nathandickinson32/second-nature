@@ -7,5 +7,9 @@ export default{
     getAllTimeCardsByUserId(userId){
         return axios.get(`/time-card/${userId}/time-cards`);
     },
+
+    updateTimeCard(updatedTimeCard){
+        return axios.put('/time-card/update', updatedTimeCard)
+    }
     
 }

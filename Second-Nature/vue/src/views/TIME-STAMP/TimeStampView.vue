@@ -64,7 +64,7 @@ export default{
       },
       
       currentTime: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      currentDate: new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })
+      currentDate: new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }),
     
     }
       
@@ -73,22 +73,22 @@ export default{
   computed:{
     isLoggedIn(){
       return this.$store.getters.isLoggedIn;
-    }
+    },
+  //  updatedTimeCard: this.timeCard
   },
   methods:{
     // setHourType(type){
     //   this.timeStamp.hourType = type;
     // },
     submitTimeStamp(){
-      TimeCardService.createNewTimeCard(this.timeCard)
+        TimeCardService.createNewTimeCard(this.timeCard)
       .then((response)=> {
         console.log(response);
         if(response.status === 201){
-          window.alert('Time Stamp submitted')
+          window.alert('Time Stamp Submitted')
           this.$router.push({name: 'home'});
         }
       })
-    }
   },
   mounted() {
     this.timer = setInterval(() => {
@@ -100,7 +100,7 @@ export default{
     clearInterval(this.timer)
   }
 
-
+  }
 }
 </script>
 

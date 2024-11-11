@@ -1,6 +1,9 @@
 <template>
     <div class="content">
-        <TimeCard v-for="timeCard in timeCardList" v-bind:key="timeCard.id" :timeCard="timeCard"></TimeCard> 
+        <!-- change -->
+        <!-- <TimeCard v-for="timeCard in timeCardList" v-bind:key="timeCard.id" :timeCard="timeCard"></TimeCard> -->
+        <TimeCard v-for="timeCard in timeCards" v-bind:key="timeCard.id" :timeCard="timeCard"></TimeCard>
+
     </div>
 </template>
 
@@ -13,18 +16,26 @@ export default{
     },
     data(){
         return{
-            timeCardList: [],
+            // no need for this
+            // timeCardList: [],
         };
     },
-    created(){
-        this.getTimeCards();
-    },
-    methods: {
-        getTimeCards(){
-            TimeCardService.getAllTimeCardsByUserId().then((response) => 
-            {this.timeCardList = response.data;});
+    // no props
+    props:{
+        timeCards:{
+            type: Array,
+            required: true
         }
-    }
+    },
+    // created(){
+    //     this.getTimeCards();
+    // },
+    // methods: {
+    //     getTimeCards(){
+    //         TimeCardService.getAllTimeCardsByUserId().then((response) => 
+    //         {this.timeCardList = response.data;});
+    //     }
+    // }
 
  }
 </script>

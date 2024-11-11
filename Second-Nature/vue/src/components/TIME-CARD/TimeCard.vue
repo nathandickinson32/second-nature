@@ -1,12 +1,14 @@
 <template>
     <!-- <div class="small-container"> -->
     <router-link class="small-container" :to="{name: 'time-card-detail' , params: {timeCardId: timeCard.timeCardId}}">
-        <!-- <h3>Hour Type</h3> -->
-        <!-- <h3>{{timeCard}} </h3> -->
-        <!-- <h5>Date and Time</h5> -->
+        <h4>Minutes Worked: {{ timeCard.totalMinutesWorked }} minutes</h4>
+        <h5>Clock-in: {{ formatDateTime(timeCard.clockInTime) }}</h5>
+        <!-- clockOutTime shows up with a random date when 
+          time card has only been punched once (i.e. no clock out)-->
+        <h5>Clock-out: {{ formatDateTime(timeCard.clockOutTime) }}</h5>
         <h5>{{timeCard.roundedDateTime}}</h5>
     </router-link>
-    <!-- </div> -->
+    
 </template>
 
 <script>
@@ -24,9 +26,25 @@ export default{
       required: true
     }
     },
-    // methods: {
 
-    // },
+    methods:{
+      formatDateTime(dateTime){
+        const date = new Date(dateTime);
+        const formattedDate = date.toLocaleDateString('en-us', {
+          month: '2-digit',
+          day: '2-digit',
+          year: 'numeric'
+        });
+        const formattedTime = date.toLocaleTimeString([], {
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true
+        });
+
+        return `${formattedDate} at ${formattedTime}`;
+      }
+    }
+    
 }
 </script>
 
