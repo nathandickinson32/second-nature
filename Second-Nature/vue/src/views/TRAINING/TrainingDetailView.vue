@@ -1,6 +1,6 @@
 <template>
-  <TrainingDocumentViewer :url="pdfUrl" />
-    <FooterVue/>
+    <TrainingDocumentViewer :url="pdfUrl" />
+    <FooterVue />
 </template>
 
 <script>
@@ -18,7 +18,7 @@ export default {
                 // { name: 'Document 2', url: '/path/to/document2.pdf' },
                 // Add more documents as needed
             ],
-            pdfUrl:'',
+            pdfUrl: '',
         };
     },
     created() {
@@ -37,8 +37,8 @@ export default {
         viewDocument(url) {
             this.pdfUrl = url;
         },
-        clearPdf(){
-            this.pdfUrl='';
+        clearPdf() {
+            this.pdfUrl = '';
         }
     }
 
@@ -59,6 +59,4 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

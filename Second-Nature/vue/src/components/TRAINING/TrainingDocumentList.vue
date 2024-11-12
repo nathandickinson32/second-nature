@@ -1,6 +1,5 @@
 <template>
     <div class="list-container" v-if="!pdfUrl">
-        <!-- Add a filter? For training category; Mowers/blowers/Summer/Winter/etc -ask Nathan? -->
         <div class="list-item" v-for="(doc) in documents" :key="doc.id" @click="viewDocument(doc.url)">
             {{ doc.name }}
         </div>    
@@ -29,9 +28,7 @@ export default {
     },
     methods: {
     viewDocument(url) {
-      // console.log("Here's our attempt at looking at the document" + JSON.stringify(url));
       this.pdfUrl = url;
-      // console.log(JSON.stringify(this.pdfUrl));
     },
     clearPdf(){
       this.pdfUrl='';

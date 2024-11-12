@@ -17,6 +17,9 @@
       <span v-if="route.name === 'clock-in' || route.name === 'clock-out' || route.name === 'meal-in' || route.name === 'meal-out'"> | </span>
       <router-link v-if="route.name === 'clock-in' || route.name === 'clock-out' || route.name === 'meal-in' || route.name === 'meal-out'" v-bind:to="{ name: 'time-stamp' }">Time Stamp</router-link>
 
+      <span v-if="route.name === 'training-new'"> | </span>
+      <router-link v-if="route.name === 'training-new'" v-bind:to="{ name: 'training' }">Training</router-link>
+
       <span> | </span>
       <router-link v-bind:to="{ name: 'logout' }">Logout</router-link>
     </div>
