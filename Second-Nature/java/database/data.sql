@@ -91,4 +91,8 @@ VALUES (1, 'shift_begin', '2024-09-10 09:05:00', false);
 
 INSERT INTO training_resource (title, category, content, resource_source, entered_on_date, entered_by_user_id, is_archived)
 VALUES ('Default Title', 'Default Category', 'Default Content', 'Default Source', '2024-09-10 09:05:00', 3, false);
+
+INSERT INTO category (name) VALUES ('Equipment Types'), ('Policies'), ('Season: Winter'), ('Season: Spring'),
+('Season: Summer'), ('Season: Fall'), ('How-to Guides');
+
 COMMIT TRANSACTION;

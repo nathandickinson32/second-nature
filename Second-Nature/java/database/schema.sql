@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS professional_check_in;
 DROP TABLE IF EXISTS time_off_requests;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS training_resource;
+DROP TABLE IF EXISTS category;
 
 
 CREATE TABLE users (
@@ -128,6 +129,12 @@ CREATE TABLE time_cards (
     FOREIGN KEY (user_id) REFERENCES users (user_id),
     FOREIGN KEY (updated_by_user_id) REFERENCES users (user_id)
 );
+
+CREATE TABLE category (
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR NOT NULL
+);
+
 CREATE TABLE training_resource (
     training_resource_id SERIAL PRIMARY KEY,
     title VARCHAR NOT NULL,
@@ -141,7 +148,8 @@ CREATE TABLE training_resource (
     is_archived BOOLEAN NOT NULL,
     archived_notes VARCHAR,
     FOREIGN KEY (entered_by_user_id) REFERENCES users (user_id),
-    FOREIGN KEY (updated_by_user_id) REFERENCES users (user_id)
+    FOREIGN KEY (updated_by_user_id) REFERENCES users (user_id),
+    FOREIGN KEY (category_id) REFERENCES category (category_id)
 );
 
 COMMIT TRANSACTION;
