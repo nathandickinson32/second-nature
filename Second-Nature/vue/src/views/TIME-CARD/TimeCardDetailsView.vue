@@ -6,9 +6,9 @@
           time card has only been punched once (i.e. no clock out)-->
         <div class="small-container">
             <h4>Minutes Worked: {{ timeCard.totalMinutesWorked }} minutes</h4>
-            <h5>Clock-in: {{ formatDateTime(timeCard.clockInTime) }}</h5>
+            <h5>Clocked-in: {{ formatDateTime(timeCard.clockInTime) }}</h5>
         
-            <h5>Clock-out: {{ formatDateTime(timeCard.clockOutTime) }}</h5>
+            <h5>Clocked-out: {{ formatDateTime(timeCard.clockOutTime) }}</h5>
             <h5>{{timeCard.roundedDateTime}}</h5>
         </div>
         <div class="small-container" id="edit-time-container" v-if="isManager">
