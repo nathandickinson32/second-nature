@@ -57,7 +57,7 @@ export default{
         getTimeCards(){
             TimeCardService.getAllTimeCardsByUserId().then((response) => 
             {this.timeCards = response.data;});
-        }
+        },
     }
 
 

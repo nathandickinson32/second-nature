@@ -7,9 +7,14 @@ export default{
     getAllTimeCardsByUserId(userId){
         return axios.get(`/time-card/${userId}/time-cards`);
     },
-
+    getTimeCardById(timeCardId){
+        return axios.get(`/time-card/${timeCardId}`)
+    },
     updateTimeCard(updatedTimeCard){
         return axios.put('/time-card/update', updatedTimeCard)
-    }
+    },
+    // getUsernameByTimeCardId(timeCardId){
+    //     return axios.get(`/time-card/${timeCardId}/username`)
+    // }
     
 }
