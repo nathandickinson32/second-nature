@@ -12,10 +12,15 @@
                     <input type="text" v-model="createTraining.title" id="title" required />
                 </div>
 
-                <!-- Category text field -->
+                <!-- Category Dropdown menu -->
                 <div class="form-input-group">
-                    <label class="category-label" for="category">Category: </label> 
-                    <input v-model="createTraining.category" id="category" rows="1" required/>
+                    <label for="training-category">Select Category: </label>
+                    <select name="training-category" id="training-category" v-model="createTraining.category" required>
+                        <option value="0" disabled>Select Category</option>
+                        <option v-for="trainingCategory in categories" v-bind:key="trainingCategory.categoryId" :value="trainingCategory.categoryId">
+                            {{ trainingCategory.name }}
+                        </option>
+                    </select>
                 </div>
 
                 <!-- Upload the new file -->
@@ -32,23 +37,33 @@
 <script>
 import Footer from '../../components/Footer.vue';
 import Trainingservice from '../../services/Trainingservice';
+import CategoryService from '../../services/CategoryService';
 
 export default {
     data() {
         return {
             createTraining:{
                 title: '',
-                category: '',
+                category: 0,
                 file: null,
                 fileUrl: null
             },
             filePresent: false,
+            categories: [],
         };
     },
     components: {
         Footer
     },
+    created() {
+        this.getCategories();
+    },
     methods: {
+        getCategories (){
+            CategoryService.getAllCategories().then((response) => {
+                this.categories = response.data;
+            });
+        },
         onFileChange(event) {
         this.createTraining.file = event.target.files[0];
         this.createTraining.fileUrl = URL.createObjectURL(this.createTraining.file); // For preview (if needed)
@@ -77,7 +92,7 @@ export default {
 // CreateTrainingResourceDTO
 // {
 // 	"title" : String
-// 	"category" : String (options include: "general", "policies", "winter", "spring", "summer", etc...)
+// 	"category" : Int; Can be cross-referenced to get a name from CategoryService
 // 	"content" : String,
 // 	"resource_source" : String (upload location),
 // }

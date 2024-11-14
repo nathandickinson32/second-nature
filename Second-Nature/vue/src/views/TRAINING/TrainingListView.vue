@@ -2,7 +2,8 @@
   <div class="content">
     <router-link id="add-new-training-button" v-if="isManager" v-bind:to="{ name: 'training-new' }">Add New Training Document</router-link>
     <!-- Once desired filters are established replace below element with label elements that trigger filter logic -->
-    <p>Filter | Options | Go | Here</p>
+    <!-- <p>Filter | Options | Go | Here</p> -->
+     <!-- Moved the filter into the TrainingDocumentsList component - KN -->
 
     <TrainingDocumentList/>
   </div>

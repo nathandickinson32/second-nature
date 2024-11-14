@@ -1,5 +1,14 @@
 <template>
     <div class="list-container" v-if="!pdfUrl">
+        <label for="training-category">Filter by Category: </label>
+            <select name="training-category" id="training-category" class="training-category">
+            <!-- v-model="createTraining.category" -->
+        
+                <option value="0" disabled>Select Category</option>
+                <option v-for="trainingCategory in categories" v-bind:key="trainingCategory.categoryId" :value="trainingCategory.categoryId">
+                    {{ trainingCategory.name }}
+                </option>
+            </select>
         <div class="list-item" v-for="(doc) in documents" :key="doc.id" @click="viewDocument(doc.url)">
             {{ doc.name }}
         </div>    
@@ -9,6 +18,7 @@
 
 <script>
 import TrainingDocumentViewer from '../../components/TRAINING/TrainingDocumentViewer.vue';
+import CategoryService from '../../services/CategoryService';
 
 export default {
     data() {
@@ -21,18 +31,32 @@ export default {
                 { name: 'Stihl Trimmer FE 55', url: 'https://cdnassets.stihlusa.com/1625863311-stihl-fe-55-owners-instruction-manual.pdf'},
             ],
             pdfUrl: '',
+            categories: [],
         };
     },
     components: {
         TrainingDocumentViewer
     },
-    methods: {
-    viewDocument(url) {
-      this.pdfUrl = url;
+    created () {
+        this.getCategories();
+    },  
+    computed: {
+        filteredDocuments() {
+            return this.documents;
+        },
     },
-    clearPdf(){
-      this.pdfUrl='';
-    }
+    methods: {
+        getCategories() {
+            CategoryService.getAllCategories().then((response) => {
+                this.categories = response.data;
+            });
+        },
+        viewDocument(url) {
+        this.pdfUrl = url;
+        },
+        clearPdf(){
+        this.pdfUrl='';
+        }
   },
 }
 </script>
@@ -58,5 +82,9 @@ export default {
     margin-right: 5%;
     margin-bottom: 5%;
     text-align: center;
+}
+.training-category {
+    padding: 10px;
+    margin: 10px;
 }
 </style>
