@@ -138,7 +138,7 @@ CREATE TABLE category (
 CREATE TABLE training_resource (
     training_resource_id SERIAL PRIMARY KEY,
     title VARCHAR NOT NULL,
-    category VARCHAR NOT NULL,
+    category_id INT,
     content VARCHAR,
     resource_source VARCHAR,
     entered_on_date DATE NOT NULL,
