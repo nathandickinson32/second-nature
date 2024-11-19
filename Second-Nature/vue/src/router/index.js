@@ -29,10 +29,6 @@ import EquipmentStatusView from '../views/EQUIPMENT/EquipmentStatusView.vue';
 import EquipmentDetailArchive from '../views/EQUIPMENT/EquipmentDetailArchive.vue';
 import MaintenanceModifyView from '../views/MAINTENANCE/MaintenanceModifyView.vue';
 import TimeStampView from '../views/TIME-STAMP/TimeStampView.vue';
-import TimeStampClockInView from '../views/TIME-STAMP/TimeStampClockInView.vue';
-import TimeStampClockOutView from '../views/TIME-STAMP/TimeStampClockOutView.vue';
-import TimeStampMealInView from '../views/TIME-STAMP/TimeStampMealInView.vue';
-import TimeStampMealOutView from '../views/TIME-STAMP/TimeStampMealOutView.vue';
 import TimeCardsView from '../views/TIME-CARD/TimeCardsView.vue';
 import TimeCardDetailsView from '../views/TIME-CARD/TimeCardDetailsView.vue'
 
@@ -259,38 +255,7 @@ const routes = [
     }
   
   },
-  {
-    path: '/time-stamp/clock-in',
-    name: 'clock-in',
-    component: TimeStampClockInView,
-    meta:{
-      requiresAuth: false
-    }
-  },
-  {
-    path: '/time-stamp/clock-out',
-    name: 'clock-out',
-    component: TimeStampClockOutView,
-    meta:{
-      requiresAuth: false
-    }
-  },
-  {
-    path: '/time-stamp/meal-in',
-    name: 'meal-in',
-    component: TimeStampMealInView,
-    meta:{
-      requiresAuth: false
-    }
-  },
-  {
-    path: '/time-stamp/meal-out',
-    name: 'meal-out',
-    component: TimeStampMealOutView,
-    meta:{
-      requiresAuth: false
-    }
-  },
+  
   {
     path: '/time-card',
     name: 'time-card',

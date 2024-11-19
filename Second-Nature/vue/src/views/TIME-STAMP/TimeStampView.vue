@@ -13,55 +13,25 @@
         </form>
         </div>
         <form v-else class="small-container" @submit.prevent="submitTimeStamp">
-          <!-- <div class="time-stamp-options">
-            <div class="form-input-group">
-              <label for="reason">Hour Type </label>
-                    <select id="title" v-model="timeCard.hourType" required>
-                        <option value="clock-in">Clock In</option>
-                        <option value="meal-in">Meal In</option>
-                        <option value="clock-out">Clock Out</option>
-                        <option value="meal-out">Meal Out</option>
-
-                    </select>
-            </div> -->
-                    
-            <!-- <div id="in-options"> -->
-              <!-- <router-link v-bind:to="{ name: 'clock-in'}" class="choice-btn" id="clock-in-btn">Clock In</router-link>
-              <router-link v-bind:to="{ name: 'meal-in'}" class="choice-btn" id="meal-in-btn">Meal In</router-link> -->
-              <!-- <button @:click="setHourType('Clock In')" type="button" class="choice-btn" id="clock-in-btn">Clock In</button>
-              <button @:click="setHourType('Meal In')" type="button" class="choice-btn" id="meal-in-btn">Meal In</button> -->
-
-            <!-- </div> -->
-            <!-- <div id="out-options"> -->
-              <!-- <router-link v-bind:to="{ name: 'clock-out'}" class="choice-btn" id="clock-out-btn">Clock Out</router-link>
-              <router-link v-bind:to="{ name: 'meal-out'}" class="choice-btn" id="meal-out-btn">Meal Out</router-link> -->
-              <!-- <button @:click="setHourType('Clock Out')" type="button" class="choice-btn" id="clock-in-btn">Clock In</button>
-              <button @:click="setHourType('Meal Out')" type="button" class="choice-btn" id="meal-out-btn">Meal Out</button> -->
-            <!-- </div> -->
-          <!-- </div> -->
+        
           <button type="submit" id="submitTimeBtn">Punch</button>
         </form>
-        
+        <time-stamp-list/>
     </div>
 </template>
 
 <script>
 
 import TimeCardService from '../../services/TimeCardService';
+import TimeStampList from '../../components/TIME-STAMP/TimeStampList.vue';
 
 export default{
+  components: {
+    TimeStampList
+  },
   data(){
     return{
-        timeCard:{
-        // "timeCardId": 1,
-        // "userId": 1,
-        // hourType: '',
-        // "dateTime": "new Date().toISOString()",
-        updatedOnDate: null,
-        // "updatedByUserId": 0,
-        isArchived: false,
-        archivedNotes: null
-      },
+       
       
       currentTime: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       currentDate: new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }),
@@ -74,12 +44,9 @@ export default{
     isLoggedIn(){
       return this.$store.getters.isLoggedIn;
     },
-  //  updatedTimeCard: this.timeCard
   },
   methods:{
-    // setHourType(type){
-    //   this.timeStamp.hourType = type;
-    // },
+    
     submitTimeStamp(){
         TimeCardService.createNewTimeCard(this.timeCard)
       .then((response)=> {
