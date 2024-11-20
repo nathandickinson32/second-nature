@@ -1,12 +1,15 @@
 <template>
   <h3>{{ formatTime(timeCard.dateTimeIn) }}</h3>
   <h3>Clocked In ({{ checkDate(timeCard.dateTimeIn) }})</h3>
-  <h3>{{ formatTime(timeCard.dateTimeOut) }}</h3>
-  <h3>Clocked Out ({{ checkDate(timeCard.dateTimeOut) }})</h3>
+  <template v-if="timeCard.dateTimeOut">
+    <h3>{{ formatTime(timeCard.dateTimeOut) }}</h3>
+    <h3>Clocked Out ({{ checkDate(timeCard.dateTimeOut) }})</h3>
+  </template>
 </template>
 
 <script>
 export default {
+
   created() {
     console.log(this.timeCard.dateTimeIn);
   },
@@ -15,6 +18,7 @@ export default {
       type: Object,
       required: true,
     },
+  
   },
   methods: {
     formatTime(dateTime) {
