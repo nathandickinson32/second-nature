@@ -1,10 +1,14 @@
 <template>
-  <h3>{{ formatTime(timeCard.dateTimeIn) }}</h3>
-  <h3>Clocked In ({{ checkDate(timeCard.dateTimeIn) }})</h3>
-  <template v-if="timeCard.dateTimeOut">
+  <div v-if="timeCard.dateTimeOut">
     <h3>{{ formatTime(timeCard.dateTimeOut) }}</h3>
     <h3>Clocked Out ({{ checkDate(timeCard.dateTimeOut) }})</h3>
-  </template>
+  </div>
+  <div>
+    <h3>{{ formatTime(timeCard.dateTimeIn) }}</h3>
+    <h3>Clocked In ({{ checkDate(timeCard.dateTimeIn) }})</h3>
+  </div>
+ 
+  
 </template>
 
 <script>
@@ -50,6 +54,7 @@ export default {
       const formattedDate = this.formatDate(date);
       const formattedToday = this.formatDate(today);
       const formattedYesterday = this.formatDate(yesterday);
+
       if (formattedDate === formattedToday) {
         return "Today";
       } else if (formattedDate === formattedYesterday) {

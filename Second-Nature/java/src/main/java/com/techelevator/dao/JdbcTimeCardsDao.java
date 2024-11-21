@@ -37,7 +37,13 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
             roundedMinutes = minutes - ( minutes%15);
 
         } else {
-            roundedMinutes = minutes + ( 15 - (minutes % 15));
+            if(minutes >= 53) {
+                roundedMinutes = 0;
+                localDateTime = localDateTime.plusHours(1);
+            }else{
+                roundedMinutes = minutes + ( 15 - (minutes % 15));
+            }
+
         }
         LocalDateTime roundedDateTime = localDateTime.withMinute(roundedMinutes).withSecond(0).withNano(0);
         return Timestamp.valueOf(roundedDateTime);
@@ -111,7 +117,7 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
 
     public List<TimeCards> getTimeCardsByUserId(int userId) {
         List<TimeCards> timeCards = new ArrayList<>();
-        String sql = "SELECT * FROM time_cards WHERE user_id = ?;";
+        String sql = "SELECT * FROM time_cards WHERE user_id = ? ORDER BY time_card_id DESC;";
 
         try {
             SqlRowSet results = template.queryForRowSet(sql, userId);
