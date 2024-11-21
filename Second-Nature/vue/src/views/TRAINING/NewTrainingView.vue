@@ -15,17 +15,20 @@
                 <!-- Category Dropdown menu -->
                 <div class="form-input-group">
                     <label for="training-category">Select Category: </label>
-                    <select name="training-category" id="training-category" v-model="createTraining.category" required>
+                    <select name="training-category" id="training-category" v-model="createTraining.category">
                         <option value="0" disabled>Select Category</option>
-                        <option v-for="trainingCategory in categories" v-bind:key="trainingCategory.categoryId" :value="trainingCategory.categoryId">
+                        <option v-for="trainingCategory in categories" v-bind:key="trainingCategory.categoryId" :value="trainingCategory.categoryId" required >
                             {{ trainingCategory.name }}
                         </option>
                     </select>
                 </div>
 
                 <!-- Upload the new file -->
-                <input class="add-file" type="file" @change="onFileChange" required/>
-
+                <!-- <input class="add-file" type="file" @change="onFileChange" required/> -->
+                <div class="upload">
+                    <button class="upload-button" v-on:click="upload">Upload</button><br>
+                </div>
+                  
                 <!-- Submit button -->
                 <button type="submit">Add Document</button>
             </form>
@@ -50,6 +53,7 @@ export default {
             },
             filePresent: false,
             categories: [],
+            myWidget : {},
         };
     },
     components: {
@@ -64,20 +68,33 @@ export default {
                 this.categories = response.data;
             });
         },
-        onFileChange(event) {
-        this.createTraining.file = event.target.files[0];
-        this.createTraining.fileUrl = URL.createObjectURL(this.createTraining.file); // For preview (if needed)
-        this.filePresent = true;
+        upload() {
+          this.myWidget.open();
         },
-        onSubmit() {
-            const formData = new FormData();
-            formData.append('file', this.createTraining.file);
+        // onFileChange(event) {  --This is Seth's
+        // this.createTraining.file = event.target.files[0];
+        // this.createTraining.fileUrl = URL.createObjectURL(this.createTraining.file); // For preview (if needed)
+        // this.filePresent = true;
+        // },
+        onSubmit() { 
+            // const formData = new FormData(); --This is Seth's
+            // formData.append('file',this.createTraining.file);
+            // formData.append('title',this.createTraining.title);
+
+            // try{    --This is Koi's
+            //     await axios.post('/createTrainingEndpoint', formData);
+            // } catch (error) {
+            //        console.log(error);
+            // }
+            
 
                 try {
-                    Trainingservice.createTraining(this.createTraining)
+                    Trainingservice.createTraining(this.createTraining)  
+                    // Trainingservice.createTraining(formData) --This is Koi's
                     .then(response => {
                     if (response.ok) {
                     console.log('File uploaded successfully:', response.data);
+                    this.$router.push({name:'training'});
                     } else {
                     console.error('File upload failed:', response.statusText);
                     }})
@@ -85,6 +102,23 @@ export default {
                     console.error('Error uploading file:', error);
                 }
         }
+    },
+    mounted() {
+         this.myWidget = window.cloudinary.createUploadWidget(
+        {
+          // Insert your cloud name and presets here - Cloudinary
+          cloudName: 'ddeab75hh', 
+          uploadPreset: 'srqjhgit'
+        }, 
+        (error, result) => { 
+          if (!error && result && result.event === "success") { 
+            console.log('Done! Here is the image info: ', result.info); 
+            console.log("Image URL: " + result.info.url);
+            this.createTraining.fileUrl = result.info.url;
+          }
+        }
+      );
+  
     },
 
 
@@ -143,6 +177,12 @@ label {
 
 .title-label {
     margin-right: 44px;
+}
+
+.upload-button {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border-radius: 25px;
 }
 
 </style>
