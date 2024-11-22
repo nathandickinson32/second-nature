@@ -1,23 +1,25 @@
 package com.techelevator.model.TimeCard;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class UpdateTimeCardDto {
 
-    private Integer timeCardId;
+    private int timeCardId;
     private Timestamp clockInTime;
 
-    public UpdateTimeCardDto(Integer timeCardId, Timestamp clockInTime) {
+    public UpdateTimeCardDto(int timeCardId, Timestamp clockInTime) {
         this.timeCardId = timeCardId;
         this.clockInTime = clockInTime;
     }
 
-    public void setTimeCardId(Integer timeCardId) {
+    public void setTimeCardId(int timeCardId) {
         this.timeCardId = timeCardId;
     }
 
-    public Integer getTimeCardId() {
+    public int getTimeCardId() {
         return timeCardId;
     }
 

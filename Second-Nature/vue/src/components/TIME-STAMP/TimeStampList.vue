@@ -1,10 +1,15 @@
 <template>
   <div class="small-container">
+<div v-if="filteredTimeStamps.length === 0">
+<p>No Recent Punches</p>
+</div>
+<div v-else>
     <time-stamp
       v-for="timeStamp in filteredTimeStamps"
       :key="timeStamp.timeStampId"
       :timeCard="timeStamp"
     />
+  </div>
   </div>
 </template>
 
