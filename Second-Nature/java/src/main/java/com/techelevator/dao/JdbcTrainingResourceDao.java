@@ -29,7 +29,7 @@ public class JdbcTrainingResourceDao implements TrainingResourceDao{
 
     public TrainingResource createTrainingResource(CreateTrainingResourceDTO createTrainingResourceDTO, int userId) {
 
-        String sql = "INSERT INTO training_resource (title, category, content, resource_source, entered_on_date, entered_by_user_id, is_archived) "
+        String sql = "INSERT INTO training_resource (title, category_id, content, resource_source, entered_on_date, entered_by_user_id, is_archived) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING training_resource_id;";
 
         int trainingResourceId = -1;
@@ -155,7 +155,7 @@ public class JdbcTrainingResourceDao implements TrainingResourceDao{
         TrainingResource trainingResource = new TrainingResource();
         trainingResource.setTrainingResourceId(results.getInt("training_resource_id"));
         trainingResource.setTitle(results.getString("title"));
-        trainingResource.setCategory(results.getInt("category"));
+        trainingResource.setCategory(results.getInt("category_id"));
         trainingResource.setContent(results.getString("content"));
         trainingResource.setResourceSource(results.getString("resource_source"));
         trainingResource.setEnteredOnDate(results.getTimestamp("entered_on_date"));

@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path="/training")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:5173")
 @PreAuthorize("isAuthenticated()")
 public class TrainingResourceController {
 

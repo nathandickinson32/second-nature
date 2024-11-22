@@ -24,7 +24,7 @@
                 </div>
 
                 <!-- Upload the new file -->
-                <input class="add-file" type="file" @change="onFileChange" required/>
+                <!-- <input class="add-file" type="file" @change="onFileChange" required/> -->
 
                 <!-- Submit button -->
                 <button type="submit">Add Document</button>
@@ -43,10 +43,10 @@ export default {
     data() {
         return {
             createTraining:{
-                title: '',
-                category: 0,
-                file: null,
-                fileUrl: null
+                title: "TestingHardCodedLondon",
+                category: 1,
+                content: "",
+                resource_source: "http://res.cloudinary.com/dw0citegu/image/upload/v1732301194/d06vnpqkmg9egb2jzn5a.ai"
             },
             filePresent: false,
             categories: [],
@@ -70,8 +70,12 @@ export default {
         this.filePresent = true;
         },
         onSubmit() {
-            const formData = new FormData();
-            formData.append('file', this.createTraining.file);
+            // const formData = new FormData();
+            // formData.append('file', this.createTraining.file);
+            // formData.append('title', this.createTraining.title);
+            // formData.append('category', this.createTraining.category);
+            // formData.append('content', this.createTraining.content);
+            // formData.append('resource_source', this.createTraining.resource_source);
 
                 try {
                     Trainingservice.createTraining(this.createTraining)
