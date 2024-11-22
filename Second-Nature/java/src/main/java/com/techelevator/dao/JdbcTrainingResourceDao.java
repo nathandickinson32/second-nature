@@ -155,7 +155,7 @@ public class JdbcTrainingResourceDao implements TrainingResourceDao{
         TrainingResource trainingResource = new TrainingResource();
         trainingResource.setTrainingResourceId(results.getInt("training_resource_id"));
         trainingResource.setTitle(results.getString("title"));
-        trainingResource.setCategory(results.getString("category"));
+        trainingResource.setCategory(results.getInt("category"));
         trainingResource.setContent(results.getString("content"));
         trainingResource.setResourceSource(results.getString("resource_source"));
         trainingResource.setEnteredOnDate(results.getTimestamp("entered_on_date"));

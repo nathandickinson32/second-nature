@@ -2,7 +2,7 @@ package com.techelevator.model.TrainingResource;
 
 public class CreateTrainingResourceDTO {
     private String title;
-    private String category;
+    private int category;
     private String content;
     private String resourceSource;
 
@@ -14,11 +14,11 @@ public class CreateTrainingResourceDTO {
         this.title = title;
     }
 
-    public String getCategory() {
+    public int getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 
