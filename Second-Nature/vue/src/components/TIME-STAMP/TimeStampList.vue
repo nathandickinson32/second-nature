@@ -9,7 +9,7 @@
       :key="timeStamp.timeStampId"
       :timeCard="timeStamp"
     />
-  </div>
+    </div>
   </div>
 </template>
 
