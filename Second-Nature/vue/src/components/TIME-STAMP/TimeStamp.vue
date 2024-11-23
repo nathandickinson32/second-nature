@@ -1,11 +1,26 @@
 <template>
   <div v-if="timeCard.dateTimeOut">
-    <h3>{{ formatTime(timeCard.dateTimeOut) }}</h3>
-    <h3>Clocked Out ({{ checkDate(timeCard.dateTimeOut) }})</h3>
+    <div class="stamp-display">
+      <h3>{{ formatTime(timeCard.dateTimeOut) }}</h3>
+      <div class="status">
+        <h3>Clocked Out</h3>
+        <h3 class="end-text">{{ checkDate(timeCard.dateTimeOut) }}</h3>
+
+      </div>
+    </div>
+   
   </div>
   <div>
-    <h3>{{ formatTime(timeCard.dateTimeIn) }}</h3>
-    <h3>Clocked In ({{ checkDate(timeCard.dateTimeIn) }})</h3>
+    <div class="stamp-display">
+      <h3>{{ formatTime(timeCard.dateTimeIn) }}</h3>
+      <div class="status">
+        <h3>Clocked In</h3>
+        <h3 class="end-text"> {{ checkDate(timeCard.dateTimeIn) }}</h3>
+
+      </div>
+   
+    </div>
+    
   </div>
  
   
@@ -67,5 +82,25 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.stamp-display{
+  display: flex;
+flex-direction: column;
+align-items: flex-start;
+width: 100%;
+}
+.status {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+}
+.end-text {
+  margin-left: auto;
+  text-align: right;
+}
+h3 {
+  margin: 8px; /* Remove default margins to reduce spacing */
+}
+
 </style>

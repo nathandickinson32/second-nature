@@ -1,8 +1,7 @@
 <template>
     <div class="content">
-        <h1>Time Stamp</h1>
-       {{ currentDate }} 
-        <section>{{ currentTime }}</section>
+       <h1>{{ currentTime }} </h1>
+        {{ currentDate }}
         <div class="small-container" v-if="!isLoggedIn">
           <form id="user-id-form" v-on:submit.prevent="displayTimeCards">
           <div class="form-input-group">
