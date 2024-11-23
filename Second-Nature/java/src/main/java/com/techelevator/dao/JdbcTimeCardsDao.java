@@ -182,10 +182,12 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
             Timestamp clockInTime = roundToNearestQuarterHour(dateTimeIn);
             Timestamp clockOutTime = null;
             int totalMinutesWorked = 0;
+            boolean clockedIn = false;
 
             if(dateTimeOut != null) {
                 clockOutTime = roundToNearestQuarterHour(dateTimeOut);
                 totalMinutesWorked = calculateMinutesWorked(clockInTime, clockOutTime);
+                clockedIn = true;
             }
 
 
@@ -193,7 +195,7 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
                     sql,
                     dateTimeIn,
                     dateTimeOut,
-                    managerUpdateCardDto.isClockedIn(),
+                    clockedIn,
                     totalMinutesWorked,
                     clockInTime,
                     clockOutTime,

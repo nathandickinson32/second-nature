@@ -7,7 +7,7 @@ public class ManagerUpdateCardDto {
     private int timeCardId;
     private Timestamp dateTimeIn;
     private Timestamp dateTimeOut;
-    private boolean clockedIn;
+
 
     public int getTimeCardId() {
         return timeCardId;
@@ -33,11 +33,5 @@ public class ManagerUpdateCardDto {
         this.dateTimeOut = dateTimeOut;
     }
 
-    public boolean isClockedIn() {
-        return clockedIn;
-    }
 
-    public void setClockedIn(boolean clockedIn) {
-        this.clockedIn = clockedIn;
-    }
 }
