@@ -3,10 +3,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.TimeCardsDao;
 import com.techelevator.dao.UserDao;
-import com.techelevator.model.TimeCard.ArchiveTimeCardDto;
-import com.techelevator.model.TimeCard.CreateTimeCardDto;
-import com.techelevator.model.TimeCard.TimeCards;
-import com.techelevator.model.TimeCard.UpdateTimeCardDto;
+import com.techelevator.model.TimeCard.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -68,6 +65,14 @@ public class TimeCardController {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is updating time card ID: " + updateTimeCardDto.getTimeCardId());
         return timeCardsDao.updateTimeCard(updateTimeCardDto, userId, timestamp);
+    }
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @PutMapping(path = "/manager-update")
+    public TimeCards managerUpdateTimeCard(@RequestBody ManagerUpdateCardDto managerUpdateCardDto, Principal principal){
+        int userId = userDao.getUserIdByUsername(principal.getName());
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is updating time card ID: " + managerUpdateCardDto.getTimeCardId());
+        return timeCardsDao.managerUpdateTimeCard(managerUpdateCardDto, userId, timestamp);
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)

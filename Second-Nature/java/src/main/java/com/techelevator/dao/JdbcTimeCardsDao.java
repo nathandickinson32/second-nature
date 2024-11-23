@@ -1,9 +1,6 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.TimeCard.ArchiveTimeCardDto;
-import com.techelevator.model.TimeCard.CreateTimeCardDto;
-import com.techelevator.model.TimeCard.TimeCards;
-import com.techelevator.model.TimeCard.UpdateTimeCardDto;
+import com.techelevator.model.TimeCard.*;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -173,6 +170,44 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
         }
 
         return getTimeCardById(updateTimeCardDto.getTimeCardId());
+    }
+
+    @Override
+    public TimeCards managerUpdateTimeCard(ManagerUpdateCardDto managerUpdateCardDto, int userId, Timestamp timestamp) {
+        String sql = "UPDATE time_cards SET date_time_in = ?, date_time_out = ?, clocked_in = ?, total_minutes_worked = ?,clock_in_time = ?,clock_out_time = ?, updated_on_date = ?, updated_by_user_id = ? WHERE time_card_id = ?;";
+
+        try {
+            Timestamp dateTimeIn = managerUpdateCardDto.getDateTimeIn();
+            Timestamp dateTimeOut = managerUpdateCardDto.getDateTimeOut();
+            Timestamp clockInTime = roundToNearestQuarterHour(dateTimeIn);
+            Timestamp clockOutTime = null;
+            int totalMinutesWorked = 0;
+
+            if(dateTimeOut != null) {
+                clockOutTime = roundToNearestQuarterHour(dateTimeOut);
+                totalMinutesWorked = calculateMinutesWorked(clockInTime, clockOutTime);
+            }
+
+
+            template.update(
+                    sql,
+                    dateTimeIn,
+                    dateTimeOut,
+                    managerUpdateCardDto.isClockedIn(),
+                    totalMinutesWorked,
+                    clockInTime,
+                    clockOutTime,
+                    new Date(),
+                    userId,
+                    managerUpdateCardDto.getTimeCardId()
+            );
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Time Card DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Time Card DAO] Error updating time card ID: " + managerUpdateCardDto.getTimeCardId());
+        }
+
+        return getTimeCardById(managerUpdateCardDto.getTimeCardId());
     }
 
     public TimeCards archiveTimeCard(ArchiveTimeCardDto archiveTimeCardDto, int userId) {
