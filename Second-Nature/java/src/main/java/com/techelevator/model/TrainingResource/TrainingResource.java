@@ -6,7 +6,7 @@ import java.util.Date;
 public class TrainingResource {
 private int trainingResourceId;
 private String title;
-private String category;
+private int category;
 private String content;
 private String resourceSource;
 private Date enteredOnDate;
@@ -32,11 +32,11 @@ private String archivedNotes;
         this.title = title;
     }
 
-    public String getCategory() {
+    public int getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 

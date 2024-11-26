@@ -1,12 +1,21 @@
 <template>
   <div class="content"> 
-
+    <div class="document-container">
+      <h4>Modify Training Document</h4>
+      <TrainingModifyList />
+    </div>
   </div>
-  
+  <FooterVue/>
 </template>
 
 <script>
+import FooterVue from '../../components/Footer.vue';
+import TrainingModifyList from '../../components/TRAINING/TrainingModifyList.vue';
 export default {
+  components: {
+    FooterVue,
+    TrainingModifyList
+  }
 
     // Update Training Resource DTO
     // {

@@ -46,10 +46,10 @@ export default {
     data() {
         return {
             createTraining:{
-                title: '',
+                title: "",
                 category: 0,
-                file: null,
-                fileUrl: null
+                content: "",
+                resource_source: ""
             },
             filePresent: false,
             categories: [],
@@ -71,6 +71,7 @@ export default {
         upload() {
           this.myWidget.open();
         },
+<<<<<<< HEAD
         // onFileChange(event) {  --This is Seth's
         // this.createTraining.file = event.target.files[0];
         // this.createTraining.fileUrl = URL.createObjectURL(this.createTraining.file); // For preview (if needed)
@@ -87,6 +88,9 @@ export default {
             //        console.log(error);
             // }
             
+=======
+        onSubmit() {
+>>>>>>> c210bfa75180c0152bf75ce3a175977fa084cb26
 
                 try {
                     Trainingservice.createTraining(this.createTraining)  

@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default {
     createTraining(createTraining) {
-        return axios.put('/training/create', createTraining);
+        return axios.post('/training/create', createTraining);
     },
     getAllTrainings() {
         return axios.get('/training/all');

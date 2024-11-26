@@ -3,7 +3,7 @@ package com.techelevator.model.TrainingResource;
 public class UpdateTrainingResourceDto {
     private int trainingResourceId;
     private String title;
-    private String category;
+    private int category;
     private String content;
     private String resourceSource;
 
@@ -23,11 +23,11 @@ public class UpdateTrainingResourceDto {
         this.trainingResourceId = trainingResourceId;
     }
 
-    public String getCategory() {
+    public int getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 

@@ -26,10 +26,10 @@ public class JdbcTrainingResourceDao implements TrainingResourceDao{
     }
 
 
-
+@Override
     public TrainingResource createTrainingResource(CreateTrainingResourceDTO createTrainingResourceDTO, int userId) {
 
-        String sql = "INSERT INTO training_resource (title, category, content, resource_source, entered_on_date, entered_by_user_id, is_archived) "
+        String sql = "INSERT INTO training_resource (title, category_id, content, resource_source, entered_on_date, entered_by_user_id, is_archived) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING training_resource_id;";
 
         int trainingResourceId = -1;
@@ -58,6 +58,7 @@ public class JdbcTrainingResourceDao implements TrainingResourceDao{
         return getTrainingResourceById(trainingResourceId);
     }
 
+    @Override
     public TrainingResource getTrainingResourceById(int trainingResourceId) {
         TrainingResource trainingResource = new TrainingResource();
         String sql = "SELECT * FROM training_resource WHERE training_resource_id = ?;";
@@ -76,6 +77,7 @@ public class JdbcTrainingResourceDao implements TrainingResourceDao{
         return trainingResource;
     }
 
+    @Override
     public List<TrainingResource> getListOfTrainingResources() {
         List<TrainingResource> trainingResources = new ArrayList<>();
         String sql = "SELECT * FROM training_resource;";
@@ -94,6 +96,7 @@ public class JdbcTrainingResourceDao implements TrainingResourceDao{
         return trainingResources;
     }
 
+    @Override
     public TrainingResource updateTrainingResource(UpdateTrainingResourceDto updateTrainingResourceDto, int userId) {
         String sql = "UPDATE training_resource SET title = ?, category = ?, content = ?, resource_source = ?, updated_by_user_id = ?, updated_on_date = ? WHERE training_resource_id = ?;";
 
@@ -118,6 +121,7 @@ public class JdbcTrainingResourceDao implements TrainingResourceDao{
         return getTrainingResourceById(updateTrainingResourceDto.getTrainingResourceId());
     }
 
+    @Override
     public TrainingResource archiveTrainingResource(ArchiveTrainingResourceDto archiveTrainingResourceDto, int userId) {
         String sql = "UPDATE training_resource SET updated_by_user_id = ?, updated_on_date = ?, is_archived = ?, archived_notes = ? WHERE training_resource_id = ?;";
 
@@ -139,6 +143,7 @@ public class JdbcTrainingResourceDao implements TrainingResourceDao{
         return getTrainingResourceById(archiveTrainingResourceDto.getTrainingResourceId());
     }
 
+    @Override
     public void deleteTrainingResource(int trainingResourceId) {
         String sql = "DELETE FROM training_resource WHERE training_resource_id = ?;";
 
@@ -155,7 +160,7 @@ public class JdbcTrainingResourceDao implements TrainingResourceDao{
         TrainingResource trainingResource = new TrainingResource();
         trainingResource.setTrainingResourceId(results.getInt("training_resource_id"));
         trainingResource.setTitle(results.getString("title"));
-        trainingResource.setCategory(results.getString("category"));
+        trainingResource.setCategory(results.getInt("category_id"));
         trainingResource.setContent(results.getString("content"));
         trainingResource.setResourceSource(results.getString("resource_source"));
         trainingResource.setEnteredOnDate(results.getTimestamp("entered_on_date"));
