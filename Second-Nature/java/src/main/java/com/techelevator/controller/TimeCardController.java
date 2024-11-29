@@ -42,7 +42,7 @@ public class TimeCardController {
         int userId = userDao.getUserIdByUsername(principal.getName());
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is creating a new time card.");
-        return timeCardsDao.punchCard(userId);
+        return timeCardsDao.handleTimeCardPunch(userId);
     }
     @GetMapping(path = "/{id}/time-cards")
     public List <TimeCards> getTimeCardByUserId(Principal principal){

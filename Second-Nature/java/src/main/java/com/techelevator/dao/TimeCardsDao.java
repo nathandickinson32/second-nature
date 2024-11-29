@@ -8,7 +8,7 @@ import java.util.List;
 public interface TimeCardsDao {
     // Create
     public TimeCards createTimeCard(int userId, Timestamp timestamp);
-    public TimeCards punchCard(int userId);
+    public TimeCards handleTimeCardPunch(int userId);
 
     // Read
     public TimeCards getTimeCardById(int timeCardId);
