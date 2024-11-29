@@ -51,7 +51,7 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
     // else create new
     // keep method params in mind
 
-    public TimeCards clockedInStatus(int userId) {
+    public TimeCards punchCard(int userId) {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         TimeCards timeCard = new TimeCards();
         String sql = "SELECT * FROM time_cards ORDER BY time_card_id DESC LIMIT 1 ";
