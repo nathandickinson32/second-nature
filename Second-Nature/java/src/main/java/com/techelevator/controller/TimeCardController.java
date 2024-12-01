@@ -50,6 +50,11 @@ public class TimeCardController {
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " accessed Time Card ID: " + userId);
         return timeCardsDao.getTimeCardsByUserId(userId);
     }
+    @GetMapping(path = "/{id}/time-sheet")
+    public List<TimeCards> getTimeCardsForCurrentPayPeriod(Principal principal){
+        int userId = userDao.getUserIdByUsername(principal.getName());
+        return timeCardsDao.getTimeCardsForCurrentPayPeriod(userId);
+    }
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping(path = "/update")
     public TimeCards updateTimeCard(@RequestBody UpdateTimeCardDto updateTimeCardDto, Principal principal){

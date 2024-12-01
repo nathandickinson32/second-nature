@@ -13,6 +13,7 @@ public interface TimeCardsDao {
     // Read
     public TimeCards getTimeCardById(int timeCardId);
     public List<TimeCards> getTimeCardsByUserId(int userId);
+    public List<TimeCards> getTimeCardsForCurrentPayPeriod(int userId);
 
     // Update
     public TimeCards updateTimeCard(UpdateTimeCardDto updateTimeCardDto, int userId, Timestamp timestamp);

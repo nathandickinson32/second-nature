@@ -10,8 +10,10 @@ import org.springframework.stereotype.Component;
 import javax.sql.DataSource;
 import java.sql.Timestamp;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoField;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,27 +26,6 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
         template = new JdbcTemplate(ds);
     }
 
-    private Timestamp roundToNearestQuarterHour(Timestamp timestamp) {
-        LocalDateTime localDateTime = timestamp.toLocalDateTime();
-        int minutes = localDateTime.getMinute();
-
-        int roundedMinutes;
-
-        if (minutes % 15 < 8 ) {
-            roundedMinutes = minutes - ( minutes%15);
-
-        } else {
-            if(minutes >= 53) {
-                roundedMinutes = 0;
-                localDateTime = localDateTime.plusHours(1);
-            }else{
-                roundedMinutes = minutes + ( 15 - (minutes % 15));
-            }
-
-        }
-        LocalDateTime roundedDateTime = localDateTime.withMinute(roundedMinutes).withSecond(0).withNano(0);
-        return Timestamp.valueOf(roundedDateTime);
-    }
 
     // method for determining clocked in status to either update current time card or create new one.
     // if clocked in update
@@ -65,13 +46,13 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
         } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityViolationException("[JDBC Time Card DAO] Cannot get time card with ID: ");
         }
-        if(timeCard.isClockedIn()) {
+        if (timeCard.isClockedIn()) {
 
-            UpdateTimeCardDto updateTimeCardDto = new UpdateTimeCardDto(timeCard.getTimeCardId(),timeCard.getClockInTime());
-            updateTimeCard(updateTimeCardDto,userId,timestamp);
+            UpdateTimeCardDto updateTimeCardDto = new UpdateTimeCardDto(timeCard.getTimeCardId(), timeCard.getClockInTime());
+            updateTimeCard(updateTimeCardDto, userId, timestamp);
             return getTimeCardById(timeCard.getTimeCardId());
-        }else{
-            createTimeCard(userId,timestamp);
+        } else {
+            createTimeCard(userId, timestamp);
         }
         return timeCard;
     }
@@ -106,10 +87,9 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
         } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityViolationException("[JDBC Time Card DAO] Cannot get time card with ID: " + timeCardId);
         }
-        
+
         return timeCard;
     }
-
 
 
     public List<TimeCards> getTimeCardsByUserId(int userId) {
@@ -145,6 +125,29 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
         return timeCards;
     }
 
+    public List<TimeCards> getTimeCardsForCurrentPayPeriod(int userId) {
+        List<TimeCards> timeCards = new ArrayList<>();
+        LocalDate[] payPeriod = getCurrentPayPeriod();
+        LocalDate startDate = payPeriod[0];
+        LocalDate endDate = payPeriod[1];
+
+        String sql = " SELECT * FROM time_cards WHERE user_id = ? AND date_time_in >= ? AND date_time_in <= ? ORDER BY time_card_id DESC;";
+
+        try {
+            SqlRowSet results = template.queryForRowSet(sql, userId, Timestamp.valueOf(startDate.atStartOfDay()), Timestamp.valueOf(endDate.atTime(23, 59, 59)));
+            while (results.next()) {
+                TimeCards timeCard = mapRowToTimeCard(results);
+                timeCards.add(timeCard);
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Time Card DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Time Card DAO] Cannot get time cards for user ID: " + userId);
+        }
+
+        return timeCards;
+    }
+
     @Override
     public TimeCards updateTimeCard(UpdateTimeCardDto updateTimeCardDto, int userId, Timestamp timestamp) {
         String sql = "UPDATE time_cards SET date_time_out = ?, clocked_in = ?, total_minutes_worked = ?,clock_out_time = ?, updated_on_date = ?, updated_by_user_id = ? WHERE time_card_id = ?;";
@@ -152,7 +155,7 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
         try {
             Timestamp clockInTime = updateTimeCardDto.getClockInTime();
             Timestamp roundedTimeStamp = roundToNearestQuarterHour(timestamp);
-            int totalMinutesWorked = calculateMinutesWorked(clockInTime,roundedTimeStamp);
+            int totalMinutesWorked = calculateMinutesWorked(clockInTime, roundedTimeStamp);
             template.update(
                     sql,
                     timestamp,
@@ -184,7 +187,7 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
             int totalMinutesWorked = 0;
             boolean clockedIn = false;
 
-            if(dateTimeOut != null) {
+            if (dateTimeOut != null) {
                 clockOutTime = roundToNearestQuarterHour(dateTimeOut);
                 totalMinutesWorked = calculateMinutesWorked(clockInTime, clockOutTime);
                 clockedIn = true;
@@ -223,8 +226,8 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
                     archiveTimeCardDto.getIsArchived(),
                     archiveTimeCardDto.getArchivedNotes(),
                     archiveTimeCardDto.getTimeCardId())
-                    ;
-        } catch(CannotGetJdbcConnectionException e) {
+            ;
+        } catch (CannotGetJdbcConnectionException e) {
             throw new CannotGetJdbcConnectionException("[JDBC Equipment DAO] Problem connecting to the database.");
         } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityViolationException("[JDBC Equipment DAO] Error archiving time card ID: " + archiveTimeCardDto.getTimeCardId());
@@ -232,7 +235,6 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
 
         return getTimeCardById(archiveTimeCardDto.getTimeCardId());
     }
-
 
 
     private TimeCards mapRowToTimeCard(SqlRowSet results) {
@@ -265,4 +267,39 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
 
         return (int) totalMinutes; // Cast to int
     }
+
+    private Timestamp roundToNearestQuarterHour(Timestamp timestamp) {
+        LocalDateTime localDateTime = timestamp.toLocalDateTime();
+        int minutes = localDateTime.getMinute();
+
+        int roundedMinutes;
+
+        if (minutes % 15 < 8) {
+            roundedMinutes = minutes - (minutes % 15);
+
+        } else {
+            if (minutes >= 53) {
+                roundedMinutes = 0;
+                localDateTime = localDateTime.plusHours(1);
+            } else {
+                roundedMinutes = minutes + (15 - (minutes % 15));
+            }
+
+        }
+        LocalDateTime roundedDateTime = localDateTime.withMinute(roundedMinutes).withSecond(0).withNano(0);
+        return Timestamp.valueOf(roundedDateTime);
+    }
+
+
+    private static final LocalDate REFERENCE_START_DATE = LocalDate.of(2024, 11, 17);
+
+    private static LocalDate[] getCurrentPayPeriod() {
+        LocalDate today = LocalDate.now();
+        long daysSinceReference = ChronoUnit.DAYS.between(REFERENCE_START_DATE, today);
+        long payPeriodSinceReference = daysSinceReference / 14;
+        LocalDate currentPeriodStart = REFERENCE_START_DATE.plusDays(payPeriodSinceReference * 14);
+        LocalDate currentPeriodEnd = currentPeriodStart.plusDays(13);
+        return new LocalDate[]{currentPeriodStart, currentPeriodEnd};
+    }
+
 }
