@@ -1,26 +1,6 @@
 <template>
 <div class="container">
-  <!-- <div v-if="!isManager">
-    <div class="checkInContainer">
-     <professional-check-in
-        class="checkInCard"
-        v-for="professionalCheckIn in professionalCheckIns"
-        v-bind:key="professionalCheckIn.id"
-        :professionalCheckIn="professionalCheckIn"
-      />
-    </div>
-  </div>
 
-  <div v-if="isManager">
-    <div class="checkInContainer">
-     <professional-check-in
-        class="checkInCard"
-        v-for="professionalCheckIn in allProfessionalCheckIns"
-        v-bind:key="professionalCheckIn.id"
-        :professionalCheckIn="professionalCheckIn"
-      />
-    </div>
-  </div> -->
   <div class="checkInList" v-if="isManager">
     <professional-check-in v-for="professionalCheckIn in allProfessionalCheckIns" :key="professionalCheckIn.checkInId" :professionalCheckIn="professionalCheckIn" />
   </div>

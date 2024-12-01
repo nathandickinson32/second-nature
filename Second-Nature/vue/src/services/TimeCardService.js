@@ -16,5 +16,7 @@ export default{
     // getUsernameByTimeCardId(timeCardId){
     //     return axios.get(`/time-card/${timeCardId}/username`)
     // }
-    
+    getTimeCardsForCurrentPayPeriod(userId) {
+        return axios.get(`/time-card/${userId}/time-sheet`)
+    }
 }
