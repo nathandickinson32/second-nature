@@ -265,7 +265,7 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
         // Convert duration to total minutes
         long totalMinutes = duration.toMinutes();
 
-        return (int) totalMinutes; // Cast to int
+        return (int) totalMinutes; 
     }
 
     private Timestamp roundToNearestQuarterHour(Timestamp timestamp) {

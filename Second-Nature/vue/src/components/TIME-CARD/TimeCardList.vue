@@ -1,42 +1,40 @@
 <template>
-  <div class="content">
-<div class="time-card-list">
-    <time-card v-for="timeCard in timeCards" :key="timeCard.timeCardId" :timeCard="timeCard"/>
-
-
-</div>
+  <div class="">
+    <div class="time-card-list">
+      <time-card
+        v-for="timeCard in timeCards"
+        :key="timeCard.timeCardId"
+        :timeCard="timeCard"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-import TimeCard from './TimeCard.vue';
-import TimeCardService from '../../services/TimeCardService';
+import TimeCard from "./TimeCard.vue";
+import TimeCardService from "../../services/TimeCardService";
 export default {
-components: {
-    TimeCard
-},
-data(){
+  components: {
+    TimeCard,
+  },
+  data() {
     return {
-        timeCards: []
-    }
-},
-created() {
+      timeCards: [],
+    };
+  },
+  created() {
+    this.getTimeCards();
+  },
 
-TimeCardService.getTimeCardsForCurrentPayPeriod().then(
-    (response) => {
-        this.timeCards=response.data;
-        
-    }
-)
-
-
-
-
-
-}
-}
+  methods: {
+    getTimeCards() {
+      TimeCardService.getTimeCardsForCurrentPayPeriod().then((response) => {
+        this.timeCards = response.data;
+      });
+    },
+  },
+};
 </script>
 
 <style>
-
 </style>
