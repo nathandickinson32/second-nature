@@ -1,5 +1,5 @@
 <template>
-  <div class="small-container" v-on:click="viewDayDetails">
+  <div v-on:click="viewDayDetails">
 <h1>{{ timeCard.totalMinutesWorked }}</h1>
   </div>
 </template>
