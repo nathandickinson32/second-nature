@@ -1,5 +1,5 @@
 <template>
-  <div v-on:click="viewDayDetails">
+  <div>
 <h1>{{ timeCard.totalMinutesWorked }}</h1>
   </div>
 </template>
@@ -16,14 +16,7 @@ export default {
     }
   },
  methods: {
-  viewDayDetails(){
-    router.push({
-      name: 'time-card-detail',
-      params: {
-        timeCardId: this.timeCard.timeCardId
-      }
-    })
-  }
+
  }
    
 
