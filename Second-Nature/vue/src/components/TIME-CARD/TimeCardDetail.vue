@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="content">
     {{ timeCard.totalMinutesWorked }} 
   </div>
 </template>

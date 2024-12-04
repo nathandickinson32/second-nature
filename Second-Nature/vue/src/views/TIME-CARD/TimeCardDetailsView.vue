@@ -3,15 +3,14 @@
 </template>
 
 <script>
-import TimeCardDetail from '../../components/TIME-CARD/TimeCardDetail.vue';
-import TimeCardService from '../../services/TimeCardService';
+import TimeCardDetail from "../../components/TIME-CARD/TimeCardDetail.vue";
+import TimeCardService from "../../services/TimeCardService";
 export default {
-components: {
-    TimeCardDetail
-}
-}
+  components: {
+    TimeCardDetail,
+  },
+};
 </script>
 
-<style>
-
+<style scoped>
 </style>

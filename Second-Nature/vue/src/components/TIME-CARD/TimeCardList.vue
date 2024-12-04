@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+
     <div class="time-card-list">
       <time-card
         v-for="timeCard in timeCards"
@@ -7,7 +7,7 @@
         :timeCard="timeCard"
       />
     </div>
-  </div>
+  
 </template>
 
 <script>
@@ -36,5 +36,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.time-card-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
 </style>
