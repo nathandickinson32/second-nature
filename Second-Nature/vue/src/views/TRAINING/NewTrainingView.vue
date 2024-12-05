@@ -91,9 +91,10 @@ export default {
 
                 try {
                     Trainingservice.createTraining(this.createTraining)  
+                    
                     // Trainingservice.createTraining(formData) --This is Koi's
                     .then(response => {
-                    if (response.ok) {
+                    if (response.status == 201){
                     console.log('File uploaded successfully:', response.data);
                     this.$router.push({name:'training'});
                     } else {
@@ -112,10 +113,11 @@ export default {
           uploadPreset: 'srqjhgit'
         }, 
         (error, result) => { 
-          if (!error && result && result.event === "success") { 
+          if (!error && result && result.event === "success" && this.createTraining.resource_source != null) { 
             console.log('Done! Here is the image info: ', result.info); 
             console.log("Image URL: " + result.info.url);
             this.createTraining.resource_source = result.info.url;
+            console.log(this.createTraining.resource_source);
           }
         }
       );
