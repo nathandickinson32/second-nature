@@ -71,13 +71,12 @@ export default {
         upload() {
           this.myWidget.open();
         },
-<<<<<<< HEAD
         // onFileChange(event) {  --This is Seth's
         // this.createTraining.file = event.target.files[0];
         // this.createTraining.fileUrl = URL.createObjectURL(this.createTraining.file); // For preview (if needed)
         // this.filePresent = true;
         // },
-        onSubmit() { 
+        // onSubmit() { 
             // const formData = new FormData(); --This is Seth's
             // formData.append('file',this.createTraining.file);
             // formData.append('title',this.createTraining.title);
@@ -88,9 +87,7 @@ export default {
             //        console.log(error);
             // }
             
-=======
         onSubmit() {
->>>>>>> c210bfa75180c0152bf75ce3a175977fa084cb26
 
                 try {
                     Trainingservice.createTraining(this.createTraining)  
@@ -118,7 +115,7 @@ export default {
           if (!error && result && result.event === "success") { 
             console.log('Done! Here is the image info: ', result.info); 
             console.log("Image URL: " + result.info.url);
-            this.createTraining.fileUrl = result.info.url;
+            this.createTraining.resource_source = result.info.url;
           }
         }
       );
