@@ -43,6 +43,12 @@ public class MaintenanceController {
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " accessed maintenance ticket " + ticketId);
         return maintenanceDao.getMaintenanceTicketById(ticketId);
     }
+    @GetMapping(path = "/equipment/{equipmentId}")
+    public List<MaintenanceTicket> getAllMaintenanceTicketsByEquipmentId(@PathVariable int equipmentId, Principal principal){
+        System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " accessed a list of all maintenance tickets with equipmentId: " + equipmentId);
+        return maintenanceDao.getAllMaintenanceTickets();
+    }
+
 
     // Update
     @ResponseStatus(HttpStatus.ACCEPTED)

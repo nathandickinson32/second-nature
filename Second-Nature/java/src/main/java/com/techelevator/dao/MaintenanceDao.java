@@ -11,6 +11,7 @@ public interface MaintenanceDao {
     public List<MaintenanceTicket> getAllMaintenanceTickets();
     public MaintenanceTicket getMaintenanceTicketById(int id);
     public List<MaintenancePerformed> getMaintenancePerformedByEquipmentId(int equipmentId);
+    public List<MaintenanceTicket> getAllMaintenanceTicketsByEquipmentId(int equipmentId);
     // Update
     public MaintenanceTicket updateMaintenanceTicket(UpdateMaintenanceTicketDto updateMaintenanceTicketDto, int userId);
     public MaintenanceTicket completeMaintenanceTicket(CompleteMaintenanceTicketDto completeMaintenanceTicketDto, int userId);

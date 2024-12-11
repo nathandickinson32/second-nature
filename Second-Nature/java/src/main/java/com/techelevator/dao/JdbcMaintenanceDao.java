@@ -128,6 +128,25 @@ public class JdbcMaintenanceDao implements MaintenanceDao {
         return ticket;
     }
 
+    @Override
+    public List<MaintenanceTicket> getAllMaintenanceTicketsByEquipmentId(int equipmentId) {
+        List<MaintenanceTicket> maintenanceTickets = new ArrayList<>();
+        String sql = "SELECT * FROM maintenance_tickets WHERE equipment_id = ?;";
+
+        try {
+            SqlRowSet results = template.queryForRowSet(sql, equipmentId);
+            while (results.next()) {
+                maintenanceTickets.add(mapRowToMaintenanceTicket(results));
+            }
+        } catch(CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Maintenance DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Maintenance DAO] Error getting all maintenance tickets for equipment Id: " + equipmentId);
+        }
+
+        return maintenanceTickets;
+    }
+
     private List<MaintenancePerformed> getMaintenancePerformedByTicket(int id) {
         List<MaintenancePerformed> performed = new ArrayList<>();
         String sql = "SELECT * FROM maintenance_performed WHERE ticket_id = ?;";
