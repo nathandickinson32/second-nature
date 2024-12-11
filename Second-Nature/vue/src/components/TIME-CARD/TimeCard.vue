@@ -1,6 +1,6 @@
 <template>
-  <div>
-<h1>{{ timeCard.totalMinutesWorked }}</h1>
+  <div class="minutes">
+  <h1>{{ timeCard.totalMinutesWorked }}</h1>
   </div>
 </template>
 
@@ -24,5 +24,9 @@ export default {
 </script>
 
 <style>
-
+  .minutes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 </style>
