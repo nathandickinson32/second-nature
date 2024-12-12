@@ -1,7 +1,9 @@
 <template>
   <div class="content-container">
     <div class="minutes-container">
-      <p class="minutes">{{ timeCard.totalMinutesWorked }} minutes</p>
+      <div class="minutes-wrapper">
+        <p class="minutes">{{ timeCard.totalMinutesWorked }} minutes</p>
+      </div>
     </div>
   </div>
 </template>
@@ -32,11 +34,22 @@ export default {
 .minutes-container {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid rgb(199, 194, 194);
-  padding: 10px 15px;
   background-color: white;
   box-sizing: border-box;
   width: 100%;
+  padding: 0 10px;
+}
+
+.minutes-wrapper {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgb(199, 194, 194);
+  width: 100%;
+  padding: 10px 0;
+}
+
+.minutes {
+  padding-left: 5px;
 }
 
 @media (min-width: 400px) {
@@ -44,5 +57,4 @@ export default {
     max-width: 400px;
   }
 }
-
 </style>
