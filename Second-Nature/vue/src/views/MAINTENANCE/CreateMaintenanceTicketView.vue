@@ -1,5 +1,5 @@
 <template>
-  <CreateMaintenanceTicket/>
+  <CreateMaintenanceTicket/> 
   <FooterVue/>
 </template>
 
