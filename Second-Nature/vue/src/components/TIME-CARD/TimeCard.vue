@@ -1,6 +1,8 @@
 <template>
-  <div class="minutes">
-  <h1>{{ timeCard.totalMinutesWorked }}</h1>
+  <div class="content-container">
+    <div class="minutes-container">
+      <p class="minutes">{{ timeCard.totalMinutesWorked }} minutes</p>
+    </div>
   </div>
 </template>
 
@@ -15,18 +17,32 @@ export default {
       required: true
     }
   },
- methods: {
+  methods: {
 
- }
-   
-
+  }
 }
 </script>
 
-<style>
-  .minutes {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+<style scoped>
+.content-container {
+  display: flex;
+  justify-content: center;
+}
+
+.minutes-container {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgb(199, 194, 194);
+  padding: 10px 15px;
+  background-color: white;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+@media (min-width: 400px) {
+  .minutes-container {
+    max-width: 400px;
   }
+}
+
 </style>
