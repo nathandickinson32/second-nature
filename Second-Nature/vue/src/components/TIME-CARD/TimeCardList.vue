@@ -1,11 +1,13 @@
 <template>
   <div class="time-card-list">
     <div v-for="(group, date) in groupedTimeCards" :key="date" class="time-card-group">
-      <h3>{{ date }}</h3>
-      <time-card v-for="timeCard in group" :key="timeCard.timeCardId" :timeCard="timeCard"/>
+      <div class="date-container">
+        <div class="date-wrapper">
+          <h3 class="date">{{ date }}</h3>
+        </div>
+      </div>
+      <time-card v-for="timeCard in group" :key="timeCard.timeCardId" :timeCard="timeCard" />
     </div>
-
-
   </div>
 </template>
 
@@ -26,31 +28,27 @@ export default {
     this.getTimeCards();
   },
   computed: {
-   groupedTimeCards() {
-    const groups = {};
+    groupedTimeCards() {
+      const groups = {};
 
-    this.timeCards.forEach(
-      (timeCard) =>{
-        const clockInDate = new Date(timeCard.clockInTime);
+      this.timeCards.forEach(
+        (timeCard) => {
+          const clockInDate = new Date(timeCard.clockInTime);
 
-        if(!isNaN(clockInDate.getTime())){
-          const formattedDate = clockInDate.toISOString().split('T')[0];
-          if(!groups[formattedDate]){
-            groups[formattedDate] = [];
+          if (!isNaN(clockInDate.getTime())) {
+            const formattedDate = clockInDate.toISOString().split('T')[0];
+            if (!groups[formattedDate]) {
+              groups[formattedDate] = [];
+            }
+            if (groups[formattedDate].length < 2)
+              groups[formattedDate].push(timeCard);
+          } else {
+            console.error(`Invalid timestamp value for timeCard with ID: ${timeCard.timeCardId}`);
           }
-          if(groups[formattedDate].length < 2)
-          groups[formattedDate].push(timeCard);
-        }else {
-          console.error(`Invalid timestamp value for timeCard with ID: ${timeCard.timeCardId}`);
-
         }
-      }
-    );
-    return groups;
-   }
-
-
-
+      );
+      return groups;
+    }
   },
   methods: {
     getTimeCards() {
@@ -75,8 +73,27 @@ export default {
   width: 100%;
 }
 
-h3 {
-  margin-bottom: 10px;
-  text-align: center;
+.date {
+  margin-bottom: 20px;
+  padding-left: 15px;
+}
+
+.date-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.date-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+@media (min-width: 400px) {
+  .date-wrapper {
+    max-width: 400px;
+  }
 }
 </style>
