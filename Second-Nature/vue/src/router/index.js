@@ -206,13 +206,14 @@ const routes = [
     }
   },
   {
-    path: '/maintenance-ticket-list/',
+    path: '/maintenance-ticket-list/:equipmentId?',
     name: 'maintenance-ticket-List',
     component: MaintenanceTicketListView,
     meta: {
       requiresAuth  : true
     }
   },
+ 
   {
     path: '/maintenance-ticket/create',
     name: 'create-maintenance-ticket',

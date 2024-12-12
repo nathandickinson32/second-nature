@@ -46,7 +46,7 @@ public class MaintenanceController {
     @GetMapping(path = "/equipment/{equipmentId}")
     public List<MaintenanceTicket> getAllMaintenanceTicketsByEquipmentId(@PathVariable int equipmentId, Principal principal){
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " accessed a list of all maintenance tickets with equipmentId: " + equipmentId);
-        return maintenanceDao.getAllMaintenanceTickets();
+        return maintenanceDao.getAllMaintenanceTicketsByEquipmentId(equipmentId);
     }
 
 
