@@ -18,6 +18,9 @@ export default {
     getUserById(id) {
         return axios.get(`/get-user/${id}`)
     },
+    getAllMaintenanceTicketsByEquipmentId(equipmentId) {
+        return axios.get(`maintenance-tickets/equipment/${equipmentId}`);
+    },
 
     // Update
     // Update Maintenance Ticket

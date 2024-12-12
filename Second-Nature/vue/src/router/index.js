@@ -31,7 +31,7 @@ import MaintenanceModifyView from '../views/MAINTENANCE/MaintenanceModifyView.vu
 import TimeStampView from '../views/TIME-STAMP/TimeStampView.vue';
 import TimeCardsView from '../views/TIME-CARD/TimeCardsView.vue';
 import TimeCardDetailsView from '../views/TIME-CARD/TimeCardDetailsView.vue'
-
+import EquipmentMaintenanceTicketsView from '../views/MAINTENANCE/EquipmentMaintenanceTicketListView.vue'
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
@@ -206,7 +206,7 @@ const routes = [
     }
   },
   {
-    path: '/maintenance-ticket-list/:equipmentId?',
+    path: '/maintenance-ticket-list/',
     name: 'maintenance-ticket-List',
     component: MaintenanceTicketListView,
     meta: {
@@ -215,7 +215,7 @@ const routes = [
   },
  
   {
-    path: '/maintenance-ticket/create',
+    path: '/maintenance-ticket/create/:equipmentId?',
     name: 'create-maintenance-ticket',
     component: CreateMaintenanceTicketView,
     meta : {
@@ -246,6 +246,14 @@ const routes = [
       requiresAuth  : true
     }
   
+  },
+  {
+    path: '/maintenance-ticket-list/equipment/:equipmentId',
+    name: 'equipment-maintenance-ticket-list',
+    component: EquipmentMaintenanceTicketsView,
+    meta: {
+      requiresAuth  : true
+    }
   },
   {
     path: '/time-stamp',

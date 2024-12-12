@@ -32,7 +32,7 @@ export default {
   methods: {
     maintenenceHistory(equipment) {
       // Need to actually make components for this view
-      router.push({ name: 'maintenance-ticket-list-equipment', params: { equipmentId: equipment.equipmentId } });
+      router.push({ name: 'equipment-maintenance-ticket-list', params: { equipmentId: equipment.equipmentId } });
     },
     newMaintenance(equipment) {
       // Need to actually make components for this view
