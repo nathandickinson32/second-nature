@@ -3,17 +3,15 @@
     <router-link v-if="isManager" v-bind:to="{ name: 'create-equipment' }" id="add-new-equipment-button">Add a piece of Equipment</router-link>
     <EquipmentList />
   </div>
-  <FooterVue/>
 </template>
 
 <script>
 import EquipmentList from '../../components/EQUIPMENT/EquipmentList.vue';
-import FooterVue from '../../components/Footer.vue';
 
 export default {
     components: {
         EquipmentList,
-        FooterVue
+        
     },
     computed: {
         isManager() {

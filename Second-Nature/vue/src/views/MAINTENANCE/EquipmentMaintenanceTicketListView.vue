@@ -4,16 +4,13 @@
       <router-link v-bind:to="{ name: 'create-maintenance-ticket',  params: { equipmentId: this.$route.params.equipmentId }}" id="create-ticket-btn">Create a Ticket</router-link>
       <equipment-maintenance-ticket-list-vue/>
     </div>
-    <FooterVue/>
   </template>
   
   <script>
 import EquipmentMaintenanceTicketListVue from '../../components/MAINTENANCE/EquipmentMaintenanceTicketList.vue';
-  import FooterVue from '../../components/Footer.vue';
   export default {
   components: {
    EquipmentMaintenanceTicketListVue,
-    FooterVue
   }
   }
   </script>

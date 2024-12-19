@@ -1,16 +1,13 @@
 <template>
   <CreateEquipment />
-  <FooterVue/>
 </template>
 
 <script>
 import CreateEquipment from '../../components/EQUIPMENT/CreateEquipment.vue';
-import FooterVue from '../../components/Footer.vue';
 
 export default {
     components: {
         CreateEquipment,
-        FooterVue
     }
 }
 </script>
