@@ -3,7 +3,12 @@
     <div v-for="(group, date) in groupedTimeCards" :key="date" class="time-card-group">
       <div class="date-container">
         <div class="date-wrapper">
+          <!-- put button in date wrapper for easy formatting -->
           <h3 class="date">{{ date }}</h3>
+        </div>
+
+        <div class="button-wrapper" @click="this.$router.push">
+          <button class="day-view-button">Day View</button>
         </div>
       </div>
       <time-card v-for="timeCard in group" :key="timeCard.timeCardId" :timeCard="timeCard" />
@@ -91,9 +96,20 @@ export default {
   width: 100%;
 }
 
-@media (min-width: 400px) {
+.day-view-button {
+  height: 40px;
+  width: 80px;
+  margin-right: 15px;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (min-width: 300px) {
   .date-wrapper {
-    max-width: 400px;
+    max-width: 300px;
   }
 }
 </style>
