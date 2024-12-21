@@ -7,8 +7,8 @@
           <h3 class="date">{{ date }}</h3>
         </div>
 
-        <div class="button-wrapper" @click="this.$router.push">
-          <button class="day-view-button">Day View</button>
+        <div class="button-wrapper">
+          <button class="day-view-button" @click="pushToDetails">Day View</button>
         </div>
       </div>
       <time-card v-for="timeCard in group" :key="timeCard.timeCardId" :timeCard="timeCard" />
@@ -60,6 +60,9 @@ export default {
       TimeCardService.getTimeCardsForCurrentPayPeriod().then((response) => {
         this.timeCards = response.data;
       });
+    },
+    pushToDetails() {
+      this.$router.push('/time-card/:timeCardId');
     },
   },
 };
