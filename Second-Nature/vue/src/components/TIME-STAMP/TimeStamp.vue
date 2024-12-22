@@ -29,9 +29,7 @@
 <script>
 export default {
 
-  created() {
-    console.log(this.timeCard.dateTimeIn);
-  },
+ 
   props: {
     timeCard: {
       type: Object,

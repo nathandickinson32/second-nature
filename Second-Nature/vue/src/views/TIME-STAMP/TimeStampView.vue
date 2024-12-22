@@ -49,7 +49,6 @@ export default{
     submitTimeStamp(){
         TimeCardService.createNewTimeCard(this.timeCard)
       .then((response)=> {
-        console.log(response);
         if(response.status === 201){
           window.alert('Time Stamp Submitted')
           this.$router.push({name: 'home'});
