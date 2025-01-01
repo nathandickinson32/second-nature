@@ -1,34 +1,32 @@
 <template>
-  <div class="check-in">
-    <div class="large-container">
-    <p class="label">
-      Professional Check In 
-      <span class="date">
-        {{ professionalCheckIn.date }}
-    
-      </span>
-    </p>
-    <div class="label">
-     <div v-if="!isManager">Performed By:</div> 
-     <div v-if="!isManager"> {{ managerName }}</div> 
-    </div>
+  <div class="content">
+    <div class="check-in">
+    <div class="small-container">
+      <p class="label">
+        Professional Check In
+        <span class="date">
+          {{ professionalCheckIn.date }}
+        </span>
+      </p>
       <div class="label">
-     <div v-if="isManager">Check In With </div> 
-     
-     <div v-if="isManager">{{ employeeName }} </div> 
+        <div v-if="!isManager">Performed By:</div>
+        <div v-if="!isManager">{{ managerName }}</div>
+      </div>
+      <div class="label">
+        <div v-if="isManager">Check In With</div>
+
+        <div v-if="isManager">{{ employeeName }}</div>
       </div>
       <label>
-        Check In Notes <br/>
+        Check In Notes <br />
         <div class="notes">
           {{ professionalCheckIn.notes }}
         </div>
       </label>
-      
+    </div>
   </div>
-
-
   </div>
-
+ 
 </template>
 
 <script>
