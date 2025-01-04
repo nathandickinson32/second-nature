@@ -73,7 +73,8 @@ export default {
       } else if (formattedDate === formattedYesterday) {
         return "Yesterday";
       } else {
-        return "Other";
+        const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    return daysOfWeek[new Date(date).getDay()];
       }
     },
   },
