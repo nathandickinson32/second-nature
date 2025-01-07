@@ -22,7 +22,7 @@
           <router-link v-bind:to="{ name: 'register' }">Need an account? Sign up.</router-link>
         </p>
         <p>
-          <router-link v-bind:to="{name: 'time-stamp' }">Manage Your Time Stamps.</router-link>
+          <router-link v-bind:to="{name: 'employee-time-stamp' }">Manage Your Time Stamps.</router-link>
         </p>
       </form>
     </div>
