@@ -134,7 +134,6 @@ export default {
         this.createMaintenanceTicketDto
       )
         .then((response) => {
-          console.log(response);
           if (response.status == 201) {
             window.alert("Ticket created!");
             this.$router.push({ name: "maintenance-ticket-List" });

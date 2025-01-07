@@ -84,7 +84,6 @@ export default {
     saveActiveStatus() {
       EquipmentService.updateEquipmentActivity(this.equipmentActivity)
       .then(response => {
-         console.log(response.data);
          alert('Equipment activity updated!');
          this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'detail');
          this.$router.push({ name: 'equipmentList' });
