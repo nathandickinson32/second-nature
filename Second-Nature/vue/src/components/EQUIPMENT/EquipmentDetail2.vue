@@ -47,6 +47,7 @@
             @change="toggleActivity"
           />
           <label for="inactiveBtn">Inactive</label> <br />
+        </span>
           <span v-show="statusChange" class="label">Note on why changing active status for this piece of equipment: </span> 
 
           <input class="userInput"
@@ -57,7 +58,7 @@
           <button v-show="statusChange" @click="saveActiveStatus">
             Submit
           </button>
-        </span>
+       
       </form>
       <div class="detail-display">
         <label for="label">Serial Number: </label>
