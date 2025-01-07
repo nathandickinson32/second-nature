@@ -1,26 +1,29 @@
 <template>
     <div class="content">
-      <h1>{{ currentTime }}</h1>
+      
+      <div class="document-container">
+        <h1>{{ currentTime }}</h1>
       {{ currentDate }}
       <form id="user-id-form" v-on:submit.prevent="submitTimeStamp">
         <div class="form-input-group">
-          <label for="user-id">Enter Your User ID</label>
-          <input type="number" id="user-id" v-model="userIdDto.id" required autofocus />
+          <label for="numericInput">Enter Your User ID</label>
+          <input type="number" id="numericInput" v-model="userIdDto.id" placeholder="Enter ID" inputmode="numeric" 
+          pattern="[0-9]*" required autofocus />
         </div>
         <button type="submit">Submit</button>
       </form>
+      </div>
+     
     </div>
   </template>
   
   <script>
   import TimeCardService from '../../services/TimeCardService';
-  
+  import router from '../../router';
   export default {
     data() {
       return {
-        userIdDto: {
-            id: 0,
-        },
+        userIdDto: {},
         
         currentTime: "",
         currentDate: "",
@@ -33,6 +36,8 @@
             .then((response) => {
               if (response.status === 201) {
                 window.alert("Time Stamp Submitted");
+                this.$router.push({ name: "login" });
+
               }
             })
             .catch((error) => {

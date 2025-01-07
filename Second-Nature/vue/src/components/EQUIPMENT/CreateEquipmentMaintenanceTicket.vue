@@ -1,5 +1,7 @@
 <template>
   <div class="content">
+    <router-link v-bind:to="{ name: 'logout' }">Logout</router-link>
+
     <div class="document-container">
       <h4>Create Maintenance Ticket</h4>
       <form v-on:submit.prevent="createMaintenanceTicket">
@@ -80,6 +82,7 @@
 <script>
 import EquipmentService from "../../services/EquipmentService";
 import MaintenanceService from "../../services/MaintenanceService";
+import router from '../../router';
 export default {
   data() {
     return {
