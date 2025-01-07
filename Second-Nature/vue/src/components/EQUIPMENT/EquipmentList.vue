@@ -12,7 +12,7 @@
       </div>
       <!-- Dropdown list of equippment types -->
       <div class="form-input-group">
-        <label for="equipmentType">Type of Equipment: </label>
+        <label for="equipmentType">Type of Equipment:  </label>
         <select v-model="typeFilter" id="equipmentType" required>
           <option value="0">Any Equipment Type</option>
           <option v-for="type in types" :key="type.typeId" :value="type.typeId">
@@ -111,5 +111,7 @@ export default {
     display: flex;
     justify-content: center;
     gap: 5px;
+    margin-top: 30px;
 }
+
 </style>
