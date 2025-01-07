@@ -49,7 +49,7 @@ export default {
   },
   computed: {
     filteredEquipment() {
-      console.log('filterType: ' + this.filterType);
+      // console.log('filterType: ' + this.filterType);
       switch (this.filterType) {
         case 'active':
           return this.equipmentList.filter((equipment) => equipment.active === true && equipment.archived === false);
@@ -66,7 +66,7 @@ export default {
       return this.$store.getters.isManager;
     },
     filteredByType() {
-      console.log('typeFilter: ' + this.typeFilter);
+      // console.log('typeFilter: ' + this.typeFilter);
       if (this.typeFilter == '0') {
         return this.filteredEquipment;
       }

@@ -211,7 +211,7 @@ export default {
     getEquipment() {
       EquipmentService.getEquipmentById(this.$route.params.equipmentId).then(
         (response) => {
-          console.log(response.data);
+          // console.log(response.data);
           //   this.archivedEquipment = response.data;
           this.statusEquipment.equipmentId = response.data.equipmentId;
           this.statusEquipment.active = response.data.active;
@@ -236,13 +236,11 @@ export default {
       this.archiveStatusChange =
         this.archiveEquipment.archived !== this.equipment.archived;
     },
-    archive() {
-      // this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'archive');
-    },
+  
     saveActiveStatus() {
       EquipmentService.updateEquipmentActivity(this.statusEquipment)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           alert("Equipment activity updated!");
           this.$router.push({ name: "equipmentList" });
         })
@@ -265,7 +263,7 @@ export default {
       EquipmentService.getEquipmentMaintenanceById(
         this.$route.params.equipmentId
       ).then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         this.maintenanceTickets = response.data;
       });
     },
