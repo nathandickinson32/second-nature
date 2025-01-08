@@ -1,7 +1,11 @@
 <template>
     <div class="content">
+        <h4>Reveiw Employee Leave Requests</h4>
         <div v-for="request in requests" v-bind:key="request.id" class="small-container"
             :class="{ 'approved': request.status == 'Approved', 'denied': request.status == 'Denied' }">
+            <h3 v-if="request.status == 'Pending'">Review</h3>
+            <h3 v-if="request.status == 'Approved'">Approved</h3>
+            <h3 v-if="request.status == 'Denied'">Denied</h3>
             <form @submit.prevent="submitRequest">
                 <span class="label">Reason for Request: {{ request.requestReason }}</span>
                 <span class="label">Requested by:  {{ request.userName }}</span>
