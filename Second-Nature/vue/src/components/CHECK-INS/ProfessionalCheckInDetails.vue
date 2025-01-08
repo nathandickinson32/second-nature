@@ -7,7 +7,7 @@
         <div v-if="!isManager">{{ managerName }}</div>
       </span>
       <span class="label">
-        <div v-if="isManager">Check In With</div>
+        <div v-if="isManager">Check In With: </div>
         <div v-if="isManager">{{ employeeName }}</div>
       </span>
       <span class="label">

@@ -1,65 +1,51 @@
 <template>
   <div class="content">
-    <div class="form">
-      <div class="small-container">
-        <form @submit.prevent="submitCheckIn">
-        
+    <div class="document-container">
+      <h4>Manager Check In</h4>
 
-          <div class="form-input-group">
-            <label for="checkInDate" class="title">
-              <span class="title-text">Professional Check In </span>
-              <span class="currentDate">{{ currentDate }}</span>
-            </label>
+      <form @submit.prevent="submitCheckIn">
+        <span class="label">
+          <div for="user-select">Employee:</div>
+          <select
+            name="user-select"
+            id="user-select"
+            v-model="CheckIn.employeeId"
+            required
+          >
+            <option value="" disabled>Select Employee</option>
+            <option
+              v-for="user in users"
+              :key="user.userId"
+              :value="user.userId"
+            >
+              {{ user.firstName }} {{ user.lastName }}
+            </option>
+          </select></span
+        >
+
+        <span class="label">
+          <div>Check In Date</div>
+          <div>{{ currentDate }}</div>
+        </span>
+
+        <span class="label">
+          <div>Performed By:</div>
+          <div>
+            {{ $store.state.user.firstName }} {{ $store.state.user.lastName }}
           </div>
+        </span>
 
-          <div class="form-input-group">
-            <label for="manager"
-            class="title"
-              >
-              <span>
-                  Performed By:
+        <span class="label" for="notes">Check In Notes </span>
 
-              </span>
-              <span class="managerName">
+        <textarea
+          id="notes"
+          v-model="CheckIn.notes"
+          required
+          autofocus
+        ></textarea>
 
-                  {{ $store.state.user.firstName }}
-                  {{ $store.state.user.lastName }}
-
-              </span>
-            
-
-            </label>
-          </div>
-          <div class="form-input-group">
-            <label for="userSelect">Employee: </label>
-            <select v-model="CheckIn.employeeId" id="userSelect" required>
-              <option value="" disabled>Select Employee</option>
-              <option
-                v-for="user in users"
-                :key="user.userId"
-                :value="user.userId"
-              >
-                {{ user.firstName }} {{ user.lastName }}
-              </option>
-            </select>
-          </div>
-          
-          <div class="form-input-group">
-            <label for="notes">Check In Notes </label>
-          
-              <textarea
-            
-              id="notes"
-              v-model="CheckIn.notes"
-              required
-              autofocus
-            ></textarea>
-
-          
-          </div>
-          <button type="submit" class="submit">Submit Check In</button>
-        </form>
-      </div>
+        <button type="submit" id="submitCheckIn">Submit Check In</button>
+      </form>
     </div>
   </div>
 </template>
@@ -117,59 +103,52 @@ export default {
 </script>
 
 <style scoped>
-.form-input-group {
+.label {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-}
-
-.title {
   width: 100%;
+  font-size: 0.8em;
+  margin-bottom: 10px;
+}
+
+.notes {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: left;
+  font-size: 0.9em;
+  margin-top: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.document-container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.currentDate {
-  text-align: right;
+h4 {
+  font-size: 1.2em;
+  margin-bottom: 15px;
 }
-.managerName{
-    margin-left: auto;
-    text-align: right;
+#user-select {
+  max-width: 100%;
 }
-#notes{
-    border-radius: 5px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    width: 100%;
-    height: 10em;
-    resize: none;
-    border-radius: 5px;
-}
-#userSelect{
-    border-radius: 5px;
-    margin-left: auto;
-}
-.submit{
-   align-self: flex-end;
-}
-.note-text{
-display: flex;
-width: 100%;
-
-}
-.form-input-group {
-    display:block;
-    
-
-}
-
-
-
 textarea {
-display:block;
-position: relative;
+  resize: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: 6em;
+  margin-bottom: 10px;
 }
-.manager{
-    align-self: flex-start;
+#submitCheckIn {
+  height: 4em;
+  margin-top: 10px;
 }
-
+input {
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  height: 4em;
+}
 </style>

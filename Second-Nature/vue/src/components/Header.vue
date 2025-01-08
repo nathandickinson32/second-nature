@@ -11,8 +11,8 @@
       <span v-if="route.name === 'create-equipment' || route.name === 'equipment-detail'"> | </span>
       <router-link v-if="route.name === 'create-equipment' || route.name === 'equipment-detail'" v-bind:to="{ name: 'equipmentList' }">Equipment List</router-link>
 
-      <span v-if="route.name === 'create-maintenance-ticket' || route.name === 'maintenance-ticket-detail' || route.name === 'maintenance-ticket-modify'"> | </span>
-      <router-link v-if="route.name === 'create-maintenance-ticket' || route.name === 'maintenance-ticket-detail' || route.name === 'maintenance-ticket-modify'" v-bind:to="{ name: 'maintenance-ticket-List' }">Maintenance Tickets</router-link>
+      <span v-if="route.name === 'newProfessionalCheckIn' || route.name === 'check-in-details'"> | </span>
+      <router-link v-if="route.name === 'newProfessionalCheckIn' || route.name === 'check-in-details'" v-bind:to="{ name: 'myCheckIns' }">Check In List</router-link>
 
   
       <span> | </span>
