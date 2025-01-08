@@ -14,6 +14,9 @@
       <span v-if="route.name === 'newProfessionalCheckIn' || route.name === 'check-in-details'"> | </span>
       <router-link v-if="route.name === 'newProfessionalCheckIn' || route.name === 'check-in-details'" v-bind:to="{ name: 'myCheckIns' }">Check In List</router-link>
 
+      <span v-if="route.name === 'reviewLeaveRequests' || route.name === 'newPTOrequest'"> | </span>
+      <router-link v-if="route.name === 'reviewLeaveRequests' || route.name === 'newPTOrequest'" v-bind:to="{ name: 'myRequests' }">Back to my List</router-link>
+
   
       <span> | </span>
       <router-link v-bind:to="{ name: 'logout' }">Logout</router-link>
