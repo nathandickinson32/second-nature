@@ -3,24 +3,22 @@
         <div v-for="request in requests" v-bind:key="request.id" class="small-container"
             :class="{ 'approved': request.status == 'Approved', 'denied': request.status == 'Denied' }">
             <form @submit.prevent="submitRequest">
-                <h5>Request</h5>
-                <p>{{ request.requestReason }}</p>
-                <h5>Requested by</h5>
-                <p>{{ request.userName }}</p>
-                <h5>Date Range</h5>
-                <p>From {{ request.startDate }} to {{ request.endDate }}</p>
-                <h5>Requested on</h5>
-                <p>{{ request.requestDate }}</p>
+                <span class="label">Reason for Request: {{ request.requestReason }}</span>
+                <span class="label">Requested by:  {{ request.userName }}</span>
+                <span class="label">Date Range: {{ formatDate(request.startDate) }} To: {{ formatDate(request.endDate) }}</span>
+                <span class="label">Date Requested on:  {{ formatDate(request.requestDate) }}</span>
+                
+               
                 <div class="review-container">
-                    <h5>Approval Status</h5>
-                    <p>{{ request.status }}</p>
+                    <h5>Approval Status:</h5>
+                    {{ request.status }}
                     <p v-if="request.status != 'Pending'">{{ request.comment }}</p>
                     <div v-if="request.status == 'Pending'" class="manager-comment">
-                        <h5>Comment</h5>
+                        <h5>Comments:</h5>
                         <input type="comment" id="comment" v-model="request.comment" autofocus />
                     </div>
                     <div v-if="request.status != 'Pending'">
-                        <h5>Reviewed on</h5>
+                        <h5>Date Reviewed on:</h5>
                         <p>{{ request.reviewDate }}</p>
                     </div>
                     <span v-if="request.status == 'Pending'" class="approval-button-container">
@@ -53,6 +51,19 @@ export default {
     computed() {
     },
     methods: {
+
+        formatDate(dateTime) {
+      const date = new Date(dateTime);
+
+      const formattedDate = date.toLocaleDateString("en-us", {
+        month: "short",
+        day: "2-digit",
+        year: "numeric",
+      });
+
+      return `${formattedDate}`;
+    },
+        
         fetchRequests() {
             LeaveRequestService.getAllTimeOffRequests()
                 .then((response) => {
@@ -152,5 +163,35 @@ export default {
 .manager-comment {
     margin-bottom: 10px;
     width: auto;
+}
+.label {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.8em;
+  margin-bottom: 10px;
+}
+
+.notes {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: left; 
+  font-size: 0.9em;
+  margin-top: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  
+ 
+}
+
+.document-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+h4 {
+  font-size: 1.2em;
+  margin-bottom: 15px;
 }
 </style>

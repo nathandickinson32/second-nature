@@ -15,12 +15,7 @@
         <router-link v-bind:to="{ name: 'time-card' }">Time Cards</router-link>
       </div>
 
-      <span class="menu-icon">
-        <img src="/src/images/calendar-plus.png" alt="" />
-        <router-link v-bind:to="{ name: 'newPTOrequest' }"
-          >New Leave Request</router-link
-        >
-      </span>
+     
       <div class="menu-icon">
         <img src="/src/images/invite-alt.png" alt="" />
         <router-link v-bind:to="{ name: 'myRequests' }"
