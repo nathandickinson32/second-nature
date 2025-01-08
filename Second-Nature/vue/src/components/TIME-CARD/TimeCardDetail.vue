@@ -1,6 +1,7 @@
 <template>
   <div class="content">
     <!-- Display total minutes worked for each time card -->
+    <div>Total Minutes Worked</div>
     <div v-for="(card, index) in timeCards" :key="index">
       <p>Total Minutes Worked for Time Card ID {{ card.timeCardId }}: {{ card.totalMinutesWorked }}</p>
     </div>

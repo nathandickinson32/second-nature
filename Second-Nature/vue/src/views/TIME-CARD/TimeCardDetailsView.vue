@@ -1,5 +1,5 @@
 <template>
-  <time-card-detail></time-card-detail>
+  <TimeCardDetail/>
 </template>
 
 <script>
