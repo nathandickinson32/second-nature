@@ -105,7 +105,6 @@ export default {
       ProfessionalCheckInService.addNewProfessionalCheckInByCheckIn(
         this.CheckIn
       ).then((response) => {
-        console.log(response.data);
         this.CheckIn.notes = "";
         if (response.status === 201) {
           window.alert("Check In submitted successfully!");
