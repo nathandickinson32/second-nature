@@ -33,6 +33,7 @@ import TimeCardsView from '../views/TIME-CARD/TimeCardsView.vue';
 import TimeCardDetailsView from '../views/TIME-CARD/TimeCardDetailsView.vue'
 import EquipmentMaintenanceTicketsView from '../views/MAINTENANCE/EquipmentMaintenanceTicketListView.vue'
 import CreateEquipmentMaintenanceTicketView from '../views/EQUIPMENT/CreateEquipmentMaintenanceTicketView.vue'
+import LoggedOutTimeStampView from '../views/TIME-STAMP/LoggedOutTimeStampView.vue';
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
@@ -265,7 +266,7 @@ const routes = [
     }
   },
   {
-    path: '/time-stamp',
+    path: '/time-stamp/',
     name: 'time-stamp',
     component: TimeStampView,
     meta: {
@@ -273,7 +274,15 @@ const routes = [
     }
   
   },
+  {
+    path: '/employee-time-stamp/',
+    name: 'employee-time-stamp',
+    component: LoggedOutTimeStampView,
+    meta: {
+      requiresAuth: false
+    }
   
+  },
   {
     path: '/time-card',
     name: 'time-card',

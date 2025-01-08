@@ -40,8 +40,8 @@ export default {
             return this.$store.getters.isManager;
         },
         filteredMaintenanceTickets() {
-            console.log(this.filterType);
-            console.log(this.MaintenanceTickets);
+            // console.log(this.filterType);
+            // console.log(this.MaintenanceTickets);
             if (this.filterType === 'all') {
                 return this.MaintenanceTickets.filter(MaintenanceTicket => MaintenanceTicket.archived === false);
             }else if (this.filterType === 'archived') {

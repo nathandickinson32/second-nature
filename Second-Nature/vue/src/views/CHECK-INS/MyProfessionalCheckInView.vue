@@ -2,14 +2,14 @@
   <div class="content">
    
     <div class="user">
-      <p v-if="!isManager">
-        Professional Check Ins for {{ $store.state.user.firstName }}
+      <h4 v-if="!isManager">
+        Check Ins for {{ $store.state.user.firstName }}
         {{ $store.state.user.lastName }}
-      </p>
-      <p v-if="isManager">
-        Professional Check Ins by: {{ $store.state.user.firstName }}
+      </h4>
+      <h4 v-if="isManager">
+        Check Ins Performed By: <br />{{ $store.state.user.firstName }}
         {{ $store.state.user.lastName }}
-      </p>
+      </h4>
     </div>
 
     <router-link  v-if="isManager" v-bind:to="{ name: 'newProfessionalCheckIn'}" id="add-check-in-btn">New Check In</router-link>
@@ -76,5 +76,7 @@ export default {
   text-align: center;
   padding-bottom: 40px;
 }
-
+.user{
+  margin: 0px 40px 0px 40px;
+}
 </style>

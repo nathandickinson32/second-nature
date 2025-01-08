@@ -1,10 +1,16 @@
 <template>
-  <router-link class="small-container" :to="{name: 'check-in-details', params: { checkInId: professionalCheckIn.checkInId } }">
+   
+  <div class="small-container">
+
+    
+    <router-link :to="{name: 'check-in-details', params: { checkInId: professionalCheckIn.checkInId } }">
     <!-- <h3>{{ ProfessionalCheckIn.date }}</h3> -->
     <p>Performed On: {{ professionalCheckIn.date }}</p>
     <p class="employeeName" v-if="isManager">{{ employeeName }}</p>
             <!-- <button @click="showCheckInDetails(professionalCheckIn.checkInId,  professionalCheckIn.managerId)" class="view-details-btn">View Details</button> -->
   </router-link>
+  </div>
+ 
 </template>
 
 <script>
@@ -68,4 +74,5 @@ a {
   text-decoration: none;
   color: #3e4a3d;
 }
+
 </style>

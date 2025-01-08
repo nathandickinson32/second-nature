@@ -12,7 +12,7 @@
                     <input type="date" id="endDate" v-model="request.endDate" required autofocus />
                 </div>
                 <div class="form-input-group">
-                    <label for="reason">Reason </label>
+                    <label for="reason">Reason for Request </label>
                     <select id="title" v-model="request.requestReason" required>
                         <option value="vacation">Vacation</option>
                         <option value="sick">Sick</option>

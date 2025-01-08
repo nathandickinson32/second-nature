@@ -92,7 +92,7 @@ export default {
     saveTicket() {
       MaintenanceService.updateMaintenanceTicket(this.updateMaintenanceTicket)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           alert('Maintenance Ticket Modifications updated!');
 
           this.$router.push({ name: 'maintenance-ticket-detail', params: { ticketId: this.updateMaintenanceTicket.ticketId } });

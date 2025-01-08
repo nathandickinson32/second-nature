@@ -1,7 +1,7 @@
 <template>
     <div class="content">
       <h1>Maintenence Tickets</h1>
-      <router-link v-bind:to="{ name: 'create-maintenance-ticket',  params: { equipmentId: this.$route.params.equipmentId }}" id="create-ticket-btn">Create a Ticket</router-link>
+      <router-link v-bind:to="{ name: 'create-equipment-maintenance-ticket',  params: { equipmentId: this.$route.params.equipmentId }}" id="create-ticket-btn">Create a Ticket</router-link>
       <equipment-maintenance-ticket-list-vue/>
     </div>
   </template>

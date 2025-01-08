@@ -12,7 +12,7 @@
       </div>
       <!-- Dropdown list of equippment types -->
       <div class="form-input-group">
-        <label for="equipmentType">Type of Equipment: </label>
+        <label for="equipmentType">Type of Equipment:  </label>
         <select v-model="typeFilter" id="equipmentType" required>
           <option value="0">Any Equipment Type</option>
           <option v-for="type in types" :key="type.typeId" :value="type.typeId">
@@ -49,7 +49,7 @@ export default {
   },
   computed: {
     filteredEquipment() {
-      console.log('filterType: ' + this.filterType);
+      // console.log('filterType: ' + this.filterType);
       switch (this.filterType) {
         case 'active':
           return this.equipmentList.filter((equipment) => equipment.active === true && equipment.archived === false);
@@ -66,7 +66,7 @@ export default {
       return this.$store.getters.isManager;
     },
     filteredByType() {
-      console.log('typeFilter: ' + this.typeFilter);
+      // console.log('typeFilter: ' + this.typeFilter);
       if (this.typeFilter == '0') {
         return this.filteredEquipment;
       }
@@ -111,5 +111,7 @@ export default {
     display: flex;
     justify-content: center;
     gap: 5px;
+    margin-top: 30px;
 }
+
 </style>

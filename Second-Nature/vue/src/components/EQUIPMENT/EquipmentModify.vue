@@ -101,7 +101,6 @@ export default {
         saveEquipment() {
             EquipmentService.updateEquipment(this.updateEquipment)
             .then(response => {
-                console.log(response.data);
                 alert('Equipment Modifications updated!');
                 // this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'detail');
                 // this.$router.push({ name: 'equipmentList' });

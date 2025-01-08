@@ -11,18 +11,20 @@
       <span v-if="route.name === 'create-equipment' || route.name === 'equipment-detail'"> | </span>
       <router-link v-if="route.name === 'create-equipment' || route.name === 'equipment-detail'" v-bind:to="{ name: 'equipmentList' }">Equipment List</router-link>
 
-      <span v-if="route.name === 'create-maintenance-ticket' || route.name === 'maintenance-ticket-detail' || route.name === 'maintenance-ticket-modify'"> | </span>
-      <router-link v-if="route.name === 'create-maintenance-ticket' || route.name === 'maintenance-ticket-detail' || route.name === 'maintenance-ticket-modify'" v-bind:to="{ name: 'maintenance-ticket-List' }">Maintenance Tickets</router-link>
+      <span v-if="route.name === 'newProfessionalCheckIn' || route.name === 'check-in-details'"> | </span>
+      <router-link v-if="route.name === 'newProfessionalCheckIn' || route.name === 'check-in-details'" v-bind:to="{ name: 'myCheckIns' }">Check In List</router-link>
 
-      <span v-if="route.name === 'clock-in' || route.name === 'clock-out' || route.name === 'meal-in' || route.name === 'meal-out'"> | </span>
-      <router-link v-if="route.name === 'clock-in' || route.name === 'clock-out' || route.name === 'meal-in' || route.name === 'meal-out'" v-bind:to="{ name: 'time-stamp' }">Time Stamp</router-link>
+      <span v-if="route.name === 'reviewLeaveRequests' || route.name === 'newPTOrequest'"> | </span>
+      <router-link v-if="route.name === 'reviewLeaveRequests' || route.name === 'newPTOrequest'" v-bind:to="{ name: 'myRequests' }">Back to my List</router-link>
 
+  
       <span> | </span>
       <router-link v-bind:to="{ name: 'logout' }">Logout</router-link>
     </div>
     <div id="nav" v-else>
-      <router-link v-if="route.name === 'time-stamp'" v-bind:to="{ name: 'home' }">Back</router-link>
+      <router-link v-if="route.name === 'employee-time-stamp'" v-bind:to="{ name: 'home' }">Sign In for Full Access</router-link>
     </div>
+   
 </template>
 
 <script>

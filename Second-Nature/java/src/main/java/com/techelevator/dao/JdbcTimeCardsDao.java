@@ -32,7 +32,7 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
     // else create new
     // keep method params in mind
 
-    public TimeCards handleTimeCardPunch(int userId) {
+    public TimeCards handleLoggedInTimeCardPunch(int userId) {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         TimeCards timeCard = new TimeCards();
         String sql = "SELECT * FROM time_cards ORDER BY time_card_id DESC LIMIT 1 ";
@@ -49,15 +49,38 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
         if (timeCard.isClockedIn()) {
 
             UpdateTimeCardDto updateTimeCardDto = new UpdateTimeCardDto(timeCard.getTimeCardId(), timeCard.getClockInTime());
-            updateTimeCard(updateTimeCardDto, userId, timestamp);
+            updateLoggedInTimeCard(updateTimeCardDto, userId, timestamp);
             return getTimeCardById(timeCard.getTimeCardId());
         } else {
-            createTimeCard(userId, timestamp);
+            createLoggedInTimeCard(userId, timestamp);
         }
         return timeCard;
     }
+    public void handleLoggedOutTimeCardPunch(int userId) {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        TimeCards timeCard = new TimeCards();
+        String sql = "SELECT * FROM time_cards ORDER BY time_card_id DESC LIMIT 1 ";
+        try {
+            SqlRowSet results = template.queryForRowSet(sql);
+            if (results.next()) {
+                timeCard = mapRowToTimeCard(results);
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Time Card DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Time Card DAO] Cannot get time card with ID: ");
+        }
+        if (timeCard.isClockedIn()) {
 
-    public TimeCards createTimeCard(int userId, Timestamp timestamp) {
+            UpdateTimeCardDto updateTimeCardDto = new UpdateTimeCardDto(timeCard.getTimeCardId(), timeCard.getClockInTime());
+            updateLoggedOutTimeCard(updateTimeCardDto, userId, timestamp);
+        } else {
+            createLoggedOutTimeCard(userId, timestamp);
+        }
+
+    }
+
+    public TimeCards createLoggedInTimeCard(int userId, Timestamp timestamp) {
         int timeCardId = -1;
         String sql = "INSERT INTO time_cards (user_id, date_time_in, clocked_in, clock_in_time) VALUES (?,?,?,?) RETURNING time_card_id;";
         timeCardId = template.queryForObject(
@@ -70,6 +93,17 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
 
         );
         return getTimeCardById(timeCardId);
+    }
+    public void createLoggedOutTimeCard(int userId, Timestamp timestamp) {
+        String sql = "INSERT INTO time_cards (user_id, date_time_in, clocked_in, clock_in_time) VALUES (?,?,?,?)";
+        template.update(
+                sql,
+                userId,
+                timestamp,
+                true,
+                roundToNearestQuarterHour(timestamp)
+
+        );
     }
 
 
@@ -149,7 +183,7 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
     }
 
     @Override
-    public TimeCards updateTimeCard(UpdateTimeCardDto updateTimeCardDto, int userId, Timestamp timestamp) {
+    public TimeCards updateLoggedInTimeCard(UpdateTimeCardDto updateTimeCardDto, int userId, Timestamp timestamp) {
         String sql = "UPDATE time_cards SET date_time_out = ?, clocked_in = ?, total_minutes_worked = ?,clock_out_time = ?, updated_on_date = ?, updated_by_user_id = ? WHERE time_card_id = ?;";
 
         try {
@@ -173,6 +207,30 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
         }
 
         return getTimeCardById(updateTimeCardDto.getTimeCardId());
+    }
+    public void updateLoggedOutTimeCard(UpdateTimeCardDto updateTimeCardDto, int userId, Timestamp timestamp) {
+        String sql = "UPDATE time_cards SET date_time_out = ?, clocked_in = ?, total_minutes_worked = ?,clock_out_time = ?, updated_on_date = ?, updated_by_user_id = ? WHERE time_card_id = ?;";
+
+        try {
+            Timestamp clockInTime = updateTimeCardDto.getClockInTime();
+            Timestamp roundedTimeStamp = roundToNearestQuarterHour(timestamp);
+            int totalMinutesWorked = calculateMinutesWorked(clockInTime, roundedTimeStamp);
+            template.update(
+                    sql,
+                    timestamp,
+                    false,
+                    totalMinutesWorked,
+                    roundedTimeStamp,
+                    new Date(),
+                    userId,
+                    updateTimeCardDto.getTimeCardId()
+            );
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Time Card DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Time Card DAO] Error updating time card ID: " + updateTimeCardDto.getTimeCardId());
+        }
+
     }
 
     @Override

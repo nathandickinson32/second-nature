@@ -70,7 +70,6 @@ export default {
             this.kudo.date = this.currentDate;
             KudosService.giveKudos(this.kudo)
                 .then(response => {
-                    console.log(response.data);
                     this.title = '';
                     this.note = '';
                     this.selectedUserId = '';

@@ -4,6 +4,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.TimeCardsDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.TimeCard.*;
+import com.techelevator.model.UserFolder.UserIdDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,7 +19,6 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/time-card")
 @CrossOrigin
-@PreAuthorize("isAuthenticated()")
 
 public class TimeCardController {
     @Autowired
@@ -42,7 +42,15 @@ public class TimeCardController {
         int userId = userDao.getUserIdByUsername(principal.getName());
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is creating a new time card.");
-        return timeCardsDao.handleTimeCardPunch(userId);
+        return timeCardsDao.handleLoggedInTimeCardPunch(userId);
+    }
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(path = "/employee-login")
+    public void createEmployeeTimeCard(@RequestBody UserIdDto userIdDto){
+        int userId = userIdDto.getId();
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println(LocalDateTime.now() + " User with id: " + userId + " is creating a new time card.");
+         timeCardsDao.handleLoggedOutTimeCardPunch(userId);
     }
     @GetMapping(path = "/{id}/time-cards")
     public List <TimeCards> getTimeCardByUserId(Principal principal){
@@ -61,7 +69,7 @@ public class TimeCardController {
         int userId = userDao.getUserIdByUsername(principal.getName());
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " is updating time card ID: " + updateTimeCardDto.getTimeCardId());
-        return timeCardsDao.updateTimeCard(updateTimeCardDto, userId, timestamp);
+        return timeCardsDao.updateLoggedInTimeCard(updateTimeCardDto, userId, timestamp);
     }
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping(path = "/manager-update")
