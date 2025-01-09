@@ -127,6 +127,7 @@ CREATE TABLE time_cards (
     updated_by_user_id INT,
     is_archived BOOLEAN,
     archived_notes VARCHAR,
+    created_on Date,
     FOREIGN KEY (user_id) REFERENCES users (user_id),
     FOREIGN KEY (updated_by_user_id) REFERENCES users (user_id)
 );

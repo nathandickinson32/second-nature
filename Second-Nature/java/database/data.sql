@@ -86,8 +86,8 @@ VALUES (1, 0, 3, '2024-07-26', 'Default Note', false, false);
 INSERT INTO maintenance_performed (equipment_id, ticket_id, description, performed_by, performed_on_date, notes, hours)
 VALUES (1, 1, 'Default Description', 'Default Performed By', '2024-08-27', 'Default Notes', 0);
 
-INSERT INTO time_cards (user_id, date_time_in, date_time_out, clocked_in, total_minutes_worked, clock_in_time, clock_out_time, is_archived)
-VALUES (1, '2024-09-10 09:05:00','2024-09-10 17:05:00', false, 480, '2024-09-10 09:00:00', '2024-09-10 17:00:00',  false),
-(3, '2024-09-10 09:05:00','2024-09-10 17:05:00', false, 480, '2024-09-10 09:00:00', '2024-09-10 17:00:00',  false);
+INSERT INTO time_cards (user_id, date_time_in, date_time_out, clocked_in, total_minutes_worked, clock_in_time, clock_out_time, is_archived, created_on)
+VALUES (1, '2024-09-10 09:05:00','2024-09-10 17:05:00', false, 480, '2024-09-10 09:00:00', '2024-09-10 17:00:00',  false, '2025-01-09'),
+(3, '2024-09-10 09:05:00','2024-09-10 17:05:00', false, 480, '2024-09-10 09:00:00', '2024-09-10 17:00:00',  false, '2025-01-09');
 
 COMMIT TRANSACTION;

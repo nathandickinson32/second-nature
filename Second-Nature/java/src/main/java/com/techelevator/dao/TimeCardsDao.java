@@ -3,6 +3,7 @@ package com.techelevator.dao;
 import com.techelevator.model.TimeCard.*;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 public interface TimeCardsDao {
@@ -16,7 +17,7 @@ public interface TimeCardsDao {
     public TimeCards getTimeCardById(int timeCardId);
     public List<TimeCards> getTimeCardsByUserId(int userId);
     public List<TimeCards> getTimeCardsForCurrentPayPeriod(int userId);
-
+    public List<TimeCards> getTimeCardsByDate(Date date);
     // Update
     public TimeCards updateLoggedInTimeCard(UpdateTimeCardDto updateTimeCardDto, int userId, Timestamp timestamp);
     public TimeCards managerUpdateTimeCard(ManagerUpdateCardDto managerUpdateCardDto, int userId, Timestamp timestamp);

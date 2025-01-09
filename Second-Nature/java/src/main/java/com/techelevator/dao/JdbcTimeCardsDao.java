@@ -126,6 +126,7 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
     }
 
 
+
     public List<TimeCards> getTimeCardsByUserId(int userId) {
         List<TimeCards> timeCards = new ArrayList<>();
         String sql = "SELECT * FROM time_cards WHERE user_id = ? ORDER BY time_card_id DESC;";
@@ -146,6 +147,7 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
                 timeCard.setUpdatedByUserId(results.getInt("updated_by_user_id"));
                 timeCard.setArchived(results.getBoolean("is_archived"));
                 timeCard.setArchivedNotes(results.getString("archived_notes"));
+                timeCard.setCreatedOn((results.getDate("created_on")));
                 timeCards.add(timeCard);
 
 
@@ -159,6 +161,39 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
         return timeCards;
     }
 
+    public List<TimeCards> getTimeCardsByDate(Date date) {
+        List<TimeCards> timeCards = new ArrayList<>();
+        String sql = "SELECT * FROM time_cards WHERE created_on = ? ORDER BY time_card_id DESC;";
+
+        try {
+            SqlRowSet results = template.queryForRowSet(sql, date);
+            while (results.next()) {
+                TimeCards timeCard = new TimeCards();
+                timeCard.setTimeCardId(results.getInt("time_card_id"));
+                timeCard.setUserId(results.getInt("user_id"));
+                timeCard.setDateTimeIn(results.getTimestamp("date_time_in"));
+                timeCard.setDateTimeOut(results.getTimestamp("date_time_out"));
+                timeCard.setClockedIn(results.getBoolean("clocked_in"));
+                timeCard.setTotalMinutesWorked(results.getInt("total_minutes_worked"));
+                timeCard.setClockInTime(results.getTimestamp("clock_in_time"));
+                timeCard.setClockOutTime(results.getTimestamp("clock_out_time"));
+                timeCard.setUpdatedOnDate(results.getDate("updated_on_date"));
+                timeCard.setUpdatedByUserId(results.getInt("updated_by_user_id"));
+                timeCard.setArchived(results.getBoolean("is_archived"));
+                timeCard.setArchivedNotes(results.getString("archived_notes"));
+                timeCard.setCreatedOn((results.getDate("created_on")));
+                timeCards.add(timeCard);
+
+
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new CannotGetJdbcConnectionException("[JDBC Time Card DAO] Problem connecting to the database.");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("[JDBC Time Card DAO] Cannot get time cards with Date: " + date);
+        }
+
+        return timeCards;
+    }
     public List<TimeCards> getTimeCardsForCurrentPayPeriod(int userId) {
         List<TimeCards> timeCards = new ArrayList<>();
         LocalDate[] payPeriod = getCurrentPayPeriod();
@@ -309,6 +344,7 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
         timeCard.setUpdatedByUserId(results.getInt("updated_by_user_id"));
         timeCard.setArchived(results.getBoolean("is_archived"));
         timeCard.setArchivedNotes(results.getString("archived_notes"));
+        timeCard.setCreatedOn((results.getDate("created_on")));
         return timeCard;
     }
 

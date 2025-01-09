@@ -19,11 +19,12 @@ public class TimeCards {
     private int updatedByUserId;
     private boolean isArchived;
     private String archivedNotes;
+    private Date createdOn;
 
     public TimeCards() {
     }
 
-    public TimeCards(int timeCardId, int userId, Timestamp dateTimeIn, boolean clockedIn, int totalMinutesWorked, Timestamp clockInTime, Timestamp clockOutTime, Date updatedOnDate, int updatedByUserId, boolean isArchived, String archivedNotes) {
+    public TimeCards(int timeCardId, int userId, Timestamp dateTimeIn, boolean clockedIn, int totalMinutesWorked, Timestamp clockInTime, Timestamp clockOutTime, Date updatedOnDate, int updatedByUserId, boolean isArchived, String archivedNotes, Date createdOn) {
         this.timeCardId = timeCardId;
         this.userId = userId;
         this.dateTimeIn = dateTimeIn;
@@ -35,6 +36,7 @@ public class TimeCards {
         this.updatedByUserId = updatedByUserId;
         this.isArchived = isArchived;
         this.archivedNotes = archivedNotes;
+        this.createdOn = createdOn;
     }
 
     public void setTimeCardId(int timeCardId) {
@@ -136,5 +138,13 @@ public class TimeCards {
 
     public void setClockOutTime(Timestamp clockOutTime) {
         this.clockOutTime = clockOutTime;
+    }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
     }
 }

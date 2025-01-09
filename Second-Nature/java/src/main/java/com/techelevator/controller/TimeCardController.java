@@ -14,6 +14,7 @@ import java.security.Principal;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -57,6 +58,11 @@ public class TimeCardController {
         int userId = userDao.getUserIdByUsername(principal.getName());
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " accessed Time Card ID: " + userId);
         return timeCardsDao.getTimeCardsByUserId(userId);
+    }
+    @GetMapping(path = "/date")
+    public List <TimeCards> getTimeCardByUserDate(@RequestBody Date date){
+        System.out.println(LocalDateTime.now() + " User accessed Time Cards by date: " + date);
+        return timeCardsDao.getTimeCardsByDate(date);
     }
     @GetMapping(path = "/{id}/time-sheet")
     public List<TimeCards> getTimeCardsForCurrentPayPeriod(Principal principal){
