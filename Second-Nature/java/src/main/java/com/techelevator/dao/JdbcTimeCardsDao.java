@@ -82,14 +82,15 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
 
     public TimeCards createLoggedInTimeCard(int userId, Timestamp timestamp) {
         int timeCardId = -1;
-        String sql = "INSERT INTO time_cards (user_id, date_time_in, clocked_in, clock_in_time) VALUES (?,?,?,?) RETURNING time_card_id;";
+        String sql = "INSERT INTO time_cards (user_id, date_time_in, clocked_in, clock_in_time, created_on) VALUES (?,?,?,?,?) RETURNING time_card_id;";
         timeCardId = template.queryForObject(
                 sql,
                 int.class,
                 userId,
                 timestamp,
                 true,
-                roundToNearestQuarterHour(timestamp)
+                roundToNearestQuarterHour(timestamp),
+                new Date()
 
         );
         return getTimeCardById(timeCardId);
