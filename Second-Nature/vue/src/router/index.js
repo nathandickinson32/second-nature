@@ -34,7 +34,7 @@ import TimeCardDetailsView from '../views/TIME-CARD/TimeCardDetailsView.vue'
 import EquipmentMaintenanceTicketsView from '../views/MAINTENANCE/EquipmentMaintenanceTicketListView.vue'
 import CreateEquipmentMaintenanceTicketView from '../views/EQUIPMENT/CreateEquipmentMaintenanceTicketView.vue'
 import LoggedOutTimeStampView from '../views/TIME-STAMP/LoggedOutTimeStampView.vue';
-
+import WeatherView from '../views/Weather/WeatherView.vue';
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
@@ -297,6 +297,14 @@ const routes = [
     name: 'time-card-detail',
     component: TimeCardDetailsView,
     meta:{
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/weather',
+    name: 'weather-view',
+    component: WeatherView,
+    meta: {
       requiresAuth: true
     }
   },

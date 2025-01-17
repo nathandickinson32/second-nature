@@ -46,7 +46,12 @@
         >
       </div>
 
-   
+      <div class="menu-icon">
+        <img src="/src/images/lawnmower.png" alt="" />
+        <router-link v-bind:to="{ name: 'weather-view' }"
+          >Weather</router-link
+        >
+      </div>
 
     </div>
   </div>
