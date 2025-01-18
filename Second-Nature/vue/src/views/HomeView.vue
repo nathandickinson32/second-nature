@@ -5,7 +5,7 @@
       <div class="menu-icon">
         <!-- need to find unique time card icon that 
        matches the other icons stylistically -->
-        <img src="/src/images/to-do.png" alt="" />
+        <img src="/src/images/clock.png" alt="" />
         <router-link v-bind:to="{ name: 'time-stamp' }">Time Stamp</router-link>
       </div>
       <div class="menu-icon">
@@ -47,7 +47,7 @@
       </div>
 
       <div class="menu-icon">
-        <img src="/src/images/lawnmower.png" alt="" />
+        <img src="/src/images/cloudy-day.png" alt="" />
         <router-link v-bind:to="{ name: 'weather-view' }"
           >Weather</router-link
         >

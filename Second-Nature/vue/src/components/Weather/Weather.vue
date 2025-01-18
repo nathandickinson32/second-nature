@@ -1,33 +1,32 @@
 <template>
+  <h3 class="title">Weather Forecast for {{ cityName }}</h3>
+
   <div class="content">
-    <div class="filter-section">
-      <label @click="fetchWeatherForecast('Columbiana')" class="clickable-label"
-        >Columbiana</label
-      >
-      <span class="separator"> | </span>
-      <label @click="fetchWeatherForecast('Cleveland')" class="clickable-label"
-        >Cleveland</label
-      >
-      <span class="separator"> | </span>
-      <label @click="fetchWeatherForecast('Akron')" class="clickable-label"
-        >Akron</label
-      >
-      <span class="separator"> | </span>
-      <label @click="fetchWeatherForecast('Youngstown')" class="clickable-label"
-        >Youngstown</label
-      >
-    </div>
-   
-      <!-- Display forecast data once it's fetched -->
+    <div class="document-container">
+      <div class="filter-section">
+        <label
+          @click="fetchWeatherForecast('Youngstown')"
+          class="clickable-label"
+          >Youngstown</label
+        >
+
+        <span class="separator"> | </span>
+
+        <label
+          @click="fetchWeatherForecast('Columbiana')"
+          class="clickable-label"
+          >Columbiana</label
+        >
+      </div>
+
       <div v-if="forecastData.length" class="forecast-list">
-        <h5>Weather Forecast for {{ cityName }}</h5>
         <div
           v-for="period in forecastData"
           :key="period.number"
           class="forecast-item"
         >
           <hr />
-          <span class="label">Day/Time: </span>{{ period.name }} <br />
+          <h4>{{ period.name }}</h4>
           <span class="label">Temperature: </span>{{ period.temperature }}°{{
             period.temperatureUnit
           }}
@@ -37,40 +36,41 @@
         </div>
       </div>
 
-      <!-- Loading state -->
       <div v-if="loading" class="loading">
         <span>Loading forecast...</span>
       </div>
 
-      <!-- Error state -->
       <div v-if="error" class="error">
         <span>Error fetching weather data. Please try again later.</span>
       </div>
-    
+    </div>
   </div>
 </template>
   
   <script>
 export default {
+  mounted() {
+    this.fetchWeatherForecast(this.cityName);
+  },
   data() {
     return {
       forecastData: [],
       loading: false,
-      cityName: "",
-      error: false, // Error state
+      cityName: "Youngstown",
+      error: false, 
     };
   },
   methods: {
     fetchWeatherForecast(city) {
       this.cityName = city;
       this.loading = true;
-      this.error = false; // Reset error on new fetch
+      this.error = false;
 
       const cityCoordinates = this.getCityCoordinates(city);
 
       if (!cityCoordinates) {
         this.loading = false;
-        this.error = true; // Set error if no coordinates found
+        this.error = true;
         return;
       }
 
@@ -88,7 +88,7 @@ export default {
         })
         .catch((error) => {
           console.error("Error fetching forecast:", error);
-          this.error = true; // Set error on fetch failure
+          this.error = true; 
         })
         .finally(() => {
           this.loading = false;
@@ -97,8 +97,6 @@ export default {
     getCityCoordinates(city) {
       const cityCoordinates = {
         Columbiana: { gridId: "PBZ", x: 30, y: 60 },
-        Cleveland: { gridId: "CLE", x: 40, y: 50 },
-        Akron: { gridId: "PBZ", x: 32, y: 58 },
         Youngstown: { gridId: "PBZ", x: 29, y: 61 },
       };
       return cityCoordinates[city] || null;
@@ -131,19 +129,12 @@ export default {
   color: #333;
 }
 
-.content {
-  flex-direction: column;
-  width: 100%;
-  box-sizing: border-box;
-  gap: 10px;
-}
-
 .forecast-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
 }
 
 .forecast-item {
@@ -164,6 +155,9 @@ export default {
   text-align: center;
   font-size: 1.2em;
   color: red;
+}
+.title {
+  text-align: center;
 }
 </style>
   
