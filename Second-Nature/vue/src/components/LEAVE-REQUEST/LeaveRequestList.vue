@@ -4,6 +4,9 @@
         <router-link v-bind:to="{ name: 'newPTOrequest'}" id="create-request-btn">Create a Request</router-link>
         <router-link v-if="isManager" v-bind:to="{ name: 'reviewLeaveRequests'}" id="create-request-btn">Review Employee Requests</router-link>
 
+        <div v-if="requests.length===0">
+          <h3>No Recent Requests</h3>
+        </div>
         <div class="small-container" v-for="request in requests" v-bind:key="request.id"
             :class="{ 'approved': request.status == 'Approved', 'denied': request.status == 'Denied' }">
             <h4>{{ request.status }}</h4>

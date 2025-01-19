@@ -2,10 +2,16 @@
 <div class="container">
 
   <div class="checkInList" v-if="isManager">
-    <professional-check-in v-for="professionalCheckIn in allProfessionalCheckIns" :key="professionalCheckIn.checkInId" :professionalCheckIn="professionalCheckIn" />
+    <div v-if="allProfessionalCheckIns.length===0">
+      <h3>No Recent Check Ins</h3>
+    </div>
+    <professional-check-in v-else v-for="professionalCheckIn in allProfessionalCheckIns" :key="professionalCheckIn.checkInId" :professionalCheckIn="professionalCheckIn" />
   </div>
   <div class="checkInList" v-else>
-    <professional-check-in v-for="professionalCheckIn in professionalCheckIns" :key="professionalCheckIn.checkInId" :professionalCheckIn="professionalCheckIn" />
+    <div v-if="professionalCheckIns.length===0">
+      <h3>No Recent Check Ins</h3>
+    </div>
+    <professional-check-in v-else v-for="professionalCheckIn in professionalCheckIns" :key="professionalCheckIn.checkInId" :professionalCheckIn="professionalCheckIn" />
   </div>
 </div>
 </template>

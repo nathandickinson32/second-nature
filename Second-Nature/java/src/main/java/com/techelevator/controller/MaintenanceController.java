@@ -16,8 +16,8 @@ import java.util.List;
 @RequestMapping(path = "/maintenance-tickets")
 @CrossOrigin
 @PreAuthorize("isAuthenticated()")
-public class MaintenanceController {
-    @Autowired
+public class MaintenanceController {    @Autowired
+
     private MaintenanceDao maintenanceDao;
 
     @Autowired
