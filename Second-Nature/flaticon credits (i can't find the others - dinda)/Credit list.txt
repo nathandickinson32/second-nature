@@ -1,3 +1,7 @@
 Training icon: <div> Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik"> Freepik </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
 
 Lawn Mower: <div> Icons made by <a href="https://www.freepik.com" title="Freepik"> Freepik </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div> <a href="https://www.flaticon.com/free-icons/farming-and-gardening" title="farming and gardening icons">Farming and gardening icons created by Freepik - Flaticon</a>
+
+Clock: <a href="https://www.flaticon.com/free-icons/clock" title="clock icons">Clock icons created by Those Icons - Flaticon</a>
+
+Cloudy Day: <div> Icons made by <a href="https://www.flaticon.com/authors/bqlqn" title="bqlqn"> bqlqn </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
