@@ -27,6 +27,8 @@
 
                 <!-- Submit button -->
                 <button type="submit">Send this Kudo!</button>
+                <message-modal :message="message" :type="type" v-if="isModalVisible" @close="closeModal" />
+
             </form>
         </div>
 
@@ -35,10 +37,18 @@
 
 <script>
 import KudosService from '../../services/KudosService';
+import MessageModal from '../../components/MODAL/MessageModal.vue';
 
 export default {
+    components: {
+  MessageModal
+},
     data() {
         return {
+            message: "created",
+            type: "KUDOS",
+            isModalVisible: false,
+
             users: [],
             kudo: {
                 title: '',
@@ -56,6 +66,15 @@ export default {
         this.fetchUsers();
     },
     methods: {
+        showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      
+      this.isModalVisible = false;
+      this.$router.push({ name: "kudos" });
+
+    },
         fetchUsers() {
             KudosService.getAllOtherUsers()
                 .then(response => {
@@ -73,8 +92,7 @@ export default {
                     this.title = '';
                     this.note = '';
                     this.selectedUserId = '';
-                    alert('Kudo sent!');
-                    this.$router.push({ name: 'kudos' });
+                    this.showModal();
                 })
                 .catch(error => {
                     console.log(error);

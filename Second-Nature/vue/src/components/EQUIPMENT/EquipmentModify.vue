@@ -4,6 +4,8 @@
         <span @click="goBack" class="clickable-label">Back to Details</span>
         <span class="separator"> | </span>
         <span @click="saveEquipment" class="clickable-label">Save Changes</span>
+        <message-modal :message="message" :type="type" v-if="isModalVisible" @close="closeModal" />
+
     </div>
     <div class="large-container">
         <form id="equipment-form" @submit.prevent="onSubmit">
@@ -37,6 +39,7 @@
 
 <script>
 import EquipmentService from '../../services/EquipmentService';
+import MessageModal from '../../components/MODAL/MessageModal.vue';
 
 export default {
     // props: {
@@ -48,6 +51,9 @@ export default {
     // },
     data() {
         return {
+            message: "updated",
+      type: "EQUIPMENT",
+      isModalVisible: false,
             equipment: {
                 equipmentId: -1,
                 serialNumber: '',
@@ -94,17 +100,27 @@ export default {
             console.log(error);
         })
     },
+    components: {
+  MessageModal
+},
     methods: {
+        showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      
+      this.isModalVisible = false;
+      this.$router.push({  name: 'equipment-detail2', params: { equipmentId: this.updateEquipment.equipmentId } });
+
+    },
         goBack() {
             this.$router.push({ name: 'equipment-detail2', params: { equipmentId: this.updateEquipment.equipmentId } });
         },
         saveEquipment() {
             EquipmentService.updateEquipment(this.updateEquipment)
             .then(response => {
-                alert('Equipment Modifications updated!');
-                // this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'detail');
-                // this.$router.push({ name: 'equipmentList' });
-                this.$router.push({ name: 'equipment-detail2', params: { equipmentId: this.updateEquipment.equipmentId } });
+                this.showModal();
+
 
             })
             .catch(error => {

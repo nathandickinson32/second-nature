@@ -1,121 +1,213 @@
 <template>
-    <div class="content">
-        <div class="document-container">
-            <h4>Add Equipment</h4>
-            <form v-on:submit.prevent="createEquipment">
-                <label for="serial-number">Serial Number: </label>
-                <input type="text" name="serial-number" id="serial-number" placeholder="Serial Number" v-model="createEquipmentDto.serialNumber">
+  <div class="content">
+    <div class="document-container">
+      <h4>Add Equipment</h4>
+      <form v-on:submit.prevent="createEquipment">
 
-                <label for="model">Model: </label>
-                <input type="text" name="model" id="model" placeholder="Model Number" v-model="createEquipmentDto.model">
+        <label for="serial-number">Type of Equipment: </label>
+        <select v-model="createEquipmentDto.typeId" id="serial-number" required>
+          <option value="0">Choose Equipment Type</option>
+          <option  v-for="type in types" :key="type.typeId" :value="type.typeId">
+            {{ type.name }}
+          </option>
+        </select>
 
-                <label for="Name">Name: </label>
-                <input type="text" name="name" id="name" placeholder="Equipment Name" v-model="createEquipmentDto.name">
 
-                <label for="hours">Machine Hours: </label>
-                <input type="text" name="hours" id="hours" placeholder="Hours on the machine" v-model="createEquipmentDto.startingHours">
 
-                <label for="notes">Notes: </label>
-                <textarea name="notes" id="notes" v-model="createEquipmentDto.notes"></textarea>
+        <label for="serial-number">Serial Number: </label>
+        <input
+          type="text"
+          name="serial-number"
+          id="serial-number"
+          placeholder="Serial Number"
+          v-model="createEquipmentDto.serialNumber"
+        />
 
-                <div class="checkbox-div">
-                    <input type="checkbox" name="active" id="active" v-model="createEquipmentDto.active">
-                    <label for="active">Equipment is active. </label>
-                </div>
+        <label for="model">Model: </label>
+        <input
+          type="text"
+          name="model"
+          id="model"
+          placeholder="Model Number"
+          v-model="createEquipmentDto.model"
+        />
 
-                <label for="active-notes">Activity Notes: </label>
-                <textarea name="active-notes" id="active-notes" v-model="createEquipmentDto.activeNotes"></textarea>
+        <label for="Name">Name: </label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="Equipment Name"
+          v-model="createEquipmentDto.name"
+        />
 
-                <div class="checkbox-div">
-                    <input type="checkbox" name="archive" id="archive" v-model="createEquipmentDto.archived">
-                    <label for="archive">Equipment is archived. </label>
-                </div>  
+     
+        <label for="hours">Machine Hours: </label>
+        <input
+          type="text"
+          name="hours"
+          id="hours"
+          placeholder="Hours on the machine"
+          v-model="createEquipmentDto.startingHours"
+        />
 
-                <input type="submit" value="Add Equipment">
-            </form>
+        <label for="notes">Notes: </label>
+        <textarea
+          name="notes"
+          id="notes"
+          v-model="createEquipmentDto.notes"
+        ></textarea>
+
+        <div class="checkbox-div">
+          <input
+            type="checkbox"
+            name="active"
+            id="active"
+            v-model="createEquipmentDto.active"
+          />
+          <label for="active">Equipment is active. </label>
         </div>
+
+        <label for="active-notes">Activity Notes: </label>
+        <textarea
+          name="active-notes"
+          id="active-notes"
+          v-model="createEquipmentDto.activeNotes"
+        ></textarea>
+
+        <div class="checkbox-div">
+          <input
+            type="checkbox"
+            name="archive"
+            id="archive"
+            v-model="createEquipmentDto.archived"
+          />
+          <label for="archive">Equipment is archived. </label>
+        </div>
+
+        <input type="submit" value="Add Equipment" />
+        <message-modal :message="message" :type="type" v-if="isModalVisible" @close="closeModal" />
+
+      </form>
     </div>
+  </div>
 </template>
 
 <script>
-import EquipmentService from '../../services/EquipmentService';
+import EquipmentService from "../../services/EquipmentService";
+import TypeService from "../../services/TypeService";
+import MessageModal from '../../components/MODAL/MessageModal.vue';
 
 export default {
-    data() {
-        return {
-            createEquipmentDto: {
-                serialNumber: '',
-                model: '',
-                name: '',
-                startingHours: 0,
-                notes: '',
-                active: true,
-                activeNotes: '',
-                archived: false
-            },
-            equipment: {}
-        }
+  components: {
+  MessageModal
+},
+  created() {
+    this.getTypes();
+  },
+  data() {
+    return {
+      message: "created",
+      type: "EQUIPMENT",
+      isModalVisible: false,
+      types: [],
+      createEquipmentDto: {
+        serialNumber: "",
+        model: "",
+        name: "",
+        typeId: 0,
+        startingHours: 0,
+        notes: "",
+        active: true,
+        activeNotes: "",
+        archived: false,
+      },
+      equipment: {},
+    };
+  },
+  methods: {
+    showModal() {
+      this.isModalVisible = true;
     },
-    methods: {
-        createEquipment(){
-            console.log("Creating Equipment...")
-            EquipmentService.createEquipment(this.createEquipmentDto).then((response) => {
-                if (response.status == 201){
-                    this.equipment = response.data;
-                    window.alert("Equipment Added.");
-                    this.$router.push({ name: 'equipmentList' });
-                }
-            }).catch((error) => {
-                console.log("Error creating equipment.");
-            })
-        }
-    }
-}
+    closeModal() {
+      
+      this.isModalVisible = false;
+      this.$router.push({ name: "equipmentList" });
+
+    },
+    getTypes() {
+      TypeService.getAllTypes().then((response) => {
+        this.types = response.data;
+      });
+    },
+    createEquipment() {
+      console.log("Creating Equipment...");
+      EquipmentService.createEquipment(this.createEquipmentDto)
+        .then((response) => {
+          if (response.status == 201) {
+            this.equipment = response.data;
+            this.showModal();
+
+          }
+        })
+        .catch((error) => {
+          console.log("Error creating equipment.");
+        });
+    },
+  },
+};
 </script>
 
 <style scoped>
 form {
-    align-items: baseline;
+  align-items: baseline;
 }
 
 input {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+select{
     width: 100%;
-    box-sizing: border-box;
+  height: 30px;
+  margin-right: 10px;
+  
 }
 
 label {
-    font-weight: normal;
-    font-size: 0.8em;
+  font-weight: normal;
+  font-size: 0.8em;
 }
 
 textarea {
-    resize: none;
-    box-sizing: border-box;
-    width: 100%;
-    height: 6em;
-    margin-bottom: 10px;
+  resize: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: 6em;
+  margin-bottom: 10px;
 }
 
 .content {
-    box-sizing: border-box;
-    width: 100%;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .checkbox-div {
-    display: flex;
-    justify-content: baseline;
-    align-items: center;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .checkbox-div input {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
 }
 
 .small-container {
-    width: 100%;
+  width: 100%;
 }
 </style>

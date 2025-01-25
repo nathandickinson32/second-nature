@@ -45,6 +45,7 @@
         ></textarea>
 
         <button type="submit" id="submitCheckIn">Submit Check In</button>
+        <message-modal :message="message" :type="type" v-if="isModalVisible" @close="closeModal" />
       </form>
     </div>
   </div>
@@ -52,8 +53,14 @@
 
 <script>
 import ProfessionalCheckInService from "../../services/ProfessionalCheckInService";
-
+import MessageModal from '../../components/MODAL/MessageModal.vue';
 export default {
+
+components: {
+  MessageModal
+},
+
+
   computed: {
     currentUserId() {
       return this.$store.state.user.userId;
@@ -61,6 +68,9 @@ export default {
   },
   data() {
     return {
+      message: "created",
+      type: "PROFESSIONAL CHECK IN",
+      isModalVisible: false,
       CheckIn: {
         managerId: "",
         employeeId: "",
@@ -75,6 +85,15 @@ export default {
     this.fetchUsers();
   },
   methods: {
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      
+      this.isModalVisible = false;
+      this.$router.push({ name: "home" });
+
+    },
     fetchUsers() {
       ProfessionalCheckInService.getUserInformation()
         .then((response) => {
@@ -93,8 +112,7 @@ export default {
       ).then((response) => {
         this.CheckIn.notes = "";
         if (response.status === 201) {
-          window.alert("Check In submitted successfully!");
-          this.$router.push({ name: "home" });
+          this.showModal();
         }
       });
     },
