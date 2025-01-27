@@ -14,23 +14,33 @@
         <form v-else class="small-container" @submit.prevent="submitTimeStamp">
         
           <button type="submit" id="submitTimeBtn">Punch</button>
+          <message-modal
+          :message="message"
+          :type="type"
+          v-if="isModalVisible"
+          @close="closeModal"
+        />
         </form>
         <time-stamp-list/>
     </div>
 </template>
 
 <script>
+import MessageModal from "../../components/MODAL/MessageModal.vue";
 
 import TimeCardService from '../../services/TimeCardService';
 import TimeStampList from '../../components/TIME-STAMP/TimeStampList.vue';
 
 export default{
   components: {
-    TimeStampList
+    TimeStampList,
+    MessageModal
   },
   data(){
     return{
-       
+      message:"Time Stamp Submitted",
+      type: "TIME STAMP",
+      isModalVisible: false,
       
       currentTime: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       currentDate: new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }),
@@ -45,13 +55,19 @@ export default{
     },
   },
   methods:{
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+      this.$router.push({ name: "home" });
+    },
     
     submitTimeStamp(){
         TimeCardService.createNewTimeCard(this.timeCard)
       .then((response)=> {
         if(response.status === 201){
-          window.alert('Time Stamp Submitted')
-          this.$router.push({name: 'home'});
+         this.showModal();
         }
       })
   },

@@ -251,10 +251,11 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
             Timestamp clockInTime = updateTimeCardDto.getClockInTime();
             Timestamp roundedTimeStamp = roundToNearestQuarterHour(timestamp);
             int totalMinutesWorked = calculateMinutesWorked(clockInTime, roundedTimeStamp);
+            boolean clockedIn = false;
             template.update(
                     sql,
                     timestamp,
-                    false,
+                    clockedIn,
                     totalMinutesWorked,
                     roundedTimeStamp,
                     new Date(),
