@@ -45,7 +45,7 @@ export default {
 },
     data() {
         return {
-            message: "created",
+            message: "Successfully Created",
             type: "KUDOS",
             isModalVisible: false,
 

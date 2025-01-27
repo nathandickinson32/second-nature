@@ -4,19 +4,6 @@
       <router-link v-if="isManager" v-bind:to="{ name: 'equipment-modify' }"
         >Modify</router-link
       >
-      <!-- <span v-if="isManager" class="separator"> | </span>
-      <label @click="toggleActivity" class="clickable-label">Change Active Status</label>
-      <router-link v-bind:to="{ name: 'equipment-status' }">Status</router-link>
-
-      <span class="separator"> | </span>
-      <label @click="archive" class="clickable-label">Archive</label>
-      <router-link
-        v-bind:to="{ name: 'equipment-archive' }"
-        v-if="isManager"
-        class="button"
-        >Archive</router-link
-      > -->
-
       <span class="separator" v-if="isManager"> | </span>
       <router-link v-bind:to="{ name: 'equipmentList' }"
         >Back to Equipment List</router-link
@@ -58,7 +45,8 @@
           <button v-show="statusChange" @click="saveActiveStatus">
             Submit
           </button>
-       
+          <message-modal :message="message" :type="type" v-if="isModalVisible" @close="closeModal" />
+
       </form>
       <div class="detail-display">
         <label for="label">Serial Number: </label>
@@ -111,64 +99,26 @@
         <span class="label">Note on why archiving this piece of equipment: </span> 
         <input class="userInput" type="text" id="archiveNotes" v-model="archiveEquipment.archivedNotes" placeholder="Enter notes here" autofocus /> <br>
         <button id="archive-equipment" @click="archivePieceOfEquipment" class="button" :disabled="!archiveEquipment.archivedNotes" >Archive</button>
+        <message-modal :message="message" :type="type" v-if="isModalVisible" @close="closeModal" />
+
       </div>
-      <!-- <span>{{ maintenanceTicket.description }}</span> -->
     </div>
-
-   
-
-
-    <!-- <form
-      v-if="isManager"
-      id="equipment-activity-form"
-      @submit.prevent="onSubmit"
-    >
-      <span>
-        <input
-          v-model="archiveEquipment.archived"
-          type="radio"
-          id="inactiveBtn"
-          :value="false"
-          :checked="equipment.archived == false"
-          @change="toggleArchiveActivity"
-        />
-        <label for="inactiveBtn">In Use</label>
-        <input
-          v-model="archiveEquipment.archived"
-          type="radio"
-          id="activeBtn"
-          :value="true"
-          :checked="equipment.archived == true"
-          @change="toggleArchiveActivity"
-        />
-        <label for="activeBtn">Archive</label>
-        <br />
-        <div class="archiveNotes" v-show="archiveStatusChange">
-          <label for="archiveNotesBtn">Notes: </label>
-          <input
-            type="text"
-            v-model="archiveEquipment.archivedNotes"
-            v-show="archiveStatusChange"
-          />
-        </div>
-        <button
-          v-show="archiveStatusChange"
-          :disabled="!archiveEquipment.archivedNotes.trim()"
-          @click="saveArchiveStatus"
-        >
-          Submit
-        </button>
-      </span>
-    </form> -->
   </div>
 </template>
 
 <script>
 import EquipmentService from "../../services/EquipmentService";
+import MessageModal from '../../components/MODAL/MessageModal.vue';
 
 export default {
+  components: {
+  MessageModal
+},
   data() {
     return {
+      message: "",
+            type: "Equipment",
+            isModalVisible: false,
       archiveAttempted: false,
       archiveEquipment: {
         equipmentId: 0,
@@ -208,11 +158,18 @@ export default {
     this.getEquipmentMaintenanceTickets();
   },
   methods: {
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      
+      this.isModalVisible = false;
+      this.$router.push({ name: "equipmentList" });
+
+    },
     getEquipment() {
       EquipmentService.getEquipmentById(this.$route.params.equipmentId).then(
         (response) => {
-          // console.log(response.data);
-          //   this.archivedEquipment = response.data;
           this.statusEquipment.equipmentId = response.data.equipmentId;
           this.statusEquipment.active = response.data.active;
           this.archiveEquipment.equipmentId = response.data.equipmentId;
@@ -223,13 +180,6 @@ export default {
       );
     },
     toggleActivity() {
-      // this.$store.commit("SET_EQUIPMENT_DETAIL_VIEW", 'activeStatus');
-      // if(this.statusEquipment.active!=this.equipment.active){
-      //     this.statusChange = true;
-
-      // }else{
-      //     this.statusChange= false;
-      // }
       this.statusChange = this.statusEquipment.active !== this.equipment.active;
     },
     toggleArchiveActivity() {
@@ -239,10 +189,9 @@ export default {
   
     saveActiveStatus() {
       EquipmentService.updateEquipmentActivity(this.statusEquipment)
-        .then((response) => {
-          // console.log(response.data);
-          alert("Equipment activity updated!");
-          this.$router.push({ name: "equipmentList" });
+        .then(() => {
+          this.message = "Successfully Changed Status"
+         this.showModal();
         })
         .catch((error) => {
           console.log(error);
@@ -253,8 +202,8 @@ export default {
       this.archiveEquipment.archived = true;
       EquipmentService.archiveEquipment(this.archiveEquipment)
       .then(() => {
-        window.alert('Equipment archived!');
-        this.$router.push({ name: 'equipmentList' });
+        this.message= "Successfully Archived"
+       this.showModal();
       }).catch(() => {
         console.log("Error archiving the piece of equipment.");
       });
@@ -263,7 +212,6 @@ export default {
       EquipmentService.getEquipmentMaintenanceById(
         this.$route.params.equipmentId
       ).then((response) => {
-        // console.log(response.data);
         this.maintenanceTickets = response.data;
       });
     },

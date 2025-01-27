@@ -9,7 +9,7 @@
   
           <section class="modal-body">
             <slot name="body"></slot>
-            <p class="prompt">Successfully {{ message }}</p>
+            <p class="prompt">{{ message }}</p>
         
           </section>
   
@@ -52,7 +52,7 @@
   };
   </script>
   
-  <style>
+  <style scoped>
   .modal-backdrop {
     position: fixed;
     top: 0;

@@ -1,6 +1,5 @@
 <template>
   <div class="content">
-    <router-link v-bind:to="{ name: 'logout' }">Logout</router-link>
 
     <div class="document-container">
       <h4>Create Maintenance Ticket</h4>
@@ -53,6 +52,7 @@
             id=""
             placeholder="What is being done?"
             v-model="performed.description"
+            required
           />
           <input
             type="text"
@@ -60,11 +60,13 @@
             id=""
             placeholder="Who is doing the work?"
             v-model="performed.performedBy"
+            required
           />
           <textarea
             name="maintenance-performed-notes"
             id="maintenance-performed-notes"
             v-model="performed.notes"
+            required
           ></textarea>
         </div>
         <button v-on:click.prevent="addMaintenancePerformed">
@@ -73,19 +75,33 @@
         <button v-on:click.prevent="subtractMaintenancePerformed">
           Remove last maintenance performed
         </button>
+        
         <input type="submit" value="Create Ticket" id="submitTicket" />
+        <message-modal
+          :message="message"
+          :type="type"
+          v-if="isModalVisible"
+          @close="closeModal"
+        />
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import MessageModal from "../../components/MODAL/MessageModal.vue";
 import EquipmentService from "../../services/EquipmentService";
 import MaintenanceService from "../../services/MaintenanceService";
 import router from '../../router';
 export default {
+  components: {
+    MessageModal,
+  },
   data() {
     return {
+      message: "",
+      type: "EQUIPMENT",
+      isModalVisible: false,
       placeholders: {
         hours: "",
       },
@@ -106,6 +122,15 @@ export default {
     this.getEquipment();
   },
   methods: {
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+      if (this.message === "Successfully created") {
+        this.$router.push({ name: "maintenance-ticket-List" });
+      }
+    },
     getEquipment() {
       EquipmentService.getEquipmentById(this.$route.params.equipmentId)
         .then((response) => {
@@ -138,8 +163,8 @@ export default {
       )
         .then((response) => {
           if (response.status == 201) {
-            window.alert("Ticket created!");
-            this.$router.push({ name: "maintenance-ticket-List" });
+            this.message = "Successfully created";
+            this.showModal();
           }
         })
         .catch((error) => {

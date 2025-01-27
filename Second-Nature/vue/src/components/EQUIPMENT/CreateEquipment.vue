@@ -3,16 +3,13 @@
     <div class="document-container">
       <h4>Add Equipment</h4>
       <form v-on:submit.prevent="createEquipment">
-
         <label for="serial-number">Type of Equipment: </label>
         <select v-model="createEquipmentDto.typeId" id="serial-number" required>
           <option value="0">Choose Equipment Type</option>
-          <option  v-for="type in types" :key="type.typeId" :value="type.typeId">
+          <option v-for="type in types" :key="type.typeId" :value="type.typeId">
             {{ type.name }}
           </option>
         </select>
-
-
 
         <label for="serial-number">Serial Number: </label>
         <input
@@ -41,7 +38,6 @@
           v-model="createEquipmentDto.name"
         />
 
-     
         <label for="hours">Machine Hours: </label>
         <input
           type="text"
@@ -86,8 +82,12 @@
         </div>
 
         <input type="submit" value="Add Equipment" />
-        <message-modal :message="message" :type="type" v-if="isModalVisible" @close="closeModal" />
-
+        <message-modal
+          :message="message"
+          :type="type"
+          v-if="isModalVisible"
+          @close="closeModal"
+        />
       </form>
     </div>
   </div>
@@ -96,18 +96,18 @@
 <script>
 import EquipmentService from "../../services/EquipmentService";
 import TypeService from "../../services/TypeService";
-import MessageModal from '../../components/MODAL/MessageModal.vue';
+import MessageModal from "../../components/MODAL/MessageModal.vue";
 
 export default {
   components: {
-  MessageModal
-},
+    MessageModal,
+  },
   created() {
     this.getTypes();
   },
   data() {
     return {
-      message: "created",
+      message: "",
       type: "EQUIPMENT",
       isModalVisible: false,
       types: [],
@@ -130,10 +130,10 @@ export default {
       this.isModalVisible = true;
     },
     closeModal() {
-      
       this.isModalVisible = false;
-      this.$router.push({ name: "equipmentList" });
-
+      if (this.message === "Successfully created") {
+        this.$router.push({ name: "equipmentList" });
+      }
     },
     getTypes() {
       TypeService.getAllTypes().then((response) => {
@@ -146,12 +146,13 @@ export default {
         .then((response) => {
           if (response.status == 201) {
             this.equipment = response.data;
+            this.message = "Successfully created";
             this.showModal();
-
           }
         })
         .catch((error) => {
-          console.log("Error creating equipment.");
+          this.message = "Error creating equipment.";
+          this.showModal();
         });
     },
   },
@@ -169,11 +170,10 @@ input {
   box-sizing: border-box;
 }
 
-select{
-    width: 100%;
+select {
+  width: 100%;
   height: 30px;
   margin-right: 10px;
-  
 }
 
 label {

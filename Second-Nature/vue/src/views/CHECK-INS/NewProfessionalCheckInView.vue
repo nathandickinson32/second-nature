@@ -68,7 +68,7 @@ components: {
   },
   data() {
     return {
-      message: "created",
+      message: "",
       type: "PROFESSIONAL CHECK IN",
       isModalVisible: false,
       CheckIn: {
@@ -91,7 +91,9 @@ components: {
     closeModal() {
       
       this.isModalVisible = false;
-      this.$router.push({ name: "home" });
+      if(this.message ===  "Successfully created"){
+        this.$router.push({ name: "home" });
+      }
 
     },
     fetchUsers() {
@@ -112,6 +114,8 @@ components: {
       ).then((response) => {
         this.CheckIn.notes = "";
         if (response.status === 201) {
+          this.message = "Successfully created";
+
           this.showModal();
         }
       });

@@ -41,7 +41,6 @@ export default {
   },
   methods: {
     updateNotes() {
-      console.log(this.archivedNotes);
       this.$emit("updateNotes", this.archivedNotes);
       this.$emit("close");
     },
@@ -52,7 +51,7 @@ export default {
 };
 </script>
 
-<style>
+<style >
 .modal-backdrop {
   position: fixed;
   top: 0;
