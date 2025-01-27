@@ -33,6 +33,8 @@
         <button v-on:click.prevent="addMaintenancePerformed">Add another maintenance performed</button>
         <button v-on:click.prevent="subtractMaintenancePerformed">Remove last maintenance performed</button>
         <input type="submit" value="Save" id="submitTicket">
+        <message-modal :message="message" :type="type" v-if="isModalVisible" @close="closeModal" />
+
       </form>
       <div class="button-section">
         <span @click="goBack" class="clickable-label">Back to Details</span>
@@ -43,10 +45,17 @@
 
 <script>
 import MaintenanceService from '../../services/MaintenanceService';
+import MessageModal from '../../components/MODAL/MessageModal.vue';
 
 export default {
+  components: {
+  MessageModal
+},
   data() {
     return {
+      message: "Ticket Modified!",
+            type: "MAINTENANCE",
+            isModalVisible: false,
       maintenanceTicket: {},
       updateMaintenanceTicket: {
         ticketId: '',
@@ -86,16 +95,22 @@ export default {
     },
   },
   methods: {
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      
+      this.isModalVisible = false;
+      this.$router.push({ name: 'maintenance-ticket-detail', params: { ticketId: this.updateMaintenanceTicket.ticketId } });
+
+    },
     goBack() {
       this.$router.push({ name: 'maintenance-ticket-detail', params: { ticketId: this.updateMaintenanceTicket.ticketId } });
     },
     saveTicket() {
       MaintenanceService.updateMaintenanceTicket(this.updateMaintenanceTicket)
         .then((response) => {
-          // console.log(response.data);
-          alert('Maintenance Ticket Modifications updated!');
-
-          this.$router.push({ name: 'maintenance-ticket-detail', params: { ticketId: this.updateMaintenanceTicket.ticketId } });
+        this.showModal(); 
         })
         .catch((error) => {
           console.log(error);

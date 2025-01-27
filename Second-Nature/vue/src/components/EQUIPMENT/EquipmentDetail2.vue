@@ -117,7 +117,7 @@ export default {
   data() {
     return {
       message: "",
-            type: "Equipment",
+            type: "EQUIPMENT",
             isModalVisible: false,
       archiveAttempted: false,
       archiveEquipment: {

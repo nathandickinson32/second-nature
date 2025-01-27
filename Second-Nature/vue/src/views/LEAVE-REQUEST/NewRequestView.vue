@@ -23,7 +23,10 @@
                     <label for="reason">More Info </label>
                     <input type="text" id="reason" v-model="otherReason" required autofocus />
                 </div>
+                
                 <button type="submit">Submit Request</button>
+                <message-modal :message="message" :type="type" v-if="isModalVisible" @close="closeModal" />
+
             </form>
         </div>
 
@@ -32,10 +35,17 @@
 
 <script>
 import LeaveRequestService from '../../services/LeaveRequestService';
+import MessageModal from '../../components/MODAL/MessageModal.vue';
 
 export default {
+    components: {
+  MessageModal
+},
     data() {
         return {
+            message: "Successfully Created",
+            type: "LEAVE REQUEST",
+            isModalVisible: false,
             request: {
                 requestDate: null, //"2024-07-18" or "yyyy-mm-dd" format
                 startDate: null,
@@ -50,6 +60,15 @@ export default {
         }
     },
     methods: {
+        showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      
+      this.isModalVisible = false;
+      this.$router.push({ name: "home" });
+
+    },
         submitRequest() {
             this.request.requestDate = this.currentDate;
             if (this.request.requestReason === 'other') {
@@ -59,8 +78,7 @@ export default {
                 .then((response) => {
                     console.log(response);
                     if (response.status === 201) {
-                        window.alert('Request submitted successfully!');
-                        this.$router.push({ name: 'home' });
+                      this.showModal();
                     }
                 })
         }

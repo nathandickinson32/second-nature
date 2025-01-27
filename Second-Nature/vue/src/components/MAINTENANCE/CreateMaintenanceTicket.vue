@@ -39,6 +39,8 @@
                 <button v-on:click.prevent="subtractMaintenancePerformed">Remove last maintenance performed</button>
                 <input type="submit" value="Create Ticket" id="submitTicket">
             </div>
+            <message-modal :message="message" :type="type" v-if="isModalVisible" @close="closeModal" />
+
         </form>
     </div>
   </div>
@@ -47,10 +49,17 @@
 <script>
 import EquipmentService from '../../services/EquipmentService';
 import MaintenanceService from '../../services/MaintenanceService';
+import MessageModal from '../../components/MODAL/MessageModal.vue';
 
 export default {
+    components: {
+  MessageModal
+},
     data() {
         return {
+            message: "Successfully Created",
+            type: "MAINTENANCE",
+            isModalVisible: false,
             createMaintenanceTicketDto : {
                 equipmentId : null,
                 createMaintenancePerformedDto : [
@@ -74,6 +83,15 @@ export default {
         })
     },
     methods: {
+        showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      
+      this.isModalVisible = false;
+      this.$router.push({ name: "maintenance-ticket-List" });
+
+    },
         addMaintenancePerformed(){
             this.createMaintenanceTicketDto.createMaintenancePerformedDto.push(
                 {
@@ -90,8 +108,7 @@ export default {
             this.createMaintenanceTicketDto.equipmentId = this.selectedEquipment.equipmentId;
             MaintenanceService.createMaintenanceTicket(this.createMaintenanceTicketDto).then((response) => {
                 if (response.status == 201){
-                    window.alert("Ticket created!")
-                    this.$router.push({ name: 'maintenance-ticket-List' });
+                  this.showModal();
                 }
             }).catch((error) => {
                 console.log("Error creating ticket.")
