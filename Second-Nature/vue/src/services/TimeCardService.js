@@ -21,5 +21,12 @@ export default{
     // }
     getTimeCardsForCurrentPayPeriod(userId) {
         return axios.get(`/time-card/${userId}/time-sheet`)
+    },
+    getTimeCardsByDateAndUser(date){
+        return axios.get(`/time-card/date`, {
+            params: {
+                date: date,
+            },
+        });
     }
 }

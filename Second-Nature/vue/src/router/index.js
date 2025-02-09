@@ -293,7 +293,7 @@ const routes = [
     }
   },
   {
-    path: '/time-card/:timeCardId',
+    path: '/time-card/:date',
     name: 'time-card-detail',
     component: TimeCardDetailsView,
     meta:{

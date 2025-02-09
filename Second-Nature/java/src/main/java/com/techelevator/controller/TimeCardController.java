@@ -6,6 +6,7 @@ import com.techelevator.dao.UserDao;
 import com.techelevator.model.TimeCard.*;
 import com.techelevator.model.UserFolder.UserIdDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -59,10 +61,15 @@ public class TimeCardController {
         System.out.println(LocalDateTime.now() + " User: " + principal.getName() + " accessed Time Card ID: " + userId);
         return timeCardsDao.getTimeCardsByUserId(userId);
     }
+    //changed to RequestParam annotation for GET request
+    //added principal so method only retrieves timecard for authenticated user
     @GetMapping(path = "/date")
-    public List <TimeCards> getTimeCardByUserDate(@RequestBody Date date){
-        System.out.println(LocalDateTime.now() + " User accessed Time Cards by date: " + date);
-        return timeCardsDao.getTimeCardsByDate(date);
+    public List <TimeCards> getTimeCardsByDateAndUser(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date, Principal principal){
+        //extracting username from principal to get authenticated userId
+        String username = principal.getName();
+        int userId = userDao.getUserIdByUsername(username);
+        System.out.println(LocalDateTime.now() + " User: " + username + "accessed Time Cards by date: " + date);
+        return timeCardsDao.getTimeCardsByDateAndUser(date, userId);
     }
     @GetMapping(path = "/{id}/time-sheet")
     public List<TimeCards> getTimeCardsForCurrentPayPeriod(Principal principal){

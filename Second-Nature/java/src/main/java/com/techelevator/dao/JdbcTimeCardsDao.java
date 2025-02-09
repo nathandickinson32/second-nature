@@ -12,7 +12,6 @@ import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
@@ -162,12 +161,12 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
         return timeCards;
     }
 
-    public List<TimeCards> getTimeCardsByDate(Date date) {
+    public List<TimeCards> getTimeCardsByDateAndUser(Date date, int userId) {
         List<TimeCards> timeCards = new ArrayList<>();
-        String sql = "SELECT * FROM time_cards WHERE created_on = ? ORDER BY time_card_id DESC;";
+        String sql = "SELECT * FROM time_cards WHERE created_on = ? AND user_id = ? ORDER BY time_card_id DESC;";
 
         try {
-            SqlRowSet results = template.queryForRowSet(sql, date);
+            SqlRowSet results = template.queryForRowSet(sql, date, userId);
             while (results.next()) {
                 TimeCards timeCard = new TimeCards();
                 timeCard.setTimeCardId(results.getInt("time_card_id"));
@@ -184,15 +183,12 @@ public class JdbcTimeCardsDao implements TimeCardsDao {
                 timeCard.setArchivedNotes(results.getString("archived_notes"));
                 timeCard.setCreatedOn((results.getDate("created_on")));
                 timeCards.add(timeCard);
-
-
             }
         } catch (CannotGetJdbcConnectionException e) {
             throw new CannotGetJdbcConnectionException("[JDBC Time Card DAO] Problem connecting to the database.");
         } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityViolationException("[JDBC Time Card DAO] Cannot get time cards with Date: " + date);
         }
-
         return timeCards;
     }
     public List<TimeCards> getTimeCardsForCurrentPayPeriod(int userId) {

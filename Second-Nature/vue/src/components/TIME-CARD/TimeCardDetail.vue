@@ -18,25 +18,16 @@ export default {
     };
   },
   mounted() {
-    // Access the array of timeCardIds passed in the route parameters
-    const timeCardIds = this.$route.params.timeCardIds;
-
-    if (Array.isArray(timeCardIds) && timeCardIds.length > 0) {
-      // Fetch time card details for each time card ID in the array
-      timeCardIds.forEach((id) => {
-        TimeCardService.getTimeCardById(id)
-          .then((response) => {
-            if (response.status === 200) {
-              // Add the time card details to the array
-              this.timeCards.push(response.data);
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching time card:", error);
-          });
-      });
-    }
+    const date = this.$route.params.date;
+    this.getTimeCards(date);
   },
+  methods: {
+    getTimeCards(date) {
+      TimeCardService.getTimeCardsByDateAndUser(date).then((response => {
+        this.timeCards = response.data;
+      }));
+    }
+  }
 };
 </script>
 

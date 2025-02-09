@@ -8,7 +8,7 @@
         </div>
 
         <div class="button-wrapper">
-          <button class="day-view-button" @click="pushToDetails">Day View</button>
+          <button class="day-view-button" @click="pushToDetails(date)">Day View</button>
         </div>
       </div>
       <time-card v-for="timeCard in group" :key="timeCard.timeCardId" :timeCard="timeCard" />
@@ -61,8 +61,8 @@ export default {
         this.timeCards = response.data;
       });
     },
-    pushToDetails() {
-      this.$router.push('/time-card/:timeCardId');
+    pushToDetails(date) {
+      this.$router.push({ name: 'time-card-detail', params: {date} });
     },
   },
 };
