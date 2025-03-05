@@ -3,7 +3,6 @@
     <div v-for="(group, date) in groupedTimeCards" :key="date" class="time-card-group">
       <div class="date-container">
         <div class="date-wrapper">
-          <!-- put button in date wrapper for easy formatting -->
           <h3 class="date">{{ formatDate(date) }}</h3>
         </div>
 

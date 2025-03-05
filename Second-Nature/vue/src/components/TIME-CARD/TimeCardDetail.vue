@@ -1,9 +1,8 @@
 <template>
   <div class="content">
     <!-- Display total minutes worked for each time card -->
-    
     <ul>
-      <li v-for="(card, index) in timeCards" :key="index"> {{ formatDate(card.createdOn) }} Total Minutes Worked: {{ card.totalMinutesWorked }}</li>
+      <li v-for="(card, index) in timeCards" :key="index"> {{ formatDate(card.createdOn) }} Clocked In {{ formatTime(card.clockInTime) }} Clocked Out {{ formatTime(card.clockOutTime) }}</li>
     </ul>
   </div>
 </template>
@@ -30,6 +29,12 @@ export default {
     formatDate(dateString) {
       const date = new Date(dateString);
       return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    },
+    formatTime(timeString){
+      if (!timeString) return "N/A";
+
+      const date = new Date(timeString);
+      return date.toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit', hour12: true, });
     }
   }
 };
