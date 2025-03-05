@@ -3,7 +3,7 @@
     <!-- Display total minutes worked for each time card -->
     
     <ul>
-      <li v-for="(card, index) in timeCards" :key="index"> {{ card.createdOn }} Total Minutes Worked: {{ card.totalMinutesWorked }}</li>
+      <li v-for="(card, index) in timeCards" :key="index"> {{ formatDate(card.createdOn) }} Total Minutes Worked: {{ card.totalMinutesWorked }}</li>
     </ul>
   </div>
 </template>
@@ -26,6 +26,10 @@ export default {
       TimeCardService.getTimeCardsByDateAndUser(date).then((response => {
         this.timeCards = response.data;
       }));
+    },
+    formatDate(dateString) {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
     }
   }
 };

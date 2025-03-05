@@ -4,7 +4,7 @@
       <div class="date-container">
         <div class="date-wrapper">
           <!-- put button in date wrapper for easy formatting -->
-          <h3 class="date">{{ date }}</h3>
+          <h3 class="date">{{ formatDate(date) }}</h3>
         </div>
 
         <div class="button-wrapper">
@@ -64,6 +64,10 @@ export default {
     pushToDetails(date) {
       this.$router.push({ name: 'time-card-detail', params: {date} });
     },
+    formatDate(dateString) {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', {month: 'short', day: 'numeric' });
+    }
   },
 };
 </script>
