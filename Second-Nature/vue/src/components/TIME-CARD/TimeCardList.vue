@@ -1,5 +1,6 @@
 <template>
   <div class="time-card-list">
+    <div v-if="timeCardsFalse">No Time Cards to Display</div>
     <div v-for="(group, date) in groupedTimeCards" :key="date" class="time-card-group">
       <div class="date-container">
         <div class="date-wrapper">
@@ -52,6 +53,13 @@ export default {
         }
       );
       return groups;
+    },
+    timeCardsFalse() {
+      if (this.timeCards.length === 0){
+        return true;
+      } else {
+        return false;
+      }
     }
   },
   methods: {
